@@ -1,0 +1,147 @@
+name: Import generated gallery batch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-generated-20260731.yml
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: gallery-import-20260731
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Download generated images and write metadata
+        shell: bash
+        env:
+          GALLERY_RECORDS: |
+            images/red-robed-immortal/snow/snow-red-robed-immortal.png|https://at.adobe.com/5j72klDuAJKBtD3c|雪中红裳仙子|雪境|true
+            images/red-robed-immortal/cloud-palace/cloud-palace-beauty.png|https://at.adobe.com/kKCiNsNoeHFCUprg|云端宫殿的绝世佳人|云宫|true
+            images/red-robed-immortal/flower-garden/spring-blossom-promise.png|https://at.adobe.com/oQuUdsdqqqAlu3Hn|春日花海中的红衣少女|春日花海|false
+            images/red-robed-immortal/moon-night/moonlit-festival.png|https://at.adobe.com/IiMiJU63mkwm3qco|月下的华丽节庆少女|月夜灯会|true
+            images/red-robed-immortal/wuxia/bamboo-sword-dance.png|https://at.adobe.com/hq4d1UgZDeVZKl0m|竹林中的武侠少女|竹林武侠|false
+            images/red-robed-immortal/desert-oasis/desert-oasis-queen.png|https://at.adobe.com/aQ77n6fuqerl4V67|沙漠绿洲中的华丽幻想女王|沙漠绿洲|true
+            images/red-robed-immortal/rain-night/rainy-night-red-umbrella.png|https://at.adobe.com/255qRJePExSjjG1c|雨夜红裳与伞影|雨夜古街|false
+            images/red-robed-immortal/moon-night/moonlit-lotus-pond.png|https://at.adobe.com/VabwCqy4bXNRKDMZ|月光荷塘中的红衣仙子|月光荷塘|true
+            images/red-robed-immortal/flower-garden/wisteria-dream.png|https://at.adobe.com/c1ldkqXQJ6Itk4se|梦幻紫藤园中的优雅女子|紫藤梦境|false
+            images/red-robed-immortal/flower-garden/autumn-palace-maples.png|https://at.adobe.com/duxmncDigvadRvB9|秋日宫廷中的红衣女子|秋日红枫|false
+            images/red-robed-immortal/snow/snowy-hot-spring.png|https://at.adobe.com/AIMqubN8ILB2TW1b|雪夜温泉中的红衣少女|雪夜温泉|true
+            images/red-robed-immortal/flower-garden/romantic-peony-garden.png|https://at.adobe.com/KOj01GPjN9RbaE4q|浪漫花园中的东方美人|牡丹花园|false
+            images/red-robed-immortal/moon-night/moonlit-mystic-coast.png|https://at.adobe.com/Gq4wTxg7ShmdOasi|月光海岸的神秘少女|月光海岸|true
+            images/red-robed-immortal/palace/candlelit-palace.png|https://at.adobe.com/V433AQ4HsVsPgWSs|宫廷红衣的诱惑女子|烛光宫廷|true
+            images/red-robed-immortal/celestial/celestial-observatory.png|https://at.adobe.com/ytRa7MENnf5pEPpZ|星空中的魔法观测者|星空观测台|true
+            images/red-robed-immortal/snow/crystal-ice-palace.png|https://at.adobe.com/xzRW01nLa2CaizoY|冰雪宫殿中的红衣女子|冰雪宫殿|false
+            images/red-robed-immortal/wuxia/crane-bamboo-pavilion.png|https://at.adobe.com/d95tAvJzCZr7V7fI|红金长裙与竹林风情|竹林仙鹤|false
+            images/red-robed-immortal/phoenix/fire-phoenix-dance.png|https://at.adobe.com/cDTgoYWS5PUBisrJ|火凤凰之舞|火凤凰|true
+            images/red-robed-immortal/palace/sunset-palace-dance.png|https://at.adobe.com/THdMVMdUjWtoJyix|夕阳下的宫殿之舞|夕阳宫殿|false
+            images/red-robed-immortal/cloud-palace/heavenly-cloud-court.png|https://at.adobe.com/so0dLvd7HeqAUR1k|云中宫廷中的红裙女子|云中天宫|true
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const { execFileSync } = require('node:child_process');
+
+          const lines = process.env.GALLERY_RECORDS.trim().split('\n').filter(Boolean);
+          const baseTime = Date.parse('2026-07-31T14:45:00+08:00');
+
+          lines.forEach((line, index) => {
+            const [imagePath, url, title, theme, featuredText] = line.split('|');
+            fs.mkdirSync(path.dirname(imagePath), { recursive: true });
+            execFileSync('curl', [
+              '-L', '--fail', '--silent', '--show-error',
+              '--retry', '3', '--retry-delay', '2', '--retry-all-errors',
+              url, '-o', imagePath,
+            ], { stdio: 'inherit' });
+
+            const mime = execFileSync('file', ['-b', '--mime-type', imagePath], { encoding: 'utf8' }).trim();
+            if (!mime.startsWith('image/')) throw new Error(`Not an image: ${imagePath} (${mime})`);
+
+            const metadata = {
+              title,
+              description: `红裳仙姬「${title}」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。`,
+              category: '红裳仙姬',
+              tags: ['人物一致性', '蓝眸', '黑色长发', '红金古装', '直视镜头', '魅惑神态', '五宫格', theme],
+              createdAt: new Date(baseTime + index * 1000).toISOString(),
+              featured: featuredText === 'true',
+              width: 1254,
+              height: 1254,
+            };
+
+            fs.writeFileSync(imagePath.replace(/\.[^.]+$/, '.json'), JSON.stringify(metadata, null, 2) + '\n');
+          });
+          NODE
+
+      - name: Generate gallery index
+        run: npm run generate
+
+      - name: Commit imported gallery
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/import-generated-20260731.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/red-robed-immortal data/gallery.json .github/workflows/import-generated-20260731.yml
+          if git diff --cached --quiet; then
+            echo "No gallery changes to commit."
+            exit 0
+          fi
+          git commit -m "feat(gallery): import red-robed immortal collection"
+          git push origin HEAD:main
+
+  build:
+    runs-on: ubuntu-latest
+    needs: import
+    steps:
+      - name: Checkout updated main branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate image index
+        run: npm run generate
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
