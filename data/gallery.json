@@ -1,10 +1,16 @@
 {
-  "generatedAt": "2026-07-31T09:15:47.198Z",
+  "generatedAt": "2026-07-31T10:36:52.057Z",
   "count": 178,
+  "thumbnail": {
+    "width": 640,
+    "format": "webp",
+    "quality": 78
+  },
   "images": [
     {
       "id": "9b4cb5c0d918",
       "path": "images/red-robed-immortal/snow/snowy-night-five-scenes.png",
+      "thumbnail": "generated/thumbnails/93608cdd243066d219eaceb27121448a.webp",
       "title": "雪夜红裳五景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「雪夜红裳五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以雪夜为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -37,6 +43,7 @@
     {
       "id": "0397a7a3e5ff",
       "path": "images/red-robed-immortal/lotus-pond/moonlit-lotus-five-scenes.png",
+      "thumbnail": "generated/thumbnails/6895292e5df2fc7558d877d477a4ad7f.webp",
       "title": "荷塘月色之梦",
       "category": "红裳仙姬",
       "description": "红裳仙姬「荷塘月色之梦」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以月夜荷塘为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -69,6 +76,7 @@
     {
       "id": "f5b941d860e3",
       "path": "images/red-robed-immortal/desert/desert-sunset-five-scenes.png",
+      "thumbnail": "generated/thumbnails/c9765aef2ec8e96c2f1b87c04a12cc36.webp",
       "title": "沙漠黄昏的梦幻少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「沙漠黄昏的梦幻少女」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以沙漠黄昏为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -101,6 +109,7 @@
     {
       "id": "8b20c05cab23",
       "path": "images/red-robed-immortal/spring-garden/spring-beauty-five-scenes.png",
+      "thumbnail": "generated/thumbnails/932ecf07c64e29ec428064b0a698a721.webp",
       "title": "春日美人五景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「春日美人五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以春日花园为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -133,6 +142,7 @@
     {
       "id": "e346a8ef9d82",
       "path": "images/red-robed-immortal/night-city/night-city-five-looks.png",
+      "thumbnail": "generated/thumbnails/ad574f8937dcbe028e3b34e9bc3528a9.webp",
       "title": "夜色缱绻五幕",
       "category": "红裳仙姬",
       "description": "红裳仙姬「夜色缱绻五幕」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以夜色古街为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -165,6 +175,7 @@
     {
       "id": "36291d2efb7b",
       "path": "images/red-robed-immortal/multi-theme/ten-scene-fantasy-anthology.png",
+      "thumbnail": "generated/thumbnails/a27e45e1c3d76cd28f2c68c563ef8c94.webp",
       "title": "红裳仙姬十景幻想集",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳仙姬十景幻想集」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以幻想十景为主题，采用十主题多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -197,6 +208,7 @@
     {
       "id": "3445207e62b6",
       "path": "images/red-robed-immortal/multi-theme/ten-theme-glamour-storyboard.png",
+      "thumbnail": "generated/thumbnails/6fbebb31343acb5bebf4f2babcba3208.webp",
       "title": "红裳仙姬十主题写真集",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳仙姬十主题写真集」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以十主题写真为主题，采用十主题多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -229,6 +241,7 @@
     {
       "id": "354a69d9fd2e",
       "path": "images/red-robed-immortal/cloud-palace/heavenly-cloud-court.png",
+      "thumbnail": "generated/thumbnails/142dd7aabdcc80c144be63210b5a7076.webp",
       "title": "云中宫廷中的红裙女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「云中宫廷中的红裙女子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -251,6 +264,7 @@
     {
       "id": "937998180e27",
       "path": "images/red-robed-immortal/phoenix/fire-phoenix-dance.png",
+      "thumbnail": "generated/thumbnails/b38e292609e56186bfe07b5260efc211.webp",
       "title": "火凤凰之舞",
       "category": "红裳仙姬",
       "description": "红裳仙姬「火凤凰之舞」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -273,6 +287,7 @@
     {
       "id": "41790fc44fb3",
       "path": "images/red-robed-immortal/celestial/celestial-observatory.png",
+      "thumbnail": "generated/thumbnails/b93592fec40cad377498fe6ca7cc881a.webp",
       "title": "星空中的魔法观测者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「星空中的魔法观测者」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -295,6 +310,7 @@
     {
       "id": "cfe99be5ccc7",
       "path": "images/red-robed-immortal/palace/candlelit-palace.png",
+      "thumbnail": "generated/thumbnails/adce7a9bb71b052de0a42533f1b898c1.webp",
       "title": "宫廷红衣的诱惑女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「宫廷红衣的诱惑女子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -317,6 +333,7 @@
     {
       "id": "7e6b4849d92b",
       "path": "images/red-robed-immortal/moon-night/moonlit-mystic-coast.png",
+      "thumbnail": "generated/thumbnails/41a59edae306ef496e92f442e9aadded.webp",
       "title": "月光海岸的神秘少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「月光海岸的神秘少女」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -339,6 +356,7 @@
     {
       "id": "d4303c88c68d",
       "path": "images/red-robed-immortal/snow/snowy-hot-spring.png",
+      "thumbnail": "generated/thumbnails/0e247770e8f41fd0aaee7c07d140a16d.webp",
       "title": "雪夜温泉中的红衣少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「雪夜温泉中的红衣少女」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -361,6 +379,7 @@
     {
       "id": "4f9fbc473930",
       "path": "images/red-robed-immortal/moon-night/moonlit-lotus-pond.png",
+      "thumbnail": "generated/thumbnails/6056f822ccea22ead7f6318bcc27a7d4.webp",
       "title": "月光荷塘中的红衣仙子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「月光荷塘中的红衣仙子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -383,6 +402,7 @@
     {
       "id": "4a36c1f95798",
       "path": "images/red-robed-immortal/desert-oasis/desert-oasis-queen.png",
+      "thumbnail": "generated/thumbnails/10c49ab7f2f982151fdf482746bf4835.webp",
       "title": "沙漠绿洲中的华丽幻想女王",
       "category": "红裳仙姬",
       "description": "红裳仙姬「沙漠绿洲中的华丽幻想女王」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -405,6 +425,7 @@
     {
       "id": "271e1d465a87",
       "path": "images/red-robed-immortal/moon-night/moonlit-festival.png",
+      "thumbnail": "generated/thumbnails/c13de5c55b646f0d823d4abd512066ea.webp",
       "title": "月下的华丽节庆少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「月下的华丽节庆少女」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -427,6 +448,7 @@
     {
       "id": "d99abcbefeca",
       "path": "images/red-robed-immortal/cloud-palace/cloud-palace-beauty.png",
+      "thumbnail": "generated/thumbnails/7806ee4e41bb3d3f54e5c9e64e8b826f.webp",
       "title": "云端宫殿的绝世佳人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「云端宫殿的绝世佳人」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -449,6 +471,7 @@
     {
       "id": "6cb2a8befdc7",
       "path": "images/red-robed-immortal/snow/snow-red-robed-immortal.png",
+      "thumbnail": "generated/thumbnails/78d379eb6ea529160e703e2bd914b660.webp",
       "title": "雪中红裳仙子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「雪中红裳仙子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -471,6 +494,7 @@
     {
       "id": "3454681d9f86",
       "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-sorceress-137.png",
+      "thumbnail": "generated/thumbnails/23d112c101aa1a29000782396c8d7425.webp",
       "title": "翡翠秘术与金饰女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「翡翠秘术与金饰女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现emerald主题、细腻材质和人物互动视线。",
@@ -504,6 +528,7 @@
     {
       "id": "55a5ccd83356",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-128.png",
+      "thumbnail": "generated/thumbnails/ef985c2325795b11268427d377b1c27c.webp",
       "title": "红焰魔法中的金饰女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红焰魔法中的金饰女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -537,6 +562,7 @@
     {
       "id": "c09a58428808",
       "path": "images/red-robed-immortal/violet/violet-gold-fan-pose-immortal-maiden-134.png",
+      "thumbnail": "generated/thumbnails/f5af4f6690209a52076d04c398526908.webp",
       "title": "紫金绮梦执扇美人肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「紫金绮梦执扇美人肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现violet主题、细腻材质和人物互动视线。",
@@ -570,6 +596,7 @@
     {
       "id": "7c8e96b9ae0d",
       "path": "images/red-robed-immortal/battle/black-gold-portrait-warrior-122.png",
+      "thumbnail": "generated/thumbnails/937a369aa8eeb489a00602b47372a8ed.webp",
       "title": "暗夜红宝石战姬",
       "category": "红裳仙姬",
       "description": "红裳仙姬「暗夜红宝石战姬」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -602,6 +629,7 @@
     {
       "id": "9f9cb015c00e",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-118.png",
+      "thumbnail": "generated/thumbnails/3bf4e2728c1415fb66c0de3bb41ef5c7.webp",
       "title": "红焰灵术中的金饰佳人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红焰灵术中的金饰佳人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -635,6 +663,7 @@
     {
       "id": "656cf6a33922",
       "path": "images/red-robed-immortal/celestial/ivory-gold-portrait-immortal-maiden-109.png",
+      "thumbnail": "generated/thumbnails/a06829caf0a06d0a56c91ad277eb08a7.webp",
       "title": "白金月华礼服特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「白金月华礼服特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
@@ -668,6 +697,7 @@
     {
       "id": "6612f0007ee1",
       "path": "images/red-robed-immortal/multi-panel/black-gold-collage-immortal-maiden-105.png",
+      "thumbnail": "generated/thumbnails/f81a6229c8db0f7ca2464bfdec22319e.webp",
       "title": "黑金十格特写拼图",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑金十格特写拼图」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
@@ -700,6 +730,7 @@
     {
       "id": "74bf3e51f662",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-095.png",
+      "thumbnail": "generated/thumbnails/52345f7d7a8f9448384b8087377c7032.webp",
       "title": "魔法使者的魅力姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法使者的魅力姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -733,6 +764,7 @@
     {
       "id": "b91557c74147",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-085.png",
+      "thumbnail": "generated/thumbnails/927418ccf7c2d2095dae2c6f7e68e62a.webp",
       "title": "神秘的红金魅力",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的红金魅力」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -766,6 +798,7 @@
     {
       "id": "913d7a63bd6c",
       "path": "images/red-robed-immortal/celestial/golden-portrait-goddess-075.png",
+      "thumbnail": "generated/thumbnails/f6e58b94f32b300f7054942418fe57c9.webp",
       "title": "神秘的光辉魔法女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的光辉魔法女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
@@ -799,6 +832,7 @@
     {
       "id": "c9ecf2fc322a",
       "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-066.png",
+      "thumbnail": "generated/thumbnails/806ef53f7e7155c4224e3d8880e1e033.webp",
       "title": "红刃女战士的冲锋",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红刃女战士的冲锋」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -832,6 +866,7 @@
     {
       "id": "6c5331ba9a83",
       "path": "images/red-robed-immortal/battle/crimson-gold-combat-pose-warrior-056.png",
+      "thumbnail": "generated/thumbnails/27b206f3eef922149571385a3568cf29.webp",
       "title": "燃焰女战士的凌厉攻击",
       "category": "红裳仙姬",
       "description": "红裳仙姬「燃焰女战士的凌厉攻击」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -864,6 +899,7 @@
     {
       "id": "c06b5b77bf3e",
       "path": "images/red-robed-immortal/battle/golden-sword-pose-warrior-047.png",
+      "thumbnail": "generated/thumbnails/accaa31668cc7cebdb5ae8030cc34802.webp",
       "title": "神秘勇者的魔法之剑",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘勇者的魔法之剑」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -896,6 +932,7 @@
     {
       "id": "0ac50d88becd",
       "path": "images/red-robed-immortal/battle/golden-dance-immortal-maiden-037.png",
+      "thumbnail": "generated/thumbnails/ef70e257e849d96958812b2003905399.webp",
       "title": "炫酷能量剑舞动",
       "category": "红裳仙姬",
       "description": "红裳仙姬「炫酷能量剑舞动」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -929,6 +966,7 @@
     {
       "id": "ae991ae6e275",
       "path": "images/red-robed-immortal/battle/golden-sword-pose-warrior-028.png",
+      "thumbnail": "generated/thumbnails/b1a4b27063906687afdceef0ce69d2c1.webp",
       "title": "动感战士与能量剑",
       "category": "红裳仙姬",
       "description": "红裳仙姬「动感战士与能量剑」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -961,6 +999,7 @@
     {
       "id": "0f08f6e0cd88",
       "path": "images/red-robed-immortal/battle/black-gold-portrait-warrior-018.png",
+      "thumbnail": "generated/thumbnails/50eabcb1137c5abe4eb0937cf731113d.webp",
       "title": "黑衣魔法女战士",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑衣魔法女战士」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -993,6 +1032,7 @@
     {
       "id": "467f3982ed0b",
       "path": "images/red-robed-immortal/magic/black-gold-summoning-immortal-maiden-026.png",
+      "thumbnail": "generated/thumbnails/96ca4d04dd3723464f2e96f60da2bed4.webp",
       "title": "黑暗幻想中的魔法召唤者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑暗幻想中的魔法召唤者」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -1026,6 +1066,7 @@
     {
       "id": "360ae600e05f",
       "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-015.png",
+      "thumbnail": "generated/thumbnails/3fb43d0e3918233e2f57d28aaf1dac6a.webp",
       "title": "游戏概念动作展示",
       "category": "红裳仙姬",
       "description": "红裳仙姬「游戏概念动作展示」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现character-sheet主题、细腻材质和人物互动视线。",
@@ -1058,6 +1099,7 @@
     {
       "id": "b01838ce2cb5",
       "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-013.png",
+      "thumbnail": "generated/thumbnails/23788d7c68af664ee09dd2561bd88154.webp",
       "title": "角色多面展示",
       "category": "红裳仙姬",
       "description": "红裳仙姬「角色多面展示」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现character-sheet主题、细腻材质和人物互动视线。",
@@ -1090,6 +1132,7 @@
     {
       "id": "e8b183673557",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-006.png",
+      "thumbnail": "generated/thumbnails/a275bbe5ff2bc2985fd0e2c9a4ed0770.webp",
       "title": "华丽红金幻想女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「华丽红金幻想女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -1123,6 +1166,7 @@
     {
       "id": "5d281eb3697f",
       "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-001.png",
+      "thumbnail": "generated/thumbnails/27c6ec524fda7bf8a4e04c6ae718bc38.webp",
       "title": "精致角色展示图",
       "category": "红裳仙姬",
       "description": "红裳仙姬「精致角色展示图」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
@@ -1156,6 +1200,7 @@
     {
       "id": "30153b5065af",
       "path": "images/red-robed-immortal/night-palace/candlelit-night-five-panels.png",
+      "thumbnail": "generated/thumbnails/a51b95cd3c6301d45d09c0f23aadfc9f.webp",
       "title": "烛夜缱绻五幕",
       "category": "红裳仙姬",
       "description": "红裳仙姬「烛夜缱绻五幕」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以烛光夜宫为主题，采用五宫格构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1188,6 +1233,7 @@
     {
       "id": "10813a98dbdc",
       "path": "images/red-robed-immortal/multi-theme/six-panel-red-robed-romance.png",
+      "thumbnail": "generated/thumbnails/d1329f4665063da623260a1713e739bc.webp",
       "title": "红裳缱绻六景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳缱绻六景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以红裳浪漫为主题，采用多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1220,6 +1266,7 @@
     {
       "id": "1a840c4f5794",
       "path": "images/red-robed-immortal/multi-theme/ten-scene-night-and-garden.png",
+      "thumbnail": "generated/thumbnails/b6558518768bc10b9aa82e2ceb05e4c1.webp",
       "title": "夜园十景写真集",
       "category": "红裳仙姬",
       "description": "红裳仙姬「夜园十景写真集」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以夜景花园为主题，采用十主题多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1252,6 +1299,7 @@
     {
       "id": "e10741ffaeaf",
       "path": "images/red-robed-immortal/portrait/five-elegant-red-robed-portraits.png",
+      "thumbnail": "generated/thumbnails/cfdf2890d501e606409406cc31319b55.webp",
       "title": "红裳雅韵五景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳雅韵五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以红裳雅韵为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1284,6 +1332,7 @@
     {
       "id": "131ec60159ef",
       "path": "images/red-robed-immortal/portrait/five-interactive-gaze-portraits.png",
+      "thumbnail": "generated/thumbnails/ba3b70aeba7b3c042f6b4f6d288ed8dc.webp",
       "title": "五重互动凝视",
       "category": "红裳仙姬",
       "description": "红裳仙姬「五重互动凝视」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以互动凝视为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1316,6 +1365,7 @@
     {
       "id": "5c18ffbc7e5b",
       "path": "images/red-robed-immortal/multi-theme/six-scene-moon-water-palace.png",
+      "thumbnail": "generated/thumbnails/57756feaad774798e8b5d98806fb4c62.webp",
       "title": "月水宫灯六景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「月水宫灯六景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以月夜水景宫廷为主题，采用多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1348,6 +1398,7 @@
     {
       "id": "d51f239d7be9",
       "path": "images/red-robed-immortal/portrait/five-close-up-fantasy-portraits.png",
+      "thumbnail": "generated/thumbnails/44f3dc2700a3344a70564b9cdc49b12f.webp",
       "title": "红裳仙姬五重特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳仙姬五重特写」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以人物特写为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1379,6 +1430,7 @@
     {
       "id": "f95dce277e65",
       "path": "images/red-robed-immortal/portrait/five-vertical-red-robed-portraits.png",
+      "thumbnail": "generated/thumbnails/97b07889784b3a069af2c7f92ec6ca82.webp",
       "title": "红裳仙姬五式立幅",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳仙姬五式立幅」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以人物立幅为主题，采用五联画构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1411,6 +1463,7 @@
     {
       "id": "5a44062798ea",
       "path": "images/red-robed-immortal/multi-theme/candle-moon-rain-six-scenes.png",
+      "thumbnail": "generated/thumbnails/9ba715c350bad4d46e0312b63b984cdf.webp",
       "title": "烛月雨夜六景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「烛月雨夜六景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以烛光月夜雨景为主题，采用多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1443,6 +1496,7 @@
     {
       "id": "4dfecd134ac8",
       "path": "images/red-robed-immortal/multi-theme/red-robed-six-mood-gallery.png",
+      "thumbnail": "generated/thumbnails/c9e9032356fb86cc398f40aab48302ef.webp",
       "title": "红裳仙姬六种风情",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳仙姬六种风情」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以多主题风情为主题，采用多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1475,6 +1529,7 @@
     {
       "id": "c07322860595",
       "path": "images/red-robed-immortal/festival/lantern-fireworks-blossom-five-scenes.png",
+      "thumbnail": "generated/thumbnails/9ea2e1ed7319fe507e11e0b618fd194c.webp",
       "title": "灯火花海五景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「灯火花海五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以灯会烟花花海为主题，采用五宫格构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1507,6 +1562,7 @@
     {
       "id": "7707078d0d14",
       "path": "images/red-robed-immortal/waterfront/waterfront-dream-five-scenes.png",
+      "thumbnail": "generated/thumbnails/270af4c7f82fbb9ca8d6a97f06acd70e.webp",
       "title": "水岸幻梦五景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「水岸幻梦五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以水岸幻梦为主题，采用五宫格构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1539,6 +1595,7 @@
     {
       "id": "5988a24b5c59",
       "path": "images/red-robed-immortal/moon-water/moonlit-water-city-five-scenes.png",
+      "thumbnail": "generated/thumbnails/0810f07e76821de7d8c19e98b0e56f75.webp",
       "title": "月夜水岸五景",
       "category": "红裳仙姬",
       "description": "红裳仙姬「月夜水岸五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以月夜水岸为主题，采用五宫格构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1571,6 +1628,7 @@
     {
       "id": "22880a636eac",
       "path": "images/red-robed-immortal/multi-theme/red-robed-six-scene-portrait-board.png",
+      "thumbnail": "generated/thumbnails/c49befcc564a2e485426cd83ffab3d8e.webp",
       "title": "红裳仙姬六景写真",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红裳仙姬六景写真」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以多主题写真为主题，采用多格拼图构图，包含人物特写、半身或场景化姿态及互动凝视。",
@@ -1603,6 +1661,7 @@
     {
       "id": "701f311520d2",
       "path": "images/red-robed-immortal/palace/sunset-palace-dance.png",
+      "thumbnail": "generated/thumbnails/4cfbbb6a3b941346fd6c587daace4e04.webp",
       "title": "夕阳下的宫殿之舞",
       "category": "红裳仙姬",
       "description": "红裳仙姬「夕阳下的宫殿之舞」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1625,6 +1684,7 @@
     {
       "id": "e0f28d05225d",
       "path": "images/red-robed-immortal/wuxia/crane-bamboo-pavilion.png",
+      "thumbnail": "generated/thumbnails/4f7a7150bba56fecc4ea2a8f63ff10db.webp",
       "title": "红金长裙与竹林风情",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红金长裙与竹林风情」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1647,6 +1707,7 @@
     {
       "id": "d47d1e372aae",
       "path": "images/red-robed-immortal/snow/crystal-ice-palace.png",
+      "thumbnail": "generated/thumbnails/b602b39330add1347de5abaa633c697a.webp",
       "title": "冰雪宫殿中的红衣女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「冰雪宫殿中的红衣女子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1669,6 +1730,7 @@
     {
       "id": "2037b69a28d0",
       "path": "images/red-robed-immortal/flower-garden/romantic-peony-garden.png",
+      "thumbnail": "generated/thumbnails/e55300d65a45ceda0ca4a55e516eb0bf.webp",
       "title": "浪漫花园中的东方美人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「浪漫花园中的东方美人」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1691,6 +1753,7 @@
     {
       "id": "fc0a1d6559b8",
       "path": "images/red-robed-immortal/flower-garden/autumn-palace-maples.png",
+      "thumbnail": "generated/thumbnails/cf4a620788c54a105b09a74f95402104.webp",
       "title": "秋日宫廷中的红衣女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「秋日宫廷中的红衣女子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1713,6 +1776,7 @@
     {
       "id": "f6d44285212a",
       "path": "images/red-robed-immortal/flower-garden/wisteria-dream.png",
+      "thumbnail": "generated/thumbnails/4f4d9482ec5727e5faba9b298e99151c.webp",
       "title": "梦幻紫藤园中的优雅女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「梦幻紫藤园中的优雅女子」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1735,6 +1799,7 @@
     {
       "id": "1c5b16048355",
       "path": "images/red-robed-immortal/rain-night/rainy-night-red-umbrella.png",
+      "thumbnail": "generated/thumbnails/5dbaedb394a42fe6c20d3313abcd4cbb.webp",
       "title": "雨夜红裳与伞影",
       "category": "红裳仙姬",
       "description": "红裳仙姬「雨夜红裳与伞影」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1757,6 +1822,7 @@
     {
       "id": "41841a356e23",
       "path": "images/red-robed-immortal/wuxia/bamboo-sword-dance.png",
+      "thumbnail": "generated/thumbnails/1d86ae48dd32d3773459e05a1b511335.webp",
       "title": "竹林中的武侠少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「竹林中的武侠少女」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1779,6 +1845,7 @@
     {
       "id": "e36cb2c28667",
       "path": "images/red-robed-immortal/flower-garden/spring-blossom-promise.png",
+      "thumbnail": "generated/thumbnails/4a965ecbb887ca0afddcf5afcd504b06.webp",
       "title": "春日花海中的红衣少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「春日花海中的红衣少女」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
@@ -1801,6 +1868,7 @@
     {
       "id": "a609cf16a675",
       "path": "images/red-robed-immortal/celestial/ivory-gold-portrait-goddess-135.png",
+      "thumbnail": "generated/thumbnails/0821175091073065ccbc70090bcc8f25.webp",
       "title": "羽光红宝石圣女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「羽光红宝石圣女」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
@@ -1834,6 +1902,7 @@
     {
       "id": "007081e2e489",
       "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-immortal-maiden-131.png",
+      "thumbnail": "generated/thumbnails/4be1c1f4a18e68dc6dbbbbb18fbdeb1f.webp",
       "title": "翡翠金饰幻梦美人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「翡翠金饰幻梦美人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现emerald主题、细腻材质和人物互动视线。",
@@ -1867,6 +1936,7 @@
     {
       "id": "aea23ee332b8",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-129.png",
+      "thumbnail": "generated/thumbnails/6f7c596f3dceff2c953ce186a158aef6.webp",
       "title": "鎏金红宝石幻梦肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「鎏金红宝石幻梦肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -1900,6 +1970,7 @@
     {
       "id": "2b416f5b21c7",
       "path": "images/red-robed-immortal/moon-night/black-gold-portrait-immortal-maiden-133.png",
+      "thumbnail": "generated/thumbnails/19d74496d353aab0874537eb73ab0e2c.webp",
       "title": "暗夜红金特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「暗夜红金特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
@@ -1933,6 +2004,7 @@
     {
       "id": "e227782963db",
       "path": "images/red-robed-immortal/moon-night/blue-silver-over-shoulder-gaze-immortal-maiden-132.png",
+      "thumbnail": "generated/thumbnails/eb95bc2ad48fb6d09ed35fae12440707.webp",
       "title": "月影星饰下的回眸美人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「月影星饰下的回眸美人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
@@ -1966,6 +2038,7 @@
     {
       "id": "03c1324bda88",
       "path": "images/red-robed-immortal/moon-night/crimson-gold-portrait-immortal-maiden-130.png",
+      "thumbnail": "generated/thumbnails/94302108768d02d8851e100647907a23.webp",
       "title": "红晶幻梦月影中的金饰美人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红晶幻梦月影中的金饰美人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
@@ -1999,6 +2072,7 @@
     {
       "id": "fe34892e9eae",
       "path": "images/red-robed-immortal/pink-gold/pink-gold-portrait-immortal-maiden-136.png",
+      "thumbnail": "generated/thumbnails/0123ed05ef771621113e37b5ee825856.webp",
       "title": "粉金流光中的东方美人",
       "category": "红裳仙姬",
       "description": "红裳仙姬「粉金流光中的东方美人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现pink-gold主题、细腻材质和人物互动视线。",
@@ -2032,6 +2106,7 @@
     {
       "id": "ba9a831e4f3f",
       "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-immortal-maiden-120.png",
+      "thumbnail": "generated/thumbnails/2ef542d93cbc2ad4e1b20ec64620638d.webp",
       "title": "翡翠华服与红宝石耳饰肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「翡翠华服与红宝石耳饰肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现emerald主题、细腻材质和人物互动视线。",
@@ -2065,6 +2140,7 @@
     {
       "id": "38cc6d6d88c5",
       "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-sorceress-127.png",
+      "thumbnail": "generated/thumbnails/f7a84a5abec2c298ac6ec3c5482fb97c.webp",
       "title": "翠金魔法女巫肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「翠金魔法女巫肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现emerald主题、细腻材质和人物互动视线。",
@@ -2098,6 +2174,7 @@
     {
       "id": "fca1a5747541",
       "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-126.png",
+      "thumbnail": "generated/thumbnails/f7297015e881d9cf9f915b034f5b6d43.webp",
       "title": "黑金红宝石华丽肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑金红宝石华丽肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2131,6 +2208,7 @@
     {
       "id": "eca9f410e159",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-over-shoulder-gaze-immortal-maiden-121.png",
+      "thumbnail": "generated/thumbnails/31de782b7f16ea9f832c889f5dfb579c.webp",
       "title": "鎏金红宝石发饰的回眸肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「鎏金红宝石发饰的回眸肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2164,6 +2242,7 @@
     {
       "id": "76aa531c38dc",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-125.png",
+      "thumbnail": "generated/thumbnails/ec5a419fa650006f6c4e797c09ea9e4c.webp",
       "title": "鎏金红玉东方美人肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「鎏金红玉东方美人肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2197,6 +2276,7 @@
     {
       "id": "03ac4ad7cfb5",
       "path": "images/red-robed-immortal/fire-magic/ivory-gold-portrait-immortal-maiden-124.png",
+      "thumbnail": "generated/thumbnails/4e6ffca007282c49c3264fae2de48b69.webp",
       "title": "鎏金羽饰中的红光幻梦",
       "category": "红裳仙姬",
       "description": "红裳仙姬「鎏金羽饰中的红光幻梦」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -2230,6 +2310,7 @@
     {
       "id": "75771a795e7d",
       "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-immortal-maiden-119.png",
+      "thumbnail": "generated/thumbnails/8cad476a79008e4fb488922d24b0cdb3.webp",
       "title": "鎏金红珠",
       "category": "红裳仙姬",
       "description": "红裳仙姬「鎏金红珠」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -2263,6 +2344,7 @@
     {
       "id": "902331787ecd",
       "path": "images/red-robed-immortal/violet/violet-gold-portrait-immortal-maiden-123.png",
+      "thumbnail": "generated/thumbnails/3b7f0275236eb0aaab4bac56f94a89e5.webp",
       "title": "紫韵金饰仕女像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「紫韵金饰仕女像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现violet主题、细腻材质和人物互动视线。",
@@ -2296,6 +2378,7 @@
     {
       "id": "9f4c634ee270",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-117.png",
+      "thumbnail": "generated/thumbnails/c56457371459a6629367ee9dff22cd1f.webp",
       "title": "黑红座椅回望特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑红座椅回望特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2329,6 +2412,7 @@
     {
       "id": "d0a83416d97f",
       "path": "images/red-robed-immortal/pink-gold/pink-gold-portrait-immortal-maiden-116.png",
+      "thumbnail": "generated/thumbnails/37281d5e980369508013d0eff2975ef0.webp",
       "title": "粉白宫廷卧姿特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「粉白宫廷卧姿特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现pink-gold主题、细腻材质和人物互动视线。",
@@ -2362,6 +2446,7 @@
     {
       "id": "0586b9af0b01",
       "path": "images/red-robed-immortal/moon-night/black-gold-chin-rest-immortal-maiden-115.png",
+      "thumbnail": "generated/thumbnails/a9b7c2aa1970fd35acb569363c825b92.webp",
       "title": "暗夜灰金托腮特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「暗夜灰金托腮特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
@@ -2395,6 +2480,7 @@
     {
       "id": "a7d68596be87",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-114.png",
+      "thumbnail": "generated/thumbnails/44ee857828b6a8f659cc6c070caf9e62.webp",
       "title": "暖光红衣俯身特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「暖光红衣俯身特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2428,6 +2514,7 @@
     {
       "id": "3e0759cdf6b6",
       "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-113.png",
+      "thumbnail": "generated/thumbnails/c22ce8d2868a9570568eb49fd6828858.webp",
       "title": "烛光黑衣侧身特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「烛光黑衣侧身特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2461,6 +2548,7 @@
     {
       "id": "fa6a260aadbf",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-112.png",
+      "thumbnail": "generated/thumbnails/09ff1553b2d3bda85b070087e0f87232.webp",
       "title": "红帐执簪特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红帐执簪特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2494,6 +2582,7 @@
     {
       "id": "d4167482f05f",
       "path": "images/red-robed-immortal/celestial/ivory-gold-closed-eyes-immortal-maiden-111.png",
+      "thumbnail": "generated/thumbnails/2023d77f6835f2319daf887cc0f59511.webp",
       "title": "闭眼黑金羽翼特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「闭眼黑金羽翼特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
@@ -2526,6 +2615,7 @@
     {
       "id": "d4362c32672d",
       "path": "images/red-robed-immortal/battle/black-gold-closed-eyes-warrior-110.png",
+      "thumbnail": "generated/thumbnails/76edd2258d18b8addec2e3931c58dae5.webp",
       "title": "闭眼黑金战姬特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「闭眼黑金战姬特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -2557,6 +2647,7 @@
     {
       "id": "e5d771292fc3",
       "path": "images/red-robed-immortal/multi-panel/golden-collage-immortal-maiden-108.png",
+      "thumbnail": "generated/thumbnails/e83d87557de40b0a60ae3986a7a9f38e.webp",
       "title": "暖光十格特写拼图",
       "category": "红裳仙姬",
       "description": "红裳仙姬「暖光十格特写拼图」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
@@ -2589,6 +2680,7 @@
     {
       "id": "236cb58beb4a",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-107.png",
+      "thumbnail": "generated/thumbnails/79975ed75ae6cb0d19f223a4a7a94fcc.webp",
       "title": "黑红战斗礼服特写",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑红战斗礼服特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2621,6 +2713,7 @@
     {
       "id": "0d68436fd541",
       "path": "images/red-robed-immortal/multi-panel/crimson-gold-collage-immortal-maiden-106.png",
+      "thumbnail": "generated/thumbnails/a99d182340a4f5d6f9da5dec554ecae9.webp",
       "title": "红黑十格特写拼图",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红黑十格特写拼图」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
@@ -2653,6 +2746,7 @@
     {
       "id": "4c45511e8f6c",
       "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-immortal-maiden-098.png",
+      "thumbnail": "generated/thumbnails/14cd686f43a5b718ae7c407a692b95b6.webp",
       "title": "朱红剑光中的神秘女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「朱红剑光中的神秘女子」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -2685,6 +2779,7 @@
     {
       "id": "2da0970a52a3",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-099.png",
+      "thumbnail": "generated/thumbnails/c2691e00a2a60768ad0fa466295ccd3c.webp",
       "title": "古风美人肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「古风美人肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2718,6 +2813,7 @@
     {
       "id": "209f0ff5bc10",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-103.png",
+      "thumbnail": "generated/thumbnails/07613feff0b0d58f165972ac7d50a2c4.webp",
       "title": "东方奇幻之美",
       "category": "红裳仙姬",
       "description": "红裳仙姬「东方奇幻之美」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2751,6 +2847,7 @@
     {
       "id": "05275e9867ce",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-sorceress-096.png",
+      "thumbnail": "generated/thumbnails/a2392fab0ec78c7d854b0edb4ea284d5.webp",
       "title": "神秘幻想中的女性法师",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘幻想中的女性法师」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -2784,6 +2881,7 @@
     {
       "id": "24c8dd1e099d",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-102.png",
+      "thumbnail": "generated/thumbnails/40daa0dd4f98e9a89db559ee8ff55e22.webp",
       "title": "神秘红光中的优雅女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘红光中的优雅女子」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -2817,6 +2915,7 @@
     {
       "id": "8e536f8933de",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-100.png",
+      "thumbnail": "generated/thumbnails/f3a5c93fd081c74dd644bafacfa71f3a.webp",
       "title": "神秘红光中的女法师",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘红光中的女法师」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -2850,6 +2949,7 @@
     {
       "id": "270ebb862c35",
       "path": "images/red-robed-immortal/magic/crimson-gold-gaze-sorceress-104.png",
+      "thumbnail": "generated/thumbnails/9146d8b5e29e34ad2ca60ed38f73d3c5.webp",
       "title": "红魔法使者的凝视",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红魔法使者的凝视」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -2882,6 +2982,7 @@
     {
       "id": "1b086530df0c",
       "path": "images/red-robed-immortal/magic/crimson-gold-portrait-immortal-maiden-101.png",
+      "thumbnail": "generated/thumbnails/7ff8ddd93a922b6397148b12511f462f.webp",
       "title": "红金旋律中的魔法少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红金旋律中的魔法少女」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -2915,6 +3016,7 @@
     {
       "id": "22f96eada1de",
       "path": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-097.png",
+      "thumbnail": "generated/thumbnails/3f480e4821da3d736b7843019f01f3a8.webp",
       "title": "红色魔法女巫肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红色魔法女巫肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -2948,6 +3050,7 @@
     {
       "id": "d7400dd45eeb",
       "path": "images/red-robed-immortal/celestial/golden-portrait-immortal-maiden-087.png",
+      "thumbnail": "generated/thumbnails/2fd57215d73a34254aa9491dc483ff5c.webp",
       "title": "魔法光辉中的优雅女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法光辉中的优雅女子」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
@@ -2981,6 +3084,7 @@
     {
       "id": "9846ea8f1433",
       "path": "images/red-robed-immortal/celestial/golden-portrait-immortal-maiden-090.png",
+      "thumbnail": "generated/thumbnails/e8e414664e9dee591662c56da3f0748f.webp",
       "title": "优雅的光辉散发",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的光辉散发」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
@@ -3014,6 +3118,7 @@
     {
       "id": "d5cb8570c271",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-086.png",
+      "thumbnail": "generated/thumbnails/35ba9b3d255333b5e993e194aa3b59fd.webp",
       "title": "优雅神秘的东方女性肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅神秘的东方女性肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3047,6 +3152,7 @@
     {
       "id": "072148fdc986",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-089.png",
+      "thumbnail": "generated/thumbnails/f8b1da921efcea83902f95ddfb3b905c.webp",
       "title": "优雅的古风少女肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的古风少女肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3080,6 +3186,7 @@
     {
       "id": "92291f1f6371",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-093.png",
+      "thumbnail": "generated/thumbnails/825c82a0ed7c65d7f2d70938082d35e7.webp",
       "title": "神秘东方美人肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘东方美人肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3113,6 +3220,7 @@
     {
       "id": "7f9f6cdd51d7",
       "path": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-092.png",
+      "thumbnail": "generated/thumbnails/26892509dc858003f2ecd0645c57a32a.webp",
       "title": "神秘的红色魔法师",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的红色魔法师」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3146,6 +3254,7 @@
     {
       "id": "f10862b8c441",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-088.png",
+      "thumbnail": "generated/thumbnails/c3e2acdccc1627e4aaed6c56bfc3c99f.webp",
       "title": "神秘的魔法使肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的魔法使肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3179,6 +3288,7 @@
     {
       "id": "767f6886d91a",
       "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-091.png",
+      "thumbnail": "generated/thumbnails/005037b70ab2d3b71a64bb69f2f7104d.webp",
       "title": "强大的魔法使者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「强大的魔法使者」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3211,6 +3321,7 @@
     {
       "id": "cd2b07564a4a",
       "path": "images/red-robed-immortal/moon-night/golden-portrait-immortal-maiden-094.png",
+      "thumbnail": "generated/thumbnails/84227956127a20c3f4537f6b37b80035.webp",
       "title": "优雅之夜的华丽肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅之夜的华丽肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
@@ -3244,6 +3355,7 @@
     {
       "id": "38df8edc066c",
       "path": "images/red-robed-immortal/battle/golden-portrait-warrior-079.png",
+      "thumbnail": "generated/thumbnails/58ab257bdf5496d5bfee525405fe45da.webp",
       "title": "华丽的东方式战士肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「华丽的东方式战士肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -3276,6 +3388,7 @@
     {
       "id": "f110399f3e45",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-076.png",
+      "thumbnail": "generated/thumbnails/3d7838de431a8be157d06c6c86fe228f.webp",
       "title": "神秘的金红幻想肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的金红幻想肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3309,6 +3422,7 @@
     {
       "id": "9b2a0e069401",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-084.png",
+      "thumbnail": "generated/thumbnails/11079f2421a5ea8d59f4bf6e41188b0d.webp",
       "title": "灵动优雅的幻想女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「灵动优雅的幻想女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3342,6 +3456,7 @@
     {
       "id": "e6a121fe7f8f",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-082.png",
+      "thumbnail": "generated/thumbnails/368543ed2bc30bd01075db90276fc868.webp",
       "title": "红光魔法少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红光魔法少女」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -3375,6 +3490,7 @@
     {
       "id": "21d147ac56a8",
       "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-goddess-083.png",
+      "thumbnail": "generated/thumbnails/74375209f7a9dd1e1c003e39ef11f8d2.webp",
       "title": "神秘红球仙子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘红球仙子」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3408,6 +3524,7 @@
     {
       "id": "cee36551e812",
       "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-immortal-maiden-077.png",
+      "thumbnail": "generated/thumbnails/4d1c1ef870fa4c23da44bf27d4a762bd.webp",
       "title": "神秘红球与优雅氛围",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘红球与优雅氛围」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3441,6 +3558,7 @@
     {
       "id": "d8f7aac79136",
       "path": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-078.png",
+      "thumbnail": "generated/thumbnails/5c8fbc26b6bef24a4ba24e81be663626.webp",
       "title": "神秘红能量女法师",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘红能量女法师」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3474,6 +3592,7 @@
     {
       "id": "b2a8b8a1aaf6",
       "path": "images/red-robed-immortal/magic/golden-portrait-immortal-maiden-080.png",
+      "thumbnail": "generated/thumbnails/14bbaeeb1ae28252760c4d90d4c296ea.webp",
       "title": "魔法能量中的优雅女子",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法能量中的优雅女子」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3507,6 +3626,7 @@
     {
       "id": "3f5b9fa6ac7c",
       "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-081.png",
+      "thumbnail": "generated/thumbnails/b52caa30d33840cba37a3c63a1b88053.webp",
       "title": "魅惑女巫的强大气场",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魅惑女巫的强大气场」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3539,6 +3659,7 @@
     {
       "id": "c8318b8f5dcb",
       "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-069.png",
+      "thumbnail": "generated/thumbnails/f9c9237e0c5721533d2953f8cbb6f4eb.webp",
       "title": "战士与红剑",
       "category": "红裳仙姬",
       "description": "红裳仙姬「战士与红剑」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -3571,6 +3692,7 @@
     {
       "id": "cdf263509bb9",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-071.png",
+      "thumbnail": "generated/thumbnails/67e3a55c167e66e17b0aaa839af9aafe.webp",
       "title": "动感幻想肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「动感幻想肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3604,6 +3726,7 @@
     {
       "id": "0c3ba17b2432",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-073.png",
+      "thumbnail": "generated/thumbnails/879d61769598a4aa5f1477002a0b82f4.webp",
       "title": "魔法女巫与火焰能量",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫与火焰能量」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -3637,6 +3760,7 @@
     {
       "id": "60966dc95e45",
       "path": "images/red-robed-immortal/magic/golden-dance-immortal-maiden-067.png",
+      "thumbnail": "generated/thumbnails/b6a6209f617833e81b9575c2a02b6741.webp",
       "title": "神秘魔力之舞",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘魔力之舞」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3670,6 +3794,7 @@
     {
       "id": "bb8a0bc9f3fd",
       "path": "images/red-robed-immortal/magic/golden-levitation-sorceress-070.png",
+      "thumbnail": "generated/thumbnails/af062ac0ba3bfea7cdc1ad4025a94766.webp",
       "title": "魔法女巫的优雅飞行",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫的优雅飞行」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3703,6 +3828,7 @@
     {
       "id": "4461b14c33db",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-065.png",
+      "thumbnail": "generated/thumbnails/c92b5c8f07ede66bdf8187ea038101cd.webp",
       "title": "魔法女巫的庄严姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫的庄严姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3736,6 +3862,7 @@
     {
       "id": "6c2d482e608c",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-068.png",
+      "thumbnail": "generated/thumbnails/413ed77d8f4fe48c6b1391740f0e8863.webp",
       "title": "神秘魔法使者的觉醒",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘魔法使者的觉醒」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3769,6 +3896,7 @@
     {
       "id": "e8685455d090",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-072.png",
+      "thumbnail": "generated/thumbnails/132786a8a1dbd8af40529f918c0d13f8.webp",
       "title": "优雅的魔法女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的魔法女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3802,6 +3930,7 @@
     {
       "id": "8035e5ab8c34",
       "path": "images/red-robed-immortal/magic/golden-summoning-sorceress-074.png",
+      "thumbnail": "generated/thumbnails/95bbe96a85bfcc7e270f89dab157530b.webp",
       "title": "魔法女巫的优雅召唤",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫的优雅召唤」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -3835,6 +3964,7 @@
     {
       "id": "b65ab6e8599a",
       "path": "images/red-robed-immortal/battle/black-gold-portrait-warrior-059.png",
+      "thumbnail": "generated/thumbnails/faeaf4cfa1dcde6fe4916fe29b4668b0.webp",
       "title": "黑暗奇幻女战士",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑暗奇幻女战士」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -3867,6 +3997,7 @@
     {
       "id": "ae4fb2c895ce",
       "path": "images/red-robed-immortal/battle/golden-summoning-immortal-maiden-058.png",
+      "thumbnail": "generated/thumbnails/19d0832a77576ae7c3e5543e71bbd052.webp",
       "title": "魔法召唤者的决斗姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法召唤者的决斗姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -3901,6 +4032,7 @@
     {
       "id": "fe91a72cb22a",
       "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-063.png",
+      "thumbnail": "generated/thumbnails/de3e0a7a058b499b70e085d2ab0fe82e.webp",
       "title": "华丽的黑金礼服肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「华丽的黑金礼服肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -3934,6 +4066,7 @@
     {
       "id": "2a5dbc325a95",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-crimson-orb-immortal-maiden-061.png",
+      "thumbnail": "generated/thumbnails/34c2920e9f724fe3df1df563c87e7103.webp",
       "title": "红光魔珠与华丽服饰",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红光魔珠与华丽服饰」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -3967,6 +4100,7 @@
     {
       "id": "ad15d468f4ef",
       "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-sorceress-057.png",
+      "thumbnail": "generated/thumbnails/b12d69e72b360ec883733e297fd25b63.webp",
       "title": "优雅的魔法使者与红珠能量球",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的魔法使者与红珠能量球」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4000,6 +4134,7 @@
     {
       "id": "26e3031b253f",
       "path": "images/red-robed-immortal/magic/golden-levitation-sorceress-060.png",
+      "thumbnail": "generated/thumbnails/0172680763b09f5c97965a1f9b336764.webp",
       "title": "浮空的魔法使者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「浮空的魔法使者」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4033,6 +4168,7 @@
     {
       "id": "9fd8caecd846",
       "path": "images/red-robed-immortal/magic/golden-portrait-queen-064.png",
+      "thumbnail": "generated/thumbnails/05b5b56083e78476bd90aff33344ef5c.webp",
       "title": "魔法女王的荣耀风采",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女王的荣耀风采」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4066,6 +4202,7 @@
     {
       "id": "77d1fa98fc3f",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-055.png",
+      "thumbnail": "generated/thumbnails/d2bdd14d8ad5a692078b69e86c8e7551.webp",
       "title": "魔法与魅力的女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法与魅力的女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4099,6 +4236,7 @@
     {
       "id": "d6aab57fe340",
       "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-062.png",
+      "thumbnail": "generated/thumbnails/c062d67dde8b6df637a5dd21c6252292.webp",
       "title": "魔法女巫的强势姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫的强势姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4132,6 +4270,7 @@
     {
       "id": "018d327f6a61",
       "path": "images/red-robed-immortal/battle/crimson-gold-portrait-warrior-049.png",
+      "thumbnail": "generated/thumbnails/bc427d65e3bab2d2c105d7f7776bd4c1.webp",
       "title": "魔法战士与红焰能量",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法战士与红焰能量」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -4164,6 +4303,7 @@
     {
       "id": "7cdbe84383c3",
       "path": "images/red-robed-immortal/battle/golden-portrait-warrior-050.png",
+      "thumbnail": "generated/thumbnails/36e3d6333baf4905b9d5dd34428710e9.webp",
       "title": "魔法女战士的优雅造型",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女战士的优雅造型」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -4196,6 +4336,7 @@
     {
       "id": "72d46f979d64",
       "path": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-048.png",
+      "thumbnail": "generated/thumbnails/34180fa37622802cbb2003132c7b7c3d.webp",
       "title": "黑暗女巫与魔法光球",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑暗女巫与魔法光球」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4229,6 +4370,7 @@
     {
       "id": "73f404430b8f",
       "path": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-054.png",
+      "thumbnail": "generated/thumbnails/303e89c1a23fe22dd1c5c52c260277da.webp",
       "title": "黑金魔法女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑金魔法女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4262,6 +4404,7 @@
     {
       "id": "ba7787c43ec7",
       "path": "images/red-robed-immortal/magic/golden-gaze-immortal-maiden-052.png",
+      "thumbnail": "generated/thumbnails/33302a4cca8e1395bcd008e5159741ba.webp",
       "title": "魔法召唤者的凝视",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法召唤者的凝视」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4295,6 +4438,7 @@
     {
       "id": "072b826a0769",
       "path": "images/red-robed-immortal/magic/golden-portrait-immortal-maiden-046.png",
+      "thumbnail": "generated/thumbnails/028fe979f92418a8132be5f5da3db51d.webp",
       "title": "魔法大师的威严姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法大师的威严姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4327,6 +4471,7 @@
     {
       "id": "ddf09ed1509f",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-051.png",
+      "thumbnail": "generated/thumbnails/ce34984037bfcfca1f5fb30b6bb4a618.webp",
       "title": "灵动的神秘魔法使者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「灵动的神秘魔法使者」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4360,6 +4505,7 @@
     {
       "id": "1e915f336daa",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-053.png",
+      "thumbnail": "generated/thumbnails/4b62f430e6957be0befc8cd92470f25a.webp",
       "title": "神秘魔法师的荣耀时刻",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘魔法师的荣耀时刻」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4393,6 +4539,7 @@
     {
       "id": "ccb53eabaed2",
       "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-041.png",
+      "thumbnail": "generated/thumbnails/3da117242dd2c50aba90dae5403adebc.webp",
       "title": "红光剑士的优雅姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「红光剑士的优雅姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -4425,6 +4572,7 @@
     {
       "id": "b70bb40a4fd0",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-044.png",
+      "thumbnail": "generated/thumbnails/6c9a0a887dd604c93f16929732d8f416.webp",
       "title": "神秘的优雅女性肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的优雅女性肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -4458,6 +4606,7 @@
     {
       "id": "0e6863a6f750",
       "path": "images/red-robed-immortal/magic/black-gold-dance-sorceress-039.png",
+      "thumbnail": "generated/thumbnails/9603dbd825aeb14cdda8943e57dd56d0.webp",
       "title": "舞动的黑衣女术士",
       "category": "红裳仙姬",
       "description": "红裳仙姬「舞动的黑衣女术士」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4491,6 +4640,7 @@
     {
       "id": "d52cf66b38b4",
       "path": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-042.png",
+      "thumbnail": "generated/thumbnails/e6bd13288b94c303cfc7a1b559606faf.webp",
       "title": "神秘的黑暗女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘的黑暗女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4524,6 +4674,7 @@
     {
       "id": "8e81e85610b6",
       "path": "images/red-robed-immortal/magic/golden-portrait-goddess-038.png",
+      "thumbnail": "generated/thumbnails/6f1eb3fbbec56f1ffae2ed5e7b891f70.webp",
       "title": "魔法与优雅的女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法与优雅的女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4557,6 +4708,7 @@
     {
       "id": "2ab045c51115",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-040.png",
+      "thumbnail": "generated/thumbnails/bc12e60b64adeb43e9d6d9f681de3960.webp",
       "title": "魔法中的优雅女巫",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法中的优雅女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4590,6 +4742,7 @@
     {
       "id": "157f1636c1d8",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-043.png",
+      "thumbnail": "generated/thumbnails/f466989155f4d3614aaf57c335363ff0.webp",
       "title": "魔法仪式中的自信女法师",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法仪式中的自信女法师」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4623,6 +4776,7 @@
     {
       "id": "07ec0954930a",
       "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-036.png",
+      "thumbnail": "generated/thumbnails/566ee772be1c8b625dc7571515e48317.webp",
       "title": "魔法使者的力量与优雅",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法使者的力量与优雅」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4656,6 +4810,7 @@
     {
       "id": "fe4b47f379bd",
       "path": "images/red-robed-immortal/multi-panel/golden-showcase-sorceress-045.png",
+      "thumbnail": "generated/thumbnails/1edbe348140b4bd706db294ed9da5f94.webp",
       "title": "魔法女巫的力量展示",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫的力量展示」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
@@ -4689,6 +4844,7 @@
     {
       "id": "878e1ba45e6e",
       "path": "images/red-robed-immortal/battle/golden-dance-warrior-031.png",
+      "thumbnail": "generated/thumbnails/14f4bd15a4e73a8fab2b93913e7b5f84.webp",
       "title": "神秘战士的光影之舞",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘战士的光影之舞」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -4721,6 +4877,7 @@
     {
       "id": "badb34d945a3",
       "path": "images/red-robed-immortal/magic/black-gold-portrait-queen-027.png",
+      "thumbnail": "generated/thumbnails/46438b3a32500498cb6d8813b40d50ce.webp",
       "title": "黑金魔法女王肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「黑金魔法女王肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4754,6 +4911,7 @@
     {
       "id": "72641b48f5b6",
       "path": "images/red-robed-immortal/magic/golden-dance-sorceress-033.png",
+      "thumbnail": "generated/thumbnails/15b796c222c474f73a43b058f7cb2fd0.webp",
       "title": "魔法师的力量舞动",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法师的力量舞动」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4787,6 +4945,7 @@
     {
       "id": "35b168586efd",
       "path": "images/red-robed-immortal/magic/golden-levitation-sorceress-030.png",
+      "thumbnail": "generated/thumbnails/bcb2801695e3a243a1ecbc9e1979c82c.webp",
       "title": "浮空施法的女术士",
       "category": "红裳仙姬",
       "description": "红裳仙姬「浮空施法的女术士」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4820,6 +4979,7 @@
     {
       "id": "9d1648ee47ac",
       "path": "images/red-robed-immortal/magic/golden-portrait-queen-034.png",
+      "thumbnail": "generated/thumbnails/6dd0683a041a853b149cffd03838c326.webp",
       "title": "魔法女王的决绝姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女王的决绝姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4852,6 +5012,7 @@
     {
       "id": "f13d6b2de9e1",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-029.png",
+      "thumbnail": "generated/thumbnails/a518f92d1beee4bbc81a5d303d74e701.webp",
       "title": "优雅的魔法使者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的魔法使者」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4885,6 +5046,7 @@
     {
       "id": "b0d1b775dfd7",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-032.png",
+      "thumbnail": "generated/thumbnails/d12e27f5993cb7cb997726194d2b7984.webp",
       "title": "魔法女巫的神秘肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女巫的神秘肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4918,6 +5080,7 @@
     {
       "id": "2d37afbe476a",
       "path": "images/red-robed-immortal/magic/golden-summoning-queen-035.png",
+      "thumbnail": "generated/thumbnails/777923da71ef72242bc6bce4e03e9f0b.webp",
       "title": "魔法女王的威严召唤",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法女王的威严召唤」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -4950,6 +5113,7 @@
     {
       "id": "2a7c5a959594",
       "path": "images/red-robed-immortal/battle/golden-portrait-warrior-021.png",
+      "thumbnail": "generated/thumbnails/69024e4b745728e8049fd57549501373.webp",
       "title": "飘逸幻想中的优雅刺客",
       "category": "红裳仙姬",
       "description": "红裳仙姬「飘逸幻想中的优雅刺客」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
@@ -4983,6 +5147,7 @@
     {
       "id": "820b50c90f64",
       "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-queen-022.png",
+      "thumbnail": "generated/thumbnails/3700655bd4b3242eb516360684afdae0.webp",
       "title": "优雅黑金幻想女王",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅黑金幻想女王」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5016,6 +5181,7 @@
     {
       "id": "c36faebc4c30",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-dance-immortal-maiden-020.png",
+      "thumbnail": "generated/thumbnails/8b388fc87f8399129fa41f714feab732.webp",
       "title": "精致的舞动少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「精致的舞动少女」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5049,6 +5215,7 @@
     {
       "id": "1e06b97426da",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-017.png",
+      "thumbnail": "generated/thumbnails/73c29497971695072720eb11de49cd5d.webp",
       "title": "精致优雅的东方女性肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「精致优雅的东方女性肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5082,6 +5249,7 @@
     {
       "id": "9cc53dba8488",
       "path": "images/red-robed-immortal/fire-magic/crimson-gold-dance-immortal-maiden-024.png",
+      "thumbnail": "generated/thumbnails/8a47d0840b18f129bbde210059d37ec8.webp",
       "title": "神秘红光中的舞者",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘红光中的舞者」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
@@ -5115,6 +5283,7 @@
     {
       "id": "b5e45524d622",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-019.png",
+      "thumbnail": "generated/thumbnails/bfba3b49c9ed30b38a8d1f487a77b99e.webp",
       "title": "魔法使者的优雅造型",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法使者的优雅造型」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -5148,6 +5317,7 @@
     {
       "id": "f77c50ce2a7e",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-023.png",
+      "thumbnail": "generated/thumbnails/f25801f3c0640e06478034930ec79e52.webp",
       "title": "魔法使者的神秘气场",
       "category": "红裳仙姬",
       "description": "红裳仙姬「魔法使者的神秘气场」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -5181,6 +5351,7 @@
     {
       "id": "67f95ff20003",
       "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-025.png",
+      "thumbnail": "generated/thumbnails/35d3aa7f1e755673c140c0aef53c1dcf.webp",
       "title": "神秘魔法女巫的优雅姿态",
       "category": "红裳仙姬",
       "description": "红裳仙姬「神秘魔法女巫的优雅姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
@@ -5214,6 +5385,7 @@
     {
       "id": "76d1556568ac",
       "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-016.png",
+      "thumbnail": "generated/thumbnails/1728bac98bbd2d18ed8b775a5d012ad3.webp",
       "title": "工作室角色作品集",
       "category": "红裳仙姬",
       "description": "红裳仙姬「工作室角色作品集」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现character-sheet主题、细腻材质和人物互动视线。",
@@ -5246,6 +5418,7 @@
     {
       "id": "5f800d3159fb",
       "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-014.png",
+      "thumbnail": "generated/thumbnails/9517b4fb22aa2f57646984f7a9edc999.webp",
       "title": "工作室多姿态展示",
       "category": "红裳仙姬",
       "description": "红裳仙姬「工作室多姿态展示」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用多格拼图构图，呈现character-sheet主题、细腻材质和人物互动视线。",
@@ -5278,6 +5451,7 @@
     {
       "id": "1e2959676382",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-005.png",
+      "thumbnail": "generated/thumbnails/75ad109485b189e1c767f9eaa5974dfd.webp",
       "title": "优雅的红色礼服女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的红色礼服女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5311,6 +5485,7 @@
     {
       "id": "c837cd7331a9",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-008.png",
+      "thumbnail": "generated/thumbnails/48633c419b8986a0571cb3caea41ce0d.webp",
       "title": "优雅红袍女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅红袍女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5344,6 +5519,7 @@
     {
       "id": "031da874c82c",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-004.png",
+      "thumbnail": "generated/thumbnails/4be3790f623431617d1edcd9241128ed.webp",
       "title": "优雅的红色礼服少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的红色礼服少女」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5377,6 +5553,7 @@
     {
       "id": "06ddea6e0884",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-007.png",
+      "thumbnail": "generated/thumbnails/96e4f57989d1ee6ac7660441a21d1eff.webp",
       "title": "优雅的红色礼服少女",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的红色礼服少女」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5410,6 +5587,7 @@
     {
       "id": "bad6293e5497",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-009.png",
+      "thumbnail": "generated/thumbnails/a801e86a1e8374feb64899d70c867960.webp",
       "title": "优雅的红金礼服女性像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的红金礼服女性像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5443,6 +5621,7 @@
     {
       "id": "0193276c83e4",
       "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-011.png",
+      "thumbnail": "generated/thumbnails/865850dad14cc163beed905bc94d5064.webp",
       "title": "华丽的红金礼服肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「华丽的红金礼服肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5476,6 +5655,7 @@
     {
       "id": "e5ca0248daf3",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-010.png",
+      "thumbnail": "generated/thumbnails/037ee795868b9093a460097ccbe99619.webp",
       "title": "优雅的东方女神肖像",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的东方女神肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5509,6 +5689,7 @@
     {
       "id": "448643281353",
       "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-012.png",
+      "thumbnail": "generated/thumbnails/855a4fa81cf729fa1b32ecdc4fe38b71.webp",
       "title": "优雅的东方女神",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅的东方女神」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
@@ -5542,6 +5723,7 @@
     {
       "id": "3b242e7ce912",
       "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-003.png",
+      "thumbnail": "generated/thumbnails/5d20c102712cca6aab4bbaade5004388.webp",
       "title": "优雅女性的传统服饰展示",
       "category": "红裳仙姬",
       "description": "红裳仙姬「优雅女性的传统服饰展示」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
@@ -5575,6 +5757,7 @@
     {
       "id": "6be833c1fd42",
       "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-002.png",
+      "thumbnail": "generated/thumbnails/a832b6066f7b9d1f732aaf38b21cea7b.webp",
       "title": "奇幻风格女性角色设计展示",
       "category": "红裳仙姬",
       "description": "红裳仙姬「奇幻风格女性角色设计展示」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
