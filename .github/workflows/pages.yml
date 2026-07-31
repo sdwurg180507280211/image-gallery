@@ -28,8 +28,19 @@ jobs:
         with:
           node-version: 20
 
-      - name: Generate image index
-        run: npm run generate
+      - name: Restore generated thumbnail cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/thumbnails
+          key: gallery-thumbnails-v1-${{ hashFiles('images/**/*.png', 'images/**/*.jpg', 'images/**/*.jpeg', 'images/**/*.webp', 'images/**/*.gif', 'images/**/*.avif') }}
+          restore-keys: |
+            gallery-thumbnails-v1-
+
+      - name: Install image tooling
+        run: npm install --no-audit --no-fund
+
+      - name: Build optimized gallery
+        run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -37,7 +48,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
   deploy:
     environment:
