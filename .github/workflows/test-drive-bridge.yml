@@ -1,0 +1,24 @@
+name: Test Drive Bridge
+on:
+  push:
+    paths:
+      - '.github/workflows/test-drive-bridge.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download test image
+        run: |
+          set -euxo pipefail
+          url='https://drive.google.com/uc?export=download&id=1xgYXPrPQGDu3Rs9mOd9IGnqYIl82uJ4E'
+          curl -L --fail --silent --show-error --retry 2 "$url" -o /tmp/test.bin
+          ls -l /tmp/test.bin
+          file -b --mime-type /tmp/test.bin
+          python - <<'PY'
+          from PIL import Image
+          im=Image.open('/tmp/test.bin')
+          print(im.size, im.format)
+          PY
