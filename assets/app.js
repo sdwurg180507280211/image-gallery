@@ -38,11 +38,13 @@ const elements = {
 };
 
 function normalizeImage(item, index) {
-  const path = String(item.path || '').replace(/^\.\//, '');
-  const title = item.title || path.split('/').pop()?.replace(/\.[^.]+$/, '') || `图片 ${index + 1}`;
+  const imagePath = String(item.path || '').replace(/^\.\//, '');
+  const thumbnail = String(item.thumbnail || '').replace(/^\.\//, '');
+  const title = item.title || imagePath.split('/').pop()?.replace(/\.[^.]+$/, '') || `图片 ${index + 1}`;
   return {
-    id: item.id || path || String(index),
-    path,
+    id: item.id || imagePath || String(index),
+    path: imagePath,
+    thumbnail: thumbnail || imagePath,
     title,
     category: item.category || '未分类',
     description: item.description || '',
@@ -72,9 +74,8 @@ async function loadGallery() {
 }
 
 function updateStats() {
-  const categories = new Set(state.images.map((item) => item.category));
   elements.imageCount.textContent = String(state.images.length);
-  elements.categoryCount.textContent = String(categories.size);
+  elements.categoryCount.textContent = String(new Set(state.images.map((item) => item.category)).size);
   elements.favoriteCount.textContent = String(state.favorites.size);
 }
 
@@ -83,7 +84,6 @@ function renderCategories() {
     map.set(item.category, (map.get(item.category) || 0) + 1);
     return map;
   }, new Map());
-
   const categories = ['全部', ...[...counts.keys()].sort((a, b) => a.localeCompare(b, 'zh-CN'))];
   elements.categoryFilters.replaceChildren();
 
@@ -94,40 +94,34 @@ function renderCategories() {
     button.className = `category-chip${category === state.activeCategory ? ' active' : ''}`;
     button.dataset.category = category;
     button.append(document.createTextNode(category));
-
     const countElement = document.createElement('span');
     countElement.textContent = String(count);
     button.append(countElement);
-
     button.addEventListener('click', () => {
       state.activeCategory = category;
       renderCategories();
       applyFilters();
     });
-
     elements.categoryFilters.append(button);
   });
 }
 
 function applyFilters() {
   const normalizedQuery = state.query.trim().toLocaleLowerCase('zh-CN');
-
-  const filtered = state.images.filter((item) => {
-    const categoryMatches = state.activeCategory === '全部' || item.category === state.activeCategory;
-    const favoriteMatches = !state.favoritesOnly || state.favorites.has(item.id);
-    const searchable = [item.title, item.category, item.description, ...item.tags].join(' ').toLocaleLowerCase('zh-CN');
-    const queryMatches = !normalizedQuery || searchable.includes(normalizedQuery);
-    return categoryMatches && favoriteMatches && queryMatches;
-  });
-
-  state.visibleImages = filtered.sort((a, b) => {
-    if (state.sort === 'title') return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
-    const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-    const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-    if (aTime === bTime) return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
-    return state.sort === 'oldest' ? aTime - bTime : bTime - aTime;
-  });
-
+  state.visibleImages = state.images
+    .filter((item) => {
+      const categoryMatches = state.activeCategory === '全部' || item.category === state.activeCategory;
+      const favoriteMatches = !state.favoritesOnly || state.favorites.has(item.id);
+      const searchable = [item.title, item.category, item.description, ...item.tags].join(' ').toLocaleLowerCase('zh-CN');
+      return categoryMatches && favoriteMatches && (!normalizedQuery || searchable.includes(normalizedQuery));
+    })
+    .sort((a, b) => {
+      if (state.sort === 'title') return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
+      const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      if (aTime === bTime) return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
+      return state.sort === 'oldest' ? aTime - bTime : bTime - aTime;
+    });
   renderGallery();
 }
 
@@ -145,13 +139,22 @@ function renderGallery() {
     const tagList = fragment.querySelector('.tag-list');
 
     if (item.width > 0 && item.height > 0) {
-      const ratio = Math.min(1.45, Math.max(0.68, item.width / item.height));
-      card.style.setProperty('--image-ratio', String(ratio));
+      card.style.setProperty('--image-ratio', String(Math.min(1.45, Math.max(0.68, item.width / item.height))));
+      image.width = item.width;
+      image.height = item.height;
     }
 
-    image.src = encodeURI(item.path);
+    image.src = encodeURI(item.thumbnail);
     image.alt = item.title;
+    image.loading = index < 6 ? 'eager' : 'lazy';
+    image.decoding = 'async';
+    image.fetchPriority = index < 3 ? 'high' : 'low';
     image.addEventListener('error', () => {
+      if (image.dataset.fallback !== 'original' && item.thumbnail !== item.path) {
+        image.dataset.fallback = 'original';
+        image.src = encodeURI(item.path);
+        return;
+      }
       card.hidden = true;
       console.warn(`图片加载失败：${item.path}`);
     });
@@ -160,7 +163,6 @@ function renderGallery() {
     category.textContent = item.category;
     imageButton.setAttribute('aria-label', `查看 ${item.title}`);
     imageButton.addEventListener('click', () => openLightbox(index));
-
     syncFavoriteButton(favorite, item);
     favorite.addEventListener('click', () => toggleFavorite(item.id));
 
@@ -170,7 +172,6 @@ function renderGallery() {
       tagElement.textContent = `#${tag}`;
       tagList.append(tagElement);
     });
-
     elements.grid.append(fragment);
   });
 
@@ -179,7 +180,6 @@ function renderGallery() {
   elements.resultText.textContent = state.images.length
     ? `显示 ${state.visibleImages.length} / ${state.images.length} 张作品`
     : '尚未添加图片';
-
   const isEmpty = state.visibleImages.length === 0;
   elements.emptyState.hidden = !isEmpty;
   elements.grid.hidden = isEmpty;
@@ -203,14 +203,10 @@ function syncFavoriteButton(button, item) {
 function toggleFavorite(id) {
   if (state.favorites.has(id)) state.favorites.delete(id);
   else state.favorites.add(id);
-
   localStorage.setItem('image-gallery:favorites', JSON.stringify([...state.favorites]));
   updateStats();
   applyFilters();
-
-  if (elements.lightbox.open && state.activeIndex >= 0) {
-    syncLightboxFavorite();
-  }
+  if (elements.lightbox.open && state.activeIndex >= 0) syncLightboxFavorite();
 }
 
 function openLightbox(index) {
@@ -223,7 +219,6 @@ function openLightbox(index) {
 function renderLightbox() {
   const item = state.visibleImages[state.activeIndex];
   if (!item) return;
-
   elements.lightboxImage.src = encodeURI(item.path);
   elements.lightboxImage.alt = item.title;
   elements.lightboxTitle.textContent = item.title;
@@ -277,22 +272,13 @@ function toggleTheme() {
   localStorage.setItem('image-gallery:theme', next);
 }
 
-elements.search.addEventListener('input', (event) => {
-  state.query = event.target.value;
-  applyFilters();
-});
-
-elements.sort.addEventListener('change', (event) => {
-  state.sort = event.target.value;
-  applyFilters();
-});
-
+elements.search.addEventListener('input', (event) => { state.query = event.target.value; applyFilters(); });
+elements.sort.addEventListener('change', (event) => { state.sort = event.target.value; applyFilters(); });
 elements.favoritesOnly.addEventListener('click', () => {
   state.favoritesOnly = !state.favoritesOnly;
   elements.favoritesOnly.setAttribute('aria-pressed', String(state.favoritesOnly));
   applyFilters();
 });
-
 elements.clearFilters.addEventListener('click', clearFilters);
 elements.themeToggle.addEventListener('click', toggleTheme);
 elements.lightboxClose.addEventListener('click', closeLightbox);
@@ -302,11 +288,7 @@ elements.lightboxFavorite.addEventListener('click', () => {
   const item = state.visibleImages[state.activeIndex];
   if (item) toggleFavorite(item.id);
 });
-
-elements.lightbox.addEventListener('click', (event) => {
-  if (event.target === elements.lightbox) closeLightbox();
-});
-
+elements.lightbox.addEventListener('click', (event) => { if (event.target === elements.lightbox) closeLightbox(); });
 document.addEventListener('keydown', (event) => {
   if (event.key === '/' && document.activeElement !== elements.search) {
     event.preventDefault();
