@@ -15,5 +15,7 @@
   "createdAt": "2026-07-31T06:45:04.000Z",
   "featured": false,
   "width": 1254,
-  "height": 1254
+  "height": 1254,
+  "schemaVersion": 2,
+  "id": "41841a356e23"
 }

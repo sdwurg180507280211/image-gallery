@@ -1,0 +1,1255 @@
+{
+  "generatedAt": "2026-08-03T01:56:27.273Z",
+  "mode": "write",
+  "total": 178,
+  "changed": 178,
+  "unchanged": 0,
+  "records": [
+    {
+      "path": "images/red-robed-immortal/snow/snowy-night-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/snow/snowy-night-five-scenes.json",
+      "id": "9b4cb5c0d918",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/lotus-pond/moonlit-lotus-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/lotus-pond/moonlit-lotus-five-scenes.json",
+      "id": "0397a7a3e5ff",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/desert/desert-sunset-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/desert/desert-sunset-five-scenes.json",
+      "id": "f5b941d860e3",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/spring-garden/spring-beauty-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/spring-garden/spring-beauty-five-scenes.json",
+      "id": "8b20c05cab23",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/night-city/night-city-five-looks.png",
+      "metadataPath": "images/red-robed-immortal/night-city/night-city-five-looks.json",
+      "id": "e346a8ef9d82",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/ten-scene-fantasy-anthology.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/ten-scene-fantasy-anthology.json",
+      "id": "36291d2efb7b",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/ten-theme-glamour-storyboard.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/ten-theme-glamour-storyboard.json",
+      "id": "3445207e62b6",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/cloud-palace/heavenly-cloud-court.png",
+      "metadataPath": "images/red-robed-immortal/cloud-palace/heavenly-cloud-court.json",
+      "id": "354a69d9fd2e",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/phoenix/fire-phoenix-dance.png",
+      "metadataPath": "images/red-robed-immortal/phoenix/fire-phoenix-dance.json",
+      "id": "937998180e27",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/celestial-observatory.png",
+      "metadataPath": "images/red-robed-immortal/celestial/celestial-observatory.json",
+      "id": "41790fc44fb3",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/palace/candlelit-palace.png",
+      "metadataPath": "images/red-robed-immortal/palace/candlelit-palace.json",
+      "id": "cfe99be5ccc7",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/moonlit-mystic-coast.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/moonlit-mystic-coast.json",
+      "id": "7e6b4849d92b",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/snow/snowy-hot-spring.png",
+      "metadataPath": "images/red-robed-immortal/snow/snowy-hot-spring.json",
+      "id": "d4303c88c68d",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/moonlit-lotus-pond.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/moonlit-lotus-pond.json",
+      "id": "4f9fbc473930",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/desert-oasis/desert-oasis-queen.png",
+      "metadataPath": "images/red-robed-immortal/desert-oasis/desert-oasis-queen.json",
+      "id": "4a36c1f95798",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/moonlit-festival.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/moonlit-festival.json",
+      "id": "271e1d465a87",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/cloud-palace/cloud-palace-beauty.png",
+      "metadataPath": "images/red-robed-immortal/cloud-palace/cloud-palace-beauty.json",
+      "id": "d99abcbefeca",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/snow/snow-red-robed-immortal.png",
+      "metadataPath": "images/red-robed-immortal/snow/snow-red-robed-immortal.json",
+      "id": "6cb2a8befdc7",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-sorceress-137.png",
+      "metadataPath": "images/red-robed-immortal/emerald/emerald-gold-portrait-sorceress-137.json",
+      "id": "3454681d9f86",
+      "sourceSha256": "c59838fb5496c88f96c89b882c6f38b6fe0f830faa877b79f265bfb218591139",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-128.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-128.json",
+      "id": "55a5ccd83356",
+      "sourceSha256": "abfefb10170b6f6b75f38c427206e67d2143fc1a6f5c3183330ddc9953b4d8c8",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/violet/violet-gold-fan-pose-immortal-maiden-134.png",
+      "metadataPath": "images/red-robed-immortal/violet/violet-gold-fan-pose-immortal-maiden-134.json",
+      "id": "c09a58428808",
+      "sourceSha256": "db7d9ce360d5e0950b69fa7b9cb29191e974c27684c6da65174464738fb153c9",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/black-gold-portrait-warrior-122.png",
+      "metadataPath": "images/red-robed-immortal/battle/black-gold-portrait-warrior-122.json",
+      "id": "7c8e96b9ae0d",
+      "sourceSha256": "40473c4f1429277ab86d04265392e1e528d7cde1f02ee5739643f703940ff5ec",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-118.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-118.json",
+      "id": "9f9cb015c00e",
+      "sourceSha256": "bb137d9abaeebcee329474cab25e5de6acfd35773d929f9c782721383b85af92",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/ivory-gold-portrait-immortal-maiden-109.png",
+      "metadataPath": "images/red-robed-immortal/celestial/ivory-gold-portrait-immortal-maiden-109.json",
+      "id": "656cf6a33922",
+      "sourceSha256": "974f46f67261dfe36343ab567fdbe43ded29511088643bc9cc413ba9b74983a5",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/black-gold-collage-immortal-maiden-105.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/black-gold-collage-immortal-maiden-105.json",
+      "id": "6612f0007ee1",
+      "sourceSha256": "63d212fb319a01db287bbfcd5333eea8217e5e3802c279a33a124fed07e91276",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-095.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-095.json",
+      "id": "74bf3e51f662",
+      "sourceSha256": "029540dbb387c18e88f61364c173e52d3094a52fb5563c71557f89c75e2b67f2",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-085.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-085.json",
+      "id": "b91557c74147",
+      "sourceSha256": "c362aa0398396c1d95256ed0762fe20d182a3df41d93e5861b229a9cae6f5142",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/golden-portrait-goddess-075.png",
+      "metadataPath": "images/red-robed-immortal/celestial/golden-portrait-goddess-075.json",
+      "id": "913d7a63bd6c",
+      "sourceSha256": "bfcc115d91c9c83f1f57ae852e99a5c9057d8a9dabf03ffee8e63356ad1123d4",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-066.png",
+      "metadataPath": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-066.json",
+      "id": "c9ecf2fc322a",
+      "sourceSha256": "5caa2a10e510ea97c3bd518aeb3d91416609da4779d1478e0bace5659af8d22e",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/crimson-gold-combat-pose-warrior-056.png",
+      "metadataPath": "images/red-robed-immortal/battle/crimson-gold-combat-pose-warrior-056.json",
+      "id": "6c5331ba9a83",
+      "sourceSha256": "a15d1c9d3f49b9623238906a7d6caba4dc67b5a19338b04270254d4bbdb9ed73",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-sword-pose-warrior-047.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-sword-pose-warrior-047.json",
+      "id": "c06b5b77bf3e",
+      "sourceSha256": "c7d71a2c1bdc74aa49b19afd2593dd502cd54a577d9fa2793af47abfc1905573",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-dance-immortal-maiden-037.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-dance-immortal-maiden-037.json",
+      "id": "0ac50d88becd",
+      "sourceSha256": "8ff830b564210f4a820430dcfd0fc45e3466ef16b0281fd62104fac91a75652d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-sword-pose-warrior-028.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-sword-pose-warrior-028.json",
+      "id": "ae991ae6e275",
+      "sourceSha256": "e958c105319a89618b9abe1841a7733b5f7ff782166882a51660ff3db4bbc455",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/black-gold-portrait-warrior-018.png",
+      "metadataPath": "images/red-robed-immortal/battle/black-gold-portrait-warrior-018.json",
+      "id": "0f08f6e0cd88",
+      "sourceSha256": "f7dd78ce2bfd0a42499eb27161fc14f8de6e6f51a35ff78267ac3463ca3db37d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/black-gold-summoning-immortal-maiden-026.png",
+      "metadataPath": "images/red-robed-immortal/magic/black-gold-summoning-immortal-maiden-026.json",
+      "id": "467f3982ed0b",
+      "sourceSha256": "6ef4d9c0c9f6fb8a5b8b488a1ab2d0049fc84d5d8d6e7956fe895e7025f6d52d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-015.png",
+      "metadataPath": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-015.json",
+      "id": "360ae600e05f",
+      "sourceSha256": "1cb3be24c4c34694b40945a69c510d7ad4eee01f9f65cd1dda5503007b135209",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-013.png",
+      "metadataPath": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-013.json",
+      "id": "b01838ce2cb5",
+      "sourceSha256": "b6f4768c4b64540fca08a8fdea2c55106f3e4a1186f82985d495bb0847a1a234",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-006.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-006.json",
+      "id": "e8b183673557",
+      "sourceSha256": "0ed12a5d71aae5a6af5f7c6aaba8cb2d18061ab70992b847d180c30858d0be1f",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-001.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-001.json",
+      "id": "5d281eb3697f",
+      "sourceSha256": "5cc248715e959bc3d720ffd6180d9bc1005c8ed5bc2a4f9429a56bef17ab789c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/night-palace/candlelit-night-five-panels.png",
+      "metadataPath": "images/red-robed-immortal/night-palace/candlelit-night-five-panels.json",
+      "id": "30153b5065af",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/six-panel-red-robed-romance.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/six-panel-red-robed-romance.json",
+      "id": "10813a98dbdc",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/ten-scene-night-and-garden.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/ten-scene-night-and-garden.json",
+      "id": "1a840c4f5794",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/portrait/five-elegant-red-robed-portraits.png",
+      "metadataPath": "images/red-robed-immortal/portrait/five-elegant-red-robed-portraits.json",
+      "id": "e10741ffaeaf",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/portrait/five-interactive-gaze-portraits.png",
+      "metadataPath": "images/red-robed-immortal/portrait/five-interactive-gaze-portraits.json",
+      "id": "131ec60159ef",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/six-scene-moon-water-palace.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/six-scene-moon-water-palace.json",
+      "id": "5c18ffbc7e5b",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/portrait/five-close-up-fantasy-portraits.png",
+      "metadataPath": "images/red-robed-immortal/portrait/five-close-up-fantasy-portraits.json",
+      "id": "d51f239d7be9",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/portrait/five-vertical-red-robed-portraits.png",
+      "metadataPath": "images/red-robed-immortal/portrait/five-vertical-red-robed-portraits.json",
+      "id": "f95dce277e65",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/candle-moon-rain-six-scenes.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/candle-moon-rain-six-scenes.json",
+      "id": "5a44062798ea",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/red-robed-six-mood-gallery.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/red-robed-six-mood-gallery.json",
+      "id": "4dfecd134ac8",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/festival/lantern-fireworks-blossom-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/festival/lantern-fireworks-blossom-five-scenes.json",
+      "id": "c07322860595",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/waterfront/waterfront-dream-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/waterfront/waterfront-dream-five-scenes.json",
+      "id": "7707078d0d14",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-water/moonlit-water-city-five-scenes.png",
+      "metadataPath": "images/red-robed-immortal/moon-water/moonlit-water-city-five-scenes.json",
+      "id": "5988a24b5c59",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-theme/red-robed-six-scene-portrait-board.png",
+      "metadataPath": "images/red-robed-immortal/multi-theme/red-robed-six-scene-portrait-board.json",
+      "id": "22880a636eac",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/palace/sunset-palace-dance.png",
+      "metadataPath": "images/red-robed-immortal/palace/sunset-palace-dance.json",
+      "id": "701f311520d2",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/wuxia/crane-bamboo-pavilion.png",
+      "metadataPath": "images/red-robed-immortal/wuxia/crane-bamboo-pavilion.json",
+      "id": "e0f28d05225d",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/snow/crystal-ice-palace.png",
+      "metadataPath": "images/red-robed-immortal/snow/crystal-ice-palace.json",
+      "id": "d47d1e372aae",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/flower-garden/romantic-peony-garden.png",
+      "metadataPath": "images/red-robed-immortal/flower-garden/romantic-peony-garden.json",
+      "id": "2037b69a28d0",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/flower-garden/autumn-palace-maples.png",
+      "metadataPath": "images/red-robed-immortal/flower-garden/autumn-palace-maples.json",
+      "id": "fc0a1d6559b8",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/flower-garden/wisteria-dream.png",
+      "metadataPath": "images/red-robed-immortal/flower-garden/wisteria-dream.json",
+      "id": "f6d44285212a",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/rain-night/rainy-night-red-umbrella.png",
+      "metadataPath": "images/red-robed-immortal/rain-night/rainy-night-red-umbrella.json",
+      "id": "1c5b16048355",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/wuxia/bamboo-sword-dance.png",
+      "metadataPath": "images/red-robed-immortal/wuxia/bamboo-sword-dance.json",
+      "id": "41841a356e23",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/flower-garden/spring-blossom-promise.png",
+      "metadataPath": "images/red-robed-immortal/flower-garden/spring-blossom-promise.json",
+      "id": "e36cb2c28667",
+      "sourceSha256": null,
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/ivory-gold-portrait-goddess-135.png",
+      "metadataPath": "images/red-robed-immortal/celestial/ivory-gold-portrait-goddess-135.json",
+      "id": "a609cf16a675",
+      "sourceSha256": "6cf82c3d171ce2bdb4e18fe12333bc8f735e1316a54b003d520bff8fd85dd3d9",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-immortal-maiden-131.png",
+      "metadataPath": "images/red-robed-immortal/emerald/emerald-gold-portrait-immortal-maiden-131.json",
+      "id": "007081e2e489",
+      "sourceSha256": "7b364b6288f2dd26c9634badaf0b86478b8ffaab07b97c7ad416cb9234de3fa2",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-129.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-129.json",
+      "id": "aea23ee332b8",
+      "sourceSha256": "061ed4f1051ce15310c1cbd2e1294930c5bb6fa4a902ab6d6e949322e5e5703e",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/black-gold-portrait-immortal-maiden-133.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/black-gold-portrait-immortal-maiden-133.json",
+      "id": "2b416f5b21c7",
+      "sourceSha256": "df27cd9e994a96d8037aaa185453fad8e55274028a409a93144804d8f17351ed",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/blue-silver-over-shoulder-gaze-immortal-maiden-132.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/blue-silver-over-shoulder-gaze-immortal-maiden-132.json",
+      "id": "e227782963db",
+      "sourceSha256": "dc130efc2d1e585b9d924ecc01cea80bd6174a278ecbcf1d35b01dad0ccde4e0",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/crimson-gold-portrait-immortal-maiden-130.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/crimson-gold-portrait-immortal-maiden-130.json",
+      "id": "03c1324bda88",
+      "sourceSha256": "85ef10b8f7196ca534760db8b11639e0bda57c6f0b9be8e4f43d2b343a7a6b72",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/pink-gold/pink-gold-portrait-immortal-maiden-136.png",
+      "metadataPath": "images/red-robed-immortal/pink-gold/pink-gold-portrait-immortal-maiden-136.json",
+      "id": "fe34892e9eae",
+      "sourceSha256": "e2a2eb6a1bb3af4c2c3ed50b866d64e10ea996e6495833349bb6ba9bcc80c538",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-immortal-maiden-120.png",
+      "metadataPath": "images/red-robed-immortal/emerald/emerald-gold-portrait-immortal-maiden-120.json",
+      "id": "ba9a831e4f3f",
+      "sourceSha256": "efc388fa901e5c0b60c17e3b5229ecc0f33dd89debf42a1c69aae9f2f76e5cac",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/emerald/emerald-gold-portrait-sorceress-127.png",
+      "metadataPath": "images/red-robed-immortal/emerald/emerald-gold-portrait-sorceress-127.json",
+      "id": "38cc6d6d88c5",
+      "sourceSha256": "c2e7a2baa766005d8d3da71593a428b070eebe76201444c858c1b8b2f0ba8fdf",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-126.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-126.json",
+      "id": "fca1a5747541",
+      "sourceSha256": "ade1b71f228adbc58101f77eacd4675f41892490e28d5d33637bc72eff9e7e3e",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-over-shoulder-gaze-immortal-maiden-121.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-over-shoulder-gaze-immortal-maiden-121.json",
+      "id": "eca9f410e159",
+      "sourceSha256": "650369c3a2014e042dc003d77c38278cd8ceea061d898e198f02632b506a4d45",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-125.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-125.json",
+      "id": "76aa531c38dc",
+      "sourceSha256": "61a47347240935c9d50c779959946b02f65ec203235e524df0612bd03343af7a",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/ivory-gold-portrait-immortal-maiden-124.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/ivory-gold-portrait-immortal-maiden-124.json",
+      "id": "03ac4ad7cfb5",
+      "sourceSha256": "3a62c07c14f30bd1b7a35170bdcc2b5065dcbfde0baf2045dd75a2986f29c3ed",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-immortal-maiden-119.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-immortal-maiden-119.json",
+      "id": "75771a795e7d",
+      "sourceSha256": "1156bb47703a07ce2baf2209d95f671007d62278677ad380e2476a436a7e0a49",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/violet/violet-gold-portrait-immortal-maiden-123.png",
+      "metadataPath": "images/red-robed-immortal/violet/violet-gold-portrait-immortal-maiden-123.json",
+      "id": "902331787ecd",
+      "sourceSha256": "fda098871c99c03a8d6f977a11e93a35e4d5913eece56308e39fbae30cde9259",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-117.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-117.json",
+      "id": "9f4c634ee270",
+      "sourceSha256": "b145ad2215a3b77016366f96fb9d53efae04bed5d93b28f62b60d3a2f6bbffb4",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/pink-gold/pink-gold-portrait-immortal-maiden-116.png",
+      "metadataPath": "images/red-robed-immortal/pink-gold/pink-gold-portrait-immortal-maiden-116.json",
+      "id": "d0a83416d97f",
+      "sourceSha256": "8c107b09bf1fdd47f2285a2bf085e45d5e437179816c319467aae52b67aad38f",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/black-gold-chin-rest-immortal-maiden-115.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/black-gold-chin-rest-immortal-maiden-115.json",
+      "id": "0586b9af0b01",
+      "sourceSha256": "5a5765649da14fae42d260d79594b44c23553db96c9af73c503efe5d53250a4d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-114.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-114.json",
+      "id": "a7d68596be87",
+      "sourceSha256": "780a9b3727c9b7dfe343151d6fb9868e5cf01dfb84bbf81679d29646e0f441c5",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-113.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-113.json",
+      "id": "3e0759cdf6b6",
+      "sourceSha256": "13086188508fefb9b26e465fec7d1673e96ac1bdd9bb816e32a369036b8a42a0",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-112.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-112.json",
+      "id": "fa6a260aadbf",
+      "sourceSha256": "1595c650bbab2446a0f08c8223abb7ebee37cf2c9f9fe4e4f17a992e6e317cbd",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/ivory-gold-closed-eyes-immortal-maiden-111.png",
+      "metadataPath": "images/red-robed-immortal/celestial/ivory-gold-closed-eyes-immortal-maiden-111.json",
+      "id": "d4167482f05f",
+      "sourceSha256": "8d5010c506f221701adf21764f573727340d100d12a53c2eb6e6b3f482a9388d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/black-gold-closed-eyes-warrior-110.png",
+      "metadataPath": "images/red-robed-immortal/battle/black-gold-closed-eyes-warrior-110.json",
+      "id": "d4362c32672d",
+      "sourceSha256": "152c8215d01ae24b35a97c7f8b9d34773736ff00e0cb56735716e2a0c6f056f5",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/golden-collage-immortal-maiden-108.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/golden-collage-immortal-maiden-108.json",
+      "id": "e5d771292fc3",
+      "sourceSha256": "e4d4a448374c8750ac7dba5b6fb21abdcc2e622ae87fddaf0d0d544bbe4f6767",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-107.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-107.json",
+      "id": "236cb58beb4a",
+      "sourceSha256": "06b1ce0d70e89c3fb67558235a470c18f327fea9dcf3835824f7c01a43e4acbf",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/crimson-gold-collage-immortal-maiden-106.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/crimson-gold-collage-immortal-maiden-106.json",
+      "id": "0d68436fd541",
+      "sourceSha256": "ca7db2ffcbc4d4e0e5510aef1df39590f0a34ca4596b3024a340819e592460af",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-immortal-maiden-098.png",
+      "metadataPath": "images/red-robed-immortal/battle/crimson-gold-sword-pose-immortal-maiden-098.json",
+      "id": "4c45511e8f6c",
+      "sourceSha256": "a8076c3ddeb298e9893d68327c6a22c439d32312d41636c2eb2babff69ff4f5d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-099.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-099.json",
+      "id": "2da0970a52a3",
+      "sourceSha256": "e02e4653643df3279f74c86fe102ff5a28a61974f9991781e6c90692bae705f7",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-103.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-103.json",
+      "id": "209f0ff5bc10",
+      "sourceSha256": "4463d028b913cc897d53cbe6155cb3c67a527cfb9d6a76c99c4e4aca70adf9fe",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-sorceress-096.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-sorceress-096.json",
+      "id": "05275e9867ce",
+      "sourceSha256": "9c9a7dc5ee60c661f9bf23ac0dd43f9a9c280b2744cd38264c3a61154d0ba1c2",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-102.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-102.json",
+      "id": "24c8dd1e099d",
+      "sourceSha256": "8983115031e6296cf172496c4f8f09dcbd1888906d2d3c546144145313bcb60c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-100.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-100.json",
+      "id": "8e536f8933de",
+      "sourceSha256": "bc281b6b9e2bb5242c15609aead40034b2fb6f5f8e28e7bda42ad2807a4916f4",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-gaze-sorceress-104.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-gaze-sorceress-104.json",
+      "id": "270ebb862c35",
+      "sourceSha256": "50f67eee5ec6042e6b0e617d83e0c07c6f030a2b637df9b5cdfbeac1d0c014d1",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-portrait-immortal-maiden-101.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-portrait-immortal-maiden-101.json",
+      "id": "1b086530df0c",
+      "sourceSha256": "7b183d51c67335688b5c247b790959dd284b62a99feed22856be8f08c0785bcc",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-097.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-097.json",
+      "id": "22f96eada1de",
+      "sourceSha256": "fb7788c0a40d69f9336b08de4a4d403308b699dc8a062944129798a32e92f77b",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/golden-portrait-immortal-maiden-087.png",
+      "metadataPath": "images/red-robed-immortal/celestial/golden-portrait-immortal-maiden-087.json",
+      "id": "d7400dd45eeb",
+      "sourceSha256": "cf3218605470b111df427e1d978f5bcb8cc3b42d27712ce0fb5a4ec1c71f1602",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/celestial/golden-portrait-immortal-maiden-090.png",
+      "metadataPath": "images/red-robed-immortal/celestial/golden-portrait-immortal-maiden-090.json",
+      "id": "9846ea8f1433",
+      "sourceSha256": "5ca33d25f0a99e4a2e1f4e3568672748fdf1051bfa908c0ffae394777b1d5f73",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-086.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-086.json",
+      "id": "d5cb8570c271",
+      "sourceSha256": "0828128ffb6d7db65425a5ea8c944c091fc61efa8a323b287f5eea7d9c7404d7",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-089.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-089.json",
+      "id": "072148fdc986",
+      "sourceSha256": "105bd65dadcdd0f342d8c32ffa233e2d62369d8dfb9276cf98bc53960385e307",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-093.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-093.json",
+      "id": "92291f1f6371",
+      "sourceSha256": "84930c21db8ce6b297f70888a96f08a3f727c1de34a04cd1ed2c3a85366a04aa",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-092.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-092.json",
+      "id": "7f9f6cdd51d7",
+      "sourceSha256": "cf1fd7476a4f18517d5f2a5bdc8c451198af6d6c00d6afb8ac7201f2a4c30e4a",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-088.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-088.json",
+      "id": "f10862b8c441",
+      "sourceSha256": "b1553b4cb6a2dff536cabf484d4c1c61f8b28343af7fa2181e85cab8db3c889d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-091.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-power-pose-sorceress-091.json",
+      "id": "767f6886d91a",
+      "sourceSha256": "db53a926202ceb619b078e3f11ff9025dea3983413d2063a4c81ed07199da500",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/moon-night/golden-portrait-immortal-maiden-094.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/golden-portrait-immortal-maiden-094.json",
+      "id": "cd2b07564a4a",
+      "sourceSha256": "9a81fc23df0feaf837f10097fabcc2819bf71946b95ccb327250a6da4dd5ff53",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-portrait-warrior-079.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-portrait-warrior-079.json",
+      "id": "38df8edc066c",
+      "sourceSha256": "e9e04ddcf056bcc1f363090fb47cef86aa654629f3dfa3ef958d62a5ac02999d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-076.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-076.json",
+      "id": "f110399f3e45",
+      "sourceSha256": "ff8eb44eacc4deeafcf3809a302bd738d4e197d7f534b725096b477cfcda6ff1",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-084.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-084.json",
+      "id": "9b2a0e069401",
+      "sourceSha256": "4105e6b4af5d21c2f293cc438800db3a4b34a3e314579aa9e9d444a2f4caee93",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-082.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-immortal-maiden-082.json",
+      "id": "e6a121fe7f8f",
+      "sourceSha256": "59e637600edfb03ea4ca9dd8d19d18c5ba12b83f6bf093019c08d40d9b1e4b6c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-goddess-083.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-goddess-083.json",
+      "id": "21d147ac56a8",
+      "sourceSha256": "97a094535200b1f1e984ff1af311580bf6eb3da1cc3259cd3772861bb29a8896",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-immortal-maiden-077.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-immortal-maiden-077.json",
+      "id": "cee36551e812",
+      "sourceSha256": "170e7399947c7dbf00dc2727cc9df3a97b09f8532f213b473be5d9809549966c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-078.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-portrait-sorceress-078.json",
+      "id": "d8f7aac79136",
+      "sourceSha256": "2f479794d80e754ebfb84e57a94979a69766ef1598b42bf4952def1c5694ad22",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-immortal-maiden-080.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-immortal-maiden-080.json",
+      "id": "b2a8b8a1aaf6",
+      "sourceSha256": "f6c569a792871096fbf03c9b411a230e39c9017f9d40ac54b4ae909396989df1",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-081.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-power-pose-sorceress-081.json",
+      "id": "3f5b9fa6ac7c",
+      "sourceSha256": "6174504133c8c555d3584c21a62c4c68a2b0c0b631e1c38eecce5c30c439615b",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-069.png",
+      "metadataPath": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-069.json",
+      "id": "c8318b8f5dcb",
+      "sourceSha256": "36a3f84db9cba8a606ec655913a555c34df71041991ce0a1285e0cc198556f75",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-071.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-071.json",
+      "id": "cdf263509bb9",
+      "sourceSha256": "6b4ce42b205ecbc941c64a705bdccb7fdb3b8954818949180364c6cedb5e9098",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-073.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-073.json",
+      "id": "0c3ba17b2432",
+      "sourceSha256": "237900cf701e651131e80d7a5ff31698cf9e3589bb6099da2b7a453e088dd345",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-dance-immortal-maiden-067.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-dance-immortal-maiden-067.json",
+      "id": "60966dc95e45",
+      "sourceSha256": "c471d87bf8caf555aaf265af145518719c552bee004cd776b121a5a3f1027136",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-levitation-sorceress-070.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-levitation-sorceress-070.json",
+      "id": "bb8a0bc9f3fd",
+      "sourceSha256": "74e34bf5ba9a167dd0b2c4e3dbd4d6af171360d35f3913ee772eded090f364dc",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-065.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-065.json",
+      "id": "4461b14c33db",
+      "sourceSha256": "56b7144d055d6cc7d8ea8c66b3e86298165e12b5496b799f1adb401a2892b82d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-068.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-068.json",
+      "id": "6c2d482e608c",
+      "sourceSha256": "2a6d1250a316b0f274d888bbc68c586b21481a26d78eca8fd0183e56ed1d51b5",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-072.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-072.json",
+      "id": "e8685455d090",
+      "sourceSha256": "8ff2895dba7d261c4bda461f530af55c606eef9b08519a763cc36444ff63af9e",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-summoning-sorceress-074.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-summoning-sorceress-074.json",
+      "id": "8035e5ab8c34",
+      "sourceSha256": "797bdc9b2ed6a1ca54db9fd9c394120d850884b3fc8f1c382c5a70227b5d96aa",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/black-gold-portrait-warrior-059.png",
+      "metadataPath": "images/red-robed-immortal/battle/black-gold-portrait-warrior-059.json",
+      "id": "b65ab6e8599a",
+      "sourceSha256": "42c2f5517440df19896da38d5bd08c7fb9ec81f238e1f49bd63853e8bf9d1481",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-summoning-immortal-maiden-058.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-summoning-immortal-maiden-058.json",
+      "id": "ae4fb2c895ce",
+      "sourceSha256": "d0a6d6927f81f01ff9886245b4b05877463e124f4e993878fd99d811bbb23f75",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-063.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-063.json",
+      "id": "fe91a72cb22a",
+      "sourceSha256": "141af1edcb9c7ca5edf9cac7144ab7362df83cad16640323bbd5b592eeddce5f",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-crimson-orb-immortal-maiden-061.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-crimson-orb-immortal-maiden-061.json",
+      "id": "2a5dbc325a95",
+      "sourceSha256": "9a4c1bf7a8ae3f8b81d4c604acd75d958cdc137d2966f707e516a24e018dae68",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-sorceress-057.png",
+      "metadataPath": "images/red-robed-immortal/magic/crimson-gold-crimson-orb-sorceress-057.json",
+      "id": "ad15d468f4ef",
+      "sourceSha256": "40756a870da46d3ef4264dd2d1dab61e3d398a4eb98001a51ce6c5550a7ad016",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-levitation-sorceress-060.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-levitation-sorceress-060.json",
+      "id": "26e3031b253f",
+      "sourceSha256": "af7327ec1cc41023be9f8054fefaaece413269bbfd03447071fc664b0f615ddb",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-queen-064.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-queen-064.json",
+      "id": "9fd8caecd846",
+      "sourceSha256": "0068681b140e5dc338e53d38fc1a02f5b930f0ebc1bb6a9c0b80adbc9d6d24c6",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-055.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-055.json",
+      "id": "77d1fa98fc3f",
+      "sourceSha256": "d53dea68520f4bb402efe768a292a89a76c99e6b72c537223bd67b6ef3490a82",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-062.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-power-pose-sorceress-062.json",
+      "id": "d6aab57fe340",
+      "sourceSha256": "e3a242474dc45ce194bcc6e0436b98594ae9f1058ff5f7646a49c6fb884bbfa3",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/crimson-gold-portrait-warrior-049.png",
+      "metadataPath": "images/red-robed-immortal/battle/crimson-gold-portrait-warrior-049.json",
+      "id": "018d327f6a61",
+      "sourceSha256": "7bca88de9e549f223fccc787478bc6c3cedfc74c0e70c483015618f4126622d4",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-portrait-warrior-050.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-portrait-warrior-050.json",
+      "id": "7cdbe84383c3",
+      "sourceSha256": "e4831ea141e2c9fb46c020ddeb3babca0f33a60919fcc2f12cf4ad80a9586f1c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-048.png",
+      "metadataPath": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-048.json",
+      "id": "72d46f979d64",
+      "sourceSha256": "ffcb23437fa8542a0ddba31752f60713c9edeb2f7ba39c42205e269f5641cc94",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-054.png",
+      "metadataPath": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-054.json",
+      "id": "73f404430b8f",
+      "sourceSha256": "23edcff2a662b28da0c0731628390b448b7e6e4cd31017dd3ef1cc8d5bc24a2d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-gaze-immortal-maiden-052.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-gaze-immortal-maiden-052.json",
+      "id": "ba7787c43ec7",
+      "sourceSha256": "fc444f6034bd1806f6ccfb7b2221de1b7eb33825b180a2d8a7209423f1168b62",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-immortal-maiden-046.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-immortal-maiden-046.json",
+      "id": "072b826a0769",
+      "sourceSha256": "8e11eff2b8e1192ffb6dd2c56c73ef0f0a726af314be5afa59f093af0ddb4dfd",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-051.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-051.json",
+      "id": "ddf09ed1509f",
+      "sourceSha256": "cf374f829b5377bafdd8ddbe0891763ef0e91644493b19bc42503abe7f5a9bc0",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-053.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-053.json",
+      "id": "1e915f336daa",
+      "sourceSha256": "8e62e8c84ad37ee365381ec0797dea6fd70c8a12612431328a14cc07866df83e",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-041.png",
+      "metadataPath": "images/red-robed-immortal/battle/crimson-gold-sword-pose-warrior-041.json",
+      "id": "ccb53eabaed2",
+      "sourceSha256": "7891513d38dbdeb8b7436a89e4a1f7d2c2d828dfa236413eba92d1822f1203f6",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-044.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-044.json",
+      "id": "b70bb40a4fd0",
+      "sourceSha256": "0ebfde27dd08ce87ff6d5748bad72dbb31b7817b55238ef4d7b31f9a697b50e3",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/black-gold-dance-sorceress-039.png",
+      "metadataPath": "images/red-robed-immortal/magic/black-gold-dance-sorceress-039.json",
+      "id": "0e6863a6f750",
+      "sourceSha256": "bb38269ced320c7844f3844a5d3ebaf79e39dc55f5fc063a24a1106d74126759",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-042.png",
+      "metadataPath": "images/red-robed-immortal/magic/black-gold-portrait-sorceress-042.json",
+      "id": "d52cf66b38b4",
+      "sourceSha256": "2577b77c0b91ebffa24e18158e7fe274b6ded135d2a32ec9c391726643b44824",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-goddess-038.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-goddess-038.json",
+      "id": "8e81e85610b6",
+      "sourceSha256": "53aea39fd0c5fa8389d8e9157a488feb0573dcd2e7d8ad0e15b722ee82830f00",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-040.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-040.json",
+      "id": "2ab045c51115",
+      "sourceSha256": "5a42cb238b2c50285871a38a606023bbd48c22dea2f3b7956007bdf93f471623",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-043.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-043.json",
+      "id": "157f1636c1d8",
+      "sourceSha256": "850bbcbc3d31f91830adeb1a6062101063b54ef56aff532dbe44554eb26f2e2f",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-power-pose-sorceress-036.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-power-pose-sorceress-036.json",
+      "id": "07ec0954930a",
+      "sourceSha256": "ede95755c9570077fb6c8fd7bf7da23481654d0501720e518f917429ed7b6e22",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-sorceress-045.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/golden-showcase-sorceress-045.json",
+      "id": "fe4b47f379bd",
+      "sourceSha256": "76b05e5e916bf639c12db598db6a6b803468dea4f74050a795b272a0ad233826",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-dance-warrior-031.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-dance-warrior-031.json",
+      "id": "878e1ba45e6e",
+      "sourceSha256": "6420f31074c685b0a5f7ce1b87c21506a077003b4a977549424f1a357d1cf3b9",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/black-gold-portrait-queen-027.png",
+      "metadataPath": "images/red-robed-immortal/magic/black-gold-portrait-queen-027.json",
+      "id": "badb34d945a3",
+      "sourceSha256": "0902753afa8c5b96cfbf048f0fa54f9acb2381628c05a19b9864b1f561ec1787",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-dance-sorceress-033.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-dance-sorceress-033.json",
+      "id": "72641b48f5b6",
+      "sourceSha256": "a3e9689b72dcf844e8489e20ae2e95b2fb8fd5bae949f3eac3d50b9294890441",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-levitation-sorceress-030.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-levitation-sorceress-030.json",
+      "id": "35b168586efd",
+      "sourceSha256": "23a45b1a391982ff738d72930139a58be41770231f716570e69550c9a48aaf89",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-queen-034.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-queen-034.json",
+      "id": "9d1648ee47ac",
+      "sourceSha256": "e1e355a7a293ac94bc209de5c7244aaed7bdad270c27617973289f046da4d2b9",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-029.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-029.json",
+      "id": "f13d6b2de9e1",
+      "sourceSha256": "1b2226d4b17eaa9429001f759899cc56012126449eb069d6bcda54204bd625f4",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-032.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-032.json",
+      "id": "b0d1b775dfd7",
+      "sourceSha256": "a83f2e0bc1fb12127f77ae0d11d1966f5563079c475527fc627beef85560389e",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-summoning-queen-035.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-summoning-queen-035.json",
+      "id": "2d37afbe476a",
+      "sourceSha256": "1ab01440585d93c4b96632110e364232543aaa2f86ede7d5ac08d325ebe4df88",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/battle/golden-portrait-warrior-021.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-portrait-warrior-021.json",
+      "id": "2a7c5a959594",
+      "sourceSha256": "c1b42e2efd576bb83a52b38ae36a8aa90a932ec9de6bc30b19a813f492b4c82d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-queen-022.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-queen-022.json",
+      "id": "820b50c90f64",
+      "sourceSha256": "ccd851e3242ad0fd16de023dfa218dc2f9576e376b88e99d86ab5453a2803c4c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-dance-immortal-maiden-020.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-dance-immortal-maiden-020.json",
+      "id": "c36faebc4c30",
+      "sourceSha256": "aaf446f6f8dfc82d3d3e7526b737f134daf1862fc5c431e4a2a8451c4b8eebe8",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-017.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-017.json",
+      "id": "1e06b97426da",
+      "sourceSha256": "cdb2dd69fc437ea965ab4f60c98679954e8c46458ea6b37e205e1970555664fe",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fire-magic/crimson-gold-dance-immortal-maiden-024.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-dance-immortal-maiden-024.json",
+      "id": "9cc53dba8488",
+      "sourceSha256": "12b72950e2dc513b21e574ed604d3f6ff35c28ad7e8a7f8263ff5fbc6bcb0a05",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-019.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-019.json",
+      "id": "b5e45524d622",
+      "sourceSha256": "76fde51fd31767a2513aab49c244b5c3d6207a97ca00a12159afef32291270ce",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-023.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-023.json",
+      "id": "f77c50ce2a7e",
+      "sourceSha256": "fa6c04a9b8b6f0a03ee88fb8be8b51b4a09a1a18e154ceb934b8b89a78254d96",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/magic/golden-portrait-sorceress-025.png",
+      "metadataPath": "images/red-robed-immortal/magic/golden-portrait-sorceress-025.json",
+      "id": "67f95ff20003",
+      "sourceSha256": "2f7d1033e5f44dcabb442aaba1ae753a74170d21187a030ebf5aa61542dd1836",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-016.png",
+      "metadataPath": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-016.json",
+      "id": "76d1556568ac",
+      "sourceSha256": "0e6643fef4c2387733af50ca0e4502fd7df60441ecd86ccd235aa9559dd61ec3",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-014.png",
+      "metadataPath": "images/red-robed-immortal/character-sheet/golden-showcase-immortal-maiden-014.json",
+      "id": "5f800d3159fb",
+      "sourceSha256": "be29a998741bfa4aafbd2393d4294c0a58783f52ee00299480b58ffc41f4d8b1",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-005.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-005.json",
+      "id": "1e2959676382",
+      "sourceSha256": "dbd5042050b579c6c1a7b6e2634c05594133120012f911be8e62d6f6e91b4795",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-008.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-goddess-008.json",
+      "id": "c837cd7331a9",
+      "sourceSha256": "5233f92000533e4b8d461487c2e0514d1b6fb3ac914bb85855d75d7db6c07df5",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-004.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-004.json",
+      "id": "031da874c82c",
+      "sourceSha256": "82326a56a97a0aed6e704f18f12d03bea623441d8607cfd608c539be77c8bfdc",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-007.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-007.json",
+      "id": "06ddea6e0884",
+      "sourceSha256": "b15e8ef57151130a2e7e71c800f0ceb6d67e0693e254ac5904f9fc137a51c97c",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-009.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-009.json",
+      "id": "bad6293e5497",
+      "sourceSha256": "b79314c0a596745b91b1b73cb370fb20ee18e1b9d1d3066901f870ba32937bcd",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-011.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-011.json",
+      "id": "0193276c83e4",
+      "sourceSha256": "dda3972872c869c6dbe285b8a4a78515f90e3f3174d871c912c119949e7db590",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-010.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-010.json",
+      "id": "e5ca0248daf3",
+      "sourceSha256": "c4fa0002fe13c4b029851f00c7b47fbde74b6e9dff125947650e846989a5d8ed",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-012.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-goddess-012.json",
+      "id": "448643281353",
+      "sourceSha256": "5de8a87dc7ab7c4f0583a971b32b1a5e8c7019f2d20faf2caacbfc3501ba010f",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-003.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-003.json",
+      "id": "3b242e7ce912",
+      "sourceSha256": "5c2215e2b64affd1d8aea60ae6b40711e30849cf475eb35c4360a1829f704a2d",
+      "changed": true
+    },
+    {
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-002.png",
+      "metadataPath": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-002.json",
+      "id": "6be833c1fd42",
+      "sourceSha256": "f0154576a0ef7e58fca0ac44de64cacd93d9931323d8d45af93957bdb68a6dff",
+      "changed": true
+    }
+  ]
+}

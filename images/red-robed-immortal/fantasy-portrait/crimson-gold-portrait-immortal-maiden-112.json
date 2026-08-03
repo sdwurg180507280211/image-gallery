@@ -32,5 +32,7 @@
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "1595c650bbab2446a0f08c8223abb7ebee37cf2c9f9fe4e4f17a992e6e317cbd",
   "composition": "独立大图",
-  "generationSequence": 112
+  "generationSequence": 112,
+  "schemaVersion": 2,
+  "id": "fa6a260aadbf"
 }
