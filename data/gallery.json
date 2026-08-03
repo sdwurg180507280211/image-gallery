@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T03:03:56.311Z",
+  "generatedAt": "2026-08-03T03:09:12.026Z",
   "count": 178,
   "thumbnail": {
     "width": 640,
@@ -270,7 +270,7 @@
   "validation": {
     "images": 178,
     "errors": 0,
-    "warnings": 4,
+    "warnings": 0,
     "info": 0
   },
   "images": [
@@ -2987,8 +2987,7 @@
         "multi-panel",
         "ten-panel",
         "mixed-shot",
-        "reference-layout",
-        "character-turnaround"
+        "reference-layout"
       ],
       "assetType": "reference-sheet",
       "actions": [
@@ -3042,7 +3041,6 @@
         "ten-panel",
         "mixed-shot",
         "reference-layout",
-        "character-turnaround",
         "reference-sheet"
       ],
       "createdAt": "2026-07-24T07:49:47.878Z",
@@ -3076,8 +3074,7 @@
         "multi-panel",
         "ten-panel",
         "mixed-shot",
-        "reference-layout",
-        "character-turnaround"
+        "reference-layout"
       ],
       "assetType": "reference-sheet",
       "actions": [
@@ -3131,7 +3128,6 @@
         "ten-panel",
         "mixed-shot",
         "reference-layout",
-        "character-turnaround",
         "reference-sheet"
       ],
       "createdAt": "2026-07-24T07:47:31.743Z",
@@ -11342,8 +11338,7 @@
       ],
       "composition": [
         "single-image",
-        "full-body",
-        "multi-panel"
+        "full-body"
       ],
       "assetType": "artwork",
       "actions": [
@@ -12527,8 +12522,7 @@
         "multi-panel",
         "ten-panel",
         "mixed-shot",
-        "reference-layout",
-        "character-turnaround"
+        "reference-layout"
       ],
       "assetType": "reference-sheet",
       "actions": [
@@ -12582,7 +12576,6 @@
         "ten-panel",
         "mixed-shot",
         "reference-layout",
-        "character-turnaround",
         "reference-sheet"
       ],
       "createdAt": "2026-07-24T07:50:56.248Z",
@@ -12616,8 +12609,7 @@
         "multi-panel",
         "ten-panel",
         "mixed-shot",
-        "reference-layout",
-        "character-turnaround"
+        "reference-layout"
       ],
       "assetType": "reference-sheet",
       "actions": [
@@ -12671,7 +12663,6 @@
         "ten-panel",
         "mixed-shot",
         "reference-layout",
-        "character-turnaround",
         "reference-sheet"
       ],
       "createdAt": "2026-07-24T07:48:26.877Z",
@@ -13241,8 +13232,7 @@
       ],
       "composition": [
         "single-image",
-        "full-body",
-        "multi-panel"
+        "full-body"
       ],
       "assetType": "artwork",
       "actions": [

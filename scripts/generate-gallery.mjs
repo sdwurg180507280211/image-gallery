@@ -173,20 +173,23 @@ function inferDimensions(metadata, folderParts, tags) {
   const confirmedTraits = normalizeList(metadata.confirmedTraits);
   let assetType = String(metadata.assetType || '').trim();
 
+  const hasExplicitComposition = Object.prototype.hasOwnProperty.call(metadata, 'composition');
+  const hasExplicitAssetType = Object.prototype.hasOwnProperty.call(metadata, 'assetType') && Boolean(String(metadata.assetType || '').trim());
+
   if (!theme.length && legacyThemeFolders.has(folder)) addUnique(theme, legacyThemeFolders.get(folder));
   if (!scene.length && legacySceneFolders.has(folder)) addUnique(scene, legacySceneFolders.get(folder));
   if (!palette.length && legacyPaletteFolders.has(folder)) addUnique(palette, legacyPaletteFolders.get(folder));
+  if (!theme.length && folder === 'multi-theme') addUnique(theme, 'fantasy');
 
-  if (folder === 'multi-panel') {
-    addUnique(composition, 'multi-panel');
-    assetType ||= 'collage';
-  } else if (folder === 'character-sheet') {
-    addUnique(composition, 'multi-panel', 'character-turnaround');
-    assetType ||= 'character-sheet';
-  } else if (folder === 'multi-theme') {
-    addUnique(composition, 'multi-panel', 'mixed-shot');
-    addUnique(theme, 'fantasy');
-    assetType ||= 'collage';
+  if (!hasExplicitComposition) {
+    if (folder === 'multi-panel') addUnique(composition, 'multi-panel');
+    else if (folder === 'character-sheet') addUnique(composition, 'multi-panel', 'character-turnaround');
+    else if (folder === 'multi-theme') addUnique(composition, 'multi-panel', 'mixed-shot');
+  }
+
+  if (!hasExplicitAssetType) {
+    if (folder === 'multi-panel' || folder === 'multi-theme') assetType = 'collage';
+    else if (folder === 'character-sheet') assetType = 'character-sheet';
   }
 
   for (const tag of tags) {
