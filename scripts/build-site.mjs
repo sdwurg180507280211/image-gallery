@@ -18,6 +18,7 @@ async function main() {
   await mkdir(dist, { recursive: true });
 
   await copyIfExists(path.join(root, 'index.html'), path.join(dist, 'index.html'));
+  await copyIfExists(path.join(root, 'review.html'), path.join(dist, 'review.html'));
   await copyIfExists(path.join(root, 'assets'), path.join(dist, 'assets'));
   await copyIfExists(path.join(root, 'data'), path.join(dist, 'data'));
   await copyIfExists(path.join(root, 'images'), path.join(dist, 'images'));
