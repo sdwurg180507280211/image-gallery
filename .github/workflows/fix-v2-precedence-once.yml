@@ -34,41 +34,32 @@ jobs:
           const fs = require('node:fs');
           const file = 'scripts/generate-gallery.mjs';
           let source = fs.readFileSync(file, 'utf8');
-          const oldBlock = `  if (!theme.length && legacyThemeFolders.has(folder)) addUnique(theme, legacyThemeFolders.get(folder));
-          if (!scene.length && legacySceneFolders.has(folder)) addUnique(scene, legacySceneFolders.get(folder));
-          if (!palette.length && legacyPaletteFolders.has(folder)) addUnique(palette, legacyPaletteFolders.get(folder));
-
-          if (folder === 'multi-panel') {
-            addUnique(composition, 'multi-panel');
-            assetType ||= 'collage';
-          } else if (folder === 'character-sheet') {
-            addUnique(composition, 'multi-panel', 'character-turnaround');
-            assetType ||= 'character-sheet';
-          } else if (folder === 'multi-theme') {
-            addUnique(composition, 'multi-panel', 'mixed-shot');
-            addUnique(theme, 'fantasy');
-            assetType ||= 'collage';
-          }`;
-          const newBlock = `  const hasExplicitComposition = Object.prototype.hasOwnProperty.call(metadata, 'composition');
-          const hasExplicitAssetType = Object.prototype.hasOwnProperty.call(metadata, 'assetType') && Boolean(String(metadata.assetType || '').trim());
-
-          if (!theme.length && legacyThemeFolders.has(folder)) addUnique(theme, legacyThemeFolders.get(folder));
-          if (!scene.length && legacySceneFolders.has(folder)) addUnique(scene, legacySceneFolders.get(folder));
-          if (!palette.length && legacyPaletteFolders.has(folder)) addUnique(palette, legacyPaletteFolders.get(folder));
-          if (!theme.length && folder === 'multi-theme') addUnique(theme, 'fantasy');
-
-          if (!hasExplicitComposition) {
-            if (folder === 'multi-panel') addUnique(composition, 'multi-panel');
-            else if (folder === 'character-sheet') addUnique(composition, 'multi-panel', 'character-turnaround');
-            else if (folder === 'multi-theme') addUnique(composition, 'multi-panel', 'mixed-shot');
-          }
-
-          if (!hasExplicitAssetType) {
-            if (folder === 'multi-panel' || folder === 'multi-theme') assetType = 'collage';
-            else if (folder === 'character-sheet') assetType = 'character-sheet';
-          }`;
-          if (!source.includes(oldBlock)) throw new Error('Expected legacy inference block was not found.');
-          source = source.replace(oldBlock, newBlock);
+          const startMarker = "  if (!theme.length && legacyThemeFolders.has(folder))";
+          const endMarker = "\n\n  for (const tag of tags)";
+          const start = source.indexOf(startMarker);
+          const end = source.indexOf(endMarker, start);
+          if (start < 0 || end < 0) throw new Error('Legacy inference block markers were not found.');
+          const newBlock = [
+            "  const hasExplicitComposition = Object.prototype.hasOwnProperty.call(metadata, 'composition');",
+            "  const hasExplicitAssetType = Object.prototype.hasOwnProperty.call(metadata, 'assetType') && Boolean(String(metadata.assetType || '').trim());",
+            "",
+            "  if (!theme.length && legacyThemeFolders.has(folder)) addUnique(theme, legacyThemeFolders.get(folder));",
+            "  if (!scene.length && legacySceneFolders.has(folder)) addUnique(scene, legacySceneFolders.get(folder));",
+            "  if (!palette.length && legacyPaletteFolders.has(folder)) addUnique(palette, legacyPaletteFolders.get(folder));",
+            "  if (!theme.length && folder === 'multi-theme') addUnique(theme, 'fantasy');",
+            "",
+            "  if (!hasExplicitComposition) {",
+            "    if (folder === 'multi-panel') addUnique(composition, 'multi-panel');",
+            "    else if (folder === 'character-sheet') addUnique(composition, 'multi-panel', 'character-turnaround');",
+            "    else if (folder === 'multi-theme') addUnique(composition, 'multi-panel', 'mixed-shot');",
+            "  }",
+            "",
+            "  if (!hasExplicitAssetType) {",
+            "    if (folder === 'multi-panel' || folder === 'multi-theme') assetType = 'collage';",
+            "    else if (folder === 'character-sheet') assetType = 'character-sheet';",
+            "  }",
+          ].join('\n');
+          source = source.slice(0, start) + newBlock + source.slice(end);
           fs.writeFileSync(file, source);
           NODE
 
