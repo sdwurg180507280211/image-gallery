@@ -1,28 +1,18 @@
 {
   "title": "神秘红光中的优雅女子",
-  "description": "红裳仙姬「神秘红光中的优雅女子」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「神秘红光中的优雅女子」作品，主题为魔法；场景包含棚拍与纯背景；配色为红金；构图为独立大图、胸像、半身。",
   "category": "红裳仙姬",
   "tags": [
-    "fire-magic",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "红金礼服",
-    "红色轻纱",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
+    "低头",
+    "托举能量球",
     "温柔",
-    "妩媚"
+    "低垂视线",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-25T12:02:35.658Z",
   "featured": false,
@@ -31,8 +21,44 @@
   "sourceFileId": "file_000000000738820698f5f7b4a2db6b4b",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "8983115031e6296cf172496c4f8f09dcbd1888906d2d3c546144145313bcb60c",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "bust",
+    "half-body"
+  ],
   "generationSequence": 102,
   "schemaVersion": 2,
-  "id": "24c8dd1e099d"
+  "id": "24c8dd1e099d",
+  "character": "红裳仙姬",
+  "theme": [
+    "magic"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "低头",
+    "托举能量球"
+  ],
+  "expressions": [
+    "温柔",
+    "低垂视线"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-25T12:02:35.658Z"
 }

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-03T03:03:56.311Z",
+  "summary": {
+    "images": 178,
+    "errors": 0,
+    "warnings": 4,
+    "info": 0
+  },
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "composition-conflict",
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-003.png",
+      "message": "composition 同时包含独立大图与多格拼图，请视觉复核。"
+    },
+    {
+      "severity": "warning",
+      "code": "asset-composition-conflict",
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-immortal-maiden-003.png",
+      "message": "普通作品被标记为多格构图，请确认 assetType。"
+    },
+    {
+      "severity": "warning",
+      "code": "composition-conflict",
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-sorceress-045.png",
+      "message": "composition 同时包含独立大图与多格拼图，请视觉复核。"
+    },
+    {
+      "severity": "warning",
+      "code": "asset-composition-conflict",
+      "path": "images/red-robed-immortal/multi-panel/golden-showcase-sorceress-045.png",
+      "message": "普通作品被标记为多格构图，请确认 assetType。"
+    }
+  ]
+}

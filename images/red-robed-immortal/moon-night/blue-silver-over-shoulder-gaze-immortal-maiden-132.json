@@ -1,28 +1,17 @@
 {
   "title": "月影星饰下的回眸美人",
-  "description": "红裳仙姬「月影星饰下的回眸美人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「月影星饰下的回眸美人」作品，主题为人物肖像、东方幻想；场景包含月夜；配色为蓝银；构图为独立大图、胸像、半身。",
   "category": "红裳仙姬",
   "tags": [
-    "moon-night",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "深蓝礼服",
-    "银色星饰",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "回眸凝视",
-    "直视镜头",
-    "互动视线",
-    "神秘",
+    "回眸",
     "清冷",
-    "温柔",
-    "妩媚"
+    "回眸凝视",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-31T05:29:44.965Z",
   "featured": false,
@@ -31,8 +20,44 @@
   "sourceFileId": "file_00000000c23481fab0fc60b8430c9df0",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "dc130efc2d1e585b9d924ecc01cea80bd6174a278ecbcf1d35b01dad0ccde4e0",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "bust",
+    "half-body"
+  ],
   "generationSequence": 132,
   "schemaVersion": 2,
-  "id": "e227782963db"
+  "id": "e227782963db",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "moon-night"
+  ],
+  "palette": [
+    "blue-silver"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "回眸"
+  ],
+  "expressions": [
+    "清冷",
+    "回眸凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-31T05:29:44.965Z"
 }

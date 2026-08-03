@@ -1,28 +1,18 @@
 {
   "title": "白金月华礼服特写",
-  "description": "红裳仙姬「白金月华礼服特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现celestial主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「白金月华礼服特写」作品，主题为人物肖像、东方幻想；场景包含棚拍与纯背景；配色为白金；构图为独立大图、人物特写、胸像。",
   "category": "红裳仙姬",
   "tags": [
-    "celestial",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "白金礼服",
-    "羽饰",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
+    "回眸",
+    "托举能量球",
     "温柔",
-    "妩媚"
+    "互动凝视",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-25T12:22:21.753Z",
   "featured": true,
@@ -31,8 +21,46 @@
   "sourceFileId": "file_00000000ca448206af74974c44c4167a",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "974f46f67261dfe36343ab567fdbe43ded29511088643bc9cc413ba9b74983a5",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "close-up",
+    "bust"
+  ],
   "generationSequence": 109,
   "schemaVersion": 2,
-  "id": "656cf6a33922"
+  "id": "656cf6a33922",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "ivory-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "回眸",
+    "托举能量球"
+  ],
+  "expressions": [
+    "温柔",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": true,
+  "manualReviewReason": "白金礼服与红色光球并存，fantasy-portrait / celestial / magic 的主主题需人工确认。",
+  "auditBasis": "实际画面为单一人物近景，结合可见室内环境、羽翼或姿态分类。",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-25T12:22:21.753Z"
 }

@@ -1,28 +1,18 @@
 {
   "title": "红焰魔法中的金饰女巫",
-  "description": "红裳仙姬「红焰魔法中的金饰女巫」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「红焰魔法中的金饰女巫」作品，主题为魔法；场景包含其他场景；配色为黑金、红金；构图为独立大图、人物特写、胸像。",
   "category": "红裳仙姬",
   "tags": [
-    "fire-magic",
     "红裳仙姬",
+    "伸手互动",
+    "施法",
+    "凌厉",
+    "互动凝视",
     "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "红金礼服",
-    "红色轻纱",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-31T05:29:44.965Z",
   "featured": true,
@@ -31,8 +21,46 @@
   "sourceFileId": "file_00000000843c82308abc24905cccad22",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "abfefb10170b6f6b75f38c427206e67d2143fc1a6f5c3183330ddc9953b4d8c8",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "close-up",
+    "bust"
+  ],
   "generationSequence": 128,
   "schemaVersion": 2,
-  "id": "55a5ccd83356"
+  "id": "55a5ccd83356",
+  "character": "红裳仙姬",
+  "theme": [
+    "magic"
+  ],
+  "scene": [
+    "other"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "伸手互动",
+    "施法"
+  ],
+  "expressions": [
+    "凌厉",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": true,
+  "manualReviewReason": "标题含红焰，但画面更接近红色能量施法，magic / fire-magic 边界需人工确认。",
+  "auditBasis": "实际画面为单一人物特写；主题与 palette 分开记录，并依据可见武器、魔法、羽光或月夜环境判断。",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-31T05:29:44.965Z"
 }

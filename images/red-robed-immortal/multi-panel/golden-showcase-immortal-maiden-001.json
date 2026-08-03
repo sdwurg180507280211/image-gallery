@@ -1,28 +1,21 @@
 {
   "title": "精致角色展示图",
-  "description": "红裳仙姬「精致角色展示图」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现multi-panel主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「精致角色展示图」作品，主题为人物肖像、东方幻想；场景包含棚拍与纯背景；配色为红金；构图为多格拼图、角色多视图、参考图排版。",
   "category": "红裳仙姬",
   "tags": [
-    "multi-panel",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "东方幻想礼服",
-    "金线刺绣",
-    "半身",
-    "全身构图",
-    "独立大图",
-    "静态姿态",
+    "A姿态",
+    "正面展示",
+    "背面展示",
+    "侧面展示",
+    "斜侧展示",
+    "中性",
     "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T07:34:54.534Z",
   "featured": true,
@@ -31,8 +24,48 @@
   "sourceFileId": "file_000000009ae082309b9bc066d90bc63a",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "5cc248715e959bc3d720ffd6180d9bc1005c8ed5bc2a4f9429a56bef17ab789c",
-  "composition": "独立大图",
+  "composition": [
+    "multi-panel",
+    "character-turnaround",
+    "reference-layout"
+  ],
   "generationSequence": 1,
   "schemaVersion": 2,
-  "id": "5d281eb3697f"
+  "id": "5d281eb3697f",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "crimson-gold"
+  ],
+  "assetType": "character-sheet",
+  "actions": [
+    "A姿态",
+    "正面展示",
+    "背面展示",
+    "侧面展示",
+    "斜侧展示"
+  ],
+  "expressions": [
+    "中性",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T07:34:54.534Z"
 }

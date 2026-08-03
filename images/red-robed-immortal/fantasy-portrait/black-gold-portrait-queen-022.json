@@ -1,28 +1,18 @@
 {
   "title": "优雅黑金幻想女王",
-  "description": "红裳仙姬「优雅黑金幻想女王」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「优雅黑金幻想女王」作品，主题为人物肖像、东方幻想；场景包含棚拍与纯背景；配色为黑金；构图为独立大图、全身。",
   "category": "红裳仙姬",
   "tags": [
-    "fantasy-portrait",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "黑金礼服",
-    "红宝石",
-    "半身",
-    "全身构图",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
+    "侧身",
+    "回眸",
     "清冷",
-    "温柔",
-    "妩媚"
+    "直视镜头",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T08:07:06.840Z",
   "featured": false,
@@ -31,8 +21,44 @@
   "sourceFileId": "file_000000001e708206b221ef5f42cebf87",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "ccd851e3242ad0fd16de023dfa218dc2f9576e376b88e99d86ab5453a2803c4c",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "full-body"
+  ],
   "generationSequence": 22,
   "schemaVersion": 2,
-  "id": "820b50c90f64"
+  "id": "820b50c90f64",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "侧身",
+    "回眸"
+  ],
+  "expressions": [
+    "清冷",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T08:07:06.840Z"
 }

@@ -1,28 +1,18 @@
 {
   "title": "鎏金羽饰中的红光幻梦",
-  "description": "红裳仙姬「鎏金羽饰中的红光幻梦」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「鎏金羽饰中的红光幻梦」作品，主题为神圣与星辉；场景包含其他场景；配色为白金、红金；构图为独立大图、人物特写、胸像。",
   "category": "红裳仙姬",
   "tags": [
-    "fire-magic",
     "红裳仙姬",
+    "托举红光",
+    "抬臂",
+    "安静",
+    "互动凝视",
     "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "白金礼服",
-    "羽饰",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-31T05:22:55.539Z",
   "featured": false,
@@ -31,8 +21,46 @@
   "sourceFileId": "file_0000000003088211be8d6271a50476f3",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "3a62c07c14f30bd1b7a35170bdcc2b5065dcbfde0baf2045dd75a2986f29c3ed",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "close-up",
+    "bust"
+  ],
   "generationSequence": 124,
   "schemaVersion": 2,
-  "id": "03ac4ad7cfb5"
+  "id": "03ac4ad7cfb5",
+  "character": "红裳仙姬",
+  "theme": [
+    "celestial"
+  ],
+  "scene": [
+    "other"
+  ],
+  "palette": [
+    "ivory-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "托举红光",
+    "抬臂"
+  ],
+  "expressions": [
+    "安静",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": true,
+  "manualReviewReason": "羽饰与红色能量同时突出，celestial / fire-magic 主主题需人工确认。",
+  "auditBasis": "实际画面为单一人物特写；主题与 palette 分开记录，并依据可见武器、魔法、羽光或月夜环境判断。",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-31T05:22:55.539Z"
 }

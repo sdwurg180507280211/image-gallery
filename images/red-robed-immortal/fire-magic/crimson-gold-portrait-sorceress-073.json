@@ -1,28 +1,19 @@
 {
   "title": "魔法女巫与火焰能量",
-  "description": "红裳仙姬「魔法女巫与火焰能量」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fire-magic主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「魔法女巫与火焰能量」作品，主题为火焰魔法；场景包含棚拍与纯背景；配色为黑金、红金；构图为独立大图、全身。",
   "category": "红裳仙姬",
   "tags": [
-    "fire-magic",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "红金礼服",
-    "红色轻纱",
-    "半身",
-    "全身构图",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
+    "高举火焰",
+    "施法",
+    "专注",
     "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "直视镜头",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T09:10:35.527Z",
   "featured": false,
@@ -31,8 +22,45 @@
   "sourceFileId": "file_0000000044e88207bb9383f4c9ec75de",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "237900cf701e651131e80d7a5ff31698cf9e3589bb6099da2b7a453e088dd345",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "full-body"
+  ],
   "generationSequence": 73,
   "schemaVersion": 2,
-  "id": "0c3ba17b2432"
+  "id": "0c3ba17b2432",
+  "character": "红裳仙姬",
+  "theme": [
+    "fire-magic"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "高举火焰",
+    "施法"
+  ],
+  "expressions": [
+    "专注",
+    "神秘",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T09:10:35.527Z"
 }

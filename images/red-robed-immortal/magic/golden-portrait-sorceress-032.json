@@ -1,28 +1,19 @@
 {
   "title": "魔法女巫的神秘肖像",
-  "description": "红裳仙姬「魔法女巫的神秘肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「魔法女巫的神秘肖像」作品，主题为魔法；场景包含棚拍与纯背景；配色为黑金、红金；构图为独立大图、全身。",
   "category": "红裳仙姬",
   "tags": [
-    "magic",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "东方幻想礼服",
-    "金线刺绣",
-    "半身",
-    "全身构图",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
+    "静坐",
+    "托举能量球",
+    "专注",
     "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "直视镜头",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T08:12:32.548Z",
   "featured": false,
@@ -31,8 +22,45 @@
   "sourceFileId": "file_000000008e18820695958ec5a56efc7b",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "a83f2e0bc1fb12127f77ae0d11d1966f5563079c475527fc627beef85560389e",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "full-body"
+  ],
   "generationSequence": 32,
   "schemaVersion": 2,
-  "id": "b0d1b775dfd7"
+  "id": "b0d1b775dfd7",
+  "character": "红裳仙姬",
+  "theme": [
+    "magic"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "静坐",
+    "托举能量球"
+  ],
+  "expressions": [
+    "专注",
+    "神秘",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T08:12:32.548Z"
 }

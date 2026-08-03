@@ -1,21 +1,70 @@
 {
   "title": "火凤凰之舞",
-  "description": "红裳仙姬「火凤凰之舞」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
+  "description": "红裳仙姬「火凤凰之舞」作品，主题为人物肖像、火焰魔法、魔法、东方幻想；场景包含凤凰与火焰场景、夜城与古街；配色为红金、金色；构图为多格拼图、五宫格、混合景别。",
   "category": "红裳仙姬",
   "tags": [
-    "人物一致性",
-    "蓝眸",
-    "黑色长发",
-    "红金古装",
+    "红裳仙姬",
     "直视镜头",
-    "魅惑神态",
-    "五宫格",
-    "火凤凰"
+    "伸手互动",
+    "凤凰召唤",
+    "回眸",
+    "自信",
+    "神秘",
+    "妩媚",
+    "成年东方女性",
+    "蓝灰眼",
+    "黑色高盘发",
+    "金色发饰"
   ],
   "createdAt": "2026-07-31T06:45:17.000Z",
   "featured": true,
   "width": 1254,
   "height": 1254,
   "schemaVersion": 2,
-  "id": "937998180e27"
+  "id": "937998180e27",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fire-magic",
+    "magic",
+    "fantasy"
+  ],
+  "scene": [
+    "phoenix",
+    "night-city"
+  ],
+  "palette": [
+    "crimson-gold",
+    "golden"
+  ],
+  "composition": [
+    "multi-panel",
+    "five-panel",
+    "mixed-shot"
+  ],
+  "assetType": "collage",
+  "actions": [
+    "直视镜头",
+    "伸手互动",
+    "凤凰召唤",
+    "回眸"
+  ],
+  "expressions": [
+    "自信",
+    "神秘",
+    "妩媚"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "蓝灰眼",
+    "黑色高盘发",
+    "金色发饰"
+  ],
+  "sourceChat": "chat-20",
+  "sourceBatch": "chat-20",
+  "generationSequence": 18,
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "sourceFileId": "file_0000000047a081fa934179c3da57488f"
 }

@@ -1,26 +1,23 @@
 {
   "title": "月夜水岸五景",
-  "description": "红裳仙姬「月夜水岸五景」原始生成作品，画面呈现成年东方女性、蓝灰眼、黑色高盘发与红金古装，以月夜水岸为主题，采用五宫格构图，包含人物特写、半身或场景化姿态及互动凝视。",
+  "description": "红裳仙姬「月夜水岸五景」作品，主题为人物肖像、浪漫氛围、东方幻想、日常生活；场景包含水景、月夜、室内、水岸、春日花园；配色为多色；构图为多格拼图、五宫格、混合景别。",
   "category": "红裳仙姬",
   "tags": [
     "红裳仙姬",
+    "涉水",
+    "持杯",
+    "托腮",
+    "倚卧",
+    "回眸",
+    "品茶",
+    "妩媚",
+    "温柔",
+    "冷静",
+    "凝视",
     "成年东方女性",
     "蓝灰眼",
     "黑色高盘发",
-    "红金古装",
-    "金色发饰",
-    "人物特写",
-    "半身",
-    "全身构图",
-    "回眸",
-    "静坐",
-    "伸手互动",
-    "直视镜头",
-    "互动视线",
-    "妩媚",
-    "魅惑",
-    "月夜水岸",
-    "五宫格"
+    "金色发饰"
   ],
   "createdAt": "2026-07-31T07:35:03Z",
   "featured": false,
@@ -30,5 +27,55 @@
   "sourceType": "ChatGPT Images original",
   "conversationImageIndex": 3,
   "schemaVersion": 2,
-  "id": "5988a24b5c59"
+  "id": "5988a24b5c59",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "romance",
+    "fantasy",
+    "daily-life"
+  ],
+  "scene": [
+    "water",
+    "moon-night",
+    "interior",
+    "waterfront",
+    "spring-garden"
+  ],
+  "palette": [
+    "multicolor"
+  ],
+  "composition": [
+    "multi-panel",
+    "five-panel",
+    "mixed-shot"
+  ],
+  "assetType": "collage",
+  "actions": [
+    "涉水",
+    "持杯",
+    "托腮",
+    "倚卧",
+    "回眸",
+    "品茶"
+  ],
+  "expressions": [
+    "妩媚",
+    "温柔",
+    "冷静",
+    "凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "蓝灰眼",
+    "黑色高盘发",
+    "金色发饰"
+  ],
+  "sourceChat": "chat-21",
+  "sourceBatch": "chat-21",
+  "generationSequence": 15,
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "sourceFileId": "file_00000000960c82099046a541c00d8313"
 }

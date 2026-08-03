@@ -1,28 +1,18 @@
 {
   "title": "暖光红衣俯身特写",
-  "description": "红裳仙姬「暖光红衣俯身特写」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「暖光红衣俯身特写」作品，主题为人物肖像、东方幻想；场景包含室内；配色为黑金、红金；构图为独立大图、人物特写、胸像。",
   "category": "红裳仙姬",
   "tags": [
-    "fantasy-portrait",
     "红裳仙姬",
+    "俯身",
+    "靠近镜头",
+    "妩媚",
+    "互动凝视",
     "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "红金礼服",
-    "红色轻纱",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-25T12:28:22.234Z",
   "featured": false,
@@ -31,8 +21,46 @@
   "sourceFileId": "file_0000000065b48206b4c3316206cea2bb",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "780a9b3727c9b7dfe343151d6fb9868e5cf01dfb84bbf81679d29646e0f441c5",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "close-up",
+    "bust"
+  ],
   "generationSequence": 114,
   "schemaVersion": 2,
-  "id": "a7d68596be87"
+  "id": "a7d68596be87",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "interior"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "俯身",
+    "靠近镜头"
+  ],
+  "expressions": [
+    "妩媚",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-25T12:28:22.234Z"
 }

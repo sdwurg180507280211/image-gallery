@@ -1,27 +1,19 @@
 {
   "title": "黑衣魔法女战士",
-  "description": "红裳仙姬「黑衣魔法女战士」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「黑衣魔法女战士」作品，主题为战斗；场景包含棚拍与纯背景；配色为黑金、红金；构图为独立大图、全身。",
   "category": "红裳仙姬",
   "tags": [
-    "battle",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "黑金礼服",
-    "红宝石",
-    "半身",
-    "全身构图",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
+    "持剑",
+    "突进",
+    "专注",
     "神秘",
-    "清冷",
-    "凌厉"
+    "直视镜头",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T08:07:06.840Z",
   "featured": true,
@@ -30,8 +22,45 @@
   "sourceFileId": "file_000000006e7c8209bd4cc7d9d17ac307",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "f7dd78ce2bfd0a42499eb27161fc14f8de6e6f51a35ff78267ac3463ca3db37d",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "full-body"
+  ],
   "generationSequence": 18,
   "schemaVersion": 2,
-  "id": "0f08f6e0cd88"
+  "id": "0f08f6e0cd88",
+  "character": "红裳仙姬",
+  "theme": [
+    "battle"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "持剑",
+    "突进"
+  ],
+  "expressions": [
+    "专注",
+    "神秘",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T08:07:06.840Z"
 }

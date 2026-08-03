@@ -1,29 +1,19 @@
 {
   "title": "魔法召唤者的决斗姿态",
-  "description": "红裳仙姬「魔法召唤者的决斗姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「魔法召唤者的决斗姿态」作品，主题为魔法；场景包含棚拍与纯背景；配色为黑金、红金；构图为独立大图、全身。",
   "category": "红裳仙姬",
   "tags": [
-    "battle",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "东方幻想礼服",
-    "金线刺绣",
-    "半身",
-    "全身构图",
-    "独立大图",
-    "魔法召唤",
-    "战斗动作",
-    "直视镜头",
-    "互动视线",
+    "魔法仪式",
+    "战斗准备",
+    "专注",
     "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "直视镜头",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T08:49:57.069Z",
   "featured": false,
@@ -32,8 +22,46 @@
   "sourceFileId": "file_000000007c4082078e1cc9d791715902",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "d0a6d6927f81f01ff9886245b4b05877463e124f4e993878fd99d811bbb23f75",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "full-body"
+  ],
   "generationSequence": 58,
   "schemaVersion": 2,
-  "id": "ae4fb2c895ce"
+  "id": "ae4fb2c895ce",
+  "character": "红裳仙姬",
+  "theme": [
+    "magic"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "魔法仪式",
+    "战斗准备"
+  ],
+  "expressions": [
+    "专注",
+    "神秘",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": true,
+  "manualReviewReason": "画面同时具有法阵施法与战斗准备姿态，magic / battle 边界需人工确认。",
+  "auditBasis": "实际画面为单一人物全身构图；主题依据可见武器、法阵、能量球或纯姿态判断。",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T08:49:57.069Z"
 }

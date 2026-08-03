@@ -1,28 +1,19 @@
 {
   "title": "红刃女战士的冲锋",
-  "description": "红裳仙姬「红刃女战士的冲锋」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「红刃女战士的冲锋」作品，主题为战斗；场景包含棚拍与纯背景；配色为黑金、红金；构图为独立大图、全身。",
   "category": "红裳仙姬",
   "tags": [
-    "battle",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "红金礼服",
-    "红色轻纱",
-    "半身",
-    "全身构图",
-    "独立大图",
     "持剑",
-    "战斗动作",
-    "直视镜头",
-    "互动视线",
+    "冲锋",
+    "专注",
     "神秘",
-    "清冷",
-    "凌厉"
+    "直视镜头",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-24T09:10:35.527Z",
   "featured": true,
@@ -31,8 +22,45 @@
   "sourceFileId": "file_0000000071a48207adc962835e75e811",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "5caa2a10e510ea97c3bd518aeb3d91416609da4779d1478e0bace5659af8d22e",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "full-body"
+  ],
   "generationSequence": 66,
   "schemaVersion": 2,
-  "id": "c9ecf2fc322a"
+  "id": "c9ecf2fc322a",
+  "character": "红裳仙姬",
+  "theme": [
+    "battle"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "持剑",
+    "冲锋"
+  ],
+  "expressions": [
+    "专注",
+    "神秘",
+    "直视镜头"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-24T09:10:35.527Z"
 }

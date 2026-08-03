@@ -1,28 +1,18 @@
 {
   "title": "红晶幻梦月影中的金饰美人",
-  "description": "红裳仙姬「红晶幻梦月影中的金饰美人」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现moon-night主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「红晶幻梦月影中的金饰美人」作品，主题为人物肖像、东方幻想；场景包含月夜；配色为白金、红金、蓝银；构图为独立大图、人物特写、胸像。",
   "category": "红裳仙姬",
   "tags": [
-    "moon-night",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "红金礼服",
-    "红色轻纱",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
+    "托举红光",
+    "侧身",
     "温柔",
-    "妩媚"
+    "互动凝视",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-31T05:29:44.965Z",
   "featured": false,
@@ -31,8 +21,47 @@
   "sourceFileId": "file_00000000efd08211a1ec3826f278c3b9",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "85ef10b8f7196ca534760db8b11639e0bda57c6f0b9be8e4f43d2b343a7a6b72",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "close-up",
+    "bust"
+  ],
   "generationSequence": 130,
   "schemaVersion": 2,
-  "id": "03c1324bda88"
+  "id": "03c1324bda88",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "moon-night"
+  ],
+  "palette": [
+    "ivory-gold",
+    "crimson-gold",
+    "blue-silver"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "托举红光",
+    "侧身"
+  ],
+  "expressions": [
+    "温柔",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-31T05:29:44.965Z"
 }

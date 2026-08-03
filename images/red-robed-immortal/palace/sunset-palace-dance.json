@@ -1,21 +1,69 @@
 {
   "title": "夕阳下的宫殿之舞",
-  "description": "红裳仙姬「夕阳下的宫殿之舞」主题五宫格，包含直视镜头、互动凝视、特写与全身构图。",
+  "description": "红裳仙姬「夕阳下的宫殿之舞」作品，主题为人物肖像、浪漫氛围、东方幻想；场景包含宫廷、水岸；配色为红金、金色；构图为多格拼图、五宫格、混合景别。",
   "category": "红裳仙姬",
   "tags": [
-    "人物一致性",
-    "蓝眸",
-    "黑色长发",
-    "红金古装",
+    "红裳仙姬",
     "直视镜头",
-    "魅惑神态",
-    "五宫格",
-    "夕阳宫殿"
+    "伸手互动",
+    "静坐",
+    "站立",
+    "妩媚",
+    "温柔",
+    "自信",
+    "成年东方女性",
+    "蓝灰眼",
+    "黑色高盘发",
+    "金色发饰"
   ],
   "createdAt": "2026-07-31T06:45:18.000Z",
   "featured": false,
   "width": 1254,
   "height": 1254,
   "schemaVersion": 2,
-  "id": "701f311520d2"
+  "id": "701f311520d2",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "romance",
+    "fantasy"
+  ],
+  "scene": [
+    "palace",
+    "waterfront"
+  ],
+  "palette": [
+    "crimson-gold",
+    "golden"
+  ],
+  "composition": [
+    "multi-panel",
+    "five-panel",
+    "mixed-shot"
+  ],
+  "assetType": "collage",
+  "actions": [
+    "直视镜头",
+    "伸手互动",
+    "静坐",
+    "站立"
+  ],
+  "expressions": [
+    "妩媚",
+    "温柔",
+    "自信"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "蓝灰眼",
+    "黑色高盘发",
+    "金色发饰"
+  ],
+  "sourceChat": "chat-20",
+  "sourceBatch": "chat-20",
+  "generationSequence": 19,
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "sourceFileId": "file_00000000d0cc81f8b191169945e13cb7"
 }

@@ -1,27 +1,18 @@
 {
   "title": "暗夜红宝石战姬",
-  "description": "红裳仙姬「暗夜红宝石战姬」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现battle主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「暗夜红宝石战姬」作品，主题为战斗；场景包含棚拍与纯背景；配色为黑金；构图为独立大图、人物特写、胸像。",
   "category": "红裳仙姬",
   "tags": [
-    "battle",
     "红裳仙姬",
+    "持短刃",
+    "战斗准备",
+    "凌厉",
+    "互动凝视",
     "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "黑金礼服",
-    "红宝石",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
-    "神秘",
-    "清冷",
-    "凌厉"
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-31T05:22:55.539Z",
   "featured": true,
@@ -30,8 +21,44 @@
   "sourceFileId": "file_000000003aec8208b3007a8b8d4be6b7",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "40473c4f1429277ab86d04265392e1e528d7cde1f02ee5739643f703940ff5ec",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "close-up",
+    "bust"
+  ],
   "generationSequence": 122,
   "schemaVersion": 2,
-  "id": "7c8e96b9ae0d"
+  "id": "7c8e96b9ae0d",
+  "character": "红裳仙姬",
+  "theme": [
+    "battle"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "持短刃",
+    "战斗准备"
+  ],
+  "expressions": [
+    "凌厉",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-31T05:22:55.539Z"
 }

@@ -1,28 +1,18 @@
 {
   "title": "魔法使者的魅力姿态",
-  "description": "红裳仙姬「魔法使者的魅力姿态」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现magic主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「魔法使者的魅力姿态」作品，主题为魔法；场景包含棚拍与纯背景；配色为黑金、红金；构图为独立大图、胸像、半身。",
   "category": "红裳仙姬",
   "tags": [
-    "magic",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "东方幻想礼服",
-    "金线刺绣",
-    "人物特写",
-    "胸像",
-    "独立大图",
-    "静态姿态",
-    "直视镜头",
-    "互动视线",
+    "伸手互动",
+    "施法",
     "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "互动凝视",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-25T12:02:35.658Z",
   "featured": true,
@@ -31,8 +21,45 @@
   "sourceFileId": "file_0000000046548206be20726dd67f652e",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "029540dbb387c18e88f61364c173e52d3094a52fb5563c71557f89c75e2b67f2",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "bust",
+    "half-body"
+  ],
   "generationSequence": 95,
   "schemaVersion": 2,
-  "id": "74bf3e51f662"
+  "id": "74bf3e51f662",
+  "character": "红裳仙姬",
+  "theme": [
+    "magic"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "black-gold",
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "伸手互动",
+    "施法"
+  ],
+  "expressions": [
+    "神秘",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-25T12:02:35.658Z"
 }

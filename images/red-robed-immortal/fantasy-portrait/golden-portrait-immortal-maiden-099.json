@@ -1,28 +1,18 @@
 {
   "title": "古风美人肖像",
-  "description": "红裳仙姬「古风美人肖像」原始生成作品。画面保持同一人物身份，以黑色高盘发、琥珀金眼、金红珠宝与东方幻想服饰为核心特征，采用独立大图构图，呈现fantasy-portrait主题、细腻材质和人物互动视线。",
+  "description": "红裳仙姬「古风美人肖像」作品，主题为人物肖像、东方幻想；场景包含棚拍与纯背景；配色为红金；构图为独立大图、胸像、半身。",
   "category": "红裳仙姬",
   "tags": [
-    "fantasy-portrait",
     "红裳仙姬",
-    "成年东方女性",
-    "黑色高盘发",
-    "琥珀金眼",
-    "金色发饰",
-    "红宝石耳坠",
-    "红裳仙姬系列",
-    "东方幻想礼服",
-    "金线刺绣",
-    "人物特写",
-    "胸像",
-    "独立大图",
+    "手指近唇",
     "静态姿态",
-    "直视镜头",
-    "互动视线",
     "神秘",
-    "清冷",
-    "温柔",
-    "妩媚"
+    "互动凝视",
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
   ],
   "createdAt": "2026-07-25T12:02:35.658Z",
   "featured": false,
@@ -31,8 +21,45 @@
   "sourceFileId": "file_00000000760082068a55f761c14c9031",
   "sourceBridge": "Adobe asset_openai_file_upload",
   "sourceSha256": "e02e4653643df3279f74c86fe102ff5a28a61974f9991781e6c90692bae705f7",
-  "composition": "独立大图",
+  "composition": [
+    "single-image",
+    "bust",
+    "half-body"
+  ],
   "generationSequence": 99,
   "schemaVersion": 2,
-  "id": "2da0970a52a3"
+  "id": "2da0970a52a3",
+  "character": "红裳仙姬",
+  "theme": [
+    "portrait",
+    "fantasy"
+  ],
+  "scene": [
+    "studio"
+  ],
+  "palette": [
+    "crimson-gold"
+  ],
+  "assetType": "artwork",
+  "actions": [
+    "手指近唇",
+    "静态姿态"
+  ],
+  "expressions": [
+    "神秘",
+    "互动凝视"
+  ],
+  "confirmedTraits": [
+    "成年东方女性",
+    "黑色长发",
+    "高盘发或半盘发",
+    "东方幻想风格",
+    "金属发饰"
+  ],
+  "sourceChat": "chat-137",
+  "sourceBatch": "chat-137",
+  "needsManualReview": false,
+  "manualReviewReason": "",
+  "auditReviewedAt": "2026-08-03T10:53:00+08:00",
+  "generatedAt": "2026-07-25T12:02:35.658Z"
 }
