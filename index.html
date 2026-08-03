@@ -72,9 +72,6 @@
           <p class="filter-label">内容筛选</p>
           <p class="filter-hint">先按主题、场景和配色缩小范围</p>
         </div>
-        <button class="advanced-toggle" id="advancedToggle" type="button" aria-expanded="false" aria-controls="advancedFilters">
-          更多筛选 <span id="advancedCount" hidden>0</span><span class="toggle-chevron" aria-hidden="true">⌄</span>
-        </button>
       </div>
 
       <div class="facet-grid primary-facets" aria-label="主要筛选">
@@ -92,16 +89,29 @@
         </label>
       </div>
 
-      <div class="advanced-filters" id="advancedFilters" hidden>
-        <div class="facet-grid secondary-facets" aria-label="更多筛选">
-          <label class="facet-control">
-            <span>▣ 构图</span>
-            <select id="compositionFilter" data-label="构图"><option value="全部">全部构图</option></select>
-          </label>
-          <label class="facet-control">
-            <span>◫ 资产类型</span>
-            <select id="assetTypeFilter" data-label="类型"><option value="全部">全部类型</option></select>
-          </label>
+      <div class="advanced-disclosure">
+        <button class="advanced-toggle" id="advancedToggle" type="button" aria-expanded="false" aria-controls="advancedFilters">
+          <span class="advanced-toggle-copy">
+            <strong>更多筛选</strong>
+            <small>构图、资产类型</small>
+          </span>
+          <span class="advanced-toggle-meta">
+            <span id="advancedCount" hidden>0</span>
+            <svg class="toggle-chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" /></svg>
+          </span>
+        </button>
+
+        <div class="advanced-filters" id="advancedFilters" hidden>
+          <div class="facet-grid secondary-facets" aria-label="更多筛选">
+            <label class="facet-control">
+              <span>▣ 构图</span>
+              <select id="compositionFilter" data-label="构图"><option value="全部">全部构图</option></select>
+            </label>
+            <label class="facet-control">
+              <span>◫ 资产类型</span>
+              <select id="assetTypeFilter" data-label="类型"><option value="全部">全部类型</option></select>
+            </label>
+          </div>
         </div>
       </div>
 
