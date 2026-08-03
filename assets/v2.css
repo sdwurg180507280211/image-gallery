@@ -1,0 +1,80 @@
+.filter-section {
+  margin-top: 18px;
+}
+
+.filter-label {
+  margin: 0 0 7px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.filter-section .category-row {
+  margin: 0;
+}
+
+.facet-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 14px 0 12px;
+}
+
+.facet-control {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.facet-control > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.facet-control select {
+  width: 100%;
+  height: 42px;
+  padding: 0 34px 0 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  outline: 0;
+  background: var(--surface-solid);
+  color: var(--text);
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+.facet-control select:focus {
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.card-category {
+  text-transform: none;
+}
+
+.tag-list {
+  flex-wrap: wrap;
+  max-height: 54px;
+}
+
+.tag {
+  max-width: 100%;
+}
+
+@media (max-width: 1120px) {
+  .facet-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .facet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 430px) {
+  .facet-grid { grid-template-columns: 1fr; }
+}
