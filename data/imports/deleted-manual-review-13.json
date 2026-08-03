@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 2,
+  "deletedAt": "2026-08-03T03:21:22.231Z",
+  "count": 13,
+  "reason": "用户明确表示这 13 张边界图片不再需要。",
+  "items": [
+    {
+      "id": "d4362c32672d",
+      "title": "闭眼黑金战姬特写",
+      "imagePath": "images/red-robed-immortal/battle/black-gold-closed-eyes-warrior-110.png",
+      "metadataPath": "images/red-robed-immortal/battle/black-gold-closed-eyes-warrior-110.json",
+      "manualReviewReason": "标题为战姬，但画面仅表现闭眼黑金特写，battle / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "38df8edc066c",
+      "title": "华丽的东方式战士肖像",
+      "imagePath": "images/red-robed-immortal/battle/golden-portrait-warrior-079.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-portrait-warrior-079.json",
+      "manualReviewReason": "标题含“战士”，实际近景未见明确武器或攻击动作，battle / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "ae4fb2c895ce",
+      "title": "魔法召唤者的决斗姿态",
+      "imagePath": "images/red-robed-immortal/battle/golden-summoning-immortal-maiden-058.png",
+      "metadataPath": "images/red-robed-immortal/battle/golden-summoning-immortal-maiden-058.json",
+      "manualReviewReason": "画面同时具有法阵施法与战斗准备姿态，magic / battle 边界需人工确认。"
+    },
+    {
+      "id": "656cf6a33922",
+      "title": "白金月华礼服特写",
+      "imagePath": "images/red-robed-immortal/celestial/ivory-gold-portrait-immortal-maiden-109.png",
+      "metadataPath": "images/red-robed-immortal/celestial/ivory-gold-portrait-immortal-maiden-109.json",
+      "manualReviewReason": "白金礼服与红色光球并存，fantasy-portrait / celestial / magic 的主主题需人工确认。"
+    },
+    {
+      "id": "fe91a72cb22a",
+      "title": "华丽的黑金礼服肖像",
+      "imagePath": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-063.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/black-gold-portrait-immortal-maiden-063.json",
+      "manualReviewReason": "画面为动态伸手并伴随能量效果，magic / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "f110399f3e45",
+      "title": "神秘的金红幻想肖像",
+      "imagePath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-076.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/crimson-gold-portrait-immortal-maiden-076.json",
+      "manualReviewReason": "画面存在能量球，但整体表现仍接近肖像，magic / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "cdf263509bb9",
+      "title": "动感幻想肖像",
+      "imagePath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-071.png",
+      "metadataPath": "images/red-robed-immortal/fantasy-portrait/golden-portrait-immortal-maiden-071.json",
+      "manualReviewReason": "动作幅度较大但无明确武器，battle / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "55a5ccd83356",
+      "title": "红焰魔法中的金饰女巫",
+      "imagePath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-128.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/crimson-gold-portrait-sorceress-128.json",
+      "manualReviewReason": "标题含红焰，但画面更接近红色能量施法，magic / fire-magic 边界需人工确认。"
+    },
+    {
+      "id": "03ac4ad7cfb5",
+      "title": "鎏金羽饰中的红光幻梦",
+      "imagePath": "images/red-robed-immortal/fire-magic/ivory-gold-portrait-immortal-maiden-124.png",
+      "metadataPath": "images/red-robed-immortal/fire-magic/ivory-gold-portrait-immortal-maiden-124.json",
+      "manualReviewReason": "羽饰与红色能量同时突出，celestial / fire-magic 主主题需人工确认。"
+    },
+    {
+      "id": "0586b9af0b01",
+      "title": "暗夜灰金托腮特写",
+      "imagePath": "images/red-robed-immortal/moon-night/black-gold-chin-rest-immortal-maiden-115.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/black-gold-chin-rest-immortal-maiden-115.json",
+      "manualReviewReason": "暗色托腮特写未见明确月夜元素，moon-night / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "2b416f5b21c7",
+      "title": "暗夜红金特写",
+      "imagePath": "images/red-robed-immortal/moon-night/black-gold-portrait-immortal-maiden-133.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/black-gold-portrait-immortal-maiden-133.json",
+      "manualReviewReason": "暗夜氛围明确但没有可见月体，moon-night / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "cd2b07564a4a",
+      "title": "优雅之夜的华丽肖像",
+      "imagePath": "images/red-robed-immortal/moon-night/golden-portrait-immortal-maiden-094.png",
+      "metadataPath": "images/red-robed-immortal/moon-night/golden-portrait-immortal-maiden-094.json",
+      "manualReviewReason": "画面为暗色闭眼特写，未见明确月体或户外夜景，moon-night / fantasy-portrait 边界需人工确认。"
+    },
+    {
+      "id": "e0f28d05225d",
+      "title": "红金长裙与竹林风情",
+      "imagePath": "images/red-robed-immortal/wuxia/crane-bamboo-pavilion.png",
+      "metadataPath": "images/red-robed-immortal/wuxia/crane-bamboo-pavilion.json",
+      "manualReviewReason": "建议删除 `wuxia` theme。 当前文件位于 `wuxia` 目录，但实际画面只有竹林、亭桥、水面和仙鹤，没有武器、战斗、武术动作或侠客叙事。"
+    }
+  ]
+}
