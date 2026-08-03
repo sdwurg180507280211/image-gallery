@@ -1,11 +1,13 @@
 {
   "name": "image-gallery",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "A static gallery for generated character artwork.",
   "scripts": {
     "generate": "node scripts/generate-gallery.mjs",
+    "validate": "node scripts/generate-gallery.mjs",
+    "freeze-ids": "node scripts/freeze-metadata-ids.mjs",
     "build": "npm run generate && node scripts/build-site.mjs",
     "serve": "python3 -m http.server 4173 --directory dist"
   },
