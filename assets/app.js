@@ -1,5 +1,6 @@
 const ALL = '全部';
 const filterDimensions = ['theme', 'scene', 'palette', 'composition', 'assetType'];
+const advancedDimensions = ['composition', 'assetType'];
 const state = {
   images: [],
   visibleImages: [],
@@ -10,6 +11,7 @@ const state = {
   query: '',
   sort: 'newest',
   favoritesOnly: false,
+  advancedOpen: false,
   activeIndex: -1,
   favorites: new Set(JSON.parse(localStorage.getItem('image-gallery:favorites') || '[]')),
 };
@@ -22,6 +24,10 @@ const elements = {
   categoryFilters: document.querySelector('#categoryFilters'),
   facetFilters: Object.fromEntries(filterDimensions.map((key) => [key, document.querySelector(`#${key}Filter`)])),
   favoritesOnly: document.querySelector('#favoritesOnly'),
+  advancedToggle: document.querySelector('#advancedToggle'),
+  advancedCount: document.querySelector('#advancedCount'),
+  advancedFilters: document.querySelector('#advancedFilters'),
+  activeFilters: document.querySelector('#activeFilters'),
   clearFilters: document.querySelector('#clearFilters'),
   resultText: document.querySelector('#resultText'),
   emptyState: document.querySelector('#emptyState'),
@@ -169,7 +175,69 @@ function matchesFacet(item, dimension) {
   return selected === ALL || dimensionValues(item, dimension).includes(selected);
 }
 
+function clearFacet(dimension) {
+  state.filters[dimension] = ALL;
+  const select = elements.facetFilters[dimension];
+  if (select) select.value = ALL;
+  applyFilters();
+}
+
+function addFilterChip(label, onRemove) {
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = 'active-filter-chip';
+  const text = document.createElement('span');
+  text.textContent = label;
+  const remove = document.createElement('b');
+  remove.setAttribute('aria-hidden', 'true');
+  remove.textContent = '×';
+  chip.append(text, remove);
+  chip.setAttribute('aria-label', `移除筛选：${label}`);
+  chip.addEventListener('click', onRemove);
+  elements.activeFilters.append(chip);
+}
+
+function syncFilterInterface() {
+  const advancedCount = advancedDimensions.filter((dimension) => state.filters[dimension] !== ALL).length;
+  if (advancedCount > 0) state.advancedOpen = true;
+
+  elements.advancedFilters.hidden = !state.advancedOpen;
+  elements.advancedToggle.setAttribute('aria-expanded', String(state.advancedOpen));
+  elements.advancedToggle.classList.toggle('active', state.advancedOpen || advancedCount > 0);
+  elements.advancedCount.hidden = advancedCount === 0;
+  elements.advancedCount.textContent = String(advancedCount);
+
+  for (const dimension of filterDimensions) {
+    const select = elements.facetFilters[dimension];
+    select?.closest('.facet-control')?.classList.toggle('has-value', state.filters[dimension] !== ALL);
+  }
+
+  elements.activeFilters.replaceChildren();
+  if (state.activeCharacter !== ALL) {
+    addFilterChip(`人物：${state.activeCharacter}`, () => {
+      state.activeCharacter = ALL;
+      renderCharacters();
+      applyFilters();
+    });
+  }
+  for (const dimension of filterDimensions) {
+    const value = state.filters[dimension];
+    if (value === ALL) continue;
+    const label = elements.facetFilters[dimension]?.dataset.label || dimension;
+    addFilterChip(`${label}：${labelFor(dimension, value)}`, () => clearFacet(dimension));
+  }
+  if (state.favoritesOnly) {
+    addFilterChip('只看收藏', () => {
+      state.favoritesOnly = false;
+      elements.favoritesOnly.setAttribute('aria-pressed', 'false');
+      applyFilters();
+    });
+  }
+  elements.activeFilters.hidden = elements.activeFilters.childElementCount === 0;
+}
+
 function applyFilters() {
+  syncFilterInterface();
   const normalizedQuery = state.query.trim().toLocaleLowerCase('zh-CN');
   state.visibleImages = state.images
     .filter((item) => {
@@ -335,6 +403,7 @@ function clearFilters() {
   state.activeCharacter = ALL;
   state.query = '';
   state.favoritesOnly = false;
+  state.advancedOpen = false;
   filterDimensions.forEach((dimension) => { state.filters[dimension] = ALL; });
   elements.search.value = '';
   elements.favoritesOnly.setAttribute('aria-pressed', 'false');
@@ -367,6 +436,10 @@ elements.favoritesOnly.addEventListener('click', () => {
   state.favoritesOnly = !state.favoritesOnly;
   elements.favoritesOnly.setAttribute('aria-pressed', String(state.favoritesOnly));
   applyFilters();
+});
+elements.advancedToggle.addEventListener('click', () => {
+  state.advancedOpen = !state.advancedOpen;
+  syncFilterInterface();
 });
 elements.clearFilters.addEventListener('click', clearFilters);
 elements.themeToggle.addEventListener('click', toggleTheme);
