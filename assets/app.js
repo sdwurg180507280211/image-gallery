@@ -1,7 +1,12 @@
+const ALL = '全部';
+const filterDimensions = ['theme', 'scene', 'palette', 'composition', 'assetType'];
 const state = {
   images: [],
   visibleImages: [],
-  activeCategory: '全部',
+  taxonomy: {},
+  validation: null,
+  activeCharacter: ALL,
+  filters: Object.fromEntries(filterDimensions.map((key) => [key, ALL])),
   query: '',
   sort: 'newest',
   favoritesOnly: false,
@@ -15,6 +20,7 @@ const elements = {
   search: document.querySelector('#searchInput'),
   sort: document.querySelector('#sortSelect'),
   categoryFilters: document.querySelector('#categoryFilters'),
+  facetFilters: Object.fromEntries(filterDimensions.map((key) => [key, document.querySelector(`#${key}Filter`)])),
   favoritesOnly: document.querySelector('#favoritesOnly'),
   clearFilters: document.querySelector('#clearFilters'),
   resultText: document.querySelector('#resultText'),
@@ -37,23 +43,55 @@ const elements = {
   nextImage: document.querySelector('#nextImage'),
 };
 
+function normalizeList(value) {
+  const source = Array.isArray(value) ? value : value == null || value === '' ? [] : [value];
+  return [...new Set(source.map(String).map((item) => item.trim()).filter(Boolean))];
+}
+
 function normalizeImage(item, index) {
   const imagePath = String(item.path || '').replace(/^\.\//, '');
   const thumbnail = String(item.thumbnail || '').replace(/^\.\//, '');
   const title = item.title || imagePath.split('/').pop()?.replace(/\.[^.]+$/, '') || `图片 ${index + 1}`;
+  const character = String(item.character || item.category || '未分类');
   return {
     id: item.id || imagePath || String(index),
     path: imagePath,
     thumbnail: thumbnail || imagePath,
     title,
-    category: item.category || '未分类',
+    character,
+    category: character,
+    theme: normalizeList(item.theme ?? item.themes),
+    scene: normalizeList(item.scene ?? item.scenes),
+    palette: normalizeList(item.palette ?? item.palettes),
+    composition: normalizeList(item.composition),
+    assetType: String(item.assetType || 'artwork'),
+    actions: normalizeList(item.actions),
+    expressions: normalizeList(item.expressions),
+    confirmedTraits: normalizeList(item.confirmedTraits),
     description: item.description || '',
-    tags: Array.isArray(item.tags) ? item.tags.filter(Boolean) : [],
-    createdAt: item.createdAt || item.date || '',
+    tags: Array.isArray(item.tags) ? item.tags.filter(Boolean).map(String) : [],
+    createdAt: item.createdAt || item.generatedAt || item.date || '',
     featured: Boolean(item.featured),
     width: Number(item.width) || 0,
     height: Number(item.height) || 0,
   };
+}
+
+function labelFor(dimension, value) {
+  const entry = (state.taxonomy[dimension] || []).find((item) => item.value === value);
+  return entry?.label || value;
+}
+
+function dimensionValues(item, dimension) {
+  return dimension === 'assetType' ? [item.assetType].filter(Boolean) : item[dimension] || [];
+}
+
+function describeImage(item) {
+  const parts = [item.character];
+  if (item.theme[0]) parts.push(labelFor('theme', item.theme[0]));
+  if (item.scene[0]) parts.push(labelFor('scene', item.scene[0]));
+  if (item.palette[0]) parts.push(labelFor('palette', item.palette[0]));
+  return parts.join(' · ');
 }
 
 async function loadGallery() {
@@ -62,6 +100,8 @@ async function loadGallery() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const payload = await response.json();
     const records = Array.isArray(payload) ? payload : payload.images;
+    state.taxonomy = Array.isArray(payload) ? {} : payload.taxonomy || {};
+    state.validation = Array.isArray(payload) ? null : payload.validation || null;
     state.images = (records || []).map(normalizeImage).filter((item) => item.path);
   } catch (error) {
     console.error('无法读取画廊索引：', error);
@@ -69,51 +109,78 @@ async function loadGallery() {
   }
 
   updateStats();
-  renderCategories();
+  renderCharacters();
+  renderFacetFilters();
   applyFilters();
 }
 
 function updateStats() {
   elements.imageCount.textContent = String(state.images.length);
-  elements.categoryCount.textContent = String(new Set(state.images.map((item) => item.category)).size);
+  elements.categoryCount.textContent = String(new Set(state.images.map((item) => item.character)).size);
   elements.favoriteCount.textContent = String(state.favorites.size);
 }
 
-function renderCategories() {
+function renderCharacters() {
   const counts = state.images.reduce((map, item) => {
-    map.set(item.category, (map.get(item.category) || 0) + 1);
+    map.set(item.character, (map.get(item.character) || 0) + 1);
     return map;
   }, new Map());
-  const categories = ['全部', ...[...counts.keys()].sort((a, b) => a.localeCompare(b, 'zh-CN'))];
+  const characters = [ALL, ...[...counts.keys()].sort((a, b) => a.localeCompare(b, 'zh-CN'))];
   elements.categoryFilters.replaceChildren();
 
-  categories.forEach((category) => {
+  characters.forEach((character) => {
     const button = document.createElement('button');
-    const count = category === '全部' ? state.images.length : counts.get(category);
+    const count = character === ALL ? state.images.length : counts.get(character);
     button.type = 'button';
-    button.className = `category-chip${category === state.activeCategory ? ' active' : ''}`;
-    button.dataset.category = category;
-    button.append(document.createTextNode(category));
+    button.className = `category-chip${character === state.activeCharacter ? ' active' : ''}`;
+    button.dataset.category = character;
+    button.append(document.createTextNode(character));
     const countElement = document.createElement('span');
     countElement.textContent = String(count);
     button.append(countElement);
     button.addEventListener('click', () => {
-      state.activeCategory = category;
-      renderCategories();
+      state.activeCharacter = character;
+      renderCharacters();
       applyFilters();
     });
     elements.categoryFilters.append(button);
   });
 }
 
+function renderFacetFilters() {
+  for (const dimension of filterDimensions) {
+    const select = elements.facetFilters[dimension];
+    if (!select) continue;
+    const current = state.filters[dimension];
+    const counts = new Map();
+    for (const item of state.images) {
+      for (const value of dimensionValues(item, dimension)) counts.set(value, (counts.get(value) || 0) + 1);
+    }
+    const values = [...counts.keys()].sort((a, b) => labelFor(dimension, a).localeCompare(labelFor(dimension, b), 'zh-CN'));
+    select.replaceChildren(new Option(`全部${select.dataset.label || ''}`, ALL));
+    values.forEach((value) => select.add(new Option(`${labelFor(dimension, value)} (${counts.get(value)})`, value)));
+    select.value = values.includes(current) ? current : ALL;
+    state.filters[dimension] = select.value;
+  }
+}
+
+function matchesFacet(item, dimension) {
+  const selected = state.filters[dimension];
+  return selected === ALL || dimensionValues(item, dimension).includes(selected);
+}
+
 function applyFilters() {
   const normalizedQuery = state.query.trim().toLocaleLowerCase('zh-CN');
   state.visibleImages = state.images
     .filter((item) => {
-      const categoryMatches = state.activeCategory === '全部' || item.category === state.activeCategory;
+      const characterMatches = state.activeCharacter === ALL || item.character === state.activeCharacter;
       const favoriteMatches = !state.favoritesOnly || state.favorites.has(item.id);
-      const searchable = [item.title, item.category, item.description, ...item.tags].join(' ').toLocaleLowerCase('zh-CN');
-      return categoryMatches && favoriteMatches && (!normalizedQuery || searchable.includes(normalizedQuery));
+      const facetsMatch = filterDimensions.every((dimension) => matchesFacet(item, dimension));
+      const searchable = [
+        item.title, item.character, item.description, ...item.theme, ...item.scene, ...item.palette,
+        ...item.composition, item.assetType, ...item.actions, ...item.expressions, ...item.confirmedTraits, ...item.tags,
+      ].join(' ').toLocaleLowerCase('zh-CN');
+      return characterMatches && favoriteMatches && facetsMatch && (!normalizedQuery || searchable.includes(normalizedQuery));
     })
     .sort((a, b) => {
       if (state.sort === 'title') return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
@@ -123,6 +190,16 @@ function applyFilters() {
       return state.sort === 'oldest' ? aTime - bTime : bTime - aTime;
     });
   renderGallery();
+}
+
+function displayTags(item) {
+  const structured = [
+    ...item.theme.map((value) => labelFor('theme', value)),
+    ...item.scene.map((value) => labelFor('scene', value)),
+    ...item.palette.map((value) => labelFor('palette', value)),
+    ...item.composition.map((value) => labelFor('composition', value)),
+  ];
+  return [...new Set([...structured, ...item.tags].filter((tag) => tag && tag !== item.character))];
 }
 
 function renderGallery() {
@@ -160,13 +237,13 @@ function renderGallery() {
     });
 
     title.textContent = item.title;
-    category.textContent = item.category;
+    category.textContent = describeImage(item);
     imageButton.setAttribute('aria-label', `查看 ${item.title}`);
     imageButton.addEventListener('click', () => openLightbox(index));
     syncFavoriteButton(favorite, item);
     favorite.addEventListener('click', () => toggleFavorite(item.id));
 
-    item.tags.slice(0, 3).forEach((tag) => {
+    displayTags(item).slice(0, 4).forEach((tag) => {
       const tagElement = document.createElement('span');
       tagElement.className = 'tag';
       tagElement.textContent = `#${tag}`;
@@ -175,18 +252,17 @@ function renderGallery() {
     elements.grid.append(fragment);
   });
 
-  const hasFilters = state.activeCategory !== '全部' || state.query || state.favoritesOnly;
+  const hasFacetFilters = filterDimensions.some((dimension) => state.filters[dimension] !== ALL);
+  const hasFilters = state.activeCharacter !== ALL || hasFacetFilters || state.query || state.favoritesOnly;
   elements.clearFilters.hidden = !hasFilters;
-  elements.resultText.textContent = state.images.length
-    ? `显示 ${state.visibleImages.length} / ${state.images.length} 张作品`
-    : '尚未添加图片';
+  elements.resultText.textContent = state.images.length ? `显示 ${state.visibleImages.length} / ${state.images.length} 张作品` : '尚未添加图片';
   const isEmpty = state.visibleImages.length === 0;
   elements.emptyState.hidden = !isEmpty;
   elements.grid.hidden = isEmpty;
 
   if (isEmpty && state.images.length) {
     elements.emptyTitle.textContent = '没有找到匹配的作品';
-    elements.emptyDescription.textContent = '尝试更换关键词、分类或关闭“只看收藏”。';
+    elements.emptyDescription.textContent = '尝试更换关键词、人物、主题或其他筛选条件。';
   } else if (isEmpty) {
     elements.emptyTitle.textContent = '画廊还是空的';
     elements.emptyDescription.innerHTML = '把图片放入 <code>images/</code> 文件夹并推送，网站会自动生成索引。';
@@ -222,8 +298,13 @@ function renderLightbox() {
   elements.lightboxImage.src = encodeURI(item.path);
   elements.lightboxImage.alt = item.title;
   elements.lightboxTitle.textContent = item.title;
-  elements.lightboxCategory.textContent = item.category;
-  elements.lightboxDescription.textContent = item.description || item.tags.map((tag) => `#${tag}`).join(' ');
+  const meta = [
+    describeImage(item),
+    labelFor('assetType', item.assetType),
+    ...item.composition.map((value) => labelFor('composition', value)),
+  ];
+  elements.lightboxCategory.textContent = [...new Set(meta.filter(Boolean))].join(' · ');
+  elements.lightboxDescription.textContent = item.description || displayTags(item).map((tag) => `#${tag}`).join(' ');
   elements.downloadImage.href = encodeURI(item.path);
   elements.downloadImage.download = item.path.split('/').pop() || item.title;
   elements.previousImage.hidden = state.visibleImages.length < 2;
@@ -251,12 +332,14 @@ function closeLightbox() {
 }
 
 function clearFilters() {
-  state.activeCategory = '全部';
+  state.activeCharacter = ALL;
   state.query = '';
   state.favoritesOnly = false;
+  filterDimensions.forEach((dimension) => { state.filters[dimension] = ALL; });
   elements.search.value = '';
   elements.favoritesOnly.setAttribute('aria-pressed', 'false');
-  renderCategories();
+  renderCharacters();
+  renderFacetFilters();
   applyFilters();
 }
 
@@ -274,6 +357,12 @@ function toggleTheme() {
 
 elements.search.addEventListener('input', (event) => { state.query = event.target.value; applyFilters(); });
 elements.sort.addEventListener('change', (event) => { state.sort = event.target.value; applyFilters(); });
+filterDimensions.forEach((dimension) => {
+  elements.facetFilters[dimension]?.addEventListener('change', (event) => {
+    state.filters[dimension] = event.target.value;
+    applyFilters();
+  });
+});
 elements.favoritesOnly.addEventListener('click', () => {
   state.favoritesOnly = !state.favoritesOnly;
   elements.favoritesOnly.setAttribute('aria-pressed', String(state.favoritesOnly));
