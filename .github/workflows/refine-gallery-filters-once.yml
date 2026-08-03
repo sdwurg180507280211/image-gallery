@@ -1,0 +1,388 @@
+name: Refine gallery filters once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/refine-gallery-filters-once.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refine-gallery-filters
+  cancel-in-progress: false
+
+jobs:
+  refine:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Refine filter layout and interactions
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          function replaceOnce(file, before, after) {
+            let source = fs.readFileSync(file, 'utf8');
+            if (!source.includes(before)) throw new Error(`${file}: expected block not found`);
+            source = source.replace(before, after);
+            fs.writeFileSync(file, source);
+          }
+
+          replaceOnce('index.html',
+`          <label class="select-wrap">
+            <span class="sr-only">排序方式</span>
+            <select id="sortSelect">
+              <option value="newest">最新优先</option>
+              <option value="oldest">最早优先</option>
+              <option value="title">标题排序</option>
+            </select>
+          </label>`,
+`          <label class="select-wrap sort-control">
+            <span class="sort-label">排序</span>
+            <select id="sortSelect" aria-label="排序方式">
+              <option value="newest">最新优先</option>
+              <option value="oldest">最早优先</option>
+              <option value="title">标题排序</option>
+            </select>
+          </label>`);
+
+          replaceOnce('index.html',
+`      <div class="facet-grid" aria-label="多维筛选">
+        <label class="facet-control">
+          <span>主题</span>
+          <select id="themeFilter" data-label="主题"><option value="全部">全部主题</option></select>
+        </label>
+        <label class="facet-control">
+          <span>场景</span>
+          <select id="sceneFilter" data-label="场景"><option value="全部">全部场景</option></select>
+        </label>
+        <label class="facet-control">
+          <span>配色</span>
+          <select id="paletteFilter" data-label="配色"><option value="全部">全部配色</option></select>
+        </label>
+        <label class="facet-control">
+          <span>构图</span>
+          <select id="compositionFilter" data-label="构图"><option value="全部">全部构图</option></select>
+        </label>
+        <label class="facet-control">
+          <span>资产类型</span>
+          <select id="assetTypeFilter" data-label="类型"><option value="全部">全部类型</option></select>
+        </label>
+      </div>`,
+`      <div class="filter-heading">
+        <div>
+          <p class="filter-label">内容筛选</p>
+          <p class="filter-hint">先按主题、场景和配色缩小范围</p>
+        </div>
+        <button class="advanced-toggle" id="advancedToggle" type="button" aria-expanded="false" aria-controls="advancedFilters">
+          更多筛选 <span id="advancedCount" hidden>0</span><span class="toggle-chevron" aria-hidden="true">⌄</span>
+        </button>
+      </div>
+
+      <div class="facet-grid primary-facets" aria-label="主要筛选">
+        <label class="facet-control">
+          <span>✦ 主题</span>
+          <select id="themeFilter" data-label="主题"><option value="全部">全部主题</option></select>
+        </label>
+        <label class="facet-control">
+          <span>◇ 场景</span>
+          <select id="sceneFilter" data-label="场景"><option value="全部">全部场景</option></select>
+        </label>
+        <label class="facet-control">
+          <span>◐ 配色</span>
+          <select id="paletteFilter" data-label="配色"><option value="全部">全部配色</option></select>
+        </label>
+      </div>
+
+      <div class="advanced-filters" id="advancedFilters" hidden>
+        <div class="facet-grid secondary-facets" aria-label="更多筛选">
+          <label class="facet-control">
+            <span>▣ 构图</span>
+            <select id="compositionFilter" data-label="构图"><option value="全部">全部构图</option></select>
+          </label>
+          <label class="facet-control">
+            <span>◫ 资产类型</span>
+            <select id="assetTypeFilter" data-label="类型"><option value="全部">全部类型</option></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="active-filter-row" id="activeFilters" aria-label="已选筛选条件" hidden></div>`);
+
+          replaceOnce('assets/app.js',
+`  favoritesOnly: false,
+  activeIndex: -1,`,
+`  favoritesOnly: false,
+  advancedOpen: false,
+  activeIndex: -1,`);
+
+          replaceOnce('assets/app.js',
+`  favoritesOnly: document.querySelector('#favoritesOnly'),
+  clearFilters: document.querySelector('#clearFilters'),`,
+`  favoritesOnly: document.querySelector('#favoritesOnly'),
+  advancedToggle: document.querySelector('#advancedToggle'),
+  advancedCount: document.querySelector('#advancedCount'),
+  advancedFilters: document.querySelector('#advancedFilters'),
+  activeFilters: document.querySelector('#activeFilters'),
+  clearFilters: document.querySelector('#clearFilters'),`);
+
+          replaceOnce('assets/app.js',
+`function matchesFacet(item, dimension) {
+  const selected = state.filters[dimension];
+  return selected === ALL || dimensionValues(item, dimension).includes(selected);
+}
+
+function applyFilters() {`,
+`function matchesFacet(item, dimension) {
+  const selected = state.filters[dimension];
+  return selected === ALL || dimensionValues(item, dimension).includes(selected);
+}
+
+function clearFacet(dimension) {
+  state.filters[dimension] = ALL;
+  const select = elements.facetFilters[dimension];
+  if (select) select.value = ALL;
+  applyFilters();
+}
+
+function addFilterChip(label, onRemove) {
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = 'active-filter-chip';
+  chip.innerHTML = `<span>${label}</span><b aria-hidden="true">×</b>`;
+  chip.setAttribute('aria-label', `移除筛选：${label}`);
+  chip.addEventListener('click', onRemove);
+  elements.activeFilters.append(chip);
+}
+
+function syncFilterInterface() {
+  const advancedDimensions = ['composition', 'assetType'];
+  const advancedCount = advancedDimensions.filter((dimension) => state.filters[dimension] !== ALL).length;
+  const hasAdvancedSelection = advancedCount > 0;
+  if (hasAdvancedSelection) state.advancedOpen = true;
+
+  elements.advancedFilters.hidden = !state.advancedOpen;
+  elements.advancedToggle.setAttribute('aria-expanded', String(state.advancedOpen));
+  elements.advancedToggle.classList.toggle('active', state.advancedOpen || hasAdvancedSelection);
+  elements.advancedCount.hidden = advancedCount === 0;
+  elements.advancedCount.textContent = String(advancedCount);
+
+  for (const dimension of filterDimensions) {
+    const select = elements.facetFilters[dimension];
+    select?.closest('.facet-control')?.classList.toggle('has-value', state.filters[dimension] !== ALL);
+  }
+
+  elements.activeFilters.replaceChildren();
+  if (state.activeCharacter !== ALL) {
+    addFilterChip(`人物：${state.activeCharacter}`, () => {
+      state.activeCharacter = ALL;
+      renderCharacters();
+      applyFilters();
+    });
+  }
+  for (const dimension of filterDimensions) {
+    const value = state.filters[dimension];
+    if (value === ALL) continue;
+    const label = elements.facetFilters[dimension]?.dataset.label || dimension;
+    addFilterChip(`${label}：${labelFor(dimension, value)}`, () => clearFacet(dimension));
+  }
+  if (state.favoritesOnly) {
+    addFilterChip('只看收藏', () => {
+      state.favoritesOnly = false;
+      elements.favoritesOnly.setAttribute('aria-pressed', 'false');
+      applyFilters();
+    });
+  }
+  elements.activeFilters.hidden = elements.activeFilters.childElementCount === 0;
+}
+
+function applyFilters() {`);
+
+          replaceOnce('assets/app.js',
+`function applyFilters() {
+  const normalizedQuery = state.query.trim().toLocaleLowerCase('zh-CN');`,
+`function applyFilters() {
+  syncFilterInterface();
+  const normalizedQuery = state.query.trim().toLocaleLowerCase('zh-CN');`);
+
+          replaceOnce('assets/app.js',
+`  state.favoritesOnly = false;
+  filterDimensions.forEach((dimension) => { state.filters[dimension] = ALL; });`,
+`  state.favoritesOnly = false;
+  state.advancedOpen = false;
+  filterDimensions.forEach((dimension) => { state.filters[dimension] = ALL; });`);
+
+          replaceOnce('assets/app.js',
+`elements.favoritesOnly.addEventListener('click', () => {
+  state.favoritesOnly = !state.favoritesOnly;
+  elements.favoritesOnly.setAttribute('aria-pressed', String(state.favoritesOnly));
+  applyFilters();
+});
+elements.clearFilters.addEventListener('click', clearFilters);`,
+`elements.favoritesOnly.addEventListener('click', () => {
+  state.favoritesOnly = !state.favoritesOnly;
+  elements.favoritesOnly.setAttribute('aria-pressed', String(state.favoritesOnly));
+  applyFilters();
+});
+elements.advancedToggle.addEventListener('click', () => {
+  state.advancedOpen = !state.advancedOpen;
+  syncFilterInterface();
+});
+elements.clearFilters.addEventListener('click', clearFilters);`);
+
+          fs.appendFileSync('assets/v2.css', `
+
+/* Refined gallery filters */
+.filter-heading {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+.filter-heading .filter-label { margin-bottom: 3px; font-size: 12px; }
+.filter-hint { margin: 0; color: var(--muted); font-size: 12px; }
+.primary-facets { grid-template-columns: repeat(3, minmax(160px, 1fr)); margin-top: 10px; }
+.secondary-facets { grid-template-columns: repeat(2, minmax(170px, 1fr)); margin: 10px 0 0; }
+.advanced-filters {
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface-solid) 72%, transparent);
+}
+.advanced-toggle {
+  display: inline-flex;
+  height: 38px;
+  padding: 0 12px;
+  gap: 7px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--surface-solid);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.advanced-toggle:hover, .advanced-toggle.active { color: var(--text); border-color: var(--line-strong); background: var(--accent-soft); }
+.advanced-toggle #advancedCount {
+  display: grid;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--bg);
+  background: var(--text);
+  font-size: 11px;
+  font-weight: 800;
+}
+.toggle-chevron { transition: transform 160ms ease; }
+.advanced-toggle[aria-expanded="true"] .toggle-chevron { transform: rotate(180deg); }
+.facet-control > span { font-size: 12px; font-weight: 680; letter-spacing: .02em; }
+.facet-control { position: relative; }
+.facet-control select, .select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 17px) 18px, calc(100% - 12px) 18px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.facet-control select { transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease; }
+.facet-control.has-value select {
+  border-color: color-mix(in srgb, var(--accent) 72%, var(--line));
+  background-color: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.facet-control.has-value > span { color: var(--accent-2); }
+.sort-control {
+  display: inline-flex;
+  height: 42px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-solid);
+}
+.sort-control .sort-label { padding-left: 12px; color: var(--muted); font-size: 12px; }
+.sort-control select { height: 40px; border: 0; background-color: transparent; }
+.active-filter-row {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 4px;
+  padding: 10px 0 2px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.active-filter-chip {
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 32px;
+  padding: 0 8px 0 11px;
+  gap: 7px;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 58%, var(--line));
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--accent-soft);
+  cursor: pointer;
+  font-size: 12px;
+}
+.active-filter-chip:hover { border-color: var(--accent); }
+.active-filter-chip b { color: var(--accent-2); font-size: 15px; line-height: 1; }
+
+@media (max-width: 760px) {
+  .filter-heading { align-items: center; }
+  .filter-hint { display: none; }
+  .primary-facets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .primary-facets .facet-control:last-child { grid-column: 1 / -1; }
+  .secondary-facets { grid-template-columns: 1fr 1fr; }
+  .sort-control .sort-label { display: none; }
+}
+@media (max-width: 520px) {
+  .toolbar-actions { width: 100%; justify-content: space-between; }
+  .sort-control { flex: 1; }
+  .sort-control select { width: 100%; }
+  .primary-facets, .secondary-facets { grid-template-columns: 1fr; }
+  .primary-facets .facet-control:last-child { grid-column: auto; }
+  .advanced-filters { padding: 10px; }
+  .facet-control select { height: 46px; }
+}
+`);
+          NODE
+
+      - name: Validate and build
+        run: |
+          npm install --no-audit --no-fund
+          node --check assets/app.js
+          npm run build
+          node <<'NODE'
+          const fs = require('node:fs');
+          const gallery = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          const report = JSON.parse(fs.readFileSync('data/validation-report.json', 'utf8'));
+          if (gallery.count !== 165) throw new Error(`Expected 165 images, found ${gallery.count}`);
+          if (report.summary.errors !== 0 || report.summary.warnings !== 0) throw new Error('Metadata validation failed.');
+          for (const token of ['advancedToggle', 'activeFilters', 'sort-label']) {
+            if (!fs.readFileSync('index.html', 'utf8').includes(token)) throw new Error(`Missing UI token: ${token}`);
+          }
+          NODE
+
+      - name: Commit and self-clean
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/refine-gallery-filters-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/app.js assets/v2.css data/gallery.json data/validation-report.json .github/workflows/refine-gallery-filters-once.yml
+          git commit -m "feat(gallery): refine filter hierarchy and states"
+          git push origin HEAD:main
