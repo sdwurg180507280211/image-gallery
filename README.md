@@ -1,21 +1,16 @@
 # Image Gallery
 
-一个专门用于整理、浏览和展示生成式人物模型图片的通用静态网站。项目名称和界面不绑定任何具体角色，可以长期存放不同人物、主题与系列的作品。
+一个用于整理、浏览和展示生成式人物作品的静态图库。网站由 GitHub Pages 托管，GitHub Actions 自动生成图片索引、640px WebP 缩略图和发布目录。
 
-## 功能
+## 当前能力
 
-- 响应式图片网格，适配电脑、平板和手机
-- 按第一层图片文件夹自动分类
-- 按更深层文件夹自动生成标签
-- 标题、分类、标签和描述全文搜索
-- 最新、最早和标题排序
-- 浏览器本地收藏
-- 明暗主题切换
-- 全屏灯箱、上一张/下一张和键盘导航
-- 原图下载
-- 自动生成 640px WebP 缩略图，首页不直接加载高清原图
-- 缩略图按图片内容哈希增量生成，只处理新增或修改过的图片
-- GitHub Actions 自动扫描图片、生成索引并部署 GitHub Pages
+- 原图与缩略图分离：首页加载 WebP，灯箱和下载使用原图
+- 按原图 SHA-256 增量复用缩略图
+- 人物、主题、场景、配色、构图和资产类型多维筛选
+- 标题、描述、动作、表情、人物特征和标签全文搜索
+- 本地收藏、明暗主题、灯箱和键盘切图
+- 元数据冲突检查与 `data/validation-report.json` 报告
+- GitHub Actions 自动构建并发布 `dist/`
 
 ## 在线地址
 
@@ -23,71 +18,71 @@
 https://sdwurg180507280211.github.io/image-gallery/
 ```
 
-## 上传图片
+仓库首次启用 Pages 时，在 **Settings → Pages** 将 Source 设为 **GitHub Actions**。
 
-直接把图片放进 `images/`。推荐按“角色 / 主题”组织：
+## 图片目录
+
+原图放入 `images/`，建议第一层使用人物 slug，第二层只使用主要内容主题：
 
 ```text
 images/
-├── character-a/
-│   ├── portrait/
-│   │   ├── close-up-01.png
-│   │   └── close-up-02.webp
-│   └── action/
-│       └── battle-pose-01.jpg
-└── character-b/
-    └── casual-01.png
+└── red-robed-immortal/
+    ├── portrait/
+    ├── battle/
+    ├── magic/
+    ├── celestial/
+    └── character-sheet/
 ```
 
-第一层文件夹会显示为分类，更深层文件夹会显示为标签。支持：
+场景、服装颜色和构图主要记录在同名 JSON 中，不再无限扩展目录层级。
+
+## 元数据 V2
+
+同名文件示例：
 
 ```text
-png / jpg / jpeg / webp / gif / avif
-```
-
-图片推送到 `main` 分支后，工作流会自动执行：
-
-1. 扫描 `images/` 中的图片。
-2. 根据图片内容哈希检查 Actions 缩略图缓存。
-3. 只为新增或变化图片生成 640px WebP 缩略图。
-4. 生成包含原图与缩略图地址的 `data/gallery.json`。
-5. 构建到独立的 `dist/` 目录并发布 GitHub Pages。
-
-第一次上传 130 张图片会生成 130 张缩略图；以后新增 10 张通常只需要再生成 10 张。缩略图属于构建缓存和 Pages 发布产物，不会提交进 Git 历史。
-
-详细的图片说明和同名 JSON 元数据写法见 [`images/README.md`](./images/README.md)。
-
-## 自定义图片信息
-
-图片旁可放置同名 JSON，例如：
-
-```text
-images/character-a/portrait/rain-night.png
-images/character-a/portrait/rain-night.json
+images/red-robed-immortal/magic/moon-summoning.png
+images/red-robed-immortal/magic/moon-summoning.json
 ```
 
 ```json
 {
-  "title": "雨夜回眸",
-  "description": "雨夜霓虹环境下的角色上半身特写。",
-  "category": "角色 A",
-  "tags": ["雨夜", "特写", "霓虹"],
-  "createdAt": "2026-07-24T18:00:00+08:00",
-  "featured": true,
-  "width": 2048,
-  "height": 3072
+  "schemaVersion": 2,
+  "id": "固定图片 ID",
+  "title": "月宫召唤",
+  "character": "红裳仙姬",
+  "theme": ["magic"],
+  "scene": ["moon-night", "palace"],
+  "palette": ["black-gold"],
+  "composition": ["single-image", "close-up"],
+  "assetType": "artwork",
+  "actions": ["魔法召唤", "直视镜头"],
+  "expressions": ["清冷", "妩媚"],
+  "confirmedTraits": ["成年东方女性", "黑色长发"],
+  "tags": ["互动视线"],
+  "createdAt": "2026-08-03T00:00:00Z",
+  "featured": true
 }
 ```
 
-所有字段均可省略。未提供 JSON 时，会根据文件夹、文件名和图片本身自动生成展示信息。
+完整规范见 [`docs/metadata-v2.md`](./docs/metadata-v2.md)，允许值见 [`data/taxonomy-v2.json`](./data/taxonomy-v2.json)。
 
-## 本地预览
+## 固定现有图片 ID
+
+移动已有图片前先把当前 ID 写入同名 JSON，避免收藏失效：
+
+```bash
+npm run freeze-ids
+npm run freeze-ids -- --write
+```
+
+第一条是预演，第二条才实际写入。执行结果记录在 `data/id-freeze-manifest.json`。
+
+## 构建与预览
 
 需要 Node.js 20 或更高版本：
 
 ```bash
-git clone https://github.com/sdwurg180507280211/image-gallery.git
-cd image-gallery
 npm install
 npm run build
 npm run serve
@@ -99,23 +94,33 @@ npm run serve
 http://localhost:4173
 ```
 
-## 项目结构
+构建产物：
 
 ```text
-image-gallery/
-├── .github/workflows/pages.yml   # 缓存缩略图并部署 Pages
-├── assets/
-│   ├── app.js                    # 缩略图加载、搜索、收藏和灯箱
-│   └── styles.css
-├── data/gallery.json             # 图片索引
-├── images/                       # 高清原图与可选同名元数据
-├── scripts/
-│   ├── generate-gallery.mjs      # 增量生成缩略图与索引
-│   └── build-site.mjs            # 构建独立 dist 发布目录
+dist/
 ├── index.html
-└── package.json
+├── assets/
+├── data/
+├── images/
+└── generated/thumbnails/
 ```
 
-## GitHub Pages
+## 图片生成窗口协作
 
-若仓库第一次使用 Pages，请在仓库的 **Settings → Pages → Build and deployment** 中把 Source 设为 **GitHub Actions**。之后每次上传图片都会自动更新网站。
+每个仍保留原始图片资产和视觉上下文的生成窗口负责：
+
+1. 逐张查看实际画面。
+2. 排除用户参考图、截图、失败图和重复图。
+3. 按 V2 字段分类，不确定字段留空。
+4. 保留原始 `file_id`、生成顺序、时间和 SHA-256。
+5. 在 `data/imports/` 提交窗口级 manifest。
+
+图库管理窗口负责：
+
+- 维护全局分类词表
+- 合并 manifest
+- 解决跨窗口冲突和重复
+- 修改前端、构建与校验程序
+- 在 ID 固定后执行最终目录迁移
+
+manifest 格式见 [`data/imports/README.md`](./data/imports/README.md)。
