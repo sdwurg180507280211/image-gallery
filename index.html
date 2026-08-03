@@ -50,9 +50,9 @@
           <kbd>/</kbd>
         </label>
         <div class="toolbar-actions">
-          <label class="select-wrap">
-            <span class="sr-only">排序方式</span>
-            <select id="sortSelect">
+          <label class="select-wrap sort-control">
+            <span class="sort-label">排序</span>
+            <select id="sortSelect" aria-label="排序方式">
               <option value="newest">最新优先</option>
               <option value="oldest">最早优先</option>
               <option value="title">标题排序</option>
@@ -67,28 +67,45 @@
         <div class="category-row" id="categoryFilters" aria-label="人物筛选"></div>
       </div>
 
-      <div class="facet-grid" aria-label="多维筛选">
+      <div class="filter-heading">
+        <div>
+          <p class="filter-label">内容筛选</p>
+          <p class="filter-hint">先按主题、场景和配色缩小范围</p>
+        </div>
+        <button class="advanced-toggle" id="advancedToggle" type="button" aria-expanded="false" aria-controls="advancedFilters">
+          更多筛选 <span id="advancedCount" hidden>0</span><span class="toggle-chevron" aria-hidden="true">⌄</span>
+        </button>
+      </div>
+
+      <div class="facet-grid primary-facets" aria-label="主要筛选">
         <label class="facet-control">
-          <span>主题</span>
+          <span>✦ 主题</span>
           <select id="themeFilter" data-label="主题"><option value="全部">全部主题</option></select>
         </label>
         <label class="facet-control">
-          <span>场景</span>
+          <span>◇ 场景</span>
           <select id="sceneFilter" data-label="场景"><option value="全部">全部场景</option></select>
         </label>
         <label class="facet-control">
-          <span>配色</span>
+          <span>◐ 配色</span>
           <select id="paletteFilter" data-label="配色"><option value="全部">全部配色</option></select>
         </label>
-        <label class="facet-control">
-          <span>构图</span>
-          <select id="compositionFilter" data-label="构图"><option value="全部">全部构图</option></select>
-        </label>
-        <label class="facet-control">
-          <span>资产类型</span>
-          <select id="assetTypeFilter" data-label="类型"><option value="全部">全部类型</option></select>
-        </label>
       </div>
+
+      <div class="advanced-filters" id="advancedFilters" hidden>
+        <div class="facet-grid secondary-facets" aria-label="更多筛选">
+          <label class="facet-control">
+            <span>▣ 构图</span>
+            <select id="compositionFilter" data-label="构图"><option value="全部">全部构图</option></select>
+          </label>
+          <label class="facet-control">
+            <span>◫ 资产类型</span>
+            <select id="assetTypeFilter" data-label="类型"><option value="全部">全部类型</option></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="active-filter-row" id="activeFilters" aria-label="已选筛选条件" hidden></div>
 
       <div class="result-meta">
         <p id="resultText">正在读取图片索引…</p>
