@@ -32,9 +32,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .cache/thumbnails
-          key: gallery-thumbnails-v1-${{ hashFiles('images/**/*.png', 'images/**/*.jpg', 'images/**/*.jpeg', 'images/**/*.webp', 'images/**/*.gif', 'images/**/*.avif') }}
+          key: gallery-thumbnails-v2-${{ hashFiles('images/**/*.png', 'images/**/*.jpg', 'images/**/*.jpeg', 'images/**/*.webp', 'images/**/*.gif', 'images/**/*.avif') }}
           restore-keys: |
-            gallery-thumbnails-v1-
+            gallery-thumbnails-v2-
 
       - name: Install image tooling
         run: npm install --no-audit --no-fund
