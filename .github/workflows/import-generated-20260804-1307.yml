@@ -1,0 +1,109 @@
+name: Import generated spring garden images 20260804-1307
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-generated-20260804-1307.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: image-gallery-import
+  cancel-in-progress: false
+
+jobs:
+  import-generated-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Download images and write Metadata V2
+        env:
+          IMPORT_MANIFEST_GZIP_BASE64: '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'
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import { gunzipSync } from 'node:zlib';
+          import { mkdirSync, statSync, writeFileSync } from 'node:fs';
+          import path from 'node:path';
+
+          const json = gunzipSync(Buffer.from(process.env.IMPORT_MANIFEST_GZIP_BASE64, 'base64')).toString('utf8');
+          const manifest = JSON.parse(json);
+          for (const item of manifest) {
+            mkdirSync(path.dirname(item.imagePath), { recursive: true });
+            execFileSync('curl', [
+              '-L', '--fail', '--silent', '--show-error',
+              '--retry', '3', '--retry-delay', '2', '--retry-all-errors',
+              item.url, '-o', item.imagePath,
+            ], { stdio: 'inherit' });
+
+            const size = statSync(item.imagePath).size;
+            const mime = execFileSync('file', ['-b', '--mime-type', item.imagePath], { encoding: 'utf8' }).trim();
+            if (!mime.startsWith('image/')) throw new Error(`下载结果不是图片：${item.imagePath}，MIME=${mime}`);
+            if (size < 1024) throw new Error(`图片文件过小：${item.imagePath}，SIZE=${size}`);
+
+            const sidecarPath = item.imagePath.replace(/\.[^.]+$/, '.json');
+            writeFileSync(sidecarPath, `${JSON.stringify(item.metadata, null, 2)}\n`, 'utf8');
+          }
+          console.log(`已下载并写入 ${manifest.length} 张图片及 Metadata V2。`);
+          NODE
+
+      - name: Generate gallery data
+        run: npm run generate
+
+      - name: Check validation report
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const report = JSON.parse(readFileSync('data/validation-report.json', 'utf8'));
+          const errors = Number(report.summary?.errors ?? report.errors ?? 0);
+          const warnings = Number(report.summary?.warnings ?? report.warnings ?? 0);
+          console.log(`Metadata V2 validation: errors=${errors}, warnings=${warnings}`);
+          if (errors > 0) process.exit(1);
+          NODE
+
+      - name: Remove temporary workflow
+        run: rm -f '.github/workflows/import-generated-20260804-1307.yml'
+
+      - name: Commit and push imported gallery
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "没有可提交内容。"
+            exit 0
+          fi
+
+          git commit -m "feat(gallery): import generated images from current conversation"
+          git pull --rebase origin main
+
+          npm run generate
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const report = JSON.parse(readFileSync('data/validation-report.json', 'utf8'));
+          const errors = Number(report.summary?.errors ?? report.errors ?? 0);
+          if (errors > 0) process.exit(1);
+          NODE
+
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
+
+          git push origin HEAD:main
