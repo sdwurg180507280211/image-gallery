@@ -1,0 +1,80 @@
+name: Force Pages refresh 20260804
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/force-pages-refresh-20260804.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: force-pages-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Add cache-busting version and verify gallery
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const version = '20260804-1337';
+
+          let html = fs.readFileSync('index.html', 'utf8');
+          html = html.replace(/\.\/assets\/app\.js(?:\?v=[^"']+)?/g, `./assets/app.js?v=${version}`);
+          html = html.replace(/\.\/assets\/delete-admin\.js(?:\?v=[^"']+)?/g, `./assets/delete-admin.js?v=${version}`);
+          fs.writeFileSync('index.html', html);
+
+          for (const file of ['assets/app.js', 'assets/delete-admin.js']) {
+            let source = fs.readFileSync(file, 'utf8');
+            source = source.replace(/fetch\('\.\/data\/gallery\.json(?:\?v=[^']+)?'/g, `fetch('./data/gallery.json?v=${version}'`);
+            fs.writeFileSync(file, source);
+          }
+
+          const gallery = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          const imported = gallery.images.filter((item) => item.character === '金饰花簪东方美人');
+          if (gallery.count !== 191 || gallery.images.length !== 191) {
+            throw new Error(`图库总数错误：${gallery.count}/${gallery.images.length}，预期 191`);
+          }
+          if (imported.length !== 26) {
+            throw new Error(`金饰花簪东方美人数量错误：${imported.length}，预期 26`);
+          }
+          console.log('源索引验证通过：总数 191，金饰花簪东方美人 26。');
+          NODE
+
+      - name: Build and verify Pages artifact
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+          node <<'NODE'
+          const fs = require('node:fs');
+          const gallery = JSON.parse(fs.readFileSync('dist/data/gallery.json', 'utf8'));
+          const imported = gallery.images.filter((item) => item.character === '金饰花簪东方美人');
+          if (gallery.count !== 191 || imported.length !== 26) {
+            throw new Error(`Pages 构建产物错误：总数 ${gallery.count}，目标人物 ${imported.length}`);
+          }
+          const html = fs.readFileSync('dist/index.html', 'utf8');
+          if (!html.includes('app.js?v=20260804-1337')) throw new Error('首页未写入缓存版本号');
+          console.log('Pages 构建产物验证通过。');
+          NODE
+
+      - name: Commit refresh and self-clean
+        run: |
+          rm -f .github/workflows/force-pages-refresh-20260804.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix(pages): refresh gallery index cache"
+          git push origin HEAD:main
