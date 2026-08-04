@@ -360,7 +360,7 @@ function injectAdminInterface() {
 }
 
 async function loadAdminGallery() {
-  const response = await fetch('./data/gallery.json', { cache: 'no-store' });
+  const response = await fetch('./data/gallery.json?v=20260804-1337', { cache: 'no-store' });
   if (!response.ok) throw new Error(`无法读取图库索引：${response.status}`);
   const payload = await response.json();
   admin.images = Array.isArray(payload) ? payload : payload.images || [];

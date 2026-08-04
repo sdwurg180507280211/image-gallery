@@ -102,7 +102,7 @@ function describeImage(item) {
 
 async function loadGallery() {
   try {
-    const response = await fetch('./data/gallery.json', { cache: 'no-store' });
+    const response = await fetch('./data/gallery.json?v=20260804-1337', { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const payload = await response.json();
     const records = Array.isArray(payload) ? payload : payload.images;

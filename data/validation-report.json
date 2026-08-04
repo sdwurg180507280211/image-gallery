@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-04T05:16:10.416Z",
+  "generatedAt": "2026-08-04T05:40:16.449Z",
   "summary": {
     "images": 191,
     "errors": 0,
@@ -11,12 +11,6 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/ancient-beauty-in-spring-flowerlight-20260804-1307-015.png",
-      "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
-    },
-    {
-      "severity": "info",
-      "code": "id-not-frozen-in-sidecar",
       "path": "images/golden-floral-eastern-beauty/spring-garden/blossoming-spring-courtyard-20260804-1307-001.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
@@ -24,6 +18,12 @@
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
       "path": "images/golden-floral-eastern-beauty/spring-garden/ancient-beauty-in-blooming-courtyard-20260804-1307-004.png",
+      "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
+    },
+    {
+      "severity": "info",
+      "code": "id-not-frozen-in-sidecar",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/ancient-beauty-in-spring-flowerlight-20260804-1307-015.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
@@ -41,13 +41,13 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/eastern-beauty-among-spring-blooms-20260804-1307-013.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/floral-garden-gentle-smile-20260804-1307-023.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/floral-garden-gentle-smile-20260804-1307-023.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/eastern-beauty-among-spring-blooms-20260804-1307-013.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
@@ -59,13 +59,13 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/gentle-petal-offering-20260804-1307-017.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/gentle-gaze-among-blossoms-20260804-1307-003.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/gentle-gaze-among-blossoms-20260804-1307-003.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/gentle-petal-offering-20260804-1307-017.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
@@ -83,13 +83,13 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/graceful-beauty-in-peony-shadows-20260804-1307-011.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/golden-ornament-immortal-in-cherry-court-20260804-1307-010.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/golden-ornament-immortal-in-cherry-court-20260804-1307-010.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/graceful-beauty-in-peony-shadows-20260804-1307-011.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
@@ -101,13 +101,13 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-maiden-in-spring-garden-20260804-1307-005.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-maiden-by-spring-fountain-20260804-1307-008.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-maiden-by-spring-fountain-20260804-1307-008.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-maiden-in-spring-garden-20260804-1307-005.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
@@ -125,7 +125,7 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/serene-flower-branch-portrait-20260804-1307-019.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/petal-bowl-spring-reverie-20260804-1307-025.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
@@ -137,13 +137,13 @@
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/petal-bowl-spring-reverie-20260804-1307-025.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/romantic-spring-garden-beauty-20260804-1307-020.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
       "severity": "info",
       "code": "id-not-frozen-in-sidecar",
-      "path": "images/golden-floral-eastern-beauty/spring-garden/romantic-spring-garden-beauty-20260804-1307-020.png",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/serene-flower-branch-portrait-20260804-1307-019.png",
       "message": "当前 ID 从旧索引继承；移动文件前应将 id 写入同名 JSON。"
     },
     {
