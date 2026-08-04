@@ -8,7 +8,7 @@
     "generate": "node scripts/generate-gallery.mjs",
     "validate": "node scripts/generate-gallery.mjs",
     "freeze-ids": "node scripts/freeze-metadata-ids.mjs",
-    "build": "npm run generate && node scripts/build-site.mjs",
+    "build": "npm run generate && node scripts/generate-landscape-thumbnails.mjs && node scripts/build-site.mjs",
     "serve": "python3 -m http.server 4173 --directory dist"
   },
   "dependencies": {
