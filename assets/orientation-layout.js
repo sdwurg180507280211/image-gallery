@@ -1,6 +1,6 @@
 const ORIENTATION_CLASSES = ['is-portrait', 'is-square', 'is-landscape', 'is-panorama'];
 const STYLE_ID = 'orientation-layout-styles';
-const GALLERY_URL = './data/gallery.json?v=20260804-1405';
+const GALLERY_URL = './data/gallery.json?v=20260804-1425';
 const SITE_ROOT = new URL('./', window.location.href).pathname;
 
 const recordsByAsset = new Map();
@@ -79,15 +79,15 @@ function applyResponsiveSource(image, record, orientation) {
   if (!record || !['landscape', 'panorama'].includes(orientation)) return;
 
   const thumbnail = normalizeAssetPath(record.thumbnail);
-  const original = normalizeAssetPath(record.path);
-  const originalWidth = Number(record.width) || Number(image.getAttribute('width')) || image.naturalWidth;
-  if (!thumbnail || !original || !(originalWidth > 640)) return;
+  const thumbnailLarge = normalizeAssetPath(record.thumbnailLarge);
+  const largeWidth = Number(record.thumbnailLargeWidth) || 0;
+  if (!thumbnail || !thumbnailLarge || !(largeWidth > 640)) return;
 
-  image.srcset = `${encodeURI(thumbnail)} 640w, ${encodeURI(original)} ${originalWidth}w`;
+  image.srcset = `${encodeURI(thumbnail)} 640w, ${encodeURI(thumbnailLarge)} ${largeWidth}w`;
   image.sizes = orientation === 'panorama'
     ? '(min-width: 1121px) calc(100vw - 96px), 100vw'
     : '(min-width: 1121px) 50vw, 100vw';
-  image.dataset.responsivePreview = 'true';
+  image.dataset.responsivePreview = 'thumbnail-only';
 }
 
 function classifyCard(card) {
@@ -133,7 +133,7 @@ async function loadGalleryRecords() {
       recordsByAsset.set(normalizeAssetPath(record.path), record);
     }
   } catch (error) {
-    console.warn('无法加载横图高清候选，继续使用普通缩略图：', error);
+    console.warn('无法加载横图高清缩略图，继续使用普通缩略图：', error);
   }
 }
 
