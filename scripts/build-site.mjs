@@ -25,6 +25,10 @@ async function main() {
     path.join(root, '.cache', 'thumbnails'),
     path.join(dist, 'generated', 'thumbnails'),
   );
+  await copyIfExists(
+    path.join(root, '.cache', 'landscape-thumbnails'),
+    path.join(dist, 'generated', 'landscape-thumbnails'),
+  );
 
   await writeFile(path.join(dist, '.nojekyll'), '', 'utf8');
   console.log('已生成 GitHub Pages 发布目录：dist/');
