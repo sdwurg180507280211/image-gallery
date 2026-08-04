@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T03:21:34.897Z",
-  "count": 165,
+  "generatedAt": "2026-08-04T05:16:10.416Z",
+  "count": 191,
   "thumbnail": {
     "width": 640,
     "format": "webp",
@@ -268,12 +268,222 @@
     ]
   },
   "validation": {
-    "images": 165,
+    "images": 191,
     "errors": 0,
     "warnings": 0,
-    "info": 0
+    "info": 26
   },
   "images": [
+    {
+      "id": "41ef5a6c4b10",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/blossoming-spring-courtyard-20260804-1307-001.png",
+      "thumbnail": "generated/thumbnails/c7491f430413342d9b1db1e1ed24a25b.webp",
+      "title": "繁花春庭中的古风佳人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻触花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻触花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": true,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "41ef5a6c4b10b5dbd431b9b6ec920aeb0961c8fe58e76c5cade46f6714832934",
+      "sourceFileId": "file_00000000364882118cd55fbabfed74e2",
+      "generationSequence": 1,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "21fb0eb80d95",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/eastern-beauty-among-spring-blooms-20260804-1307-013.png",
+      "thumbnail": "generated/thumbnails/42d2c6c39315f09443de119627144171.webp",
+      "title": "春日繁花中的东方美人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手持花朵",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手持花朵与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": true,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "21fb0eb80d95833319da81f6de1c1f8d7397b52db06e68bd43d9d810605e23cd",
+      "sourceFileId": "file_000000001f7481fabf07a0c4f0cda9c0",
+      "generationSequence": 13,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "782917e470a5",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-spring-garden-closeup-20260804-1307-026.png",
+      "thumbnail": "generated/thumbnails/8708b7c8449b1ae77ec1a47e82406cca.webp",
+      "title": "鎏金花园近景",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "双手持花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以双手持花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": true,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "782917e470a520310ff8cdd3445b78ce9db3ba0ba961cdcb1233cf10257fa0b0",
+      "sourceFileId": "file_0000000025008211909b25e4d727b60d",
+      "generationSequence": 26,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
     {
       "id": "9b4cb5c0d918",
       "path": "images/red-robed-immortal/snow/snowy-night-five-scenes.png",
@@ -3142,6 +3352,1612 @@
       "generationSequence": 1,
       "generatedAt": "2026-07-24T07:34:54.534Z",
       "sourceChat": "chat-137"
+    },
+    {
+      "id": "1d5787d4c10e",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/ancient-beauty-in-blooming-courtyard-20260804-1307-004.png",
+      "thumbnail": "generated/thumbnails/799b5eef12486695f754c1579aa05f24.webp",
+      "title": "繁花庭院中的古风美人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手捧花瓣",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手捧花瓣与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "1d5787d4c10e1347a49a3172fa9ceeeeacd46fb71274d561c55b3a3c5e253710",
+      "sourceFileId": "file_000000007a78820ea05f1703b8b3ba0b",
+      "generationSequence": 4,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "7826fd4aad9b",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/ancient-beauty-in-spring-flowerlight-20260804-1307-015.png",
+      "thumbnail": "generated/thumbnails/17dc1ccee154c3e9d8e7d875db6334f9.webp",
+      "title": "春日花影中的古风佳人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "花枝贴近脸侧",
+        "直视镜头"
+      ],
+      "expressions": [
+        "亲近浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以花枝贴近脸侧与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "7826fd4aad9b64bf609d255a49ab4bb15504c35465fd86f236895e37130becaf",
+      "sourceFileId": "file_00000000277081fa864aebe6c4a8ad6d",
+      "generationSequence": 15,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "c9e490bf296a",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/classical-beauty-in-spring-light-20260804-1307-002.png",
+      "thumbnail": "generated/thumbnails/1f9984c2ba3466eed92925e43ea2e921.webp",
+      "title": "春日花影中的古典美人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻抚花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻抚花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "c9e490bf296acff49373bab659869d0b4c4e39fc8bf1d748a0d069606850285b",
+      "sourceFileId": "file_00000000000c8206a7d276fce8fc3e6f",
+      "generationSequence": 2,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "e9a8d51373d1",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/dreamy-beauty-in-flowerlight-20260804-1307-012.png",
+      "thumbnail": "generated/thumbnails/83bfee47ae9ce0f1277343a310d727ee.webp",
+      "title": "花影流光中的绮梦佳人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻触垂花",
+        "直视镜头"
+      ],
+      "expressions": [
+        "梦幻浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻触垂花与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "e9a8d51373d1b15c5f1474784431538aeca320e3986044e48e477992526372d4",
+      "sourceFileId": "file_0000000040b8822f852a82fccce2e533",
+      "generationSequence": 12,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "87d0ebf2818f",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/elegant-maiden-in-cherry-garden-20260804-1307-016.png",
+      "thumbnail": "generated/thumbnails/15f65da1e208f77a95f36815d0bfca4c.webp",
+      "title": "樱花园中的古韵少女",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻拈花朵",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻拈花朵与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "87d0ebf2818f35d84b0755810dddfb5c04f636986945f20c69aaae91fa589b8b",
+      "sourceFileId": "file_00000000ee2c8211b62f6286ba5a3807",
+      "generationSequence": 16,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "fefe3362b6c9",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/floral-garden-gentle-smile-20260804-1307-023.png",
+      "thumbnail": "generated/thumbnails/512df8db5335480f6ad6dfc16bd135c6.webp",
+      "title": "春园花影浅笑",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手捧花瓣",
+        "直视镜头"
+      ],
+      "expressions": [
+        "浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手捧花瓣与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "fefe3362b6c93f48c9d9b8805f4dba4c250f5896c92a3807d3f4e83c7cb5f54e",
+      "sourceFileId": "file_0000000006fc81f8a768fc7a7a84a52a",
+      "generationSequence": 23,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "464d71a29e0b",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/gentle-gaze-among-blossoms-20260804-1307-003.png",
+      "thumbnail": "generated/thumbnails/e9a9e756661c89cf11e61ffe77546f4e.webp",
+      "title": "春日花枝间的温柔凝眸",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "花枝贴近脸侧",
+        "直视镜头"
+      ],
+      "expressions": [
+        "亲近浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以花枝贴近脸侧与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "464d71a29e0bce4762c2ae19554cae7efc44df6b988b67952f6b8c2a63c5a36b",
+      "sourceFileId": "file_0000000022f4820b88b8c348abd40987",
+      "generationSequence": 3,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "8b3c642974e9",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/gentle-petal-offering-20260804-1307-017.png",
+      "thumbnail": "generated/thumbnails/a23a616ca902d8d86117086b15d1a5d9.webp",
+      "title": "春庭花瓣轻赠",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手捧花瓣",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手捧花瓣与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "8b3c642974e98093785fa79ecf962e8e1642f30866becfb66c2f78e91a71df53",
+      "sourceFileId": "file_00000000d6d4820bb8849d4f7ef024c1",
+      "generationSequence": 17,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "c02d51b9d062",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/gilt-flower-dress-under-cherry-arch-20260804-1307-007.png",
+      "thumbnail": "generated/thumbnails/26654f3e4378afa08870c9c5c0f81c5e.webp",
+      "title": "樱花拱门下的鎏金花裙少女",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻提裙摆",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻提裙摆与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "c02d51b9d06249e11c688df91e2b3eb821defde8d4c5888fb1fc1786806f32cd",
+      "sourceFileId": "file_000000009520820c99b82e6671ed1f03",
+      "generationSequence": 7,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "23fcba3e50ce",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/golden-maiden-among-blossoms-20260804-1307-006.png",
+      "thumbnail": "generated/thumbnails/8339e4f63c10b33f3ef850cb5a0f5ecf.webp",
+      "title": "繁花庭院中的金饰少女",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "触碰花瓣",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以触碰花瓣与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "23fcba3e50ce7ea30d1ddfba46079e78ad42dddae2d226fb3a5fb5eb51cd135b",
+      "sourceFileId": "file_000000003d9c8209bcf5f20c46d7181e",
+      "generationSequence": 6,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "6aeabb58e7ad",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/golden-ornament-immortal-in-cherry-court-20260804-1307-010.png",
+      "thumbnail": "generated/thumbnails/fe563d91b3969d38e58ca4317db59230.webp",
+      "title": "樱花庭院中的金饰仙姬",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "花枝近脸",
+        "直视镜头"
+      ],
+      "expressions": [
+        "浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以花枝近脸与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "6aeabb58e7ad6609dca0d8a020d9e85eb93c738d6886c6e10adbc9b3f57fe7a7",
+      "sourceFileId": "file_0000000093a8820d9be70750bb520e13",
+      "generationSequence": 10,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "80306a313c39",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/graceful-beauty-in-peony-shadows-20260804-1307-011.png",
+      "thumbnail": "generated/thumbnails/106298a0f0b88ef1ffa28adaf8475882.webp",
+      "title": "牡丹花影中的古韵佳人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手捧牡丹",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手捧牡丹与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "80306a313c39ba67fa347d6d4cac19c6c998e6e5e3d7d7e5d3094c6faeb65ef1",
+      "sourceFileId": "file_00000000483482309b0143f241c1e207",
+      "generationSequence": 11,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "3c0935f2447d",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-beauty-in-rose-garden-20260804-1307-009.png",
+      "thumbnail": "generated/thumbnails/f0864c98a168644558c21dda5fef32e2.webp",
+      "title": "玫瑰花园中的金饰佳人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻握玫瑰",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻握玫瑰与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "3c0935f2447df1512d5b1344cd29a16199bd9cc9e40ca9a54e05932010f65237",
+      "sourceFileId": "file_000000007abc81fa94aebfd9a43f01e0",
+      "generationSequence": 9,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "52686edd2618",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-maiden-by-spring-fountain-20260804-1307-008.png",
+      "thumbnail": "generated/thumbnails/c674b393d7cda65bd1b3ba2d19bae446.webp",
+      "title": "春日花园喷泉旁的金饰少女",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手持花瓣",
+        "直视镜头"
+      ],
+      "expressions": [
+        "亲近",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手持花瓣与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "52686edd26183dd7247545b9c7b08ae9cdee3f1e069432c29499719ddec9478a",
+      "sourceFileId": "file_00000000776881faae01932d87f9c862",
+      "generationSequence": 8,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "140b94477357",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/jeweled-maiden-in-spring-garden-20260804-1307-005.png",
+      "thumbnail": "generated/thumbnails/3e913248a7252328a1d8431c05aa8639.webp",
+      "title": "花园春日金饰少女像",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻托花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻托花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "140b94477357d1bb08754e8e4943c54870f12006ac704c6196ff84625742bb35",
+      "sourceFileId": "file_00000000971881f6a02072c03f5fff92",
+      "generationSequence": 5,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "a1b4b882c3c7",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/luminous-spring-portrait-20260804-1307-021.png",
+      "thumbnail": "generated/thumbnails/b4d226e6453eb7ddb36699ea4a56353c.webp",
+      "title": "春光流影肖像",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "花枝近脸",
+        "直视镜头"
+      ],
+      "expressions": [
+        "柔和凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以花枝近脸与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "a1b4b882c3c74a906edac0d5ac374746484c0c2d425e694c8a9ec007c5741372",
+      "sourceFileId": "file_0000000082608211bbcac62a3555c633",
+      "generationSequence": 21,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "3bfa36ff0fb9",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/petal-bowl-spring-reverie-20260804-1307-025.png",
+      "thumbnail": "generated/thumbnails/e1826eb9dd7ee9fb77b8fae3605af4a6.webp",
+      "title": "落英花盏春梦",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "捧花盏与花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以捧花盏与花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "3bfa36ff0fb91ba0d8917cadd811e518a6d99f7f3f5e090b53012eabfbe3b311",
+      "sourceFileId": "file_00000000a6088211af20baa2d0a70c9c",
+      "generationSequence": 25,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "6df38a11f4e0",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/romantic-outdoor-blossom-portrait-20260804-1307-024.png",
+      "thumbnail": "generated/thumbnails/b809fb7e6d3669e9c744c3848e23b78c.webp",
+      "title": "春日花簪柔情",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻抚花朵",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻抚花朵与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "6df38a11f4e093700c4870971437e7430a047f84232338db87d13c2b923be842",
+      "sourceFileId": "file_000000001d3082438f28326d4e759729",
+      "generationSequence": 24,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "78b5943d51f7",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/romantic-spring-garden-beauty-20260804-1307-020.png",
+      "thumbnail": "generated/thumbnails/f145cb8bf6ebd9ad9559ecc74264a218.webp",
+      "title": "浪漫春庭佳人",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻触花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻触花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "78b5943d51f7060720dd4d514201df32aff6477eab744114af8ba78f77af9a29",
+      "sourceFileId": "file_00000000db4882308686b51d202c16a5",
+      "generationSequence": 20,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "bba933e32260",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/serene-flower-branch-portrait-20260804-1307-019.png",
+      "thumbnail": "generated/thumbnails/8389a480f07863ca4b554e2b311d44fe.webp",
+      "title": "春光花枝静语",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "手持花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "亲近",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以手持花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "bba933e322605755891ed3953a04329e399bf71417d616c7e571f30cc03b4342",
+      "sourceFileId": "file_00000000ea9882079051c462b8ec349d",
+      "generationSequence": 19,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "e800314cae5e",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/soft-focus-blossom-gaze-20260804-1307-018.png",
+      "thumbnail": "generated/thumbnails/e877cfa6c4cade458fe981cc7ee16a0b.webp",
+      "title": "柔焦花枝凝眸",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻扶花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔凝视",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻扶花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "e800314cae5ead7dcdd482f173f2865a4434a5ed4356f22d6008ad60e7b0909b",
+      "sourceFileId": "file_00000000e94081fdad0bd80365e1569e",
+      "generationSequence": 18,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "c2367cd02ce4",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/spring-cherry-dream-portrait-20260804-1307-014.png",
+      "thumbnail": "generated/thumbnails/1f84ac46eec45595cca6589dc8428208.webp",
+      "title": "春日樱花梦境肖像",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻触樱花",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔浅笑",
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻触樱花与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "c2367cd02ce4f61eb6e051e0a9799835c83c1e9839b4985a47984a97627b556f",
+      "sourceFileId": "file_0000000065dc82069ed5dd9628a063df",
+      "generationSequence": 14,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
+    },
+    {
+      "id": "569921299ab3",
+      "path": "images/golden-floral-eastern-beauty/spring-garden/spring-pavilion-blossom-gaze-20260804-1307-022.png",
+      "thumbnail": "generated/thumbnails/ea422f2d9ab6f64aeb34268a24f623bd.webp",
+      "title": "春亭繁花凝眸",
+      "category": "金饰花簪东方美人",
+      "character": "金饰花簪东方美人",
+      "theme": [
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature"
+      ],
+      "scene": [
+        "spring-garden"
+      ],
+      "palette": [
+        "pink-gold",
+        "ivory-gold"
+      ],
+      "composition": [
+        "single-image",
+        "half-body"
+      ],
+      "assetType": "artwork",
+      "actions": [
+        "轻握花枝",
+        "直视镜头"
+      ],
+      "expressions": [
+        "温柔"
+      ],
+      "confirmedTraits": [
+        "成年东方女性",
+        "黑色高盘发",
+        "琥珀金眼",
+        "东方幻想人物",
+        "金属发饰"
+      ],
+      "description": "春日花园晨光中的东方美人正面半身肖像，人物以轻握花枝与镜头互动，浅粉白金服饰与盛放花枝营造柔美浪漫氛围。",
+      "tags": [
+        "spring-garden",
+        "春日花园",
+        "温柔浅笑",
+        "花枝",
+        "晨光",
+        "东方美人",
+        "正面肖像",
+        "金饰花簪东方美人",
+        "portrait",
+        "romance",
+        "fantasy",
+        "nature",
+        "pink-gold",
+        "ivory-gold",
+        "single-image",
+        "half-body",
+        "artwork"
+      ],
+      "createdAt": "2026-08-04T13:07:00+08:00",
+      "featured": false,
+      "width": 1122,
+      "height": 1402,
+      "sourceSha256": "569921299ab3e22ea56255385e73a73d634c53d2178ec174606ea70bee91a9ab",
+      "sourceFileId": "file_000000008f40820ebe40b78c79102900",
+      "generationSequence": 22,
+      "generatedAt": "2026-08-04T13:07:00+08:00",
+      "sourceChat": "current-chat"
     },
     {
       "id": "30153b5065af",
