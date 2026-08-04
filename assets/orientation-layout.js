@@ -1,5 +1,20 @@
 const ORIENTATION_CLASSES = ['is-portrait', 'is-square', 'is-landscape', 'is-panorama'];
 const STYLE_ID = 'orientation-layout-styles';
+const GALLERY_URL = './data/gallery.json?v=20260804-1405';
+const SITE_ROOT = new URL('./', window.location.href).pathname;
+
+const recordsByAsset = new Map();
+
+function normalizeAssetPath(value) {
+  if (!value) return '';
+  try {
+    let pathname = decodeURIComponent(new URL(value, window.location.href).pathname);
+    if (pathname.startsWith(SITE_ROOT)) pathname = pathname.slice(SITE_ROOT.length);
+    return pathname.replace(/^\/+/, '').replace(/^\.\//, '');
+  } catch {
+    return String(value).replace(/^\.\//, '');
+  }
+}
 
 function installStyles() {
   if (document.querySelector(`#${STYLE_ID}`)) return;
@@ -55,6 +70,26 @@ function orientationForRatio(ratio) {
   return 'portrait';
 }
 
+function recordForImage(image) {
+  const source = normalizeAssetPath(image.getAttribute('src') || image.currentSrc || image.src);
+  return recordsByAsset.get(source) || null;
+}
+
+function applyResponsiveSource(image, record, orientation) {
+  if (!record || !['landscape', 'panorama'].includes(orientation)) return;
+
+  const thumbnail = normalizeAssetPath(record.thumbnail);
+  const original = normalizeAssetPath(record.path);
+  const originalWidth = Number(record.width) || Number(image.getAttribute('width')) || image.naturalWidth;
+  if (!thumbnail || !original || !(originalWidth > 640)) return;
+
+  image.srcset = `${encodeURI(thumbnail)} 640w, ${encodeURI(original)} ${originalWidth}w`;
+  image.sizes = orientation === 'panorama'
+    ? '(min-width: 1121px) calc(100vw - 96px), 100vw'
+    : '(min-width: 1121px) 50vw, 100vw';
+  image.dataset.responsivePreview = 'true';
+}
+
 function classifyCard(card) {
   if (!(card instanceof HTMLElement) || !card.classList.contains('gallery-card')) return;
 
@@ -76,6 +111,8 @@ function classifyCard(card) {
   card.classList.add(`is-${orientation}`);
   card.dataset.orientation = orientation;
   card.style.setProperty('--image-ratio', String(Math.min(3.2, Math.max(0.68, ratio))));
+
+  applyResponsiveSource(image, recordForImage(image), orientation);
 }
 
 function classifyCards(root = document) {
@@ -83,8 +120,26 @@ function classifyCards(root = document) {
   root.querySelectorAll?.('.gallery-card').forEach(classifyCard);
 }
 
-function initializeOrientationLayout() {
+async function loadGalleryRecords() {
+  try {
+    const response = await fetch(GALLERY_URL, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    const records = Array.isArray(payload) ? payload : payload.images || [];
+
+    recordsByAsset.clear();
+    for (const record of records) {
+      recordsByAsset.set(normalizeAssetPath(record.thumbnail), record);
+      recordsByAsset.set(normalizeAssetPath(record.path), record);
+    }
+  } catch (error) {
+    console.warn('无法加载横图高清候选，继续使用普通缩略图：', error);
+  }
+}
+
+async function initializeOrientationLayout() {
   installStyles();
+  await loadGalleryRecords();
 
   const grid = document.querySelector('#galleryGrid');
   if (!grid) return;
