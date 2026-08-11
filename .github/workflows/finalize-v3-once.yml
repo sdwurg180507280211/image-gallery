@@ -56,7 +56,8 @@ jobs:
       - name: Install final application files
         run: |
           rm -rf /tmp/v3-final && mkdir -p /tmp/v3-final
-          base64 --decode next-v3.bundle.b64 > /tmp/v3-final.tar.gz
+          cat .v3-bundle/part-* | base64 --decode > /tmp/v3-final.tar.gz
+          tar -tzf /tmp/v3-final.tar.gz
           tar -xzf /tmp/v3-final.tar.gz -C /tmp/v3-final
           test -f /tmp/v3-final/assets/app.js && test -f /tmp/v3-final/assets/admin.js && test -f /tmp/v3-final/scripts/build.mjs
           grep -q 'medical-kv' /tmp/v3-final/assets/app.js
@@ -73,6 +74,7 @@ jobs:
           cp /tmp/gallery-v3.json data/gallery.json
           find images -type f -name '*.json' -delete
           rm -f next-v3.bundle.b64 .github/workflows/reset-v3-once.yml .github/workflows/reset-v3-issue.yml
+          rm -rf .v3-bundle
 
       - name: Download and verify the three original medical KV PNG files
         run: |
