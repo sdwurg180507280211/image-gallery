@@ -3,7 +3,7 @@ name: Finalize visual asset library v3 once
 on:
   pull_request:
     branches: [main]
-    types: [opened]
+    types: [opened, synchronize]
     paths:
       - .v3-finalize-trigger
 
@@ -20,9 +20,6 @@ jobs:
   finalize:
     if: github.head_ref == 'v3-finalize-exec'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
