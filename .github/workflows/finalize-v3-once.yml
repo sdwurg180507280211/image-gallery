@@ -1,0 +1,138 @@
+name: Finalize visual asset library v3 once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .v3-finalize-trigger
+
+permissions:
+  contents: write
+
+concurrency:
+  group: finalize-v3
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Prepare final v3 source catalog
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const old = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          if (old.schemaVersion !== 2 || !Array.isArray(old.images) || old.images.length !== 191) {
+            throw new Error(`旧索引安全检查失败：schema=${old.schemaVersion}, count=${old.images?.length}`);
+          }
+          const multi = new Set(['multi-panel','five-panel','six-panel','ten-panel','character-turnaround','reference-layout','mixed-shot']);
+          const colorMap = new Map([
+            ['black-gold','black'], ['crimson-gold','red'], ['pink-gold','pink'], ['blue-silver','blue'],
+            ['ivory-gold','white'], ['violet-gold','purple'], ['emerald-gold','green'], ['golden','gold'],
+            ['multicolor','other'], ['other','other'],
+          ]);
+          function characterCategory(item) {
+            if ((item.composition || []).some((value) => multi.has(value))) return 'multi-panel';
+            for (const value of item.palette || []) if (colorMap.has(value)) return colorMap.get(value);
+            return 'other';
+          }
+          const assets = old.images.map((item) => ({
+            id: String(item.id), path: String(item.path), title: String(item.title || item.path.split('/').pop()),
+            domain: 'character', category: characterCategory(item), tags: item.character ? [String(item.character)] : [],
+            createdAt: String(item.createdAt || item.generatedAt || ''),
+          }));
+          assets.push(
+            { id:'c2a2bdd09358', path:'images/medical-kv/2026-08/medical-kv-heart-dna-blue-001.png', title:'心脏与DNA蓝白科技KV', domain:'medical-kv', color:'blue', organ:'heart', used:false, tags:['DNA','分子','医疗科技','右侧主视觉','左侧留白'], createdAt:'2026-08-11T15:33:00+08:00' },
+            { id:'47e855122658', path:'images/medical-kv/2026-08/medical-kv-heart-lifecycle-blue-002.png', title:'全生命周期心脏医疗科技KV', domain:'medical-kv', color:'blue', organ:'heart', used:false, tags:['医疗科技','家庭','城市','右侧主视觉','左侧留白'], createdAt:'2026-08-11T15:33:00+08:00' },
+            { id:'f333642986c6', path:'images/medical-kv/2026-08/medical-kv-brain-heart-blue-003.png', title:'心脑协同医疗科技KV', domain:'medical-kv', color:'blue', organ:'brain', used:false, tags:['心脑协同','医疗科技','右侧主视觉','左侧留白'], createdAt:'2026-08-11T15:33:00+08:00' }
+          );
+          if (assets.length !== 194) throw new Error(`v3 catalog 数量异常：${assets.length}`);
+          if (new Set(assets.map((x) => x.id)).size !== 194) throw new Error('v3 catalog 存在重复 ID');
+          if (new Set(assets.map((x) => x.path)).size !== 194) throw new Error('v3 catalog 存在重复路径');
+          fs.writeFileSync('/tmp/gallery-v3.json', JSON.stringify({ schemaVersion: 3, assets }, null, 2) + '\n');
+          NODE
+
+      - name: Install final application files
+        run: |
+          rm -rf /tmp/v3-final
+          mkdir -p /tmp/v3-final
+          base64 --decode next-v3.bundle.b64 > /tmp/v3-final.tar.gz
+          tar -xzf /tmp/v3-final.tar.gz -C /tmp/v3-final
+          test -f /tmp/v3-final/assets/app.js
+          test -f /tmp/v3-final/assets/admin.js
+          test -f /tmp/v3-final/scripts/build.mjs
+          grep -q 'medical-kv' /tmp/v3-final/assets/app.js
+          grep -q 'used' /tmp/v3-final/assets/admin.js
+          grep -q 'thumbnailLarge' /tmp/v3-final/scripts/build.mjs
+          if grep -q 'filterDimensions\|themeFilter\|sceneFilter\|paletteFilter' /tmp/v3-final/assets/app.js; then echo '暂存包仍包含旧筛选结构'; exit 1; fi
+          rm -rf assets scripts data
+          mkdir -p assets scripts data
+          cp -R /tmp/v3-final/assets/. assets/
+          cp -R /tmp/v3-final/scripts/. scripts/
+          cp /tmp/v3-final/index.html index.html
+          cp /tmp/v3-final/package.json package.json
+          cp /tmp/v3-final/pages.yml .github/workflows/pages.yml
+          cp /tmp/gallery-v3.json data/gallery.json
+          find images -type f -name '*.json' -delete
+          rm -f next-v3.bundle.b64
+          rm -f .github/workflows/reset-v3-once.yml .github/workflows/reset-v3-issue.yml
+
+      - name: Download the three original medical KV PNG files
+        run: |
+          mkdir -p images/medical-kv/2026-08
+          curl -L --fail --retry 2 -o images/medical-kv/2026-08/medical-kv-heart-dna-blue-001.png 'https://at.adobe.com/VUIV7YesrFYeONhH'
+          curl -L --fail --retry 2 -o images/medical-kv/2026-08/medical-kv-heart-lifecycle-blue-002.png 'https://at.adobe.com/YKUHBeIQlHtYn7HN'
+          curl -L --fail --retry 2 -o images/medical-kv/2026-08/medical-kv-brain-heart-blue-003.png 'https://at.adobe.com/Qmrysdfj9QWrqutg'
+          echo 'c2a2bdd09358e95363690dd7051e6a52d65c7ab04634743dd38ad9fd52b5b319  images/medical-kv/2026-08/medical-kv-heart-dna-blue-001.png' | sha256sum -c -
+          echo '47e855122658b5b35765eaf407cf99dac8efe9b0dee31c9b319ad8e59079d8f8  images/medical-kv/2026-08/medical-kv-heart-lifecycle-blue-002.png' | sha256sum -c -
+          echo 'f333642986c61c70324e306a0849a558ddcce09841884778a8f3fbd6ff00a509  images/medical-kv/2026-08/medical-kv-brain-heart-blue-003.png' | sha256sum -c -
+
+      - name: Build and validate the final architecture
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+          node <<'NODE'
+          const fs = require('node:fs');
+          const sharp = require('sharp');
+          (async () => {
+            const source = JSON.parse(fs.readFileSync('data/gallery.json','utf8'));
+            const built = JSON.parse(fs.readFileSync('dist/data/gallery.json','utf8'));
+            if (source.schemaVersion !== 3 || source.assets.length !== 194) throw new Error('源 catalog 不是最终 v3/194');
+            if (built.schemaVersion !== 3 || built.count !== 194 || built.assets.length !== 194) throw new Error('发布 catalog 不是最终 v3/194');
+            const chars = source.assets.filter((x) => x.domain === 'character');
+            const kvs = source.assets.filter((x) => x.domain === 'medical-kv');
+            if (chars.length !== 191 || kvs.length !== 3) throw new Error(`素材域数量异常：人物 ${chars.length}, KV ${kvs.length}`);
+            const forbidden = ['theme','scene','palette','composition','assetType','character','actions','expressions','confirmedTraits'];
+            for (const x of chars) {
+              if (!x.category || x.color || x.organ) throw new Error(`人物分类模型异常：${x.id}`);
+              for (const key of forbidden) if (Object.hasOwn(x,key)) throw new Error(`人物仍有旧字段 ${key}: ${x.id}`);
+            }
+            for (const x of kvs) if (!x.color || !x.organ || typeof x.used !== 'boolean' || x.category) throw new Error(`KV 分类模型异常：${x.id}`);
+            for (const p of ['images/medical-kv/2026-08/medical-kv-heart-dna-blue-001.png','images/medical-kv/2026-08/medical-kv-heart-lifecycle-blue-002.png','images/medical-kv/2026-08/medical-kv-brain-heart-blue-003.png']) {
+              const m = await sharp(p).metadata();
+              if (m.width !== 1672 || m.height !== 941) throw new Error(`KV 尺寸异常：${p} ${m.width}x${m.height}`);
+            }
+            const oldFiles = ['assets/v2.css','assets/orientation-layout.js','assets/delete-admin.js','scripts/generate-gallery.mjs','scripts/generate-landscape-thumbnails.mjs','scripts/freeze-metadata-ids.mjs','scripts/build-site.mjs','data/taxonomy-v2.json','data/validation-report.json'];
+            for (const p of oldFiles) if (fs.existsSync(p)) throw new Error(`过时文件仍存在：${p}`);
+            if (require('child_process').execFileSync('bash',['-lc',"find images -type f -name '*.json' | head"],{encoding:'utf8'}).trim()) throw new Error('仍存在旧 sidecar JSON');
+            for (const x of built.assets.filter((x) => x.domain === 'medical-kv')) if (!x.thumbnail || !x.thumbnailLarge || x.thumbnail === x.path || x.thumbnailLarge === x.path) throw new Error(`KV 缩略图管线异常：${x.id}`);
+            console.log('最终校验通过：194 资产 = 191 人物 + 3 医药KV；无旧 schema、无兼容层。');
+          })().catch((e) => { console.error(e); process.exit(1); });
+          NODE
+
+      - name: Commit one clean final replacement
+        run: |
+          rm -f .v3-finalize-trigger .github/workflows/finalize-v3-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: rebuild as focused visual asset library v3'
+          git push origin HEAD:main
