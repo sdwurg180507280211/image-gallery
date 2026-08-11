@@ -9,8 +9,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: finalize-v3
@@ -70,10 +68,9 @@ jobs:
           cp -R /tmp/v3-final/scripts/. scripts/
           cp /tmp/v3-final/index.html index.html
           cp /tmp/v3-final/package.json package.json
-          cp /tmp/v3-final/pages.yml .github/workflows/pages.yml
           cp /tmp/gallery-v3.json data/gallery.json
           find images -type f -name '*.json' -delete
-          rm -f next-v3.bundle.b64 .github/workflows/reset-v3-once.yml .github/workflows/reset-v3-issue.yml
+          rm -f next-v3.bundle.b64
           rm -rf .v3-bundle
 
       - name: Download and verify the three original medical KV PNG files
@@ -112,23 +109,9 @@ jobs:
 
       - name: Commit the clean replacement to main
         run: |
-          rm -f .v3-finalize-trigger .github/workflows/finalize-v3-once.yml
+          rm -f .v3-finalize-trigger
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m 'feat: rebuild as focused visual asset library v3'
           git push origin HEAD:main
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload final Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      - name: Deploy final Pages artifact
-        id: deployment
-        uses: actions/deploy-pages@v4
