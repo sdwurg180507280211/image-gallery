@@ -1,0 +1,128 @@
+name: Clean rebuild visual asset library v3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/reset-v3-once.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clean-rebuild-v3
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rewrite catalog to the final v3 schema
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const source = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          const records = source.images;
+          if (!Array.isArray(records) || records.length !== 191) {
+            throw new Error(`旧图库数量异常：${Array.isArray(records) ? records.length : 'not-array'}，预期 191`);
+          }
+
+          const multi = new Set(['multi-panel', 'five-panel', 'six-panel', 'ten-panel', 'character-turnaround', 'reference-layout', 'mixed-shot']);
+          const paletteMap = new Map([
+            ['black-gold', 'black'],
+            ['crimson-gold', 'red'],
+            ['pink-gold', 'pink'],
+            ['blue-silver', 'blue'],
+            ['ivory-gold', 'white'],
+            ['violet-gold', 'purple'],
+            ['emerald-gold', 'green'],
+            ['golden', 'gold'],
+            ['multicolor', 'other'],
+            ['other', 'other'],
+          ]);
+
+          function categoryFor(item) {
+            if ((item.composition || []).some((value) => multi.has(value))) return 'multi-panel';
+            for (const value of item.palette || []) {
+              if (paletteMap.has(value)) return paletteMap.get(value);
+            }
+            return 'other';
+          }
+
+          const assets = records.map((item) => ({
+            id: String(item.id),
+            path: String(item.path),
+            title: String(item.title || item.path.split('/').pop()),
+            domain: 'character',
+            category: categoryFor(item),
+            tags: [...new Set([item.character, ...(item.tags || [])].filter(Boolean).map(String))],
+            createdAt: String(item.createdAt || item.generatedAt || ''),
+          }));
+
+          fs.writeFileSync('data/gallery.json', `${JSON.stringify({ schemaVersion: 3, assets }, null, 2)}\n`, 'utf8');
+          NODE
+
+      - name: Install clean v3 application
+        run: |
+          mkdir -p /tmp/visual-asset-v3
+          base64 --decode next-v3.bundle.b64 > /tmp/visual-asset-v3.tar.gz
+          tar -xzf /tmp/visual-asset-v3.tar.gz -C /tmp/visual-asset-v3
+
+          rm -rf assets scripts
+          mkdir -p assets scripts
+          cp -R /tmp/visual-asset-v3/assets/. assets/
+          cp -R /tmp/visual-asset-v3/scripts/. scripts/
+          cp /tmp/visual-asset-v3/index.html index.html
+          cp /tmp/visual-asset-v3/package.json package.json
+          cp /tmp/visual-asset-v3/pages.yml .github/workflows/pages.yml
+
+          find images -type f -name '*.json' -delete
+          find data -type f ! -name 'gallery.json' -delete
+          rm -f next-v3.bundle.b64
+          rm -rf generated
+
+      - name: Build and verify the end-to-end version
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+          node <<'NODE'
+          const fs = require('node:fs');
+          const source = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          const built = JSON.parse(fs.readFileSync('dist/data/gallery.json', 'utf8'));
+          if (source.schemaVersion !== 3 || !Array.isArray(source.assets) || source.assets.length !== 191) throw new Error('源 catalog v3 校验失败。');
+          if (built.schemaVersion !== 3 || built.count !== 191 || built.assets.length !== 191) throw new Error('发布 catalog v3 校验失败。');
+          const forbidden = ['theme', 'scene', 'palette', 'composition', 'assetType', 'character', 'expressions', 'actions', 'confirmedTraits'];
+          for (const asset of source.assets) {
+            if (asset.domain !== 'character') throw new Error(`旧素材域未清理：${asset.id}`);
+            if (!asset.category) throw new Error(`人物分类缺失：${asset.id}`);
+            for (const key of forbidden) if (Object.hasOwn(asset, key)) throw new Error(`仍存在旧字段 ${key}：${asset.id}`);
+          }
+          const obsolete = [
+            'assets/v2.css', 'assets/orientation-layout.js', 'assets/delete-admin.js',
+            'scripts/generate-gallery.mjs', 'scripts/generate-landscape-thumbnails.mjs', 'scripts/freeze-metadata-ids.mjs',
+            'data/taxonomy-v2.json', 'data/validation-report.json'
+          ];
+          for (const file of obsolete) if (fs.existsSync(file)) throw new Error(`过时文件仍存在：${file}`);
+          if (!fs.existsSync('assets/admin.js') || !fs.existsSync('assets/app.js')) throw new Error('v3 模块缺失。');
+          const sidecars = require('node:child_process').execFileSync('bash', ['-lc', "find images -type f -name '*.json' | head"], { encoding: 'utf8' }).trim();
+          if (sidecars) throw new Error(`仍有旧 sidecar：${sidecars}`);
+          console.log('v3 验证通过：191 张人物素材，新 schema，无兼容层。');
+          NODE
+
+      - name: Commit clean replacement and remove this workflow
+        run: |
+          rm -f .github/workflows/reset-v3-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: rebuild as focused visual asset library v3"
+          git push origin HEAD:main
