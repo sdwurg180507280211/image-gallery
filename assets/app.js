@@ -1,465 +1,58 @@
-const ALL = '全部';
-const filterDimensions = ['theme', 'scene', 'palette', 'composition', 'assetType'];
-const advancedDimensions = ['composition', 'assetType'];
-const state = {
-  images: [],
-  visibleImages: [],
-  taxonomy: {},
-  validation: null,
-  activeCharacter: ALL,
-  filters: Object.fromEntries(filterDimensions.map((key) => [key, ALL])),
-  query: '',
-  sort: 'newest',
-  favoritesOnly: false,
-  advancedOpen: false,
-  activeIndex: -1,
-  favorites: new Set(JSON.parse(localStorage.getItem('image-gallery:favorites') || '[]')),
+const ALL='all';
+const LABELS={
+  character:{'multi-panel':'多宫图',black:'黑色系',red:'红色系',pink:'粉色系',blue:'蓝色系',white:'白色系',purple:'紫色系',green:'绿色系',gold:'金色系',other:'其他'},
+  color:{blue:'蓝色系',purple:'紫色系',pink:'粉色系',green:'绿色系',red:'红色系',orange:'橙黄色系',white:'白色系',black:'黑色系',mixed:'综合色系'},
+  organ:{heart:'心脏',brain:'大脑',kidney:'肾脏',liver:'肝脏',lung:'肺',spleen:'脾脏',stomach:'胃',pancreas:'胰腺',vascular:'血管',genetics:'DNA / 基因',other:'其他医疗'}
 };
+const state={assets:[],visible:[],domain:'character',characterCategory:ALL,color:ALL,organ:ALL,unusedOnly:false,query:'',sort:'newest',activeIndex:-1,favorites:new Set(JSON.parse(localStorage.getItem('visual-asset-library:favorites')||'[]'))};
+const $=(s)=>document.querySelector(s);
+const el={grid:$('#galleryGrid'),template:$('#cardTemplate'),search:$('#searchInput'),sort:$('#sortSelect'),favoritesOnly:$('#favoritesOnly'),characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),medicalFilters:$('#medicalFilters'),color:$('#colorFilter'),organ:$('#organFilter'),unusedOnly:$('#unusedOnly'),result:$('#resultText'),clear:$('#clearFilters'),empty:$('#emptyState'),assetCount:$('#assetCount'),characterCount:$('#characterCount'),kvCount:$('#kvCount'),theme:$('#themeToggle'),lightbox:$('#lightbox'),lightboxClose:$('#lightboxClose'),lightboxImage:$('#lightboxImage'),lightboxTitle:$('#lightboxTitle'),lightboxMeta:$('#lightboxMeta'),lightboxDetails:$('#lightboxDetails'),lightboxFavorite:$('#lightboxFavorite'),download:$('#downloadImage'),prev:$('#previousImage'),next:$('#nextImage')};
 
-const elements = {
-  grid: document.querySelector('#galleryGrid'),
-  template: document.querySelector('#cardTemplate'),
-  search: document.querySelector('#searchInput'),
-  sort: document.querySelector('#sortSelect'),
-  categoryFilters: document.querySelector('#categoryFilters'),
-  facetFilters: Object.fromEntries(filterDimensions.map((key) => [key, document.querySelector(`#${key}Filter`)])),
-  favoritesOnly: document.querySelector('#favoritesOnly'),
-  advancedToggle: document.querySelector('#advancedToggle'),
-  advancedCount: document.querySelector('#advancedCount'),
-  advancedFilters: document.querySelector('#advancedFilters'),
-  activeFilters: document.querySelector('#activeFilters'),
-  clearFilters: document.querySelector('#clearFilters'),
-  resultText: document.querySelector('#resultText'),
-  emptyState: document.querySelector('#emptyState'),
-  emptyTitle: document.querySelector('#emptyTitle'),
-  emptyDescription: document.querySelector('#emptyDescription'),
-  imageCount: document.querySelector('#imageCount'),
-  categoryCount: document.querySelector('#categoryCount'),
-  favoriteCount: document.querySelector('#favoriteCount'),
-  themeToggle: document.querySelector('#themeToggle'),
-  lightbox: document.querySelector('#lightbox'),
-  lightboxClose: document.querySelector('#lightboxClose'),
-  lightboxImage: document.querySelector('#lightboxImage'),
-  lightboxTitle: document.querySelector('#lightboxTitle'),
-  lightboxCategory: document.querySelector('#lightboxCategory'),
-  lightboxDescription: document.querySelector('#lightboxDescription'),
-  lightboxFavorite: document.querySelector('#lightboxFavorite'),
-  downloadImage: document.querySelector('#downloadImage'),
-  previousImage: document.querySelector('#previousImage'),
-  nextImage: document.querySelector('#nextImage'),
-};
-
-function normalizeList(value) {
-  const source = Array.isArray(value) ? value : value == null || value === '' ? [] : [value];
-  return [...new Set(source.map(String).map((item) => item.trim()).filter(Boolean))];
+function assertAsset(a){
+  if(!a||typeof a!=='object'||!a.id||!a.path||!a.title)throw new Error('发现缺少 id/path/title 的素材记录。');
+  if(a.domain==='character'){if(!LABELS.character[a.category])throw new Error(`人物分类非法：${a.id}`);return;}
+  if(a.domain==='medical-kv'){if(!LABELS.color[a.color]||!LABELS.organ[a.organ]||typeof a.used!=='boolean')throw new Error(`医药KV分类非法：${a.id}`);return;}
+  throw new Error(`素材域非法：${a.id}`);
 }
-
-function normalizeImage(item, index) {
-  const imagePath = String(item.path || '').replace(/^\.\//, '');
-  const thumbnail = String(item.thumbnail || '').replace(/^\.\//, '');
-  const title = item.title || imagePath.split('/').pop()?.replace(/\.[^.]+$/, '') || `图片 ${index + 1}`;
-  const character = String(item.character || item.category || '未分类');
-  return {
-    id: item.id || imagePath || String(index),
-    path: imagePath,
-    thumbnail: thumbnail || imagePath,
-    title,
-    character,
-    category: character,
-    theme: normalizeList(item.theme ?? item.themes),
-    scene: normalizeList(item.scene ?? item.scenes),
-    palette: normalizeList(item.palette ?? item.palettes),
-    composition: normalizeList(item.composition),
-    assetType: String(item.assetType || 'artwork'),
-    actions: normalizeList(item.actions),
-    expressions: normalizeList(item.expressions),
-    confirmedTraits: normalizeList(item.confirmedTraits),
-    description: item.description || '',
-    tags: Array.isArray(item.tags) ? item.tags.filter(Boolean).map(String) : [],
-    createdAt: item.createdAt || item.generatedAt || item.date || '',
-    featured: Boolean(item.featured),
-    width: Number(item.width) || 0,
-    height: Number(item.height) || 0,
-  };
+async function load(){
+  const r=await fetch('./data/gallery.json',{cache:'no-store'});if(!r.ok)throw new Error(`索引读取失败：HTTP ${r.status}`);
+  const payload=await r.json();if(payload.schemaVersion!==3||!Array.isArray(payload.assets))throw new Error('只支持 schemaVersion 3。');
+  payload.assets.forEach(assertAsset);state.assets=payload.assets;renderStats();renderFilters();apply();
 }
-
-function labelFor(dimension, value) {
-  const entry = (state.taxonomy[dimension] || []).find((item) => item.value === value);
-  return entry?.label || value;
+function renderStats(){el.assetCount.textContent=state.assets.length;el.characterCount.textContent=state.assets.filter(a=>a.domain==='character').length;el.kvCount.textContent=state.assets.filter(a=>a.domain==='medical-kv').length;}
+function renderFilters(){
+  const chars=state.assets.filter(a=>a.domain==='character');const counts=new Map();chars.forEach(a=>counts.set(a.category,(counts.get(a.category)||0)+1));
+  el.characterCategoryFilters.replaceChildren();[[ALL,'全部'],...Object.entries(LABELS.character)].forEach(([value,label])=>{if(value!==ALL&&!counts.has(value))return;const b=document.createElement('button');b.type='button';b.className=value===state.characterCategory?'active':'';b.textContent=label;const c=document.createElement('span');c.textContent=value===ALL?chars.length:counts.get(value);b.append(c);b.onclick=()=>{state.characterCategory=value;renderFilters();apply();};el.characterCategoryFilters.append(b);});
+  fillSelect(el.color,LABELS.color,'全部颜色',state.color);fillSelect(el.organ,LABELS.organ,'全部器官',state.organ);
 }
-
-function dimensionValues(item, dimension) {
-  return dimension === 'assetType' ? [item.assetType].filter(Boolean) : item[dimension] || [];
+function fillSelect(select,labels,allLabel,current){select.replaceChildren(new Option(allLabel,ALL));for(const [value,label] of Object.entries(labels))select.add(new Option(label,value));select.value=current;}
+function domainLabel(a){return a.domain==='character'?(LABELS.character[a.category]||a.category):`${LABELS.organ[a.organ]} · ${LABELS.color[a.color]}`;}
+function searchable(a){return [a.title,...(a.tags||[]),a.domain==='character'?LABELS.character[a.category]:LABELS.color[a.color],a.domain==='medical-kv'?LABELS.organ[a.organ]:''].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN');}
+function apply(){
+  const q=state.query.trim().toLocaleLowerCase('zh-CN');const favOnly=el.favoritesOnly.getAttribute('aria-pressed')==='true';
+  state.visible=state.assets.filter(a=>a.domain===state.domain).filter(a=>state.domain==='character'?state.characterCategory===ALL||a.category===state.characterCategory:(state.color===ALL||a.color===state.color)&&(state.organ===ALL||a.organ===state.organ)&&(!state.unusedOnly||!a.used)).filter(a=>!favOnly||state.favorites.has(a.id)).filter(a=>!q||searchable(a).includes(q)).sort((a,b)=>{if(state.sort==='title')return a.title.localeCompare(b.title,'zh-CN');const at=Date.parse(a.createdAt||0)||0,bt=Date.parse(b.createdAt||0)||0;return state.sort==='oldest'?at-bt:bt-at;});
+  render();syncFilterVisibility();
 }
-
-function describeImage(item) {
-  const parts = [item.character];
-  if (item.theme[0]) parts.push(labelFor('theme', item.theme[0]));
-  if (item.scene[0]) parts.push(labelFor('scene', item.scene[0]));
-  if (item.palette[0]) parts.push(labelFor('palette', item.palette[0]));
-  return parts.join(' · ');
-}
-
-async function loadGallery() {
-  try {
-    const response = await fetch('./data/gallery.json?v=20260804-1337', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json();
-    const records = Array.isArray(payload) ? payload : payload.images;
-    state.taxonomy = Array.isArray(payload) ? {} : payload.taxonomy || {};
-    state.validation = Array.isArray(payload) ? null : payload.validation || null;
-    state.images = (records || []).map(normalizeImage).filter((item) => item.path);
-  } catch (error) {
-    console.error('无法读取画廊索引：', error);
-    state.images = [];
-  }
-
-  updateStats();
-  renderCharacters();
-  renderFacetFilters();
-  applyFilters();
-}
-
-function updateStats() {
-  elements.imageCount.textContent = String(state.images.length);
-  elements.categoryCount.textContent = String(new Set(state.images.map((item) => item.character)).size);
-  elements.favoriteCount.textContent = String(state.favorites.size);
-}
-
-function renderCharacters() {
-  const counts = state.images.reduce((map, item) => {
-    map.set(item.character, (map.get(item.character) || 0) + 1);
-    return map;
-  }, new Map());
-  const characters = [ALL, ...[...counts.keys()].sort((a, b) => a.localeCompare(b, 'zh-CN'))];
-  elements.categoryFilters.replaceChildren();
-
-  characters.forEach((character) => {
-    const button = document.createElement('button');
-    const count = character === ALL ? state.images.length : counts.get(character);
-    button.type = 'button';
-    button.className = `category-chip${character === state.activeCharacter ? ' active' : ''}`;
-    button.dataset.category = character;
-    button.append(document.createTextNode(character));
-    const countElement = document.createElement('span');
-    countElement.textContent = String(count);
-    button.append(countElement);
-    button.addEventListener('click', () => {
-      state.activeCharacter = character;
-      renderCharacters();
-      applyFilters();
-    });
-    elements.categoryFilters.append(button);
+function syncFilterVisibility(){el.characterFilters.hidden=state.domain!=='character';el.medicalFilters.hidden=state.domain!=='medical-kv';const has=state.query||state.characterCategory!==ALL||state.color!==ALL||state.organ!==ALL||state.unusedOnly||el.favoritesOnly.getAttribute('aria-pressed')==='true';el.clear.hidden=!has;}
+function render(){
+  el.grid.replaceChildren();state.visible.forEach((a,index)=>{const f=el.template.content.cloneNode(true),card=f.querySelector('.gallery-card'),btn=f.querySelector('.image-button'),img=f.querySelector('img'),meta=f.querySelector('.card-meta'),title=f.querySelector('.card-title'),dims=f.querySelector('.card-dimensions'),fav=f.querySelector('.favorite-button'),badge=f.querySelector('.usage-badge');
+    const ratio=a.width>0&&a.height>0?a.width/a.height:1;card.dataset.assetId=a.id;card.dataset.domain=a.domain;card.style.setProperty('--ratio',String(Math.max(.55,Math.min(2.4,ratio))));if(ratio>=1.15)card.classList.add('is-landscape');
+    img.src=encodeURI(a.thumbnail);if(a.thumbnailLarge){img.srcset=`${encodeURI(a.thumbnail)} 640w, ${encodeURI(a.thumbnailLarge)} ${a.thumbnailLargeWidth}w`;img.sizes=a.domain==='medical-kv'?'(min-width:1121px) 50vw, 100vw':'(min-width:1121px) 50vw, 100vw';}img.alt=a.title;img.loading=index<6?'eager':'lazy';img.fetchPriority=index<3?'high':'low';img.onerror=()=>{card.hidden=true;};
+    meta.textContent=domainLabel(a);title.textContent=a.title;dims.textContent=a.width&&a.height?`${a.width} × ${a.height}`:'';btn.onclick=()=>openLightbox(index);syncFavorite(fav,a);fav.onclick=()=>toggleFavorite(a.id);
+    if(a.domain==='medical-kv'){badge.hidden=false;badge.className=`usage-badge ${a.used?'used':'unused'}`;badge.textContent=a.used?'✓ 已使用':'● 未使用';}
+    el.grid.append(f);
   });
+  el.result.textContent=`显示 ${state.visible.length} / ${state.assets.filter(a=>a.domain===state.domain).length} 张素材`;el.empty.hidden=state.visible.length!==0;el.grid.hidden=state.visible.length===0;document.dispatchEvent(new CustomEvent('gallery:rendered'));
 }
-
-function renderFacetFilters() {
-  for (const dimension of filterDimensions) {
-    const select = elements.facetFilters[dimension];
-    if (!select) continue;
-    const current = state.filters[dimension];
-    const counts = new Map();
-    for (const item of state.images) {
-      for (const value of dimensionValues(item, dimension)) counts.set(value, (counts.get(value) || 0) + 1);
-    }
-    const values = [...counts.keys()].sort((a, b) => labelFor(dimension, a).localeCompare(labelFor(dimension, b), 'zh-CN'));
-    select.replaceChildren(new Option(`全部${select.dataset.label || ''}`, ALL));
-    values.forEach((value) => select.add(new Option(`${labelFor(dimension, value)} (${counts.get(value)})`, value)));
-    select.value = values.includes(current) ? current : ALL;
-    state.filters[dimension] = select.value;
-  }
-}
-
-function matchesFacet(item, dimension) {
-  const selected = state.filters[dimension];
-  return selected === ALL || dimensionValues(item, dimension).includes(selected);
-}
-
-function clearFacet(dimension) {
-  state.filters[dimension] = ALL;
-  const select = elements.facetFilters[dimension];
-  if (select) select.value = ALL;
-  applyFilters();
-}
-
-function addFilterChip(label, onRemove) {
-  const chip = document.createElement('button');
-  chip.type = 'button';
-  chip.className = 'active-filter-chip';
-  const text = document.createElement('span');
-  text.textContent = label;
-  const remove = document.createElement('b');
-  remove.setAttribute('aria-hidden', 'true');
-  remove.textContent = '×';
-  chip.append(text, remove);
-  chip.setAttribute('aria-label', `移除筛选：${label}`);
-  chip.addEventListener('click', onRemove);
-  elements.activeFilters.append(chip);
-}
-
-function syncFilterInterface() {
-  const advancedCount = advancedDimensions.filter((dimension) => state.filters[dimension] !== ALL).length;
-  if (advancedCount > 0) state.advancedOpen = true;
-
-  elements.advancedFilters.hidden = !state.advancedOpen;
-  elements.advancedToggle.setAttribute('aria-expanded', String(state.advancedOpen));
-  elements.advancedToggle.classList.toggle('active', state.advancedOpen || advancedCount > 0);
-  elements.advancedCount.hidden = advancedCount === 0;
-  elements.advancedCount.textContent = String(advancedCount);
-
-  for (const dimension of filterDimensions) {
-    const select = elements.facetFilters[dimension];
-    select?.closest('.facet-control')?.classList.toggle('has-value', state.filters[dimension] !== ALL);
-  }
-
-  elements.activeFilters.replaceChildren();
-  if (state.activeCharacter !== ALL) {
-    addFilterChip(`人物：${state.activeCharacter}`, () => {
-      state.activeCharacter = ALL;
-      renderCharacters();
-      applyFilters();
-    });
-  }
-  for (const dimension of filterDimensions) {
-    const value = state.filters[dimension];
-    if (value === ALL) continue;
-    const label = elements.facetFilters[dimension]?.dataset.label || dimension;
-    addFilterChip(`${label}：${labelFor(dimension, value)}`, () => clearFacet(dimension));
-  }
-  if (state.favoritesOnly) {
-    addFilterChip('只看收藏', () => {
-      state.favoritesOnly = false;
-      elements.favoritesOnly.setAttribute('aria-pressed', 'false');
-      applyFilters();
-    });
-  }
-  elements.activeFilters.hidden = elements.activeFilters.childElementCount === 0;
-}
-
-function applyFilters() {
-  syncFilterInterface();
-  const normalizedQuery = state.query.trim().toLocaleLowerCase('zh-CN');
-  state.visibleImages = state.images
-    .filter((item) => {
-      const characterMatches = state.activeCharacter === ALL || item.character === state.activeCharacter;
-      const favoriteMatches = !state.favoritesOnly || state.favorites.has(item.id);
-      const facetsMatch = filterDimensions.every((dimension) => matchesFacet(item, dimension));
-      const searchable = [
-        item.title, item.character, item.description, ...item.theme, ...item.scene, ...item.palette,
-        ...item.composition, item.assetType, ...item.actions, ...item.expressions, ...item.confirmedTraits, ...item.tags,
-      ].join(' ').toLocaleLowerCase('zh-CN');
-      return characterMatches && favoriteMatches && facetsMatch && (!normalizedQuery || searchable.includes(normalizedQuery));
-    })
-    .sort((a, b) => {
-      if (state.sort === 'title') return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
-      const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-      const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-      if (aTime === bTime) return a.title.localeCompare(b.title, 'zh-CN', { numeric: true });
-      return state.sort === 'oldest' ? aTime - bTime : bTime - aTime;
-    });
-  renderGallery();
-}
-
-function displayTags(item) {
-  const structured = [
-    ...item.theme.map((value) => labelFor('theme', value)),
-    ...item.scene.map((value) => labelFor('scene', value)),
-    ...item.palette.map((value) => labelFor('palette', value)),
-    ...item.composition.map((value) => labelFor('composition', value)),
-  ];
-  return [...new Set([...structured, ...item.tags].filter((tag) => tag && tag !== item.character))];
-}
-
-function renderGallery() {
-  elements.grid.replaceChildren();
-
-  state.visibleImages.forEach((item, index) => {
-    const fragment = elements.template.content.cloneNode(true);
-    const card = fragment.querySelector('.gallery-card');
-    const imageButton = fragment.querySelector('.image-button');
-    const image = fragment.querySelector('img');
-    const title = fragment.querySelector('.card-title');
-    const category = fragment.querySelector('.card-category');
-    const favorite = fragment.querySelector('.favorite-button');
-    const tagList = fragment.querySelector('.tag-list');
-
-    if (item.width > 0 && item.height > 0) {
-      card.style.setProperty('--image-ratio', String(Math.min(1.45, Math.max(0.68, item.width / item.height))));
-      image.width = item.width;
-      image.height = item.height;
-    }
-
-    image.src = encodeURI(item.thumbnail);
-    image.alt = item.title;
-    image.loading = index < 6 ? 'eager' : 'lazy';
-    image.decoding = 'async';
-    image.fetchPriority = index < 3 ? 'high' : 'low';
-    image.addEventListener('error', () => {
-      if (image.dataset.fallback !== 'original' && item.thumbnail !== item.path) {
-        image.dataset.fallback = 'original';
-        image.src = encodeURI(item.path);
-        return;
-      }
-      card.hidden = true;
-      console.warn(`图片加载失败：${item.path}`);
-    });
-
-    title.textContent = item.title;
-    category.textContent = describeImage(item);
-    imageButton.setAttribute('aria-label', `查看 ${item.title}`);
-    imageButton.addEventListener('click', () => openLightbox(index));
-    syncFavoriteButton(favorite, item);
-    favorite.addEventListener('click', () => toggleFavorite(item.id));
-
-    displayTags(item).slice(0, 4).forEach((tag) => {
-      const tagElement = document.createElement('span');
-      tagElement.className = 'tag';
-      tagElement.textContent = `#${tag}`;
-      tagList.append(tagElement);
-    });
-    elements.grid.append(fragment);
-  });
-
-  const hasFacetFilters = filterDimensions.some((dimension) => state.filters[dimension] !== ALL);
-  const hasFilters = state.activeCharacter !== ALL || hasFacetFilters || state.query || state.favoritesOnly;
-  elements.clearFilters.hidden = !hasFilters;
-  elements.resultText.textContent = state.images.length ? `显示 ${state.visibleImages.length} / ${state.images.length} 张作品` : '尚未添加图片';
-  const isEmpty = state.visibleImages.length === 0;
-  elements.emptyState.hidden = !isEmpty;
-  elements.grid.hidden = isEmpty;
-
-  if (isEmpty && state.images.length) {
-    elements.emptyTitle.textContent = '没有找到匹配的作品';
-    elements.emptyDescription.textContent = '尝试更换关键词、人物、主题或其他筛选条件。';
-  } else if (isEmpty) {
-    elements.emptyTitle.textContent = '画廊还是空的';
-    elements.emptyDescription.innerHTML = '把图片放入 <code>images/</code> 文件夹并推送，网站会自动生成索引。';
-  }
-}
-
-function syncFavoriteButton(button, item) {
-  const active = state.favorites.has(item.id);
-  button.textContent = active ? '♥' : '♡';
-  button.setAttribute('aria-pressed', String(active));
-  button.setAttribute('aria-label', active ? `取消收藏 ${item.title}` : `收藏 ${item.title}`);
-}
-
-function toggleFavorite(id) {
-  if (state.favorites.has(id)) state.favorites.delete(id);
-  else state.favorites.add(id);
-  localStorage.setItem('image-gallery:favorites', JSON.stringify([...state.favorites]));
-  updateStats();
-  applyFilters();
-  if (elements.lightbox.open && state.activeIndex >= 0) syncLightboxFavorite();
-}
-
-function openLightbox(index) {
-  state.activeIndex = index;
-  renderLightbox();
-  elements.lightbox.showModal();
-  document.body.style.overflow = 'hidden';
-}
-
-function renderLightbox() {
-  const item = state.visibleImages[state.activeIndex];
-  if (!item) return;
-  elements.lightboxImage.src = encodeURI(item.path);
-  elements.lightboxImage.alt = item.title;
-  elements.lightboxTitle.textContent = item.title;
-  const meta = [
-    describeImage(item),
-    labelFor('assetType', item.assetType),
-    ...item.composition.map((value) => labelFor('composition', value)),
-  ];
-  elements.lightboxCategory.textContent = [...new Set(meta.filter(Boolean))].join(' · ');
-  elements.lightboxDescription.textContent = item.description || displayTags(item).map((tag) => `#${tag}`).join(' ');
-  elements.downloadImage.href = encodeURI(item.path);
-  elements.downloadImage.download = item.path.split('/').pop() || item.title;
-  elements.previousImage.hidden = state.visibleImages.length < 2;
-  elements.nextImage.hidden = state.visibleImages.length < 2;
-  syncLightboxFavorite();
-}
-
-function syncLightboxFavorite() {
-  const item = state.visibleImages[state.activeIndex];
-  if (!item) return;
-  const active = state.favorites.has(item.id);
-  elements.lightboxFavorite.textContent = active ? '♥ 已收藏' : '♡ 收藏';
-  elements.lightboxFavorite.setAttribute('aria-pressed', String(active));
-}
-
-function moveLightbox(offset) {
-  if (!state.visibleImages.length) return;
-  state.activeIndex = (state.activeIndex + offset + state.visibleImages.length) % state.visibleImages.length;
-  renderLightbox();
-}
-
-function closeLightbox() {
-  elements.lightbox.close();
-  document.body.style.overflow = '';
-}
-
-function clearFilters() {
-  state.activeCharacter = ALL;
-  state.query = '';
-  state.favoritesOnly = false;
-  state.advancedOpen = false;
-  filterDimensions.forEach((dimension) => { state.filters[dimension] = ALL; });
-  elements.search.value = '';
-  elements.favoritesOnly.setAttribute('aria-pressed', 'false');
-  renderCharacters();
-  renderFacetFilters();
-  applyFilters();
-}
-
-function initializeTheme() {
-  const saved = localStorage.getItem('image-gallery:theme');
-  const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  document.documentElement.dataset.theme = saved || preferred;
-}
-
-function toggleTheme() {
-  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-  document.documentElement.dataset.theme = next;
-  localStorage.setItem('image-gallery:theme', next);
-}
-
-elements.search.addEventListener('input', (event) => { state.query = event.target.value; applyFilters(); });
-elements.sort.addEventListener('change', (event) => { state.sort = event.target.value; applyFilters(); });
-filterDimensions.forEach((dimension) => {
-  elements.facetFilters[dimension]?.addEventListener('change', (event) => {
-    state.filters[dimension] = event.target.value;
-    applyFilters();
-  });
-});
-elements.favoritesOnly.addEventListener('click', () => {
-  state.favoritesOnly = !state.favoritesOnly;
-  elements.favoritesOnly.setAttribute('aria-pressed', String(state.favoritesOnly));
-  applyFilters();
-});
-elements.advancedToggle.addEventListener('click', () => {
-  state.advancedOpen = !state.advancedOpen;
-  syncFilterInterface();
-});
-elements.clearFilters.addEventListener('click', clearFilters);
-elements.themeToggle.addEventListener('click', toggleTheme);
-elements.lightboxClose.addEventListener('click', closeLightbox);
-elements.previousImage.addEventListener('click', () => moveLightbox(-1));
-elements.nextImage.addEventListener('click', () => moveLightbox(1));
-elements.lightboxFavorite.addEventListener('click', () => {
-  const item = state.visibleImages[state.activeIndex];
-  if (item) toggleFavorite(item.id);
-});
-elements.lightbox.addEventListener('click', (event) => { if (event.target === elements.lightbox) closeLightbox(); });
-document.addEventListener('keydown', (event) => {
-  if (event.key === '/' && document.activeElement !== elements.search) {
-    event.preventDefault();
-    elements.search.focus();
-  }
-  if (!elements.lightbox.open) return;
-  if (event.key === 'ArrowLeft') moveLightbox(-1);
-  if (event.key === 'ArrowRight') moveLightbox(1);
-});
-
-initializeTheme();
-loadGallery();
+function syncFavorite(button,a){const on=state.favorites.has(a.id);button.textContent=on?'♥':'♡';button.setAttribute('aria-pressed',String(on));}
+function toggleFavorite(id){state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);localStorage.setItem('visual-asset-library:favorites',JSON.stringify([...state.favorites]));apply();if(el.lightbox.open)renderLightbox();}
+function openLightbox(index){state.activeIndex=index;renderLightbox();el.lightbox.showModal();document.body.style.overflow='hidden';}
+function renderLightbox(){const a=state.visible[state.activeIndex];if(!a)return;el.lightboxImage.src=encodeURI(a.path);el.lightboxImage.alt=a.title;el.lightboxTitle.textContent=a.title;el.lightboxMeta.textContent=domainLabel(a);el.lightboxDetails.textContent=[a.width&&a.height?`${a.width} × ${a.height}`:'',a.domain==='medical-kv'?(a.used?'已使用':'未使用'):''].filter(Boolean).join(' · ');el.download.href=encodeURI(a.path);el.download.download=a.path.split('/').pop();const on=state.favorites.has(a.id);el.lightboxFavorite.textContent=on?'♥ 已收藏':'♡ 收藏';el.prev.disabled=state.visible.length<2;el.next.disabled=state.visible.length<2;}
+function move(delta){if(!state.visible.length)return;state.activeIndex=(state.activeIndex+delta+state.visible.length)%state.visible.length;renderLightbox();}
+function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.organ=ALL;state.unusedOnly=false;state.query='';el.search.value='';el.unusedOnly.setAttribute('aria-pressed','false');el.favoritesOnly.setAttribute('aria-pressed','false');renderFilters();apply();}
+function setDomain(domain){state.domain=domain;document.querySelectorAll('.domain-tab').forEach(b=>b.classList.toggle('active',b.dataset.domain===domain));clearFilters();}
+function patchAsset(id,patch){const a=state.assets.find(x=>x.id===id);if(!a)return;Object.assign(a,patch);apply();}
+window.visualAssetLibrary={getAsset:(id)=>state.assets.find(a=>a.id===id),patchAsset,getDomain:()=>state.domain};
+document.querySelectorAll('.domain-tab').forEach(b=>b.onclick=()=>setDomain(b.dataset.domain));el.search.oninput=e=>{state.query=e.target.value;apply();};el.sort.onchange=e=>{state.sort=e.target.value;apply();};el.color.onchange=e=>{state.color=e.target.value;apply();};el.organ.onchange=e=>{state.organ=e.target.value;apply();};el.unusedOnly.onclick=()=>{state.unusedOnly=!state.unusedOnly;el.unusedOnly.setAttribute('aria-pressed',String(state.unusedOnly));apply();};el.favoritesOnly.onclick=()=>{const on=el.favoritesOnly.getAttribute('aria-pressed')!=='true';el.favoritesOnly.setAttribute('aria-pressed',String(on));apply();};el.clear.onclick=clearFilters;el.lightboxClose.onclick=()=>el.lightbox.close();el.lightbox.addEventListener('close',()=>{document.body.style.overflow='';});el.prev.onclick=()=>move(-1);el.next.onclick=()=>move(1);el.lightboxFavorite.onclick=()=>{const a=state.visible[state.activeIndex];if(a)toggleFavorite(a.id);};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el.lightbox.open)el.lightbox.close();if(el.lightbox.open&&e.key==='ArrowLeft')move(-1);if(el.lightbox.open&&e.key==='ArrowRight')move(1);});
+const savedTheme=localStorage.getItem('visual-asset-library:theme');if(savedTheme)document.documentElement.dataset.theme=savedTheme;el.theme.onclick=()=>{const next=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=next;localStorage.setItem('visual-asset-library:theme',next);};
+load().catch(err=>{console.error(err);el.result.textContent=`素材库加载失败：${err.message}`;});

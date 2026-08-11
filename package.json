@@ -1,14 +1,11 @@
 {
-  "name": "image-gallery",
-  "version": "2.0.0",
+  "name": "visual-asset-library",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
-  "description": "A static gallery for generated character artwork.",
+  "description": "A focused static visual asset library for character artwork and medical KV backgrounds.",
   "scripts": {
-    "generate": "node scripts/generate-gallery.mjs",
-    "validate": "node scripts/generate-gallery.mjs",
-    "freeze-ids": "node scripts/freeze-metadata-ids.mjs",
-    "build": "npm run generate && node scripts/generate-landscape-thumbnails.mjs && node scripts/build-site.mjs",
+    "build": "node scripts/build.mjs",
     "serve": "python3 -m http.server 4173 --directory dist"
   },
   "dependencies": {
