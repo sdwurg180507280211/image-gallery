@@ -24,7 +24,7 @@
       <div>
         <p class="eyebrow">PERSONAL VISUAL ARCHIVE</p>
         <h1>把生成的好素材，<span>真正沉淀下来。</span></h1>
-        <p>人物图按服装主色或多宫图整理；医药KV按主色、主器官与使用状态快速筛选。原图保留，列表只加载缩略图。</p>
+        <p>人物图按服装主色或多宫图整理；医药KV按主色整理，并保留使用状态。原图保留，列表只加载缩略图。</p>
       </div>
       <div class="stats">
         <div><strong id="assetCount">0</strong><span>张素材</span></div>
@@ -62,12 +62,8 @@
 
       <section id="medicalFilters" class="filter-block medical-filters" hidden>
         <div class="facet-row">
-          <div class="facet-header"><span>主色</span><small>只保留当前库里实际存在的颜色</small></div>
+          <div class="facet-header"><span>主色</span><small>按KV整体主色快速筛选</small></div>
           <div class="chip-row" id="colorFilters"></div>
-        </div>
-        <div class="facet-row">
-          <div class="facet-header"><span>主器官</span><small>一个KV只归到一个主器官</small></div>
-          <div class="chip-row" id="organFilters"></div>
         </div>
         <div class="facet-row usage-row">
           <div class="facet-header"><span>使用状态</span><small>用于筛选可继续使用的KV</small></div>
@@ -136,7 +132,7 @@
     </article>
   </template>
 
-  <script type="module" src="./assets/app.js?v=8"></script>
+  <script type="module" src="./assets/app.js?v=9"></script>
   <script type="module" src="./assets/admin.js?v=5"></script>
   <script type="module" src="./assets/interactions.js?v=1"></script>
 </body>
