@@ -1,6 +1,5 @@
 export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onToggleFavorite}){
   const dialog=document.querySelector('#lightbox');
-  const stageWrap=document.querySelector('.viewer-stage-wrap');
   const el={
     close:document.querySelector('#lightboxClose'),image:document.querySelector('#lightboxImage'),stage:document.querySelector('#lightboxStage'),
     title:document.querySelector('#lightboxTitle'),meta:document.querySelector('#lightboxMeta'),counter:document.querySelector('#lightboxCounter'),
@@ -9,37 +8,43 @@ export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onTog
   };
   let activeIndex=-1;
   let returnFocus=null;
-  let gesture=null;
-  let wheelAt=0;
+  let pan=null;
 
   function setOrientation(asset){
-    const ratio=asset.width>0&&asset.height>0?asset.width/asset.height:1;
+    const ratio=asset.width/asset.height;
     dialog.classList.toggle('is-portrait',ratio<1);
     dialog.classList.toggle('is-landscape',ratio>=1.15);
     dialog.classList.toggle('is-square',ratio>=1&&ratio<1.15);
   }
 
-  function resetGesture(){
-    gesture=null;
-    stageWrap.classList.remove('is-dragging');
-    el.image.style.removeProperty('transform');
-    el.image.style.removeProperty('opacity');
+  function resetPan(){
+    pan=null;
+    el.stage.classList.remove('is-panning');
+  }
+
+  function resetViewport(){
+    requestAnimationFrame(()=>{
+      el.stage.scrollLeft=Math.max(0,(el.stage.scrollWidth-el.stage.clientWidth)/2);
+      el.stage.scrollTop=0;
+    });
   }
 
   function render(){
     const items=getItems();
     if(!dialog.open||!items.length)return;
-    resetGesture();
+    resetPan();
     activeIndex=Math.max(0,Math.min(activeIndex,items.length-1));
     const asset=items[activeIndex];
     setOrientation(asset);
     el.counter.textContent=`${activeIndex+1} / ${items.length}`;
-    el.meta.textContent=formatMeta(asset);
+    el.meta.textContent=`${formatMeta(asset)} · 原尺寸 1:1`;
     el.title.textContent=asset.title;
     el.stage.classList.add('is-loading');
-    el.image.onload=()=>el.stage.classList.remove('is-loading');
+    el.image.onload=()=>{
+      el.stage.classList.remove('is-loading');
+      resetViewport();
+    };
     el.image.onerror=()=>el.stage.classList.remove('is-loading');
-    el.image.draggable=false;
     el.image.src=encodeURI(asset.path);
     el.image.alt=asset.title;
     el.download.href=encodeURI(asset.path);
@@ -94,57 +99,25 @@ export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onTog
     render();
   }
 
-  stageWrap.addEventListener('pointerdown',event=>{
-    if(getItems().length<2)return;
-    if(event.target.closest('button,a'))return;
-    if(event.pointerType==='mouse'&&event.button!==0)return;
-    gesture={id:event.pointerId,startX:event.clientX,startY:event.clientY,lastX:event.clientX,lastY:event.clientY,horizontal:false,cancelled:false};
-    stageWrap.setPointerCapture?.(event.pointerId);
+  el.stage.addEventListener('pointerdown',event=>{
+    if(event.pointerType!=='mouse'||event.button!==0)return;
+    pan={id:event.pointerId,x:event.clientX,y:event.clientY,left:el.stage.scrollLeft,top:el.stage.scrollTop};
+    el.stage.setPointerCapture?.(event.pointerId);
+    el.stage.classList.add('is-panning');
   });
 
-  stageWrap.addEventListener('pointermove',event=>{
-    if(!gesture||gesture.id!==event.pointerId||gesture.cancelled)return;
-    gesture.lastX=event.clientX;
-    gesture.lastY=event.clientY;
-    const dx=event.clientX-gesture.startX;
-    const dy=event.clientY-gesture.startY;
-    if(!gesture.horizontal){
-      if(Math.abs(dx)<10&&Math.abs(dy)<10)return;
-      if(Math.abs(dy)>=Math.abs(dx)){
-        gesture.cancelled=true;
-        return;
-      }
-      gesture.horizontal=true;
-      stageWrap.classList.add('is-dragging');
-    }
+  el.stage.addEventListener('pointermove',event=>{
+    if(!pan||pan.id!==event.pointerId)return;
     event.preventDefault();
-    const offset=Math.max(-110,Math.min(110,dx*.34));
-    el.image.style.transform=`translateX(${offset}px)`;
-    el.image.style.opacity=String(Math.max(.58,1-Math.abs(offset)/280));
+    el.stage.scrollLeft=pan.left-(event.clientX-pan.x);
+    el.stage.scrollTop=pan.top-(event.clientY-pan.y);
   });
 
-  function finishGesture(event){
-    if(!gesture||gesture.id!==event.pointerId)return;
-    const dx=(gesture.lastX??event.clientX)-gesture.startX;
-    const dy=(gesture.lastY??event.clientY)-gesture.startY;
-    const shouldMove=gesture.horizontal&&Math.abs(dx)>64&&Math.abs(dx)>Math.abs(dy)*1.15;
-    const direction=dx<0?1:-1;
-    resetGesture();
-    if(shouldMove)move(direction);
+  function finishPan(event){
+    if(pan&&pan.id===event.pointerId)resetPan();
   }
-
-  stageWrap.addEventListener('pointerup',finishGesture);
-  stageWrap.addEventListener('pointercancel',resetGesture);
-
-  stageWrap.addEventListener('wheel',event=>{
-    if(!dialog.open||getItems().length<2)return;
-    if(Math.abs(event.deltaX)<36||Math.abs(event.deltaX)<=Math.abs(event.deltaY))return;
-    event.preventDefault();
-    const now=Date.now();
-    if(now-wheelAt<420)return;
-    wheelAt=now;
-    move(event.deltaX>0?1:-1);
-  },{passive:false});
+  el.stage.addEventListener('pointerup',finishPan);
+  el.stage.addEventListener('pointercancel',resetPan);
 
   el.close.onclick=close;
   el.prev.onclick=()=>move(-1);
@@ -159,7 +132,7 @@ export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onTog
   dialog.addEventListener('click',event=>{if(event.target===dialog)close();});
   dialog.addEventListener('close',()=>{
     document.body.style.overflow='';
-    resetGesture();
+    resetPan();
     el.image.removeAttribute('src');
     dialog.classList.remove('is-portrait','is-landscape','is-square');
     const target=returnFocus;
