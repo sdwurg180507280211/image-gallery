@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b0d12" />
   <meta name="description" content="人物作品与医药KV的个人视觉素材库。" />
   <title>Visual Asset Library</title>
-  <link rel="stylesheet" href="./assets/styles.css?v=4" />
+  <link rel="stylesheet" href="./assets/styles.css?v=5" />
 </head>
 <body>
   <header class="site-header">
@@ -100,7 +100,7 @@
           <button class="lightbox-nav previous" id="previousImage" type="button" aria-label="上一张">‹</button>
           <div class="viewer-stage" id="lightboxStage">
             <div class="viewer-loader" aria-hidden="true"></div>
-            <img id="lightboxImage" alt="" />
+            <img id="lightboxImage" draggable="false" alt="" />
           </div>
           <button class="lightbox-nav next" id="nextImage" type="button" aria-label="下一张">›</button>
         </div>
@@ -113,7 +113,7 @@
             <button class="secondary-button" id="lightboxFavorite" type="button">♡ 收藏</button>
             <a class="primary-button" id="downloadImage" href="#" download>下载原图</a>
           </div>
-          <p class="viewer-hint">← → 切换图片 · Esc 关闭</p>
+          <p class="viewer-hint">左右滑动 / 拖拽或 ← → 切换 · Esc 关闭</p>
         </aside>
       </div>
     </div>
@@ -134,7 +134,7 @@
     </article>
   </template>
 
-  <script type="module" src="./assets/app.js?v=4"></script>
-  <script type="module" src="./assets/admin.js?v=4"></script>
+  <script type="module" src="./assets/app.js?v=5"></script>
+  <script type="module" src="./assets/admin.js?v=5"></script>
 </body>
 </html>
