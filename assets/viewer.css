@@ -1,0 +1,12 @@
+.viewer-stage-wrap{overflow:hidden;background:var(--surface);cursor:default;user-select:none;touch-action:auto}
+.viewer-stage,.lightbox.is-portrait .viewer-stage{position:relative;display:block;width:100%;height:100%;min-height:0;padding:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:var(--surface);cursor:grab}
+.viewer-stage.is-panning{cursor:grabbing}
+.viewer-canvas{display:flex;align-items:flex-start;justify-content:center;min-width:100%;min-height:100%;width:max-content;height:max-content;padding:24px}
+.lightbox.is-portrait .viewer-canvas{padding:18px}
+.viewer-stage img{display:block;flex:0 0 auto;max-width:none;max-height:none;margin:0;object-fit:none;background:transparent;opacity:1;transition:opacity .18s ease;will-change:auto}
+.viewer-stage.is-loading img{opacity:.28}
+.viewer-stage.is-panning img{pointer-events:none}
+.viewer-loader{position:absolute;left:50%;top:50%;z-index:3;display:block;margin:-17px 0 0 -17px;pointer-events:none}
+.lightbox-nav{position:absolute;z-index:4}
+@media(max-width:760px){.viewer-main{grid-template-rows:minmax(62dvh,1fr) auto}.viewer-stage-wrap{min-height:62dvh}.viewer-canvas{padding:16px}.viewer-details{max-height:none}.viewer-hint{display:block}}
+@media(max-width:480px){.viewer-canvas{padding:12px}}
