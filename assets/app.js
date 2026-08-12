@@ -6,11 +6,11 @@ const LABELS={
   color:{blue:'蓝色系',purple:'紫色系',pink:'粉色系',green:'绿色系',red:'红色系',orange:'橙黄色系',white:'白色系',black:'黑色系',mixed:'综合色系'},
   organ:{heart:'心脏',brain:'大脑',kidney:'肾脏',liver:'肝脏',lung:'肺',spleen:'脾脏',stomach:'胃',pancreas:'胰腺',vascular:'血管',genetics:'DNA / 基因',other:'其他医疗'}
 };
-const state={assets:[],visible:[],domain:'character',characterCategory:ALL,color:ALL,organ:ALL,usage:ALL,query:'',sort:'newest',favoritesOnly:false,favorites:new Set(JSON.parse(localStorage.getItem('visual-asset-library:favorites')||'[]'))};
+const state={assets:[],visible:[],domain:'character',characterCategory:ALL,color:ALL,usage:ALL,query:'',sort:'newest',favoritesOnly:false,favorites:new Set(JSON.parse(localStorage.getItem('visual-asset-library:favorites')||'[]'))};
 const $=selector=>document.querySelector(selector);
 const el={
   grid:$('#galleryGrid'),template:$('#cardTemplate'),search:$('#searchInput'),clearSearch:$('#clearSearch'),sort:$('#sortSelect'),favoritesOnly:$('#favoritesOnly'),
-  characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),medicalFilters:$('#medicalFilters'),colorFilters:$('#colorFilters'),organFilters:$('#organFilters'),usageFilters:$('#usageFilters'),
+  characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),medicalFilters:$('#medicalFilters'),colorFilters:$('#colorFilters'),usageFilters:$('#usageFilters'),
   result:$('#resultText'),activeFilters:$('#activeFilters'),clear:$('#clearFilters'),empty:$('#emptyState'),assetCount:$('#assetCount'),characterCount:$('#characterCount'),kvCount:$('#kvCount'),characterTabCount:$('#characterTabCount'),kvTabCount:$('#kvTabCount'),theme:$('#themeToggle')
 };
 let lightbox;
@@ -26,9 +26,9 @@ function matchesShared(asset){const q=state.query.trim().toLocaleLowerCase('zh-C
 function matchesUsage(asset){return state.usage===ALL||(state.usage==='used'?asset.used:!asset.used);}
 function currentDomainAssets(){return state.assets.filter(asset=>asset.domain===state.domain);}
 function sortAssets(items){return items.sort((a,b)=>{if(state.sort==='title')return a.title.localeCompare(b.title,'zh-CN');const at=Date.parse(a.createdAt||0)||0,bt=Date.parse(b.createdAt||0)||0;return state.sort==='oldest'?at-bt:bt-at;});}
-function computeVisible(){return sortAssets(currentDomainAssets().filter(matchesShared).filter(asset=>state.domain==='character'?state.characterCategory===ALL||asset.category===state.characterCategory:(state.color===ALL||asset.color===state.color)&&(state.organ===ALL||asset.organ===state.organ)&&matchesUsage(asset)));}
+function computeVisible(){return sortAssets(currentDomainAssets().filter(matchesShared).filter(asset=>state.domain==='character'?state.characterCategory===ALL||asset.category===state.characterCategory:(state.color===ALL||asset.color===state.color)&&matchesUsage(asset)));}
 function countBy(items,key){const map=new Map();for(const item of items)map.set(item[key],(map.get(item[key])||0)+1);return map;}
-function medicalScope(skip){return state.assets.filter(asset=>asset.domain==='medical-kv').filter(matchesShared).filter(asset=>skip==='color'||state.color===ALL||asset.color===state.color).filter(asset=>skip==='organ'||state.organ===ALL||asset.organ===state.organ).filter(asset=>skip==='usage'||matchesUsage(asset));}
+function medicalScope(skip){return state.assets.filter(asset=>asset.domain==='medical-kv').filter(matchesShared).filter(asset=>skip==='color'||state.color===ALL||asset.color===state.color).filter(asset=>skip==='usage'||matchesUsage(asset));}
 function characterScope(){return state.assets.filter(asset=>asset.domain==='character').filter(matchesShared);}
 function domainLabel(asset){return asset.domain==='character'?(LABELS.character[asset.category]||asset.category):`${LABELS.organ[asset.organ]} · ${LABELS.color[asset.color]}`;}
 function formatDate(value){const time=Date.parse(value||'');if(!Number.isFinite(time))return '';return new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'short',day:'numeric'}).format(time);}
@@ -42,7 +42,6 @@ function toggleFacet(current,value){return current===value?ALL:value;}
 function buildFilterControls(){
   createChip(el.characterCategoryFilters,ALL,'全部',value=>{state.characterCategory=toggleFacet(state.characterCategory,value);apply();});for(const [value,label] of Object.entries(LABELS.character))createChip(el.characterCategoryFilters,value,label,v=>{state.characterCategory=toggleFacet(state.characterCategory,v);apply();});
   createChip(el.colorFilters,ALL,'全部颜色',value=>{state.color=toggleFacet(state.color,value);apply();});for(const [value,label] of Object.entries(LABELS.color))createChip(el.colorFilters,value,label,v=>{state.color=toggleFacet(state.color,v);apply();});
-  createChip(el.organFilters,ALL,'全部器官',value=>{state.organ=toggleFacet(state.organ,value);apply();});for(const [value,label] of Object.entries(LABELS.organ))createChip(el.organFilters,value,label,v=>{state.organ=toggleFacet(state.organ,v);apply();});
   for(const [value,label] of [[ALL,'全部'],['unused','未使用'],['used','已使用']])createChip(el.usageFilters,value,label,v=>{state.usage=toggleFacet(state.usage,v);apply();});
 }
 function updateChipGroup(container,current,counts,total){
@@ -51,22 +50,20 @@ function updateChipGroup(container,current,counts,total){
 function updateFilterControls(){
   const charScope=characterScope();updateChipGroup(el.characterCategoryFilters,state.characterCategory,countBy(charScope,'category'),charScope.length);
   const colorScope=medicalScope('color');updateChipGroup(el.colorFilters,state.color,countBy(colorScope,'color'),colorScope.length);
-  const organScope=medicalScope('organ');updateChipGroup(el.organFilters,state.organ,countBy(organScope,'organ'),organScope.length);
   const usageScope=medicalScope('usage'),usageCounts=new Map([['unused',usageScope.filter(asset=>!asset.used).length],['used',usageScope.filter(asset=>asset.used).length]]);updateChipGroup(el.usageFilters,state.usage,usageCounts,usageScope.length);
 }
 function renderStats(){const characters=state.assets.filter(asset=>asset.domain==='character').length,kvs=state.assets.filter(asset=>asset.domain==='medical-kv').length;el.assetCount.textContent=state.assets.length;el.characterCount.textContent=characters;el.kvCount.textContent=kvs;el.characterTabCount.textContent=characters;el.kvTabCount.textContent=kvs;}
 function syncControls(){
-  el.characterFilters.hidden=state.domain!=='character';el.medicalFilters.hidden=state.domain!=='medical-kv';el.search.placeholder=state.domain==='character'?'搜索人物标题或关键词…':'搜索KV标题、器官或关键词…';el.clearSearch.hidden=!state.query;
+  el.characterFilters.hidden=state.domain!=='character';el.medicalFilters.hidden=state.domain!=='medical-kv';el.search.placeholder=state.domain==='character'?'搜索人物标题或关键词…':'搜索KV标题或关键词…';el.clearSearch.hidden=!state.query;
   el.favoritesOnly.setAttribute('aria-pressed',String(state.favoritesOnly));el.favoritesOnly.textContent=state.favoritesOnly?'♥ 只看收藏':'♡ 只看收藏';
   document.querySelectorAll('.domain-tab').forEach(button=>{const active=button.dataset.domain===state.domain;button.classList.toggle('active',active);button.setAttribute('aria-selected',String(active));});
-  const has=state.query||state.favoritesOnly||state.characterCategory!==ALL||state.color!==ALL||state.organ!==ALL||state.usage!==ALL;el.clear.hidden=!has;
+  const has=state.query||state.favoritesOnly||state.characterCategory!==ALL||state.color!==ALL||state.usage!==ALL;el.clear.hidden=!has;
 }
 function renderActiveFilters(){
   el.activeFilters.replaceChildren();const filters=[];
   if(state.domain==='character'&&state.characterCategory!==ALL)filters.push([LABELS.character[state.characterCategory],()=>{state.characterCategory=ALL;apply();}]);
   if(state.domain==='medical-kv'){
     if(state.color!==ALL)filters.push([LABELS.color[state.color],()=>{state.color=ALL;apply();}]);
-    if(state.organ!==ALL)filters.push([LABELS.organ[state.organ],()=>{state.organ=ALL;apply();}]);
     if(state.usage!==ALL)filters.push([state.usage==='used'?'已使用':'未使用',()=>{state.usage=ALL;apply();}]);
   }
   for(const [label,remove] of filters){const button=document.createElement('button');button.type='button';button.textContent=`${label} ×`;button.onclick=remove;el.activeFilters.append(button);}el.activeFilters.hidden=!filters.length;
@@ -85,8 +82,8 @@ function render(){
   const total=currentDomainAssets().length;el.result.textContent=`显示 ${state.visible.length} / ${total} 张${state.domain==='character'?'人物图片':'医药 KV'}`;el.empty.hidden=state.visible.length!==0;el.grid.hidden=state.visible.length===0;document.dispatchEvent(new CustomEvent('gallery:rendered'));
 }
 function apply(){state.visible=computeVisible();updateFilterControls();syncControls();renderActiveFilters();render();if(lightbox?.isOpen())lightbox.refresh();}
-function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.organ=ALL;state.usage=ALL;state.query='';state.favoritesOnly=false;el.search.value='';apply();}
-function setDomain(domain){if(domain===state.domain)return;state.domain=domain;state.characterCategory=ALL;state.color=ALL;state.organ=ALL;state.usage=ALL;apply();}
+function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.usage=ALL;state.query='';state.favoritesOnly=false;el.search.value='';apply();}
+function setDomain(domain){if(domain===state.domain)return;state.domain=domain;state.characterCategory=ALL;state.color=ALL;state.usage=ALL;apply();}
 function patchAsset(id,patch){const asset=state.assets.find(item=>item.id===id);if(!asset)return;Object.assign(asset,patch);apply();}
 async function load(){
   const response=await fetch('./data/gallery.json',{cache:'no-store'});if(!response.ok)throw new Error(`索引读取失败：HTTP ${response.status}`);
