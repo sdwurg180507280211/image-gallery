@@ -1,85 +1,94 @@
-export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onToggleFavorite}){
+export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}){
   const dialog=document.querySelector('#lightbox');
   const el={
-    close:document.querySelector('#lightboxClose'),image:document.querySelector('#lightboxImage'),stage:document.querySelector('#lightboxStage'),
-    title:document.querySelector('#lightboxTitle'),meta:document.querySelector('#lightboxMeta'),counter:document.querySelector('#lightboxCounter'),
-    status:document.querySelector('#lightboxStatus'),facts:document.querySelector('#lightboxFacts'),tags:document.querySelector('#lightboxTags'),
-    favorite:document.querySelector('#lightboxFavorite'),download:document.querySelector('#downloadImage'),prev:document.querySelector('#previousImage'),next:document.querySelector('#nextImage')
+    stage:document.querySelector('#lightboxStage'),
+    image:document.querySelector('#lightboxImage'),
+    close:document.querySelector('#lightboxClose'),
+    counter:document.querySelector('#lightboxCounter'),
+    meta:document.querySelector('#lightboxMeta'),
+    title:document.querySelector('#lightboxTitle'),
+    status:document.querySelector('#lightboxStatus'),
+    favorite:document.querySelector('#lightboxFavorite'),
+    download:document.querySelector('#downloadImage'),
+    prev:document.querySelector('#previousImage'),
+    next:document.querySelector('#nextImage')
   };
+
   let activeIndex=-1;
   let returnFocus=null;
+  let activeAsset=null;
   let pan=null;
+  let offset={x:0,y:0};
+  let bounds={minX:0,maxX:0,minY:0,maxY:0};
 
-  function setOrientation(asset){
-    const ratio=asset.width/asset.height;
-    dialog.classList.toggle('is-portrait',ratio<1);
-    dialog.classList.toggle('is-landscape',ratio>=1.15);
-    dialog.classList.toggle('is-square',ratio>=1&&ratio<1.15);
+  const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+
+  function computeBounds(asset){
+    const width=el.stage.clientWidth;
+    const height=el.stage.clientHeight;
+    const centerX=(width-asset.width)/2;
+    const centerY=(height-asset.height)/2;
+    bounds={
+      minX:asset.width>width?width-asset.width:centerX,
+      maxX:asset.width>width?0:centerX,
+      minY:asset.height>height?height-asset.height:centerY,
+      maxY:asset.height>height?0:centerY
+    };
+    el.stage.classList.toggle('is-pannable',asset.width>width||asset.height>height);
   }
 
-  function resetPan(){
-    pan=null;
-    el.stage.classList.remove('is-panning');
+  function applyOffset(){
+    offset.x=clamp(offset.x,bounds.minX,bounds.maxX);
+    offset.y=clamp(offset.y,bounds.minY,bounds.maxY);
+    el.image.style.transform=`translate3d(${offset.x}px,${offset.y}px,0)`;
   }
 
-  function resetViewport(){
-    requestAnimationFrame(()=>{
-      el.stage.scrollLeft=Math.max(0,(el.stage.scrollWidth-el.stage.clientWidth)/2);
-      el.stage.scrollTop=0;
-    });
+  function resetViewport(asset){
+    computeBounds(asset);
+    const width=el.stage.clientWidth;
+    const height=el.stage.clientHeight;
+    offset.x=(width-asset.width)/2;
+    offset.y=asset.height>height?0:(height-asset.height)/2;
+    applyOffset();
   }
 
   function render(){
     const items=getItems();
     if(!dialog.open||!items.length)return;
-    resetPan();
     activeIndex=Math.max(0,Math.min(activeIndex,items.length-1));
-    const asset=items[activeIndex];
-    setOrientation(asset);
+    activeAsset=items[activeIndex];
+    pan=null;
+    el.stage.classList.remove('is-panning');
+
     el.counter.textContent=`${activeIndex+1} / ${items.length}`;
-    el.meta.textContent=`${formatMeta(asset)} · 原尺寸 1:1`;
-    el.title.textContent=asset.title;
-    el.stage.scrollLeft=0;
-    el.stage.scrollTop=0;
+    el.meta.textContent=`${formatMeta(activeAsset)} · ${activeAsset.width} × ${activeAsset.height} · 1:1`;
+    el.title.textContent=activeAsset.title;
+    el.image.style.width=`${activeAsset.width}px`;
+    el.image.style.height=`${activeAsset.height}px`;
+    el.image.alt=activeAsset.title;
     el.stage.classList.add('is-loading');
-    el.image.style.width=`${asset.width}px`;
-    el.image.style.height=`${asset.height}px`;
     el.image.onload=()=>{
       el.stage.classList.remove('is-loading');
-      resetViewport();
+      resetViewport(activeAsset);
     };
     el.image.onerror=()=>el.stage.classList.remove('is-loading');
-    el.image.src=encodeURI(asset.path);
-    el.image.alt=asset.title;
-    el.download.href=encodeURI(asset.path);
-    el.download.download=asset.path.split('/').pop();
-    const favorite=isFavorite(asset.id);
+    el.image.src=encodeURI(activeAsset.path);
+
+    el.download.href=encodeURI(activeAsset.path);
+    el.download.download=activeAsset.path.split('/').pop();
+    const favorite=isFavorite(activeAsset.id);
     el.favorite.textContent=favorite?'♥ 已收藏':'♡ 收藏';
     el.favorite.setAttribute('aria-pressed',String(favorite));
     el.prev.disabled=items.length<2;
     el.next.disabled=items.length<2;
-    if(asset.domain==='medical-kv'){
+
+    if(activeAsset.domain==='medical-kv'){
       el.status.hidden=false;
-      el.status.className=`viewer-status ${asset.used?'used':'unused'}`;
-      el.status.textContent=asset.used?'✓ 已使用':'● 未使用';
+      el.status.className=`viewer-status ${activeAsset.used?'used':'unused'}`;
+      el.status.textContent=activeAsset.used?'✓ 已使用':'● 未使用';
     }else{
       el.status.hidden=true;
     }
-    el.facts.replaceChildren();
-    for(const [label,value] of formatFacts(asset)){
-      const dt=document.createElement('dt');
-      const dd=document.createElement('dd');
-      dt.textContent=label;
-      dd.textContent=value;
-      el.facts.append(dt,dd);
-    }
-    el.tags.replaceChildren();
-    for(const tag of asset.tags||[]){
-      const span=document.createElement('span');
-      span.textContent=tag;
-      el.tags.append(span);
-    }
-    el.tags.hidden=!el.tags.childElementCount;
   }
 
   function open(index,opener){
@@ -104,56 +113,76 @@ export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onTog
   }
 
   el.stage.addEventListener('pointerdown',event=>{
-    if(event.pointerType!=='mouse'||event.button!==0)return;
-    pan={id:event.pointerId,x:event.clientX,y:event.clientY,left:el.stage.scrollLeft,top:el.stage.scrollTop};
+    if(!el.stage.classList.contains('is-pannable'))return;
+    if(event.pointerType==='mouse'&&event.button!==0)return;
+    pan={id:event.pointerId,x:event.clientX,y:event.clientY,startX:offset.x,startY:offset.y};
     el.stage.setPointerCapture?.(event.pointerId);
     el.stage.classList.add('is-panning');
+    event.preventDefault();
   });
 
   el.stage.addEventListener('pointermove',event=>{
     if(!pan||pan.id!==event.pointerId)return;
+    offset.x=pan.startX+(event.clientX-pan.x);
+    offset.y=pan.startY+(event.clientY-pan.y);
+    applyOffset();
     event.preventDefault();
-    el.stage.scrollLeft=pan.left-(event.clientX-pan.x);
-    el.stage.scrollTop=pan.top-(event.clientY-pan.y);
   });
 
   function finishPan(event){
-    if(pan&&pan.id===event.pointerId)resetPan();
+    if(pan&&pan.id===event.pointerId){
+      pan=null;
+      el.stage.classList.remove('is-panning');
+    }
   }
   el.stage.addEventListener('pointerup',finishPan);
-  el.stage.addEventListener('pointercancel',resetPan);
+  el.stage.addEventListener('pointercancel',()=>{
+    pan=null;
+    el.stage.classList.remove('is-panning');
+  });
+
+  el.stage.addEventListener('wheel',event=>{
+    if(!activeAsset||!el.stage.classList.contains('is-pannable'))return;
+    offset.x-=event.deltaX;
+    offset.y-=event.deltaY;
+    applyOffset();
+    event.preventDefault();
+  },{passive:false});
 
   el.close.onclick=close;
   el.prev.onclick=()=>move(-1);
   el.next.onclick=()=>move(1);
   el.favorite.onclick=()=>{
-    const asset=getItems()[activeIndex];
-    if(asset){
-      onToggleFavorite(asset.id);
-      render();
-    }
+    if(!activeAsset)return;
+    onToggleFavorite(activeAsset.id);
+    render();
   };
-  dialog.addEventListener('click',event=>{if(event.target===dialog)close();});
+
   dialog.addEventListener('close',()=>{
     document.body.style.overflow='';
-    resetPan();
+    activeAsset=null;
+    pan=null;
+    el.stage.classList.remove('is-panning','is-pannable','is-loading');
     el.image.removeAttribute('src');
-    dialog.classList.remove('is-portrait','is-landscape','is-square');
+    el.image.style.removeProperty('transform');
     const target=returnFocus;
     returnFocus=null;
     if(target?.isConnected)target.focus({preventScroll:true});
   });
+
+  window.addEventListener('resize',()=>{
+    if(dialog.open&&activeAsset)resetViewport(activeAsset);
+  });
+
   document.addEventListener('keydown',event=>{
     if(!dialog.open)return;
     if(event.key==='ArrowLeft'){
       event.preventDefault();
       move(-1);
-    }
-    if(event.key==='ArrowRight'){
+    }else if(event.key==='ArrowRight'){
       event.preventDefault();
       move(1);
-    }
-    if(event.key==='Escape'){
+    }else if(event.key==='Escape'){
       event.preventDefault();
       close();
     }
