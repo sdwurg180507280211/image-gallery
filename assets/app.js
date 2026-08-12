@@ -1,4 +1,4 @@
-import {createLightbox} from './lightbox.js?v=7';
+import {createLightbox} from './lightbox.js?v=8';
 
 const ALL='all';
 const LABELS={
@@ -38,11 +38,12 @@ function assetFacts(asset){
   const date=formatDate(asset.createdAt);if(date)facts.push(['入库',date]);return facts;
 }
 function createChip(container,value,label,onClick){const button=document.createElement('button');button.type='button';button.dataset.value=value;button.setAttribute('aria-pressed','false');const text=document.createElement('span');text.className='chip-label';text.textContent=label;const count=document.createElement('small');count.className='chip-count';button.append(text,count);button.onclick=()=>onClick(value);container.append(button);return button;}
+function toggleFacet(current,value){return current===value?ALL:value;}
 function buildFilterControls(){
-  createChip(el.characterCategoryFilters,ALL,'全部',value=>{state.characterCategory=value;apply();});for(const [value,label] of Object.entries(LABELS.character))createChip(el.characterCategoryFilters,value,label,v=>{state.characterCategory=v;apply();});
-  createChip(el.colorFilters,ALL,'全部颜色',value=>{state.color=value;apply();});for(const [value,label] of Object.entries(LABELS.color))createChip(el.colorFilters,value,label,v=>{state.color=v;apply();});
-  createChip(el.organFilters,ALL,'全部器官',value=>{state.organ=value;apply();});for(const [value,label] of Object.entries(LABELS.organ))createChip(el.organFilters,value,label,v=>{state.organ=v;apply();});
-  for(const [value,label] of [[ALL,'全部'],['unused','未使用'],['used','已使用']])createChip(el.usageFilters,value,label,v=>{state.usage=v;apply();});
+  createChip(el.characterCategoryFilters,ALL,'全部',value=>{state.characterCategory=toggleFacet(state.characterCategory,value);apply();});for(const [value,label] of Object.entries(LABELS.character))createChip(el.characterCategoryFilters,value,label,v=>{state.characterCategory=toggleFacet(state.characterCategory,v);apply();});
+  createChip(el.colorFilters,ALL,'全部颜色',value=>{state.color=toggleFacet(state.color,value);apply();});for(const [value,label] of Object.entries(LABELS.color))createChip(el.colorFilters,value,label,v=>{state.color=toggleFacet(state.color,v);apply();});
+  createChip(el.organFilters,ALL,'全部器官',value=>{state.organ=toggleFacet(state.organ,value);apply();});for(const [value,label] of Object.entries(LABELS.organ))createChip(el.organFilters,value,label,v=>{state.organ=toggleFacet(state.organ,v);apply();});
+  for(const [value,label] of [[ALL,'全部'],['unused','未使用'],['used','已使用']])createChip(el.usageFilters,value,label,v=>{state.usage=toggleFacet(state.usage,v);apply();});
 }
 function updateChipGroup(container,current,counts,total){
   container.querySelectorAll('button').forEach(button=>{const value=button.dataset.value,count=value===ALL?total:(counts.get(value)||0);const selected=value===current;button.hidden=value!==ALL&&count===0&&!selected;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));button.querySelector('.chip-count').textContent=String(count);});

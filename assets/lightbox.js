@@ -15,13 +15,40 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
   };
 
   let activeIndex=-1;
-  let returnFocus=null;
   let activeAsset=null;
+  let returnFocus=null;
+  let keyboardMode=false;
   let pan=null;
+  let controlsTimer=null;
   let offset={x:0,y:0};
   let bounds={minX:0,maxX:0,minY:0,maxY:0};
 
+  el.stage.tabIndex=-1;
+
   const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+
+  function controlFocused(){
+    const active=document.activeElement;
+    return keyboardMode&&active instanceof HTMLElement&&dialog.contains(active)&&active.matches('button,a');
+  }
+
+  function scheduleControlsHide(delay=1500){
+    clearTimeout(controlsTimer);
+    controlsTimer=setTimeout(()=>{
+      if(dialog.open&&!pan&&!controlFocused()) dialog.classList.add('controls-hidden');
+    },delay);
+  }
+
+  function showControls(){
+    if(!dialog.open)return;
+    dialog.classList.remove('controls-hidden');
+    if(!controlFocused()) scheduleControlsHide();
+  }
+
+  function clearTransientFocus(){
+    const active=document.activeElement;
+    if(active instanceof HTMLElement&&dialog.contains(active)&&active!==el.stage) active.blur();
+  }
 
   function computeBounds(asset){
     const width=el.stage.clientWidth;
@@ -89,15 +116,17 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     }else{
       el.status.hidden=true;
     }
+    showControls();
   }
 
   function open(index,opener){
     const items=getItems();
     if(!items.length)return;
     activeIndex=Math.max(0,Math.min(index,items.length-1));
-    returnFocus=opener||document.activeElement;
+    returnFocus=keyboardMode?(opener||document.activeElement):null;
     dialog.showModal();
     document.body.style.overflow='hidden';
+    if(!keyboardMode) el.stage.focus({preventScroll:true});
     render();
   }
 
@@ -112,10 +141,37 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     render();
   }
 
+  document.addEventListener('pointerdown',()=>{keyboardMode=false;},{capture:true});
+  document.addEventListener('keydown',event=>{
+    if(['Tab','Enter',' '].includes(event.key)) keyboardMode=true;
+    if(!dialog.open)return;
+    showControls();
+    if(event.key==='ArrowLeft'){
+      event.preventDefault();
+      move(-1);
+    }else if(event.key==='ArrowRight'){
+      event.preventDefault();
+      move(1);
+    }else if(event.key==='Escape'){
+      event.preventDefault();
+      close();
+    }
+  });
+
+  dialog.addEventListener('pointermove',()=>{
+    if(!keyboardMode) showControls();
+  });
+
   el.stage.addEventListener('pointerdown',event=>{
-    if(!el.stage.classList.contains('is-pannable'))return;
+    keyboardMode=false;
+    clearTransientFocus();
+    showControls();
+    if(!el.stage.classList.contains('is-pannable')){
+      scheduleControlsHide(450);
+      return;
+    }
     if(event.pointerType==='mouse'&&event.button!==0)return;
-    pan={id:event.pointerId,x:event.clientX,y:event.clientY,startX:offset.x,startY:offset.y};
+    pan={id:event.pointerId,x:event.clientX,y:event.clientY,startX:offset.x,startY:offset.y,moved:false};
     el.stage.setPointerCapture?.(event.pointerId);
     el.stage.classList.add('is-panning');
     event.preventDefault();
@@ -123,29 +179,37 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
 
   el.stage.addEventListener('pointermove',event=>{
     if(!pan||pan.id!==event.pointerId)return;
-    offset.x=pan.startX+(event.clientX-pan.x);
-    offset.y=pan.startY+(event.clientY-pan.y);
+    const dx=event.clientX-pan.x;
+    const dy=event.clientY-pan.y;
+    if(Math.abs(dx)>3||Math.abs(dy)>3) pan.moved=true;
+    offset.x=pan.startX+dx;
+    offset.y=pan.startY+dy;
     applyOffset();
     event.preventDefault();
   });
 
   function finishPan(event){
-    if(pan&&pan.id===event.pointerId){
-      pan=null;
-      el.stage.classList.remove('is-panning');
-    }
+    if(!pan||pan.id!==event.pointerId)return;
+    const moved=pan.moved;
+    pan=null;
+    el.stage.classList.remove('is-panning');
+    scheduleControlsHide(moved?1100:350);
   }
   el.stage.addEventListener('pointerup',finishPan);
   el.stage.addEventListener('pointercancel',()=>{
     pan=null;
     el.stage.classList.remove('is-panning');
+    scheduleControlsHide(900);
   });
 
   el.stage.addEventListener('wheel',event=>{
     if(!activeAsset||!el.stage.classList.contains('is-pannable'))return;
+    keyboardMode=false;
+    clearTransientFocus();
     offset.x-=event.deltaX;
     offset.y-=event.deltaY;
     applyOffset();
+    scheduleControlsHide(900);
     event.preventDefault();
   },{passive:false});
 
@@ -159,33 +223,21 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
   };
 
   dialog.addEventListener('close',()=>{
+    clearTimeout(controlsTimer);
     document.body.style.overflow='';
     activeAsset=null;
     pan=null;
+    dialog.classList.remove('controls-hidden');
     el.stage.classList.remove('is-panning','is-pannable','is-loading');
     el.image.removeAttribute('src');
     el.image.style.removeProperty('transform');
     const target=returnFocus;
     returnFocus=null;
-    if(target?.isConnected)target.focus({preventScroll:true});
+    if(target?.isConnected) target.focus({preventScroll:true});
   });
 
   window.addEventListener('resize',()=>{
-    if(dialog.open&&activeAsset)resetViewport(activeAsset);
-  });
-
-  document.addEventListener('keydown',event=>{
-    if(!dialog.open)return;
-    if(event.key==='ArrowLeft'){
-      event.preventDefault();
-      move(-1);
-    }else if(event.key==='ArrowRight'){
-      event.preventDefault();
-      move(1);
-    }else if(event.key==='Escape'){
-      event.preventDefault();
-      close();
-    }
+    if(dialog.open&&activeAsset) resetViewport(activeAsset);
   });
 
   return {open,refresh:render,isOpen:()=>dialog.open};
