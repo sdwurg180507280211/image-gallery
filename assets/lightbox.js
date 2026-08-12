@@ -39,7 +39,11 @@ export function createLightbox({getItems,formatMeta,formatFacts,isFavorite,onTog
     el.counter.textContent=`${activeIndex+1} / ${items.length}`;
     el.meta.textContent=`${formatMeta(asset)} · 原尺寸 1:1`;
     el.title.textContent=asset.title;
+    el.stage.scrollLeft=0;
+    el.stage.scrollTop=0;
     el.stage.classList.add('is-loading');
+    el.image.style.width=`${asset.width}px`;
+    el.image.style.height=`${asset.height}px`;
     el.image.onload=()=>{
       el.stage.classList.remove('is-loading');
       resetViewport();
