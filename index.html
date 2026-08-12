@@ -7,7 +7,7 @@
   <meta name="description" content="人物作品与医药KV的个人视觉素材库。" />
   <title>Visual Asset Library</title>
   <link rel="stylesheet" href="./assets/styles.css?v=5" />
-  <link rel="stylesheet" href="./assets/viewer.css?v=1" />
+  <link rel="stylesheet" href="./assets/viewer.css?v=2" />
 </head>
 <body>
   <header class="site-header">
@@ -90,34 +90,32 @@
     </section>
   </main>
 
-  <dialog class="lightbox" id="lightbox" aria-label="大图查看">
-    <div class="viewer-shell">
-      <header class="viewer-topbar">
-        <div class="viewer-context"><span id="lightboxCounter"></span><span class="viewer-divider" aria-hidden="true"></span><span id="lightboxMeta"></span></div>
-        <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭">×</button>
-      </header>
-      <div class="viewer-main">
-        <div class="viewer-stage-wrap">
-          <button class="lightbox-nav previous" id="previousImage" type="button" aria-label="上一张">‹</button>
-          <div class="viewer-stage" id="lightboxStage">
-            <div class="viewer-loader" aria-hidden="true"></div>
-            <div class="viewer-canvas">
-              <img id="lightboxImage" draggable="false" alt="" />
-            </div>
-          </div>
-          <button class="lightbox-nav next" id="nextImage" type="button" aria-label="下一张">›</button>
-        </div>
-        <aside class="viewer-details">
-          <span class="viewer-status" id="lightboxStatus" hidden></span>
-          <h2 id="lightboxTitle"></h2>
-          <dl class="viewer-facts" id="lightboxFacts"></dl>
-          <div class="viewer-tags" id="lightboxTags"></div>
-          <div class="lightbox-actions">
-            <button class="secondary-button" id="lightboxFavorite" type="button">♡ 收藏</button>
-            <a class="primary-button" id="downloadImage" href="#" download>下载原图</a>
-          </div>
-          <p class="viewer-hint">原尺寸 1:1 · 拖动或滚动查看超出区域 · ← → 切换 · Esc 关闭</p>
-        </aside>
+  <dialog class="lightbox" id="lightbox" aria-label="原尺寸大图查看">
+    <div class="viewer-stage" id="lightboxStage">
+      <div class="viewer-loader" aria-hidden="true"></div>
+      <img id="lightboxImage" draggable="false" alt="" />
+    </div>
+
+    <header class="viewer-topbar">
+      <div class="viewer-context">
+        <span id="lightboxCounter"></span>
+        <span class="viewer-divider" aria-hidden="true"></span>
+        <span id="lightboxMeta"></span>
+      </div>
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭">×</button>
+    </header>
+
+    <button class="lightbox-nav previous" id="previousImage" type="button" aria-label="上一张">‹</button>
+    <button class="lightbox-nav next" id="nextImage" type="button" aria-label="下一张">›</button>
+
+    <div class="viewer-caption">
+      <div class="viewer-caption-copy">
+        <span class="viewer-status" id="lightboxStatus" hidden></span>
+        <h2 id="lightboxTitle"></h2>
+      </div>
+      <div class="lightbox-actions">
+        <button class="secondary-button" id="lightboxFavorite" type="button">♡ 收藏</button>
+        <a class="primary-button" id="downloadImage" href="#" download>下载原图</a>
       </div>
     </div>
   </dialog>
@@ -137,7 +135,7 @@
     </article>
   </template>
 
-  <script type="module" src="./assets/app.js?v=6"></script>
+  <script type="module" src="./assets/app.js?v=7"></script>
   <script type="module" src="./assets/admin.js?v=5"></script>
 </body>
 </html>
