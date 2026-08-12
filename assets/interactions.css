@@ -1,0 +1,7 @@
+.chip-row button.active,.segmented-control button.active{background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-color:color-mix(in srgb,var(--accent) 58%,var(--line));color:var(--text)}
+.chip-row button.active .chip-count,.segmented-control button.active .chip-count{background:color-mix(in srgb,var(--accent) 14%,var(--surface2));color:var(--accent)}
+.gallery-card:hover{transform:none;box-shadow:none;border-color:color-mix(in srgb,var(--accent) 32%,var(--line))}
+.gallery-card:hover .image-button img{transform:none}
+.image-overlay{background:rgba(0,0,0,.48)}
+.text-button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 8%,var(--surface2))}
+@media(prefers-reduced-motion:reduce){.gallery-card,.image-button img,.image-overlay{transition:none!important}}
