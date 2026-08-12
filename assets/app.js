@@ -1,4 +1,4 @@
-import {createLightbox} from './lightbox.js';
+import {createLightbox} from './lightbox.js?v=5';
 
 const ALL='all';
 const LABELS={
