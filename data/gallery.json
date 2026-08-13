@@ -2151,6 +2151,176 @@
         "左侧留白"
       ],
       "createdAt": "2026-08-11T15:33:00+08:00"
+    },
+    {
+      "id": "57530ea41c14",
+      "path": "images/medical-kv/2026-08/dna-care-path-blue-20260813-001.png",
+      "title": "DNA健康管理蓝白科技KV",
+      "domain": "medical-kv",
+      "color": "blue",
+      "organ": "genetics",
+      "used": false,
+      "tags": [
+        "DNA",
+        "健康管理",
+        "医疗科技",
+        "蓝白",
+        "留白"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "c583812a255a",
+      "path": "images/medical-kv/2026-08/heart-purple-orbit-20260813-002.png",
+      "title": "紫粉心脏环轨医疗科技KV",
+      "domain": "medical-kv",
+      "color": "purple",
+      "organ": "heart",
+      "used": false,
+      "tags": [
+        "心脏",
+        "蓝紫",
+        "粉紫",
+        "环轨",
+        "医疗科技"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "f8e699cba490",
+      "path": "images/medical-kv/2026-08/joint-blue-tech-20260813-003.png",
+      "title": "蓝色关节医疗科技KV",
+      "domain": "medical-kv",
+      "color": "blue",
+      "organ": "other",
+      "used": false,
+      "tags": [
+        "关节",
+        "骨科",
+        "蓝色",
+        "医疗科技",
+        "留白"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "e266aba06870",
+      "path": "images/medical-kv/2026-08/heart-red-flow-20260813-004.png",
+      "title": "红白心血管流线医疗科技KV",
+      "domain": "medical-kv",
+      "color": "red",
+      "organ": "heart",
+      "used": false,
+      "tags": [
+        "心脏",
+        "心血管",
+        "红白",
+        "血细胞",
+        "流线"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "c91c0fd9ea61",
+      "path": "images/medical-kv/2026-08/family-care-pink-20260813-005.png",
+      "title": "粉蓝家庭健康关怀KV",
+      "domain": "medical-kv",
+      "color": "pink",
+      "organ": "other",
+      "used": false,
+      "tags": [
+        "家庭健康",
+        "关怀",
+        "母婴",
+        "粉蓝",
+        "城市"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "9c7b534c549a",
+      "path": "images/medical-kv/2026-08/medical-milestone-blue-20260813-006.png",
+      "title": "蓝金医学里程碑科技KV",
+      "domain": "medical-kv",
+      "color": "blue",
+      "organ": "other",
+      "used": false,
+      "tags": [
+        "医疗科技",
+        "蓝金",
+        "里程碑",
+        "DNA",
+        "舞台"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "cb5792d9d1d4",
+      "path": "images/medical-kv/2026-08/dna-white-blue-20260813-007.png",
+      "title": "蓝白DNA分子科技KV",
+      "domain": "medical-kv",
+      "color": "white",
+      "organ": "genetics",
+      "used": false,
+      "tags": [
+        "DNA",
+        "分子",
+        "蓝白",
+        "医学科技",
+        "极简"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "19a56e2ac145",
+      "path": "images/medical-kv/2026-08/dna-particle-purple-20260813-008.png",
+      "title": "蓝紫DNA粒子波纹科技KV",
+      "domain": "medical-kv",
+      "color": "purple",
+      "organ": "genetics",
+      "used": false,
+      "tags": [
+        "DNA",
+        "蓝紫",
+        "粒子",
+        "波纹",
+        "医疗科技"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "f20c62a4ddab",
+      "path": "images/medical-kv/2026-08/heart-silver-color-20260813-009.png",
+      "title": "银灰彩色心脏科技KV",
+      "domain": "medical-kv",
+      "color": "white",
+      "organ": "heart",
+      "used": false,
+      "tags": [
+        "心脏",
+        "银灰",
+        "彩色心脏",
+        "医学科技",
+        "留白"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
+    },
+    {
+      "id": "382a8dda31a1",
+      "path": "images/medical-kv/2026-08/heart-stairway-cyan-20260813-010.png",
+      "title": "青灰心脏阶梯向上KV",
+      "domain": "medical-kv",
+      "color": "blue",
+      "organ": "heart",
+      "used": false,
+      "tags": [
+        "心脏",
+        "青灰",
+        "阶梯",
+        "向上",
+        "医疗科技"
+      ],
+      "createdAt": "2026-08-13T10:09:00+08:00"
     }
   ]
 }
