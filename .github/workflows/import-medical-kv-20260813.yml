@@ -1,0 +1,257 @@
+name: Import medical KV batch 20260813
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened]
+    paths:
+      - .import-medical-kv-20260813
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-medical-kv-20260813
+  cancel-in-progress: false
+
+jobs:
+  import:
+    if: github.head_ref == 'import-medical-kv-20260813-exec'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install existing dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Download original PNG files from Adobe bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p images/medical-kv/2026-08
+
+          download_image() {
+            local url="$1"
+            local target="$2"
+            curl -L --fail --silent --show-error --retry 3 --retry-delay 2 --retry-all-errors "$url" -o "$target"
+            local mime size
+            mime=$(file -b --mime-type "$target")
+            size=$(wc -c < "$target")
+            if [[ "$mime" != image/* ]]; then
+              echo "下载结果不是图片：$target，MIME=$mime"
+              exit 1
+            fi
+            if [[ "$size" -lt 1024 ]]; then
+              echo "图片文件过小：$target，SIZE=$size"
+              exit 1
+            fi
+          }
+
+          download_image 'https://at.adobe.com/5bLE8XzP3099qc4l' 'images/medical-kv/2026-08/dna-care-path-blue-20260813-001.png'
+          download_image 'https://at.adobe.com/AlhL7DP66nV1ecgO' 'images/medical-kv/2026-08/heart-purple-orbit-20260813-002.png'
+          download_image 'https://at.adobe.com/skRCU6BjNyIDVQ9n' 'images/medical-kv/2026-08/joint-blue-tech-20260813-003.png'
+          download_image 'https://at.adobe.com/7RpGvJ7iHcx4lMGQ' 'images/medical-kv/2026-08/heart-red-flow-20260813-004.png'
+          download_image 'https://at.adobe.com/QyOqnWqDAWXUDfS6' 'images/medical-kv/2026-08/family-care-pink-20260813-005.png'
+          download_image 'https://at.adobe.com/IVErwNmNpKB0muoG' 'images/medical-kv/2026-08/medical-milestone-blue-20260813-006.png'
+          download_image 'https://at.adobe.com/3vcCazwpb0yuX8sp' 'images/medical-kv/2026-08/dna-white-blue-20260813-007.png'
+          download_image 'https://at.adobe.com/zutHFsh1GzgIvFzW' 'images/medical-kv/2026-08/dna-particle-purple-20260813-008.png'
+          download_image 'https://at.adobe.com/YFXSEmJAuPFdZeiH' 'images/medical-kv/2026-08/heart-silver-color-20260813-009.png'
+          download_image 'https://at.adobe.com/dCcx7V4fGyUbnNJG' 'images/medical-kv/2026-08/heart-stairway-cyan-20260813-010.png'
+
+      - name: Append current v3 asset records and verify originals
+        run: |
+          node <<'NODE'
+          import fs from 'node:fs';
+          import sharp from 'sharp';
+
+          const galleryPath = 'data/gallery.json';
+          const doc = JSON.parse(fs.readFileSync(galleryPath, 'utf8'));
+          if (doc.schemaVersion !== 3 || !Array.isArray(doc.assets)) throw new Error('data/gallery.json 不是当前 schemaVersion 3。');
+
+          const createdAt = '2026-08-13T10:09:00+08:00';
+          const incoming = [
+            {id:'57530ea41c14',path:'images/medical-kv/2026-08/dna-care-path-blue-20260813-001.png',title:'DNA健康管理蓝白科技KV',domain:'medical-kv',color:'blue',organ:'genetics',used:false,tags:['DNA','健康管理','医疗科技','蓝白','留白'],createdAt},
+            {id:'c583812a255a',path:'images/medical-kv/2026-08/heart-purple-orbit-20260813-002.png',title:'紫粉心脏环轨医疗科技KV',domain:'medical-kv',color:'purple',organ:'heart',used:false,tags:['心脏','蓝紫','粉紫','环轨','医疗科技'],createdAt},
+            {id:'f8e699cba490',path:'images/medical-kv/2026-08/joint-blue-tech-20260813-003.png',title:'蓝色关节医疗科技KV',domain:'medical-kv',color:'blue',organ:'other',used:false,tags:['关节','骨科','蓝色','医疗科技','留白'],createdAt},
+            {id:'e266aba06870',path:'images/medical-kv/2026-08/heart-red-flow-20260813-004.png',title:'红白心血管流线医疗科技KV',domain:'medical-kv',color:'red',organ:'heart',used:false,tags:['心脏','心血管','红白','血细胞','流线'],createdAt},
+            {id:'c91c0fd9ea61',path:'images/medical-kv/2026-08/family-care-pink-20260813-005.png',title:'粉蓝家庭健康关怀KV',domain:'medical-kv',color:'pink',organ:'other',used:false,tags:['家庭健康','关怀','母婴','粉蓝','城市'],createdAt},
+            {id:'9c7b534c549a',path:'images/medical-kv/2026-08/medical-milestone-blue-20260813-006.png',title:'蓝金医学里程碑科技KV',domain:'medical-kv',color:'blue',organ:'other',used:false,tags:['医疗科技','蓝金','里程碑','DNA','舞台'],createdAt},
+            {id:'cb5792d9d1d4',path:'images/medical-kv/2026-08/dna-white-blue-20260813-007.png',title:'蓝白DNA分子科技KV',domain:'medical-kv',color:'white',organ:'genetics',used:false,tags:['DNA','分子','蓝白','医学科技','极简'],createdAt},
+            {id:'19a56e2ac145',path:'images/medical-kv/2026-08/dna-particle-purple-20260813-008.png',title:'蓝紫DNA粒子波纹科技KV',domain:'medical-kv',color:'purple',organ:'genetics',used:false,tags:['DNA','蓝紫','粒子','波纹','医疗科技'],createdAt},
+            {id:'f20c62a4ddab',path:'images/medical-kv/2026-08/heart-silver-color-20260813-009.png',title:'银灰彩色心脏科技KV',domain:'medical-kv',color:'white',organ:'heart',used:false,tags:['心脏','银灰','彩色心脏','医学科技','留白'],createdAt},
+            {id:'382a8dda31a1',path:'images/medical-kv/2026-08/heart-stairway-cyan-20260813-010.png',title:'青灰心脏阶梯向上KV',domain:'medical-kv',color:'blue',organ:'heart',used:false,tags:['心脏','青灰','阶梯','向上','医疗科技'],createdAt}
+          ];
+
+          const existingIds = new Set(doc.assets.map(x => x.id));
+          const existingPaths = new Set(doc.assets.map(x => x.path));
+          for (const asset of incoming) {
+            if (existingIds.has(asset.id) || existingPaths.has(asset.path)) throw new Error(`目标记录已存在：${asset.id} ${asset.path}`);
+            const meta = await sharp(asset.path, {failOn:'none'}).metadata();
+            if (meta.width !== 1672 || meta.height !== 941) throw new Error(`图片尺寸异常：${asset.path} ${meta.width}x${meta.height}`);
+          }
+
+          doc.assets.push(...incoming);
+          fs.writeFileSync(galleryPath, `${JSON.stringify(doc, null, 2)}\n`, 'utf8');
+          console.log(`已追加 ${incoming.length} 张医药KV，源索引总数 ${doc.assets.length}。`);
+          NODE
+
+      - name: Write the proven upload method into the project
+        run: |
+          mkdir -p docs
+          cat > docs/image-upload-via-adobe-bridge.md <<'DOC'
+          # 图片通过 Adobe 文件桥接入库 image-gallery
+
+          ## 适用场景
+
+          将 ChatGPT 当前会话可访问的原始图片或工作区本地图片，稳定写入 `sdwurg180507280211/image-gallery`。
+
+          ## 稳定链路
+
+          ```text
+          当前会话 / 工作区原始图片
+                  ↓
+          Adobe.asset_openai_file_upload
+                  ↓
+          assetId + presignedAssetUrl + mediaType
+                  ↓
+          一次性 GitHub Actions
+                  ↓
+          curl -L 下载原始图片
+                  ↓
+          MIME / 文件大小 / sharp 可解析性校验
+                  ↓
+          images/ 正式路径 + data/gallery.json v3
+                  ↓
+          npm run build
+                  ↓
+          git commit + push main
+          ```
+
+          ## 1. Adobe 桥接预检
+
+          先取第一张图片调用：
+
+          `Adobe.asset_openai_file_upload`
+
+          成功条件：
+
+          - 返回 `assetId`；
+          - 返回 `presignedAssetUrl`；
+          - 返回 `mediaType`；
+          - `mediaType` 必须以 `image/` 开头。
+
+          预检成功后，再把全部图片在一次调用中批量桥接。不要使用 Google Drive 预览页、聊天缩略图、HTML 跳转页或人工猜测的公开 URL 代替 Adobe 文件桥。
+
+          ## 2. GitHub 端下载原图
+
+          一次性导入工作流使用 Adobe 返回的 `presignedAssetUrl`：
+
+          ```bash
+          curl \
+            -L \
+            --fail \
+            --silent \
+            --show-error \
+            --retry 3 \
+            --retry-delay 2 \
+            --retry-all-errors \
+            "$url" \
+            -o "$imagePath"
+          ```
+
+          下载后至少校验：
+
+          ```bash
+          mime=$(file -b --mime-type "$imagePath")
+          size=$(wc -c < "$imagePath")
+
+          [[ "$mime" == image/* ]]
+          [[ "$size" -ge 1024 ]]
+          ```
+
+          同时用项目已有 `sharp` 读取图片，确认实际尺寸可解析。不要把 Adobe 登录页、403/404 HTML、JSON 错误页或空文件保存成图片。
+
+          ## 3. 当前 v3 数据写入规则
+
+          当前项目直接维护 `data/gallery.json` 的 `schemaVersion: 3` 源数据。医药 KV 最小记录：
+
+          ```json
+          {
+            "id": "稳定唯一ID",
+            "path": "images/medical-kv/YYYY-MM/file.png",
+            "title": "素材标题",
+            "domain": "medical-kv",
+            "color": "blue",
+            "organ": "heart",
+            "used": false,
+            "tags": ["补充搜索词"],
+            "createdAt": "ISO 8601 时间"
+          }
+          ```
+
+          页面内容分类只使用 `color`；`organ` 仅作为描述和搜索元数据，`used` 是业务状态。
+
+          不手工生成 `width`、`height`、`thumbnail`、`thumbnailLarge`。这些字段由当前 `scripts/build.mjs` 从真实图片构建到 `dist/data/gallery.json`。
+
+          ## 4. 构建和提交
+
+          仓库存在 `package-lock.json` 时使用：
+
+          ```bash
+          npm ci --no-audit --no-fund
+          npm run build
+          ```
+
+          只有原图校验、v3 数据校验和构建全部通过后，才提交：
+
+          ```bash
+          git add images data/gallery.json docs/image-upload-via-adobe-bridge.md
+          git commit -m "feat(gallery): import images via Adobe bridge"
+          git push origin HEAD:main
+          ```
+
+          ## 5. 临时工作流
+
+          导入工作流只服务一次批次。取得正式图片导入 commit 后删除临时 workflow，不把 presigned URL 长期保留在仓库。
+
+          ## 核心原则
+
+          真正的传输通道是：
+
+          **原始图片 → Adobe 文件桥 → presignedAssetUrl → GitHub Actions curl → 仓库原图。**
+
+          Adobe 负责把 ChatGPT/工作区文件变成 GitHub 可下载的真实图片 URL；GitHub Actions 负责下载、验证、构建和提交。
+          DOC
+
+      - name: Build and validate the current site
+        run: |
+          npm run build
+          node <<'NODE'
+          import fs from 'node:fs';
+          const source = JSON.parse(fs.readFileSync('data/gallery.json','utf8'));
+          const built = JSON.parse(fs.readFileSync('dist/data/gallery.json','utf8'));
+          const ids = ['57530ea41c14','c583812a255a','f8e699cba490','e266aba06870','c91c0fd9ea61','9c7b534c549a','cb5792d9d1d4','19a56e2ac145','f20c62a4ddab','382a8dda31a1'];
+          for (const id of ids) {
+            const src = source.assets.find(x => x.id === id);
+            const out = built.assets.find(x => x.id === id);
+            if (!src || !out) throw new Error(`导入记录缺失：${id}`);
+            if (!out.thumbnail || !out.thumbnailLarge || out.width !== 1672 || out.height !== 941) throw new Error(`构建产物异常：${id}`);
+          }
+          if (built.count !== source.assets.length) throw new Error(`构建数量不一致：${built.count}/${source.assets.length}`);
+          console.log(`导入校验通过，总资产 ${source.assets.length}。`);
+          NODE
+
+      - name: Commit formal import to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images/medical-kv/2026-08 data/gallery.json docs/image-upload-via-adobe-bridge.md
+          git commit -m 'feat(gallery): import medical KV images via Adobe bridge'
+          git push origin HEAD:main
