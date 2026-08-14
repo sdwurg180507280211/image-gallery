@@ -1,0 +1,160 @@
+name: Import ChatGPT medical KV batch 20260814
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .import-medical-kv-20260814
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-medical-kv-20260814
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install existing dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Download original PNG files from Adobe bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_list='data/import-medical-kv-20260814.txt'
+          target_dir='images/medical-kv/2026-08'
+          mkdir -p "$target_dir"
+
+          count=$(grep -cve '^\s*$' "$source_list")
+          if [[ "$count" -ne 94 ]]; then
+            echo "Expected 94 source URLs, got $count"
+            exit 1
+          fi
+
+          n=0
+          while IFS= read -r url || [[ -n "$url" ]]; do
+            [[ -z "${url//[[:space:]]/}" ]] && continue
+            n=$((n + 1))
+            target=$(printf '%s/chat-kv-20260814-%03d.png' "$target_dir" "$n")
+            echo "[$n/94] downloading $target"
+            curl -L --fail --silent --show-error --retry 3 --retry-delay 2 --retry-all-errors "$url" -o "$target"
+            mime=$(file -b --mime-type "$target")
+            size=$(wc -c < "$target")
+            if [[ "$mime" != image/* ]]; then
+              echo "Downloaded result is not an image: $target MIME=$mime"
+              exit 1
+            fi
+            if [[ "$size" -lt 1024 ]]; then
+              echo "Downloaded image is too small: $target SIZE=$size"
+              exit 1
+            fi
+          done < "$source_list"
+
+          if [[ "$n" -ne 94 ]]; then
+            echo "Downloaded count mismatch: $n"
+            exit 1
+          fi
+
+      - name: Append v3 medical KV records and validate originals
+        run: |
+          node <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          import sharp from 'sharp';
+
+          const galleryPath = 'data/gallery.json';
+          const doc = JSON.parse(fs.readFileSync(galleryPath, 'utf8'));
+          if (doc.schemaVersion !== 3 || !Array.isArray(doc.assets)) {
+            throw new Error('data/gallery.json is not current schemaVersion 3');
+          }
+
+          const createdAt = '2026-08-14T14:24:00+08:00';
+          const incomingCount = 94;
+          const existingIds = new Set(doc.assets.map(x => x.id));
+          const existingPaths = new Set(doc.assets.map(x => x.path));
+          const added = [];
+          let duplicates = 0;
+
+          function metaFor(n) {
+            const suffix = String(n).padStart(3, '0');
+            if (n <= 10) return {title:`蓝白医疗科技KV ${suffix}`,color:'blue',tags:['医学KV','蓝白医疗科技','医疗科技','会话20260814']};
+            if (n <= 20) return {title:`多风格医学概念KV ${suffix}`,color:'mixed',tags:['医学KV','多风格','医学概念','会话20260814']};
+            if (n <= 30) return {title:`粉紫粉红医学KV ${suffix}`,color:'pink',tags:['医学KV','粉紫','粉红医学','关怀','会话20260814']};
+            if (n <= 40) return {title:`红白专科医学KV ${suffix}`,color:'red',tags:['医学KV','红白医学','专科医学','风湿免疫','会话20260814']};
+            if (n <= 50) return {title:`深蓝深紫科技KV ${suffix}`,color:'purple',tags:['医学KV','深蓝','深紫','科技会议','会话20260814']};
+            if (n <= 68) return {title:`红白风湿免疫KV ${suffix}`,color:'red',tags:['医学KV','红白医学','风湿免疫','非写实医学','会话20260814']};
+            if (n <= 73) return {title:`红白医学多方案拼图 ${suffix}`,color:'red',tags:['医学KV','红白医学','多宫格','方案集','会话20260814']};
+            if (n <= 83) return {title:`红白医学抽象专科KV ${suffix}`,color:'red',tags:['医学KV','红白医学','抽象医学','专科医学','会话20260814']};
+            if (n <= 92) return {title:`红白医学标题主KV ${suffix}`,color:'red',tags:['医学KV','红白医学','标题KV','专科论坛','会话20260814']};
+            return {title:`红白医学多方案拼图 ${suffix}`,color:'red',tags:['医学KV','红白医学','多宫格','方案集','会话20260814']};
+          }
+
+          for (let n = 1; n <= incomingCount; n++) {
+            const suffix = String(n).padStart(3, '0');
+            const imagePath = `images/medical-kv/2026-08/chat-kv-20260814-${suffix}.png`;
+            const buffer = fs.readFileSync(imagePath);
+            const meta = await sharp(buffer, {failOn:'none'}).metadata();
+            if (!(Number(meta.width) > 0 && Number(meta.height) > 0)) {
+              throw new Error(`Cannot decode image: ${imagePath}`);
+            }
+            const id = crypto.createHash('sha256').update(buffer).digest('hex').slice(0, 12);
+            if (existingIds.has(id)) {
+              fs.unlinkSync(imagePath);
+              duplicates++;
+              continue;
+            }
+            if (existingPaths.has(imagePath)) {
+              throw new Error(`Target path already exists: ${imagePath}`);
+            }
+            const m = metaFor(n);
+            const asset = {
+              id,
+              path: imagePath,
+              title: m.title,
+              domain: 'medical-kv',
+              color: m.color,
+              organ: 'other',
+              used: false,
+              tags: m.tags,
+              createdAt
+            };
+            doc.assets.push(asset);
+            added.push(asset);
+            existingIds.add(id);
+            existingPaths.add(imagePath);
+          }
+
+          fs.writeFileSync(galleryPath, `${JSON.stringify(doc, null, 2)}\n`, 'utf8');
+          fs.writeFileSync('/tmp/import-summary.json', JSON.stringify({added:added.length,duplicates,total:incomingCount}, null, 2));
+          console.log(`Added ${added.length} medical KVs; skipped ${duplicates} content duplicates; source total ${incomingCount}.`);
+          NODE
+
+      - name: Build and validate site
+        run: npm run build
+
+      - name: Commit imported originals and source index
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images/medical-kv/2026-08 data/gallery.json
+          if git diff --cached --quiet; then
+            echo 'No new images to commit.'
+            exit 0
+          fi
+          git commit -m 'feat(gallery): import ChatGPT medical KV batch 20260814'
+          git push origin HEAD:main
