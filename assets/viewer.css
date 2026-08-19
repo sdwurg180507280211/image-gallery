@@ -32,10 +32,19 @@
 .viewer-caption .primary-button{background:rgba(255,255,255,.94);color:#15171b}
 .viewer-caption .secondary-button:hover{background:rgba(0,0,0,.38)}
 .viewer-caption .primary-button:hover{background:#fff}
+.prompt-panel{position:absolute;inset:0;z-index:12;display:grid;place-items:center;padding:24px;background:rgba(233,234,237,.72);backdrop-filter:blur(10px);color:#171a22}
+.prompt-panel[hidden]{display:none}
+.prompt-sheet{display:flex;flex-direction:column;width:min(760px,calc(100vw - 32px));max-height:min(80dvh,820px);overflow:hidden;border:1px solid rgba(23,26,34,.10);border-radius:18px;background:rgba(255,255,255,.96);box-shadow:0 24px 70px rgba(30,34,45,.18)}
+.prompt-sheet-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 20px 14px;border-bottom:1px solid rgba(23,26,34,.08)}
+.prompt-sheet-header div{min-width:0}.prompt-sheet-header small,.prompt-sheet-header strong{display:block}.prompt-sheet-header small{margin-bottom:4px;color:#727988;font-size:11px}.prompt-sheet-header strong{font-size:16px;line-height:1.35}
+.prompt-close{flex:0 0 auto;width:32px;height:32px;border:0;border-radius:50%;background:#eef0f4;color:#39404d;font-size:20px;cursor:pointer}.prompt-close:hover{background:#e3e6ec}
+.prompt-sheet pre{min-height:0;margin:0;padding:20px;overflow:auto;white-space:pre-wrap;word-break:break-word;color:#272c36;font:14px/1.8 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.prompt-sheet-actions{display:flex;justify-content:flex-end;padding:12px 16px;border-top:1px solid rgba(23,26,34,.08)}
+.prompt-sheet-actions button{min-height:36px;padding:7px 13px;border:0;border-radius:999px;background:#171a22;color:#fff;font:12px/1 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer}.prompt-sheet-actions button:disabled{opacity:.45;cursor:default}
 .lightbox.controls-hidden::before,.lightbox.controls-hidden::after{opacity:0}
 .lightbox.controls-hidden .viewer-topbar,.lightbox.controls-hidden .viewer-caption,.lightbox.controls-hidden .lightbox-nav{opacity:0;pointer-events:none}
 .lightbox.controls-hidden .viewer-topbar{transform:translateY(-5px)}
 .lightbox.controls-hidden .viewer-caption{transform:translateY(5px)}
-@media(max-width:760px){.viewer-topbar{padding:10px}.viewer-context{max-width:calc(100vw - 62px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.lightbox-nav{width:36px;height:50px;margin-top:-25px}.lightbox-nav.previous{left:7px}.lightbox-nav.next{right:7px}.viewer-caption{left:10px;right:10px;bottom:10px}.viewer-caption-copy{max-width:58vw}.viewer-caption h2{font-size:15px}.viewer-caption .primary-button,.viewer-caption .secondary-button{min-height:34px;padding:7px 10px;font-size:11px}}
-@media(max-width:520px){.viewer-caption{gap:8px}.viewer-caption-copy{max-width:52vw}.viewer-meta-compact{display:none}.viewer-caption .lightbox-actions{gap:5px}.viewer-caption .primary-button,.viewer-caption .secondary-button{padding:7px 9px}}
+@media(max-width:760px){.viewer-topbar{padding:10px}.viewer-context{max-width:calc(100vw - 62px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.lightbox-nav{width:36px;height:50px;margin-top:-25px}.lightbox-nav.previous{left:7px}.lightbox-nav.next{right:7px}.viewer-caption{left:10px;right:10px;bottom:10px}.viewer-caption-copy{max-width:52vw}.viewer-caption h2{font-size:15px}.viewer-caption .primary-button,.viewer-caption .secondary-button{min-height:34px;padding:7px 10px;font-size:11px}.prompt-panel{padding:12px}.prompt-sheet{width:100%;max-height:88dvh}.prompt-sheet pre{padding:16px;font-size:13px}}
+@media(max-width:520px){.viewer-caption{gap:8px}.viewer-caption-copy{max-width:42vw}.viewer-meta-compact{display:none}.viewer-caption .lightbox-actions{gap:5px}.viewer-caption .primary-button,.viewer-caption .secondary-button{padding:7px 9px}}
 @media(prefers-reduced-motion:reduce){.lightbox::before,.lightbox::after,.viewer-topbar,.viewer-caption,.lightbox-nav{transition:none}}
