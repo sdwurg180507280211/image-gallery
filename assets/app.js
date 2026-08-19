@@ -1,4 +1,4 @@
-import {createLightbox} from './lightbox.js?v=8';
+import {createLightbox} from './lightbox.js?v=9';
 
 const ALL='all';
 const LABELS={
@@ -21,6 +21,10 @@ function assertAsset(asset){
   if(asset.domain==='medical-kv'){if(!LABELS.color[asset.color]||!LABELS.organ[asset.organ]||typeof asset.used!=='boolean')throw new Error(`医药KV分类非法：${asset.id}`);return;}
   throw new Error(`素材域非法：${asset.id}`);
 }
+function assertPromptIndex(payload){
+  if(payload?.schemaVersion!==1||!payload.assets||typeof payload.assets!=='object'||Array.isArray(payload.assets))throw new Error('提示词索引格式非法。');
+  for(const [id,prompt] of Object.entries(payload.assets))if(!id||!prompt?.path||!['original','reconstructed'].includes(prompt.kind))throw new Error(`提示词索引非法：${id}`);
+}
 function searchable(asset){return [asset.title,...(asset.tags||[]),asset.domain==='character'?LABELS.character[asset.category]:LABELS.color[asset.color],asset.domain==='medical-kv'?LABELS.organ[asset.organ]:''].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN');}
 function matchesShared(asset){const q=state.query.trim().toLocaleLowerCase('zh-CN');return (!state.favoritesOnly||state.favorites.has(asset.id))&&(!q||searchable(asset).includes(q));}
 function matchesUsage(asset){return state.usage===ALL||(state.usage==='used'?asset.used:!asset.used);}
@@ -31,12 +35,6 @@ function countBy(items,key){const map=new Map();for(const item of items)map.set(
 function medicalScope(skip){return state.assets.filter(asset=>asset.domain==='medical-kv').filter(matchesShared).filter(asset=>skip==='color'||state.color===ALL||asset.color===state.color).filter(asset=>skip==='usage'||matchesUsage(asset));}
 function characterScope(){return state.assets.filter(asset=>asset.domain==='character').filter(matchesShared);}
 function domainLabel(asset){return asset.domain==='character'?(LABELS.character[asset.category]||asset.category):`${LABELS.organ[asset.organ]} · ${LABELS.color[asset.color]}`;}
-function formatDate(value){const time=Date.parse(value||'');if(!Number.isFinite(time))return '';return new Intl.DateTimeFormat('zh-CN',{year:'numeric',month:'short',day:'numeric'}).format(time);}
-function assetFacts(asset){
-  const facts=[];if(asset.width&&asset.height)facts.push(['尺寸',`${asset.width} × ${asset.height}`]);
-  if(asset.domain==='character')facts.push(['分类',LABELS.character[asset.category]]);else{facts.push(['主色',LABELS.color[asset.color]],['主器官',LABELS.organ[asset.organ]],['状态',asset.used?'已使用':'未使用']);}
-  const date=formatDate(asset.createdAt);if(date)facts.push(['入库',date]);return facts;
-}
 function createChip(container,value,label,onClick){const button=document.createElement('button');button.type='button';button.dataset.value=value;button.setAttribute('aria-pressed','false');const text=document.createElement('span');text.className='chip-label';text.textContent=label;const count=document.createElement('small');count.className='chip-count';button.append(text,count);button.onclick=()=>onClick(value);container.append(button);return button;}
 function toggleFacet(current,value){return current===value?ALL:value;}
 function buildFilterControls(){
@@ -86,9 +84,10 @@ function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.usage=
 function setDomain(domain){if(domain===state.domain)return;state.domain=domain;state.characterCategory=ALL;state.color=ALL;state.usage=ALL;apply();}
 function patchAsset(id,patch){const asset=state.assets.find(item=>item.id===id);if(!asset)return;Object.assign(asset,patch);apply();}
 async function load(){
-  const response=await fetch('./data/gallery.json',{cache:'no-store'});if(!response.ok)throw new Error(`索引读取失败：HTTP ${response.status}`);
-  const payload=await response.json();if(payload.schemaVersion!==3||!Array.isArray(payload.assets))throw new Error('只支持 schemaVersion 3。');payload.assets.forEach(assertAsset);state.assets=payload.assets;
-  buildFilterControls();renderStats();lightbox=createLightbox({getItems:()=>state.visible,formatMeta:domainLabel,formatFacts:assetFacts,isFavorite:id=>state.favorites.has(id),onToggleFavorite:toggleFavorite});apply();
+  const [response,promptResponse]=await Promise.all([fetch('./data/gallery.json',{cache:'no-store'}),fetch('./data/prompt-index.json',{cache:'no-store'})]);
+  if(!response.ok)throw new Error(`索引读取失败：HTTP ${response.status}`);if(!promptResponse.ok)throw new Error(`提示词索引读取失败：HTTP ${promptResponse.status}`);
+  const payload=await response.json(),promptPayload=await promptResponse.json();if(payload.schemaVersion!==3||!Array.isArray(payload.assets))throw new Error('只支持 schemaVersion 3。');assertPromptIndex(promptPayload);payload.assets.forEach(assertAsset);state.assets=payload.assets.map(asset=>{const prompt=promptPayload.assets[asset.id];return prompt?{...asset,promptPath:prompt.path,promptKind:prompt.kind}:asset;});
+  buildFilterControls();renderStats();lightbox=createLightbox({getItems:()=>state.visible,formatMeta:domainLabel,isFavorite:id=>state.favorites.has(id),onToggleFavorite:toggleFavorite});apply();
 }
 window.visualAssetLibrary={getAsset:id=>state.assets.find(asset=>asset.id===id),patchAsset,getDomain:()=>state.domain};
 document.querySelectorAll('.domain-tab').forEach(button=>button.onclick=()=>setDomain(button.dataset.domain));
