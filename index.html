@@ -8,7 +8,7 @@
   <title>Visual Asset Library</title>
   <link rel="stylesheet" href="./assets/styles.css?v=5" />
   <link rel="stylesheet" href="./assets/interactions.css?v=1" />
-  <link rel="stylesheet" href="./assets/viewer.css?v=3" />
+  <link rel="stylesheet" href="./assets/viewer.css?v=4" />
 </head>
 <body>
   <header class="site-header">
@@ -112,9 +112,26 @@
       </div>
       <div class="lightbox-actions">
         <button class="secondary-button" id="lightboxFavorite" type="button">♡ 收藏</button>
+        <button class="secondary-button" id="lightboxPrompt" type="button" hidden>提示词</button>
         <a class="primary-button" id="downloadImage" href="#" download>下载原图</a>
       </div>
     </div>
+
+    <section class="prompt-panel" id="promptPanel" hidden aria-label="图片提示词">
+      <div class="prompt-sheet">
+        <header class="prompt-sheet-header">
+          <div>
+            <small id="promptKindLabel"></small>
+            <strong id="promptPanelTitle"></strong>
+          </div>
+          <button class="prompt-close" id="promptPanelClose" type="button" aria-label="关闭提示词">×</button>
+        </header>
+        <pre id="promptText"></pre>
+        <footer class="prompt-sheet-actions">
+          <button id="copyPrompt" type="button">复制提示词</button>
+        </footer>
+      </div>
+    </section>
   </dialog>
 
   <template id="cardTemplate">
@@ -132,7 +149,7 @@
     </article>
   </template>
 
-  <script type="module" src="./assets/app.js?v=9"></script>
+  <script type="module" src="./assets/app.js?v=10"></script>
   <script type="module" src="./assets/admin.js?v=5"></script>
   <script type="module" src="./assets/interactions.js?v=1"></script>
 </body>
