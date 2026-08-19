@@ -9,9 +9,16 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     title:document.querySelector('#lightboxTitle'),
     status:document.querySelector('#lightboxStatus'),
     favorite:document.querySelector('#lightboxFavorite'),
+    prompt:document.querySelector('#lightboxPrompt'),
     download:document.querySelector('#downloadImage'),
     prev:document.querySelector('#previousImage'),
-    next:document.querySelector('#nextImage')
+    next:document.querySelector('#nextImage'),
+    promptPanel:document.querySelector('#promptPanel'),
+    promptClose:document.querySelector('#promptPanelClose'),
+    promptKind:document.querySelector('#promptKindLabel'),
+    promptTitle:document.querySelector('#promptPanelTitle'),
+    promptText:document.querySelector('#promptText'),
+    copyPrompt:document.querySelector('#copyPrompt')
   };
 
   let activeIndex=-1;
@@ -22,10 +29,13 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
   let controlsTimer=null;
   let offset={x:0,y:0};
   let bounds={minX:0,maxX:0,minY:0,maxY:0};
+  const promptCache=new Map();
 
   el.stage.tabIndex=-1;
 
   const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+
+  function promptOpen(){return !el.promptPanel.hidden;}
 
   function controlFocused(){
     const active=document.activeElement;
@@ -34,15 +44,16 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
 
   function scheduleControlsHide(delay=1500){
     clearTimeout(controlsTimer);
+    if(promptOpen())return;
     controlsTimer=setTimeout(()=>{
-      if(dialog.open&&!pan&&!controlFocused()) dialog.classList.add('controls-hidden');
+      if(dialog.open&&!pan&&!promptOpen()&&!controlFocused()) dialog.classList.add('controls-hidden');
     },delay);
   }
 
   function showControls(){
     if(!dialog.open)return;
     dialog.classList.remove('controls-hidden');
-    if(!controlFocused()) scheduleControlsHide();
+    if(!controlFocused()&&!promptOpen()) scheduleControlsHide();
   }
 
   function clearTransientFocus(){
@@ -79,9 +90,47 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     applyOffset();
   }
 
+  function extractPrompt(markdown){
+    const match=markdown.match(/## 生成提示词\s*\n([\s\S]*?)(?=\n##\s|$)/);
+    return (match?.[1]||markdown).trim();
+  }
+
+  function closePromptPanel(){
+    el.promptPanel.hidden=true;
+    el.promptText.textContent='';
+    el.copyPrompt.textContent='复制提示词';
+    showControls();
+  }
+
+  async function openPromptPanel(){
+    if(!activeAsset?.promptPath)return;
+    clearTimeout(controlsTimer);
+    dialog.classList.remove('controls-hidden');
+    el.promptPanel.hidden=false;
+    el.promptKind.textContent=activeAsset.promptKind==='original'?'原始提示词':'重建提示词';
+    el.promptTitle.textContent=activeAsset.title;
+    el.promptText.textContent='正在读取提示词…';
+    el.copyPrompt.disabled=true;
+    try{
+      let text=promptCache.get(activeAsset.promptPath);
+      if(!text){
+        const response=await fetch(encodeURI(activeAsset.promptPath),{cache:'no-store'});
+        if(!response.ok)throw new Error(`HTTP ${response.status}`);
+        text=extractPrompt(await response.text());
+        promptCache.set(activeAsset.promptPath,text);
+      }
+      if(!activeAsset||el.promptPanel.hidden)return;
+      el.promptText.textContent=text;
+      el.copyPrompt.disabled=false;
+    }catch(error){
+      el.promptText.textContent=`提示词读取失败：${error.message}`;
+    }
+  }
+
   function render(){
     const items=getItems();
     if(!dialog.open||!items.length)return;
+    closePromptPanel();
     activeIndex=Math.max(0,Math.min(activeIndex,items.length-1));
     activeAsset=items[activeIndex];
     pan=null;
@@ -106,6 +155,7 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     const favorite=isFavorite(activeAsset.id);
     el.favorite.textContent=favorite?'♥ 已收藏':'♡ 收藏';
     el.favorite.setAttribute('aria-pressed',String(favorite));
+    el.prompt.hidden=!activeAsset.promptPath;
     el.prev.disabled=items.length<2;
     el.next.disabled=items.length<2;
 
@@ -146,10 +196,13 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     if(['Tab','Enter',' '].includes(event.key)) keyboardMode=true;
     if(!dialog.open)return;
     showControls();
-    if(event.key==='ArrowLeft'){
+    if(event.key==='Escape'&&promptOpen()){
+      event.preventDefault();
+      closePromptPanel();
+    }else if(event.key==='ArrowLeft'&&!promptOpen()){
       event.preventDefault();
       move(-1);
-    }else if(event.key==='ArrowRight'){
+    }else if(event.key==='ArrowRight'&&!promptOpen()){
       event.preventDefault();
       move(1);
     }else if(event.key==='Escape'){
@@ -159,7 +212,7 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
   });
 
   dialog.addEventListener('pointermove',()=>{
-    if(!keyboardMode) showControls();
+    if(!keyboardMode&&!promptOpen()) showControls();
   });
 
   el.stage.addEventListener('pointerdown',event=>{
@@ -221,10 +274,21 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     onToggleFavorite(activeAsset.id);
     render();
   };
+  el.prompt.onclick=openPromptPanel;
+  el.promptClose.onclick=closePromptPanel;
+  el.promptPanel.onclick=event=>{if(event.target===el.promptPanel)closePromptPanel();};
+  el.copyPrompt.onclick=async()=>{
+    const text=el.promptText.textContent.trim();
+    if(!text||el.copyPrompt.disabled)return;
+    await navigator.clipboard.writeText(text);
+    el.copyPrompt.textContent='已复制';
+    setTimeout(()=>{if(!el.promptPanel.hidden)el.copyPrompt.textContent='复制提示词';},1200);
+  };
 
   dialog.addEventListener('close',()=>{
     clearTimeout(controlsTimer);
     document.body.style.overflow='';
+    closePromptPanel();
     activeAsset=null;
     pan=null;
     dialog.classList.remove('controls-hidden');
