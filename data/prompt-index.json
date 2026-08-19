@@ -1,17 +1,31 @@
 {
   "schemaVersion": 1,
   "assets": {
-    "41ef5a6c4b10": {
-      "path": "prompts/assets/41ef5a6c4b10.md",
-      "kind": "reconstructed"
-    },
-    "21fb0eb80d95": {
-      "path": "prompts/assets/21fb0eb80d95.md",
-      "kind": "reconstructed"
-    },
-    "782917e470a5": {
-      "path": "prompts/assets/782917e470a5.md",
-      "kind": "reconstructed"
-    }
+    "41ef5a6c4b10": {"path":"prompts/assets/41ef5a6c4b10.md","kind":"reconstructed"},
+    "c9e490bf296a": {"path":"prompts/assets/c9e490bf296a.md","kind":"reconstructed"},
+    "464d71a29e0b": {"path":"prompts/assets/464d71a29e0b.md","kind":"reconstructed"},
+    "1d5787d4c10e": {"path":"prompts/assets/1d5787d4c10e.md","kind":"reconstructed"},
+    "140b94477357": {"path":"prompts/assets/140b94477357.md","kind":"reconstructed"},
+    "23fcba3e50ce": {"path":"prompts/assets/23fcba3e50ce.md","kind":"reconstructed"},
+    "c02d51b9d062": {"path":"prompts/assets/c02d51b9d062.md","kind":"reconstructed"},
+    "52686edd2618": {"path":"prompts/assets/52686edd2618.md","kind":"reconstructed"},
+    "3c0935f2447d": {"path":"prompts/assets/3c0935f2447d.md","kind":"reconstructed"},
+    "6aeabb58e7ad": {"path":"prompts/assets/6aeabb58e7ad.md","kind":"reconstructed"},
+    "80306a313c39": {"path":"prompts/assets/80306a313c39.md","kind":"reconstructed"},
+    "e9a8d51373d1": {"path":"prompts/assets/e9a8d51373d1.md","kind":"reconstructed"},
+    "21fb0eb80d95": {"path":"prompts/assets/21fb0eb80d95.md","kind":"reconstructed"},
+    "c2367cd02ce4": {"path":"prompts/assets/c2367cd02ce4.md","kind":"reconstructed"},
+    "7826fd4aad9b": {"path":"prompts/assets/7826fd4aad9b.md","kind":"reconstructed"},
+    "87d0ebf2818f": {"path":"prompts/assets/87d0ebf2818f.md","kind":"reconstructed"},
+    "8b3c642974e9": {"path":"prompts/assets/8b3c642974e9.md","kind":"reconstructed"},
+    "e800314cae5e": {"path":"prompts/assets/e800314cae5e.md","kind":"reconstructed"},
+    "bba933e32260": {"path":"prompts/assets/bba933e32260.md","kind":"reconstructed"},
+    "78b5943d51f7": {"path":"prompts/assets/78b5943d51f7.md","kind":"reconstructed"},
+    "a1b4b882c3c7": {"path":"prompts/assets/a1b4b882c3c7.md","kind":"reconstructed"},
+    "569921299ab3": {"path":"prompts/assets/569921299ab3.md","kind":"reconstructed"},
+    "fefe3362b6c9": {"path":"prompts/assets/fefe3362b6c9.md","kind":"reconstructed"},
+    "6df38a11f4e0": {"path":"prompts/assets/6df38a11f4e0.md","kind":"reconstructed"},
+    "3bfa36ff0fb9": {"path":"prompts/assets/3bfa36ff0fb9.md","kind":"reconstructed"},
+    "782917e470a5": {"path":"prompts/assets/782917e470a5.md","kind":"reconstructed"}
   }
 }
