@@ -7,5 +7,8 @@
 - 公众号组件继续复用 `wechat/index.html` 中的组件数据
 - 每个组件只展示样式编号、预览和“复制 HTML”
 - `wechat/` 目录作为组件数据与兼容入口保留，不作为主导航页面
+- 公众号“图片”分类使用已经正式入库的品牌图片，不保留占位图；当前包含 4 个医荟她健康 Logo 方案与马年横版、竖版 KV，共 6 个图片组件
+- 公众号图片原图统一存放在 `images/wechat/yihui-she-health/`，文件名使用稳定、可读的英文路径名；组件 HTML 使用 GitHub Pages 公开图片地址，方便直接复制
+- 会话图片进入仓库时，继续遵循 `docs/image-upload-via-adobe-bridge.md` 的 Adobe 文件桥接、下载校验、构建校验与一次性工作流清理流程
 
-此文件同时用于触发 GitHub Pages 重新构建，以发布共享首页版本。
+此文件同时可用于通过 PR merge 触发 GitHub Pages 重新构建，以发布共享首页版本。
