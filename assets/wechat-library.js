@@ -8,6 +8,14 @@ const grid=document.querySelector('#wechatGrid');
 const search=document.querySelector('#wechatSearch');
 const empty=document.querySelector('#wechatEmpty');
 const wechatTab=document.querySelector('.domain-tab[data-domain="wechat"]');
+const heroEyebrow=document.querySelector('.hero .eyebrow');
+const heroTitle=document.querySelector('.hero h1');
+const heroIntro=document.querySelector('.hero p:not(.eyebrow)');
+const defaultHero={
+  eyebrow:heroEyebrow?.textContent||'',
+  title:heroTitle?.innerHTML||'',
+  intro:heroIntro?.textContent||''
+};
 
 function renderChips(){
   const cats=['全部',...new Set(COMPONENTS.map(x=>x.category))];
@@ -44,8 +52,30 @@ function render(){
     shell.append(preview);card.append(head,shell);grid.append(card);
   });
 }
-function showWechat(){document.body.classList.add('wechat-mode');assetView.hidden=true;wechatView.hidden=false;history.replaceState(null,'',location.pathname+location.search+'#wechat');}
-function showAssets(){document.body.classList.remove('wechat-mode');wechatView.hidden=true;assetView.hidden=false;if(location.hash==='#wechat')history.replaceState(null,'',location.pathname+location.search);}
+function setWechatHero(){
+  if(heroEyebrow)heroEyebrow.textContent='WECHAT STYLE LIBRARY';
+  if(heroTitle)heroTitle.innerHTML='把好用的公众号样式，<span>真正沉淀下来。</span>';
+  if(heroIntro)heroIntro.textContent='按组件分类浏览并选择样式，记住编号即可。后续直接指定编号，我会按选定的顶部关注、导语、标题、正文、Figure、参考文献与结尾样式组合生成公众号文章。';
+}
+function restoreHero(){
+  if(heroEyebrow)heroEyebrow.textContent=defaultHero.eyebrow;
+  if(heroTitle)heroTitle.innerHTML=defaultHero.title;
+  if(heroIntro)heroIntro.textContent=defaultHero.intro;
+}
+function showWechat(){
+  document.body.classList.add('wechat-mode');
+  setWechatHero();
+  assetView.hidden=true;
+  wechatView.hidden=false;
+  history.replaceState(null,'',location.pathname+location.search+'#wechat');
+}
+function showAssets(){
+  document.body.classList.remove('wechat-mode');
+  restoreHero();
+  wechatView.hidden=true;
+  assetView.hidden=false;
+  if(location.hash==='#wechat')history.replaceState(null,'',location.pathname+location.search);
+}
 async function loadComponents(){
   const response=await fetch('./wechat/index.html',{cache:'no-store'});
   if(!response.ok)throw new Error(`公众号样式读取失败：HTTP ${response.status}`);
