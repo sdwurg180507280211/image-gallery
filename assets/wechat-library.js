@@ -44,8 +44,8 @@ function render(){
     shell.append(preview);card.append(head,shell);grid.append(card);
   });
 }
-function showWechat(){assetView.hidden=true;wechatView.hidden=false;history.replaceState(null,'',location.pathname+location.search+'#wechat');}
-function showAssets(){wechatView.hidden=true;assetView.hidden=false;if(location.hash==='#wechat')history.replaceState(null,'',location.pathname+location.search);}
+function showWechat(){document.body.classList.add('wechat-mode');assetView.hidden=true;wechatView.hidden=false;history.replaceState(null,'',location.pathname+location.search+'#wechat');}
+function showAssets(){document.body.classList.remove('wechat-mode');wechatView.hidden=true;assetView.hidden=false;if(location.hash==='#wechat')history.replaceState(null,'',location.pathname+location.search);}
 async function loadComponents(){
   const response=await fetch('./wechat/index.html',{cache:'no-store'});
   if(!response.ok)throw new Error(`公众号样式读取失败：HTTP ${response.status}`);
