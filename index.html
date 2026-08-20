@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./assets/styles.css?v=5" />
   <link rel="stylesheet" href="./assets/interactions.css?v=1" />
   <link rel="stylesheet" href="./assets/viewer.css?v=4" />
+  <link rel="stylesheet" href="./assets/wechat-library.css?v=1" />
 </head>
 <body>
   <header class="site-header">
@@ -37,54 +38,66 @@
       <div class="domain-tabs" role="tablist" aria-label="素材类型">
         <button class="domain-tab active" data-domain="character" type="button" role="tab" aria-selected="true"><span>人物图片</span><small id="characterTabCount">0</small></button>
         <button class="domain-tab" data-domain="medical-kv" type="button" role="tab" aria-selected="false"><span>医药KV</span><small id="kvTabCount">0</small></button>
-        <a href="./wechat/" role="tab" aria-selected="false" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:12px;text-decoration:none;"><span>公众号</span><small style="min-width:24px;padding:2px 7px;border-radius:999px;background:color-mix(in srgb,var(--surface2) 80%,transparent);color:var(--muted);font-size:10px;">22</small></a>
+        <button class="domain-tab" data-domain="wechat" type="button" role="tab" aria-selected="false"><span>公众号</span><small>22</small></button>
       </div>
 
-      <div class="toolbar">
-        <div class="search-box" role="search">
-          <span class="search-icon" aria-hidden="true">⌕</span>
-          <input id="searchInput" type="search" aria-label="搜索素材" placeholder="搜索人物标题或关键词…" autocomplete="off" />
-          <button class="search-clear" id="clearSearch" type="button" aria-label="清除搜索" hidden>×</button>
+      <div id="assetLibraryView">
+        <div class="toolbar">
+          <div class="search-box" role="search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" aria-label="搜索素材" placeholder="搜索人物标题或关键词…" autocomplete="off" />
+            <button class="search-clear" id="clearSearch" type="button" aria-label="清除搜索" hidden>×</button>
+          </div>
+          <div class="toolbar-actions">
+            <select id="sortSelect" aria-label="排序方式">
+              <option value="newest">最新优先</option>
+              <option value="oldest">最早优先</option>
+              <option value="title">标题排序</option>
+            </select>
+            <button class="text-button" id="favoritesOnly" type="button" aria-pressed="false">♡ 只看收藏</button>
+          </div>
         </div>
-        <div class="toolbar-actions">
-          <select id="sortSelect" aria-label="排序方式">
-            <option value="newest">最新优先</option>
-            <option value="oldest">最早优先</option>
-            <option value="title">标题排序</option>
-          </select>
-          <button class="text-button" id="favoritesOnly" type="button" aria-pressed="false">♡ 只看收藏</button>
+
+        <section id="characterFilters" class="filter-block">
+          <div class="facet-header"><span>分类</span><small>按主要视觉特征归档</small></div>
+          <div class="chip-row" id="characterCategoryFilters"></div>
+        </section>
+
+        <section id="medicalFilters" class="filter-block medical-filters" hidden>
+          <div class="facet-row">
+            <div class="facet-header"><span>主色</span><small>按KV整体主色快速筛选</small></div>
+            <div class="chip-row" id="colorFilters"></div>
+          </div>
+          <div class="facet-row usage-row">
+            <div class="facet-header"><span>使用状态</span><small>用于筛选可继续使用的KV</small></div>
+            <div class="segmented-control" id="usageFilters" aria-label="使用状态筛选"></div>
+          </div>
+        </section>
+
+        <div class="result-meta">
+          <div>
+            <p id="resultText">正在读取素材…</p>
+            <div class="active-filter-row" id="activeFilters" aria-label="当前筛选条件"></div>
+          </div>
+          <button class="text-button compact" id="clearFilters" type="button" hidden>清除筛选</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <strong>没有匹配素材</strong>
+          <p>减少筛选条件或换一个关键词。</p>
         </div>
       </div>
 
-      <section id="characterFilters" class="filter-block">
-        <div class="facet-header"><span>分类</span><small>按主要视觉特征归档</small></div>
-        <div class="chip-row" id="characterCategoryFilters"></div>
+      <section id="wechatLibraryView" hidden>
+        <p class="wechat-library-intro">选择喜欢的样式编号，后续直接告诉我编号即可。每个组件只展示效果预览，并提供可直接复制的 inline HTML。</p>
+        <div class="wechat-library-toolbar">
+          <div class="wechat-chips" id="wechatChips"></div>
+          <input class="wechat-search" id="wechatSearch" type="search" aria-label="搜索公众号样式" placeholder="搜索样式编号或名称，例如：标题-01" autocomplete="off" />
+        </div>
+        <div class="wechat-grid" id="wechatGrid"></div>
+        <div class="wechat-empty" id="wechatEmpty" hidden>没有匹配的样式。</div>
       </section>
-
-      <section id="medicalFilters" class="filter-block medical-filters" hidden>
-        <div class="facet-row">
-          <div class="facet-header"><span>主色</span><small>按KV整体主色快速筛选</small></div>
-          <div class="chip-row" id="colorFilters"></div>
-        </div>
-        <div class="facet-row usage-row">
-          <div class="facet-header"><span>使用状态</span><small>用于筛选可继续使用的KV</small></div>
-          <div class="segmented-control" id="usageFilters" aria-label="使用状态筛选"></div>
-        </div>
-      </section>
-
-      <div class="result-meta">
-        <div>
-          <p id="resultText">正在读取素材…</p>
-          <div class="active-filter-row" id="activeFilters" aria-label="当前筛选条件"></div>
-        </div>
-        <button class="text-button compact" id="clearFilters" type="button" hidden>清除筛选</button>
-      </div>
-
-      <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
-      <div class="empty-state" id="emptyState" hidden>
-        <strong>没有匹配素材</strong>
-        <p>减少筛选条件或换一个关键词。</p>
-      </div>
     </section>
   </main>
 
@@ -151,6 +164,7 @@
   </template>
 
   <script type="module" src="./assets/app.js?v=10"></script>
+  <script type="module" src="./assets/wechat-library.js?v=1"></script>
   <script type="module" src="./assets/admin.js?v=5"></script>
   <script type="module" src="./assets/interactions.js?v=1"></script>
 </body>
