@@ -1,31 +1,441 @@
 {
   "schemaVersion": 1,
   "assets": {
-    "41ef5a6c4b10": {"path":"prompts/assets/41ef5a6c4b10.md","kind":"reconstructed"},
-    "c9e490bf296a": {"path":"prompts/assets/c9e490bf296a.md","kind":"reconstructed"},
-    "464d71a29e0b": {"path":"prompts/assets/464d71a29e0b.md","kind":"reconstructed"},
-    "1d5787d4c10e": {"path":"prompts/assets/1d5787d4c10e.md","kind":"reconstructed"},
-    "140b94477357": {"path":"prompts/assets/140b94477357.md","kind":"reconstructed"},
-    "23fcba3e50ce": {"path":"prompts/assets/23fcba3e50ce.md","kind":"reconstructed"},
-    "c02d51b9d062": {"path":"prompts/assets/c02d51b9d062.md","kind":"reconstructed"},
-    "52686edd2618": {"path":"prompts/assets/52686edd2618.md","kind":"reconstructed"},
-    "3c0935f2447d": {"path":"prompts/assets/3c0935f2447d.md","kind":"reconstructed"},
-    "6aeabb58e7ad": {"path":"prompts/assets/6aeabb58e7ad.md","kind":"reconstructed"},
-    "80306a313c39": {"path":"prompts/assets/80306a313c39.md","kind":"reconstructed"},
-    "e9a8d51373d1": {"path":"prompts/assets/e9a8d51373d1.md","kind":"reconstructed"},
-    "21fb0eb80d95": {"path":"prompts/assets/21fb0eb80d95.md","kind":"reconstructed"},
-    "c2367cd02ce4": {"path":"prompts/assets/c2367cd02ce4.md","kind":"reconstructed"},
-    "7826fd4aad9b": {"path":"prompts/assets/7826fd4aad9b.md","kind":"reconstructed"},
-    "87d0ebf2818f": {"path":"prompts/assets/87d0ebf2818f.md","kind":"reconstructed"},
-    "8b3c642974e9": {"path":"prompts/assets/8b3c642974e9.md","kind":"reconstructed"},
-    "e800314cae5e": {"path":"prompts/assets/e800314cae5e.md","kind":"reconstructed"},
-    "bba933e32260": {"path":"prompts/assets/bba933e32260.md","kind":"reconstructed"},
-    "78b5943d51f7": {"path":"prompts/assets/78b5943d51f7.md","kind":"reconstructed"},
-    "a1b4b882c3c7": {"path":"prompts/assets/a1b4b882c3c7.md","kind":"reconstructed"},
-    "569921299ab3": {"path":"prompts/assets/569921299ab3.md","kind":"reconstructed"},
-    "fefe3362b6c9": {"path":"prompts/assets/fefe3362b6c9.md","kind":"reconstructed"},
-    "6df38a11f4e0": {"path":"prompts/assets/6df38a11f4e0.md","kind":"reconstructed"},
-    "3bfa36ff0fb9": {"path":"prompts/assets/3bfa36ff0fb9.md","kind":"reconstructed"},
-    "782917e470a5": {"path":"prompts/assets/782917e470a5.md","kind":"reconstructed"}
+    "41ef5a6c4b10": {
+      "path": "prompts/assets/41ef5a6c4b10.md",
+      "kind": "reconstructed"
+    },
+    "c9e490bf296a": {
+      "path": "prompts/assets/c9e490bf296a.md",
+      "kind": "reconstructed"
+    },
+    "464d71a29e0b": {
+      "path": "prompts/assets/464d71a29e0b.md",
+      "kind": "reconstructed"
+    },
+    "1d5787d4c10e": {
+      "path": "prompts/assets/1d5787d4c10e.md",
+      "kind": "reconstructed"
+    },
+    "140b94477357": {
+      "path": "prompts/assets/140b94477357.md",
+      "kind": "reconstructed"
+    },
+    "23fcba3e50ce": {
+      "path": "prompts/assets/23fcba3e50ce.md",
+      "kind": "reconstructed"
+    },
+    "c02d51b9d062": {
+      "path": "prompts/assets/c02d51b9d062.md",
+      "kind": "reconstructed"
+    },
+    "52686edd2618": {
+      "path": "prompts/assets/52686edd2618.md",
+      "kind": "reconstructed"
+    },
+    "3c0935f2447d": {
+      "path": "prompts/assets/3c0935f2447d.md",
+      "kind": "reconstructed"
+    },
+    "6aeabb58e7ad": {
+      "path": "prompts/assets/6aeabb58e7ad.md",
+      "kind": "reconstructed"
+    },
+    "80306a313c39": {
+      "path": "prompts/assets/80306a313c39.md",
+      "kind": "reconstructed"
+    },
+    "e9a8d51373d1": {
+      "path": "prompts/assets/e9a8d51373d1.md",
+      "kind": "reconstructed"
+    },
+    "21fb0eb80d95": {
+      "path": "prompts/assets/21fb0eb80d95.md",
+      "kind": "reconstructed"
+    },
+    "c2367cd02ce4": {
+      "path": "prompts/assets/c2367cd02ce4.md",
+      "kind": "reconstructed"
+    },
+    "7826fd4aad9b": {
+      "path": "prompts/assets/7826fd4aad9b.md",
+      "kind": "reconstructed"
+    },
+    "87d0ebf2818f": {
+      "path": "prompts/assets/87d0ebf2818f.md",
+      "kind": "reconstructed"
+    },
+    "8b3c642974e9": {
+      "path": "prompts/assets/8b3c642974e9.md",
+      "kind": "reconstructed"
+    },
+    "e800314cae5e": {
+      "path": "prompts/assets/e800314cae5e.md",
+      "kind": "reconstructed"
+    },
+    "bba933e32260": {
+      "path": "prompts/assets/bba933e32260.md",
+      "kind": "reconstructed"
+    },
+    "78b5943d51f7": {
+      "path": "prompts/assets/78b5943d51f7.md",
+      "kind": "reconstructed"
+    },
+    "a1b4b882c3c7": {
+      "path": "prompts/assets/a1b4b882c3c7.md",
+      "kind": "reconstructed"
+    },
+    "569921299ab3": {
+      "path": "prompts/assets/569921299ab3.md",
+      "kind": "reconstructed"
+    },
+    "fefe3362b6c9": {
+      "path": "prompts/assets/fefe3362b6c9.md",
+      "kind": "reconstructed"
+    },
+    "6df38a11f4e0": {
+      "path": "prompts/assets/6df38a11f4e0.md",
+      "kind": "reconstructed"
+    },
+    "3bfa36ff0fb9": {
+      "path": "prompts/assets/3bfa36ff0fb9.md",
+      "kind": "reconstructed"
+    },
+    "782917e470a5": {
+      "path": "prompts/assets/782917e470a5.md",
+      "kind": "reconstructed"
+    },
+    "7c8e96b9ae0d": {
+      "path": "prompts/assets/7c8e96b9ae0d.md",
+      "kind": "reconstructed"
+    },
+    "9f9cb015c00e": {
+      "path": "prompts/assets/9f9cb015c00e.md",
+      "kind": "reconstructed"
+    },
+    "74bf3e51f662": {
+      "path": "prompts/assets/74bf3e51f662.md",
+      "kind": "reconstructed"
+    },
+    "b91557c74147": {
+      "path": "prompts/assets/b91557c74147.md",
+      "kind": "reconstructed"
+    },
+    "913d7a63bd6c": {
+      "path": "prompts/assets/913d7a63bd6c.md",
+      "kind": "reconstructed"
+    },
+    "c9ecf2fc322a": {
+      "path": "prompts/assets/c9ecf2fc322a.md",
+      "kind": "reconstructed"
+    },
+    "6c5331ba9a83": {
+      "path": "prompts/assets/6c5331ba9a83.md",
+      "kind": "reconstructed"
+    },
+    "c06b5b77bf3e": {
+      "path": "prompts/assets/c06b5b77bf3e.md",
+      "kind": "reconstructed"
+    },
+    "0ac50d88becd": {
+      "path": "prompts/assets/0ac50d88becd.md",
+      "kind": "reconstructed"
+    },
+    "ae991ae6e275": {
+      "path": "prompts/assets/ae991ae6e275.md",
+      "kind": "reconstructed"
+    },
+    "0f08f6e0cd88": {
+      "path": "prompts/assets/0f08f6e0cd88.md",
+      "kind": "reconstructed"
+    },
+    "467f3982ed0b": {
+      "path": "prompts/assets/467f3982ed0b.md",
+      "kind": "reconstructed"
+    },
+    "aea23ee332b8": {
+      "path": "prompts/assets/aea23ee332b8.md",
+      "kind": "reconstructed"
+    },
+    "fca1a5747541": {
+      "path": "prompts/assets/fca1a5747541.md",
+      "kind": "reconstructed"
+    },
+    "75771a795e7d": {
+      "path": "prompts/assets/75771a795e7d.md",
+      "kind": "reconstructed"
+    },
+    "9f4c634ee270": {
+      "path": "prompts/assets/9f4c634ee270.md",
+      "kind": "reconstructed"
+    },
+    "a7d68596be87": {
+      "path": "prompts/assets/a7d68596be87.md",
+      "kind": "reconstructed"
+    },
+    "3e0759cdf6b6": {
+      "path": "prompts/assets/3e0759cdf6b6.md",
+      "kind": "reconstructed"
+    },
+    "fa6a260aadbf": {
+      "path": "prompts/assets/fa6a260aadbf.md",
+      "kind": "reconstructed"
+    },
+    "d4167482f05f": {
+      "path": "prompts/assets/d4167482f05f.md",
+      "kind": "reconstructed"
+    },
+    "236cb58beb4a": {
+      "path": "prompts/assets/236cb58beb4a.md",
+      "kind": "reconstructed"
+    },
+    "4c45511e8f6c": {
+      "path": "prompts/assets/4c45511e8f6c.md",
+      "kind": "reconstructed"
+    },
+    "209f0ff5bc10": {
+      "path": "prompts/assets/209f0ff5bc10.md",
+      "kind": "reconstructed"
+    },
+    "d7400dd45eeb": {
+      "path": "prompts/assets/d7400dd45eeb.md",
+      "kind": "reconstructed"
+    },
+    "9846ea8f1433": {
+      "path": "prompts/assets/9846ea8f1433.md",
+      "kind": "reconstructed"
+    },
+    "d5cb8570c271": {
+      "path": "prompts/assets/d5cb8570c271.md",
+      "kind": "reconstructed"
+    },
+    "072148fdc986": {
+      "path": "prompts/assets/072148fdc986.md",
+      "kind": "reconstructed"
+    },
+    "92291f1f6371": {
+      "path": "prompts/assets/92291f1f6371.md",
+      "kind": "reconstructed"
+    },
+    "f10862b8c441": {
+      "path": "prompts/assets/f10862b8c441.md",
+      "kind": "reconstructed"
+    },
+    "767f6886d91a": {
+      "path": "prompts/assets/767f6886d91a.md",
+      "kind": "reconstructed"
+    },
+    "9b2a0e069401": {
+      "path": "prompts/assets/9b2a0e069401.md",
+      "kind": "reconstructed"
+    },
+    "e6a121fe7f8f": {
+      "path": "prompts/assets/e6a121fe7f8f.md",
+      "kind": "reconstructed"
+    },
+    "cee36551e812": {
+      "path": "prompts/assets/cee36551e812.md",
+      "kind": "reconstructed"
+    },
+    "d8f7aac79136": {
+      "path": "prompts/assets/d8f7aac79136.md",
+      "kind": "reconstructed"
+    },
+    "3f5b9fa6ac7c": {
+      "path": "prompts/assets/3f5b9fa6ac7c.md",
+      "kind": "reconstructed"
+    },
+    "c8318b8f5dcb": {
+      "path": "prompts/assets/c8318b8f5dcb.md",
+      "kind": "reconstructed"
+    },
+    "0c3ba17b2432": {
+      "path": "prompts/assets/0c3ba17b2432.md",
+      "kind": "reconstructed"
+    },
+    "60966dc95e45": {
+      "path": "prompts/assets/60966dc95e45.md",
+      "kind": "reconstructed"
+    },
+    "bb8a0bc9f3fd": {
+      "path": "prompts/assets/bb8a0bc9f3fd.md",
+      "kind": "reconstructed"
+    },
+    "4461b14c33db": {
+      "path": "prompts/assets/4461b14c33db.md",
+      "kind": "reconstructed"
+    },
+    "6c2d482e608c": {
+      "path": "prompts/assets/6c2d482e608c.md",
+      "kind": "reconstructed"
+    },
+    "e8685455d090": {
+      "path": "prompts/assets/e8685455d090.md",
+      "kind": "reconstructed"
+    },
+    "8035e5ab8c34": {
+      "path": "prompts/assets/8035e5ab8c34.md",
+      "kind": "reconstructed"
+    },
+    "b65ab6e8599a": {
+      "path": "prompts/assets/b65ab6e8599a.md",
+      "kind": "reconstructed"
+    },
+    "2a5dbc325a95": {
+      "path": "prompts/assets/2a5dbc325a95.md",
+      "kind": "reconstructed"
+    },
+    "ad15d468f4ef": {
+      "path": "prompts/assets/ad15d468f4ef.md",
+      "kind": "reconstructed"
+    },
+    "26e3031b253f": {
+      "path": "prompts/assets/26e3031b253f.md",
+      "kind": "reconstructed"
+    },
+    "9fd8caecd846": {
+      "path": "prompts/assets/9fd8caecd846.md",
+      "kind": "reconstructed"
+    },
+    "77d1fa98fc3f": {
+      "path": "prompts/assets/77d1fa98fc3f.md",
+      "kind": "reconstructed"
+    },
+    "d6aab57fe340": {
+      "path": "prompts/assets/d6aab57fe340.md",
+      "kind": "reconstructed"
+    },
+    "018d327f6a61": {
+      "path": "prompts/assets/018d327f6a61.md",
+      "kind": "reconstructed"
+    },
+    "7cdbe84383c3": {
+      "path": "prompts/assets/7cdbe84383c3.md",
+      "kind": "reconstructed"
+    },
+    "72d46f979d64": {
+      "path": "prompts/assets/72d46f979d64.md",
+      "kind": "reconstructed"
+    },
+    "73f404430b8f": {
+      "path": "prompts/assets/73f404430b8f.md",
+      "kind": "reconstructed"
+    },
+    "ba7787c43ec7": {
+      "path": "prompts/assets/ba7787c43ec7.md",
+      "kind": "reconstructed"
+    },
+    "072b826a0769": {
+      "path": "prompts/assets/072b826a0769.md",
+      "kind": "reconstructed"
+    },
+    "ddf09ed1509f": {
+      "path": "prompts/assets/ddf09ed1509f.md",
+      "kind": "reconstructed"
+    },
+    "1e915f336daa": {
+      "path": "prompts/assets/1e915f336daa.md",
+      "kind": "reconstructed"
+    },
+    "ccb53eabaed2": {
+      "path": "prompts/assets/ccb53eabaed2.md",
+      "kind": "reconstructed"
+    },
+    "b70bb40a4fd0": {
+      "path": "prompts/assets/b70bb40a4fd0.md",
+      "kind": "reconstructed"
+    },
+    "0e6863a6f750": {
+      "path": "prompts/assets/0e6863a6f750.md",
+      "kind": "reconstructed"
+    },
+    "d52cf66b38b4": {
+      "path": "prompts/assets/d52cf66b38b4.md",
+      "kind": "reconstructed"
+    },
+    "8e81e85610b6": {
+      "path": "prompts/assets/8e81e85610b6.md",
+      "kind": "reconstructed"
+    },
+    "2ab045c51115": {
+      "path": "prompts/assets/2ab045c51115.md",
+      "kind": "reconstructed"
+    },
+    "157f1636c1d8": {
+      "path": "prompts/assets/157f1636c1d8.md",
+      "kind": "reconstructed"
+    },
+    "07ec0954930a": {
+      "path": "prompts/assets/07ec0954930a.md",
+      "kind": "reconstructed"
+    },
+    "fe4b47f379bd": {
+      "path": "prompts/assets/fe4b47f379bd.md",
+      "kind": "reconstructed"
+    },
+    "878e1ba45e6e": {
+      "path": "prompts/assets/878e1ba45e6e.md",
+      "kind": "reconstructed"
+    },
+    "badb34d945a3": {
+      "path": "prompts/assets/badb34d945a3.md",
+      "kind": "reconstructed"
+    },
+    "72641b48f5b6": {
+      "path": "prompts/assets/72641b48f5b6.md",
+      "kind": "reconstructed"
+    },
+    "35b168586efd": {
+      "path": "prompts/assets/35b168586efd.md",
+      "kind": "reconstructed"
+    },
+    "9d1648ee47ac": {
+      "path": "prompts/assets/9d1648ee47ac.md",
+      "kind": "reconstructed"
+    },
+    "f13d6b2de9e1": {
+      "path": "prompts/assets/f13d6b2de9e1.md",
+      "kind": "reconstructed"
+    },
+    "b0d1b775dfd7": {
+      "path": "prompts/assets/b0d1b775dfd7.md",
+      "kind": "reconstructed"
+    },
+    "2d37afbe476a": {
+      "path": "prompts/assets/2d37afbe476a.md",
+      "kind": "reconstructed"
+    },
+    "2a7c5a959594": {
+      "path": "prompts/assets/2a7c5a959594.md",
+      "kind": "reconstructed"
+    },
+    "820b50c90f64": {
+      "path": "prompts/assets/820b50c90f64.md",
+      "kind": "reconstructed"
+    },
+    "c36faebc4c30": {
+      "path": "prompts/assets/c36faebc4c30.md",
+      "kind": "reconstructed"
+    },
+    "1e06b97426da": {
+      "path": "prompts/assets/1e06b97426da.md",
+      "kind": "reconstructed"
+    },
+    "9cc53dba8488": {
+      "path": "prompts/assets/9cc53dba8488.md",
+      "kind": "reconstructed"
+    },
+    "b5e45524d622": {
+      "path": "prompts/assets/b5e45524d622.md",
+      "kind": "reconstructed"
+    },
+    "f77c50ce2a7e": {
+      "path": "prompts/assets/f77c50ce2a7e.md",
+      "kind": "reconstructed"
+    },
+    "67f95ff20003": {
+      "path": "prompts/assets/67f95ff20003.md",
+      "kind": "reconstructed"
+    }
   }
 }
