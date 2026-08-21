@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/backfill-red-robed-remaining-20260821.yml'
+      - '.github/prompt-backfill-trigger-red-robed-remaining'
 
 permissions:
   contents: write
@@ -37,8 +38,10 @@ jobs:
       - name: Validate site build
         run: npm run build
 
-      - name: Remove one-time workflow
-        run: rm -f .github/workflows/backfill-red-robed-remaining-20260821.yml
+      - name: Remove one-time trigger files
+        run: |
+          rm -f .github/workflows/backfill-red-robed-remaining-20260821.yml
+          rm -f .github/prompt-backfill-trigger-red-robed-remaining
 
       - name: Commit reconstructed prompts
         run: |
