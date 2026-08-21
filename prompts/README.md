@@ -35,3 +35,4 @@
 - 白色系「红裳仙姬」：2 / 2 已完成，均为 `reconstructed`。
 - 蓝色系「红裳仙姬」：2 / 2 已完成，均为 `reconstructed`。
 - 粉色系「红裳仙姬」：3 / 3 已完成，均为 `reconstructed`。
+- 医药 KV 总计：107 / 107 已完成提示词归档，均为 `reconstructed`。
