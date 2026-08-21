@@ -24,14 +24,22 @@ function parseArgs(argv){
 const cosine=Array.from({length:8},(_,u)=>Array.from({length:32},(_,x)=>Math.cos(((2*x+1)*u*Math.PI)/64)));
 
 async function perceptualHash(buffer){
-  const pixels=await sharp(buffer,{failOn:'none'}).rotate().grayscale().resize(32,32,{fit:'fill'}).raw().toBuffer();
+  const {data,info}=await sharp(buffer,{failOn:'none'})
+    .rotate()
+    .flatten({background:'#ffffff'})
+    .grayscale()
+    .resize(32,32,{fit:'fill'})
+    .raw()
+    .toBuffer({resolveWithObject:true});
+  if(info.channels!==1)throw new Error(`pHash 预处理通道异常：${info.channels}`);
+
   const coeff=[];
   for(let v=0;v<8;v++){
     for(let u=0;u<8;u++){
       let sum=0;
       for(let y=0;y<32;y++){
         const cy=cosine[v][y];
-        for(let x=0;x<32;x++)sum+=pixels[y*32+x]*cosine[u][x]*cy;
+        for(let x=0;x<32;x++)sum+=data[y*32+x]*cosine[u][x]*cy;
       }
       coeff.push(sum);
     }
@@ -108,7 +116,7 @@ async function main(){
 
   const report={
     schemaVersion:1,
-    algorithm:{exact:'sha256',near:'phash-32x32-dct-8x8',nearThreshold:options.nearThreshold,aspectRatioTolerance:'log-ratio <= 0.06',crossDomain:options.crossDomain},
+    algorithm:{exact:'sha256',near:'phash-32x32-dct-8x8',alpha:'flatten-white',nearThreshold:options.nearThreshold,aspectRatioTolerance:'log-ratio <= 0.06',crossDomain:options.crossDomain},
     assetCount:analyzed.length,
     exactDuplicateGroups:exactDuplicates,
     nearDuplicatePairs:nearDuplicates
