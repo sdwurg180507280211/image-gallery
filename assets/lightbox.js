@@ -1,4 +1,4 @@
-export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}){
+export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,isDisliked,onToggleDislike}){
   const dialog=document.querySelector('#lightbox');
   const el={
     stage:document.querySelector('#lightboxStage'),
@@ -9,6 +9,7 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     title:document.querySelector('#lightboxTitle'),
     status:document.querySelector('#lightboxStatus'),
     favorite:document.querySelector('#lightboxFavorite'),
+    dislike:document.querySelector('#lightboxDislike'),
     prompt:document.querySelector('#lightboxPrompt'),
     download:document.querySelector('#downloadImage'),
     prev:document.querySelector('#previousImage'),
@@ -155,6 +156,10 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     const favorite=isFavorite(activeAsset.id);
     el.favorite.textContent=favorite?'♥ 已收藏':'♡ 收藏';
     el.favorite.setAttribute('aria-pressed',String(favorite));
+    const disliked=isDisliked?.(activeAsset.id)===true;
+    el.dislike.textContent=disliked?'👎 已标记':'👎 不喜欢';
+    el.dislike.setAttribute('aria-pressed',String(disliked));
+    el.dislike.title=disliked?'取消不喜欢标记':'标记不喜欢，之后可集中删除';
     el.prompt.hidden=!activeAsset.promptPath;
     el.prev.disabled=items.length<2;
     el.next.disabled=items.length<2;
@@ -273,6 +278,10 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite}
     if(!activeAsset)return;
     onToggleFavorite(activeAsset.id);
     render();
+  };
+  el.dislike.onclick=()=>{
+    if(!activeAsset)return;
+    onToggleDislike?.(activeAsset.id,el.dislike);
   };
   el.prompt.onclick=openPromptPanel;
   el.promptClose.onclick=closePromptPanel;
