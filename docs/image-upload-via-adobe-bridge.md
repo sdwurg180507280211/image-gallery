@@ -6,7 +6,7 @@
 
 ## 适用场景
 
-将 ChatGPT 当前会话可访问的原始图片、image_gen / ChatGPT Images 生成图，或当前工作区可访问的原始图片，稳定写入 `sdwurg180507280211/image-gallery`。
+将 ChatGPT 当前会话可访问的原始图片、image_gen / ChatGPT Images 生成图，或当前工作区可访问的原始图片，稳定写入 `sdwurg180507280211/image-gallery`，并确保 GitHub Pages 被明确触发发布。
 
 默认入库域为 **人物图片**；只有明确属于医药会议 KV / 医疗主视觉时才写入 `medical-kv`。
 
@@ -41,11 +41,13 @@ prompts/assets/<id>.md + data/prompt-index.json
         ↓
 npm run build
         ↓
-正式 commit + push main
+正式 commit + git push main
+        ↓
+显式 workflow_dispatch .github/workflows/pages.yml
         ↓
 删除一次性 workflow / 临时触发文件
         ↓
-确认正式入库 commit 后结束
+确认正式入库 commit + Pages 发布状态
 ```
 
 真正的二进制传输通道是：
@@ -53,6 +55,53 @@ npm run build
 **原始图片 → Adobe 文件桥 → presignedAssetUrl → GitHub Actions curl → 仓库原图。**
 
 GitHub connector 本身不需要直接承载几十 MB 的 Base64 图片。
+
+### 0.1 必须显式触发 Pages
+
+不要依赖“一次性导入 workflow 向 `main` push 后，`pages.yml` 会自动继续运行”。
+
+导入 workflow 通常使用仓库 `GITHUB_TOKEN` 进行：
+
+```bash
+git push origin HEAD:main
+```
+
+GitHub 为避免 workflow 递归触发，会抑制由该 token 产生的部分后续 workflow 事件。因此：
+
+> **由 `github-actions[bot]` / `GITHUB_TOKEN` 产生的 `main` push，不能作为 Pages 一定会自动触发的依据。**
+
+本项目的 `.github/workflows/pages.yml` 已支持：
+
+```yaml
+workflow_dispatch:
+```
+
+因此一次性导入 workflow 在正式 push 后必须显式 dispatch Pages workflow。
+
+推荐：
+
+```bash
+git push origin HEAD:main
+
+gh workflow run pages.yml --ref main
+```
+
+并给一次性导入 workflow 配置：
+
+```yaml
+permissions:
+  contents: write
+  actions: write
+```
+
+调用 `gh` 时使用当前 workflow token：
+
+```yaml
+env:
+  GH_TOKEN: ${{ github.token }}
+```
+
+如果显式 dispatch 失败，图片可以已经完成仓库入库，但**不能声称网站已经发布**。
 
 ---
 
@@ -161,6 +210,23 @@ mediaType
 
 如果需要临时触发分支 / PR，只保留一个；正式入库完成后清理。
 
+### 4.1 权限
+
+一次性导入 workflow 至少需要：
+
+```yaml
+permissions:
+  contents: write
+  actions: write
+```
+
+含义：
+
+- `contents: write`：提交图片、gallery、prompt，并 push `main`；
+- `actions: write`：正式 push 后显式 dispatch `pages.yml`。
+
+### 4.2 导入 workflow 职责
+
 一次性 workflow 负责：
 
 1. Checkout `main`；
@@ -173,7 +239,30 @@ mediaType
 8. 写入提示词文件并更新 `data/prompt-index.json`；
 9. 执行 `npm run build`；
 10. 删除自身及本批次临时触发文件；
-11. commit 并 push `main`。
+11. commit 并 push `main`；
+12. **显式 dispatch `pages.yml --ref main`**。
+
+### 4.3 不要用第二次空提交触发 Pages
+
+不要把以下方式作为正常流程：
+
+```text
+import bot push main
+        ↓
+发现 Pages 没运行
+        ↓
+人工创建 refresh trigger
+        ↓
+再用普通用户身份 push 一次
+```
+
+这只能作为历史故障补救，不是标准架构。
+
+标准方案是在导入 workflow 内主动：
+
+```bash
+gh workflow run pages.yml --ref main
+```
 
 ---
 
@@ -403,7 +492,7 @@ npm run build
 
 ---
 
-## 9. 正式提交
+## 9. 正式提交与 Pages 发布
 
 只有以下内容全部完成后才允许正式提交：
 
@@ -421,39 +510,103 @@ git commit -m "feat(gallery): import images via Adobe bridge"
 git push origin HEAD:main
 ```
 
-GitHub Pages 现有工作流监听 `main` push。临时上传分支本身不是发布完成状态。
+### 9.1 push 后必须显式 dispatch Pages
+
+紧接着执行：
+
+```bash
+gh workflow run pages.yml --ref main
+```
+
+建议同一 step 中明确设置：
+
+```yaml
+env:
+  GH_TOKEN: ${{ github.token }}
+```
+
+项目当前 `pages.yml` 同时支持：
+
+```yaml
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+```
+
+其中 `push` 继续服务普通用户 / 外部正常 push；**导入 workflow 自己的 bot push 一律按显式 `workflow_dispatch` 处理，不依赖递归触发。**
+
+### 9.2 推荐的最终 shell 顺序
+
+```bash
+git config user.name 'github-actions[bot]'
+git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+git add -A
+git commit -m 'feat(gallery): import images via Adobe bridge'
+git push origin HEAD:main
+
+gh workflow run pages.yml --ref main
+```
+
+不要在 `git push` 与 `gh workflow run` 之间加入人为 refresh commit。
 
 ---
 
-## 10. 成功判定与快速结束
+## 10. 成功判定：入库与发布分开
 
-以下状态**都不能**称为“上传成功”：
+以后不要再用一个“上传成功”同时代表仓库和网站两个状态。
 
-- Adobe bridge 已成功；
-- 已取得 presigned URL；
-- 已创建上传分支；
-- 已创建 workflow；
-- 图片只存在 `images/`；
-- workflow 已触发但尚无正式入库 commit。
+### 10.1 仓库入库成功
 
-唯一成功标准：
+满足以下条件才可以说“图片已入库”：
 
-> **正式入库 commit 已出现在 `main`，其中包含本批次原图、v3 gallery 数据和提示词关联，并且构建已通过。**
+- 正式 import commit 已出现在 `main`；
+- 本批次原图真实存在；
+- `data/gallery.json` 已包含对应记录；
+- prompt / prompt-index 已同步；
+- import workflow 中 `npm run build` 已通过。
 
-取得正式入库 commit 后即可结束，不需要：
+### 10.2 Pages 发布已触发
 
-- 轮询 GitHub Pages；
-- 等待网站部署；
-- 反复查询 workflow runs / jobs / logs；
-- 为了确认 UI 再做重复 push。
+满足以下条件才可以说“网站发布已触发”：
 
-如果合理等待后正式 commit 尚未出现，只报告工作流已触发但尚未取得正式入库 commit，不得声称图片已经成功入库。
+- 正式 import commit 已进入 `main`；
+- `gh workflow run pages.yml --ref main` / workflow dispatch 请求已成功提交。
+
+### 10.3 Pages 发布成功
+
+只有 Pages workflow 最终成功完成，才可以说：
+
+> **网站已发布 / 新图已上线。**
+
+如果 Pages 仍在 queued / in_progress，只能说：
+
+> **图片已入库，Pages 已触发，发布尚未完成。**
+
+如果 dispatch 失败，只能说：
+
+> **图片已入库，但 Pages 未成功触发。**
+
+### 10.4 检查策略
+
+不要高频轮询。
+
+在用户明确要求“上传到网站 / 确认能看见”时：
+
+1. 正式入库 commit 后显式 dispatch Pages；
+2. 对对应 Pages workflow 做有限检查；
+3. 成功则报告网站已发布；
+4. 仍运行中则准确报告当前状态；
+5. 失败则直接查该次 run / job 日志，不制造第二次空 push。
+
+不要用浏览器缓存问题解释尚未确认的部署失败。
 
 ---
 
 ## 11. 临时文件与分支清理
 
-正式入库完成后：
+正式入库并完成 Pages dispatch 后：
 
 - 删除一次性 import workflow；
 - 删除本批次临时触发文件；
@@ -463,9 +616,41 @@ GitHub Pages 现有工作流监听 `main` push。临时上传分支本身不是�
 
 不要为了同一个批次不断创建新的测试分支。
 
+注意：清理临时 workflow / trigger 可以包含在正式 import commit 中；但无论采用哪种方式，都不能因为清理动作产生另一个“为了触发 Pages”的空提交。
+
 ---
 
-## 12. 最终检查表
+## 12. 故障模式：图片已进 main，但 Pages 没更新
+
+如果出现：
+
+- 图片 blob 已存在；
+- `data/gallery.json` 已有记录；
+- import commit 已进入 `main`；
+- 网站仍然没有新图；
+
+第一优先检查：
+
+> **这次 import commit 是否由 `github-actions[bot]` / `GITHUB_TOKEN` push，以及 importer 是否显式 dispatch 了 `pages.yml`。**
+
+不要第一时间归因于：
+
+- 浏览器缓存；
+- 前端筛选；
+- `cache: no-store`；
+- 图片没有进入仓库。
+
+标准修复不是创建普通用户 refresh commit，而是修正 importer，让后续每次：
+
+```text
+bot push main
+        ↓
+explicit workflow_dispatch pages.yml
+```
+
+---
+
+## 13. 最终检查表
 
 ```text
 [ ] 已先读取本文件
@@ -474,15 +659,20 @@ GitHub Pages 现有工作流监听 `main` push。临时上传分支本身不是�
 [ ] 第一张 bridge 预检成功
 [ ] 全批次取得 image/* presignedAssetUrl
 [ ] 只创建一个一次性导入 workflow
+[ ] importer permissions 含 contents: write
+[ ] importer permissions 含 actions: write
 [ ] 原图 MIME / size / sharp 校验成功
 [ ] 原图写入 images/
 [ ] data/gallery.json v3 已更新
-[ ] 每张图已有 prompt 或明确 reconstructed prompt
+[ ] 每张图已有 original / reconstructed prompt
 [ ] data/prompt-index.json 已更新
 [ ] npm run build 成功
 [ ] 正式入库 commit 已进入 main
+[ ] 已显式 workflow_dispatch pages.yml --ref main
+[ ] 已根据任务要求确认 Pages 当前状态
 [ ] 一次性 workflow 已删除
 [ ] 临时触发文件 / 无用分支已清理
+[ ] 没有为了触发 Pages 创建第二次空 refresh commit
 ```
 
 ## 核心原则
@@ -492,4 +682,6 @@ GitHub Pages 现有工作流监听 `main` push。临时上传分支本身不是�
 3. **GitHub Actions 负责拉取原始二进制、验证、构建和提交。**
 4. **`data/gallery.json` 是 v3 素材真源，`images/` 目录本身不会自动入库。**
 5. **新图片与提示词同步归档。**
-6. **正式 `main` 入库 commit 才代表成功。**
+6. **正式 `main` import commit 代表仓库入库成功。**
+7. **bot push 后必须显式 dispatch `pages.yml`，不能依赖递归 push 触发。**
+8. **只有 Pages workflow 成功后，才能声称网站已发布。**
