@@ -2,13 +2,13 @@
 
 ## 目标
 
-用户在 GitHub Pages 图库点击“👎 不喜欢”后，不需要输入 GitHub Token。状态会自动同步到 Supabase，供后续图库管理和 ChatGPT 读取。
+用户在 GitHub Pages 图库点击“👎 不喜欢”后，不需要输入 GitHub Token。状态自动同步到 Supabase，供后续图库管理和 ChatGPT 读取。
 
 ## 数据流
 
-1. 页面入口先加载 `assets/dislikes-sync.js`。
-2. 同步脚本读取本地 `visual-asset-library:dislikes`，并与云端状态合并。
-3. 页面点击/取消“👎 不喜欢”时，原有 `app.js` 仍更新 localStorage；同步脚本拦截变化并写入 Supabase Edge Function。
+1. `assets/app.js` 直接调用 `assets/feedback-store.js`，不再通过劫持 `Storage.prototype.setItem` 监听变化。
+2. `feedback-store.js` 启动时读取云端状态，并使用本地 `localStorage` 作为即时 UI 缓冲和离线回退。
+3. 页面点击/取消“👎 不喜欢”时，Store 先立即更新本地状态，再把变更加入 pending 队列并异步写入 Supabase Edge Function。
 4. Edge Function `image-dislikes` 使用服务端权限写 `public.image_dislikes`，浏览器不持有 GitHub Token 或 Supabase service key。
 5. `.github/workflows/keep-supabase-alive.yml` 每小时读取云端状态并镜像到 `data/dislikes.json`；无变化时不提交。
 
@@ -19,21 +19,37 @@
 - Edge Function: `image-dislikes`
 - 表已启用 RLS，并撤销 `anon` / `authenticated` 的直接表权限；页面只通过 Edge Function 访问。
 
-## 删除“不喜欢”素材时
+## 本地兼容与重试
 
-以 Supabase `public.image_dislikes` 为即时来源，`data/dislikes.json` 为自动镜像。
+- `visual-asset-library:dislikes`：当前浏览器即时状态。
+- `visual-asset-library:dislike-pending-v1`：尚未成功同步到云端的最终状态，网络恢复后继续上传。
+- `visual-asset-library:dislike-cloud-migrated-v1`：标记旧版本本地状态已完成首次迁移。
+- 浏览器触发 `online` 事件时会自动继续 flush pending 队列。
 
-删除某个不喜欢素材时应同时：
+## 删除素材
 
-1. 从 `data/gallery.json` 删除素材记录。
-2. 删除原图、对应元数据/缩略图来源和提示词关联文件（如存在）。
-3. 从 `data/prompt-index.json` 删除对应提示词索引（如存在）。
-4. 从 Supabase `public.image_dislikes` 删除对应 `asset_id`。
-5. 确认 `data/dislikes.json` 不再包含该 ID（自动同步会最终覆盖；批量删除时可同步清理以避免构建窗口出现陈旧 ID）。
-6. 运行/检查构建，避免 `data/dislikes.json` 指向已删除素材导致构建校验失败。
+统一使用 `scripts/delete-assets.mjs`，默认只预演：
 
-## 兼容性
+```bash
+npm run delete-assets -- aa25bf1b17c8
+npm run delete-assets -- --from-dislikes
+```
 
-- 本地 localStorage 仍作为即时 UI 和网络失败时的缓冲。
-- 未同步操作存放在 `visual-asset-library:dislike-pending-v1`，后续页面加载会继续尝试上传。
-- `visual-asset-library:dislike-cloud-migrated-v1` 用于把升级前已有的本地“不喜欢”首次迁移到云端。
+确认预演内容无误后才加 `--write`：
+
+```bash
+npm run delete-assets -- --from-dislikes --write
+```
+
+执行顺序：
+
+1. 解析 asset ID，并确认所有 ID 都存在于 `data/gallery.json`。
+2. 输出原图、同名元数据、提示词和缩略图缓存的删除计划。
+3. `--write` 模式先清理 Supabase 中对应的“不喜欢”状态，避免云端镜像任务重新写回已删除 ID。
+4. 从 `data/gallery.json` 删除素材记录。
+5. 从 `data/prompt-index.json` 删除对应提示词索引。
+6. 从 `data/dislikes.json` 删除对应 ID。
+7. 删除原图、同名元数据、提示词文件和已知缩略图缓存。
+8. 最后运行 `npm run build` 校验索引与文件一致性。
+
+`--skip-cloud` 仅用于云端故障时的维护操作，正常删除不要使用；使用后必须人工清理 Supabase 状态。
