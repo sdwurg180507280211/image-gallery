@@ -7,6 +7,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const args=Object.fromEntries(process.argv.slice(2).map(value=>{const [key,...rest]=value.replace(/^--/,'').split('=');return [key,rest.join('=')||true];}));
 const category=String(args.category||'').trim();
 const family=String(args.family||'').trim();
+const rewrite=args.rewrite===true||String(args.rewrite||'').toLowerCase()==='true';
 if(!category)throw new Error('缺少 --category=<人物颜色分类|all>');
 
 const galleryPath=path.join(root,'data','gallery.json');
@@ -16,6 +17,10 @@ const assetPromptDir=path.join(root,'prompts','assets');
 
 const categoryLabels={
   'multi-panel':'多宫图',black:'黑色系',red:'红色系',pink:'粉色系',blue:'蓝色系',white:'白色系',purple:'紫色系',green:'绿色系',gold:'金色系',other:'其他'
+};
+const familyIdentities={
+  '红裳仙姬':'成年东方女性，黑色高盘发 / 高束发体系，琥珀金色眼眸，精致金色发饰，红宝石耳坠与金红珠宝语言',
+  '金饰花簪东方美人':'成年东方女性，黑色高盘发，琥珀金色眼眸，精致金属花簪与鎏金花卉发饰'
 };
 const paletteStyles={
   black:'以黑色、深红和金色为主，服装保持黑金东方幻想礼服 / 战斗服的精致层次，以暗红布料、红宝石和金属饰件作为点缀',
@@ -84,9 +89,12 @@ function inferAction(asset,meta){
   return '采用自然人物姿态，眼神与镜头保持明确互动';
 }
 function inferFraming(meta){
-  const labelMap={'single-image':'独立大图','close-up':'人物特写',bust:'胸像','half-body':'半身','full-body':'全身','five-panel':'五宫格','ten-panel':'十宫格',collage:'拼图'};
+  const labelMap={
+    'single-image':'独立大图','close-up':'人物特写',bust:'胸像','half-body':'半身','full-body':'全身',
+    'five-panel':'五宫格','ten-panel':'十宫格',collage:'拼图','multi-panel':'多宫图','mixed-shot':'混合景别'
+  };
   const fromComposition=asArray(meta.composition).map(value=>labelMap[value]||value);
-  const fromTags=['人物特写','胸像','半身','全身构图','独立大图','多宫图','五宫格','十宫格'].filter(value=>(meta.tags||[]).includes(value));
+  const fromTags=['人物特写','胸像','半身','全身构图','独立大图','多宫图','五宫格','十宫格','混合景别'].filter(value=>(meta.tags||[]).includes(value));
   return unique([...fromComposition,...fromTags]).join('、')||'独立大图';
 }
 function inferMoods(meta){
@@ -97,13 +105,17 @@ function inferMoods(meta){
   return unique(moods).slice(0,4).join('、')||'神秘、清冷、优雅';
 }
 function inferIdentity(meta){
+  if(familyIdentities[family])return familyIdentities[family];
   const tags=meta.tags||[];
-  const traitPatterns=[/成年|少女|女性|男性/,/黑色.*发|银色.*发|白色.*发|长发|高盘发|高束发/,/眼|眸/,/发饰|耳坠|头饰|珠宝/];
   const traits=[];
-  for(const pattern of traitPatterns){const hit=tags.find(tag=>pattern.test(tag));if(hit)traits.push(hit)}
-  if(!traits.length&&family==='红裳仙姬')return '成年东方女性，黑色高盘发，琥珀金色眼眸，精致金色发饰与红宝石耳坠';
-  if(!traits.length&&family==='金饰花簪东方美人')return '成年东方女性，黑色高盘发，琥珀金色眼眸，精致金属花簪与花卉发饰';
-  return unique(traits).join('，');
+  const identityPatterns=[
+    /^(成年|青年|少女|少年).*(女性|男性)?$/,
+    /^(黑色|银色|白色|金色|棕色|红色|蓝色).*(长发|短发|高盘发|高束发|盘发)$/,
+    /^(琥珀|金色|蓝色|绿色|棕色|黑色|灰色).*(眼|眼眸|瞳)$/,
+    /^(金色|银色|金属|花卉|宝石).*(发饰|耳坠|头饰|珠宝)$/
+  ];
+  for(const pattern of identityPatterns){const hit=tags.find(tag=>pattern.test(tag));if(hit)traits.push(hit)}
+  return unique(traits).join('，')||'人物身份与原始图片保持一致';
 }
 function renderPrompt(asset,meta){
   const theme=inferTheme(asset,meta);
@@ -139,14 +151,15 @@ async function main(){
   const targets=gallery.assets.filter(asset=>asset.domain==='character'&&(category==='all'||asset.category===category)&&(!family||(asset.tags||[]).includes(family)));
   if(!targets.length)throw new Error(`没有找到 category=${category}${family?` / family=${family}`:''} 的人物素材。`);
   await mkdir(assetPromptDir,{recursive:true});
-  let created=0;
+  let created=0,rewritten=0;
   for(const asset of targets){
     const targetPath=path.join(assetPromptDir,`${asset.id}.md`);
-    if(await exists(targetPath)&&index.assets[asset.id])continue;
+    const alreadyExists=await exists(targetPath)&&index.assets[asset.id];
+    if(alreadyExists&&!rewrite)continue;
     const meta=historicalSidecar(asset);
     await writeFile(targetPath,renderPrompt(asset,meta),'utf8');
     index.assets[asset.id]={path:`prompts/assets/${asset.id}.md`,kind:'reconstructed'};
-    created++;
+    alreadyExists?rewritten++:created++;
   }
   await writeFile(indexPath,`${JSON.stringify(index,null,2)}\n`,'utf8');
   const grouped=new Map();
@@ -158,7 +171,7 @@ async function main(){
   }
   await updateReadme(grouped);
   const totalDone=targets.filter(asset=>index.assets[asset.id]).length;
-  console.log(`历史提示词回填完成：category=${category} family=${family||'-'} total=${targets.length} created=${created} indexed=${totalDone}`);
+  console.log(`历史提示词回填完成：category=${category} family=${family||'-'} total=${targets.length} created=${created} rewritten=${rewritten} indexed=${totalDone}`);
 }
 
 main().catch(error=>{console.error(error);process.exitCode=1;});
