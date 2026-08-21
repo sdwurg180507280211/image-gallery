@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./assets/wechat-library.css?v=2" />
   <link rel="stylesheet" href="./assets/curation.css?v=2" />
   <link rel="stylesheet" href="./assets/library.css?v=1" />
+  <link rel="stylesheet" href="./assets/series-browser.css?v=1" />
 </head>
 <body>
   <header class="site-header compact-header">
@@ -38,6 +39,7 @@
               <option value="oldest">最早优先</option>
               <option value="title">标题排序</option>
             </select>
+            <button class="text-button" id="seriesViewToggle" type="button" aria-pressed="false">▦ 系列</button>
             <button class="text-button" id="favoritesOnly" type="button" aria-pressed="false">♡ 收藏</button>
             <button class="text-button" id="dislikedOnly" type="button" aria-pressed="false">👎 不喜欢</button>
           </div>
@@ -138,7 +140,7 @@
     </article>
   </template>
 
-  <script type="module" src="./assets/app.js?v=13"></script>
+  <script type="module" src="./assets/app.js?v=14"></script>
   <script type="module" src="./assets/wechat-library.js?v=4"></script>
   <script type="module" src="./assets/interactions.js?v=1"></script>
 </body>
