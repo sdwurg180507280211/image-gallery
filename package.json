@@ -7,7 +7,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "serve": "python3 -m http.server 4173 --directory dist",
-    "delete-assets": "node scripts/delete-assets.mjs"
+    "delete-assets": "node scripts/delete-assets.mjs",
+    "check-duplicates": "node scripts/check-duplicates.mjs"
   },
   "dependencies": {
     "sharp": "latest"
