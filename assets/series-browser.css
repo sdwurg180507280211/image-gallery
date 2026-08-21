@@ -1,0 +1,2 @@
+.series-card .image-button{cursor:pointer}.series-card .card-meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.series-card .card-title{text-transform:none}
+@media(max-width:640px){.toolbar-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
