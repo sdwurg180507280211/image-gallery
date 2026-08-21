@@ -144,7 +144,7 @@ function applyImage(card,image,asset,index){
   const ratio=asset.width>0&&asset.height>0?asset.width/asset.height:1;
   card.style.setProperty('--ratio',String(Math.max(.55,Math.min(2.4,ratio))));if(ratio>=1.15)card.classList.add('is-landscape');
   image.onload=()=>card.classList.add('image-ready');image.onerror=()=>{card.hidden=true;};image.alt=asset.title;image.loading=index<8?'eager':'lazy';image.fetchPriority=index<4?'high':'low';image.src=encodeURI(asset.thumbnail);
-  if(asset.thumbnailLarge){image.srcset=`${encodeURI(asset.thumbnail)} 640w, ${encodeURI(asset.thumbnailLarge)} ${asset.thumbnailLargeWidth}w`;image.sizes='(min-width:1400px) 20vw, (min-width:900px) 25vw, 50vw';}
+  if(asset.thumbnailLarge){image.srcset=`${encodeURI(asset.thumbnail)} 640w, ${encodeURI(asset.thumbnailLarge)} ${asset.thumbnailLargeWidth}w`;image.sizes=asset.domain==='medical-kv'?'(min-width:1100px) 44vw, 100vw':'(min-width:1400px) 20vw, (min-width:900px) 25vw, 50vw';}
   if(image.complete&&image.naturalWidth)card.classList.add('image-ready');
 }
 function groupSeries(items){
