@@ -1,0 +1,41 @@
+name: Duplicate Quality Report
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - images/**
+      - data/gallery.json
+      - scripts/check-duplicates.mjs
+      - package.json
+      - .github/workflows/duplicate-quality.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: duplicate-quality-report
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-audit --no-fund
+      - run: npm run check-duplicates -- --no-fail-exact --report data/duplicate-report.json
+      - name: Commit deterministic report
+        run: |
+          if git diff --quiet -- data/duplicate-report.json; then
+            echo 'Duplicate report unchanged.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/duplicate-report.json
+          git commit -m 'chore(quality): update duplicate report'
+          git push
