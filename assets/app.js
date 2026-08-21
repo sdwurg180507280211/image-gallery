@@ -1,106 +1,201 @@
 import {createLightbox} from './lightbox.js?v=10';
 
 const ALL='all';
+const FAVORITES_KEY='visual-asset-library:favorites';
+const DISLIKES_KEY='visual-asset-library:dislikes';
+const THEME_KEY='visual-asset-library:theme';
 const LABELS={
   character:{'multi-panel':'多宫图',black:'黑色系',red:'红色系',pink:'粉色系',blue:'蓝色系',white:'白色系',purple:'紫色系',green:'绿色系',gold:'金色系',other:'其他'},
   color:{blue:'蓝色系',purple:'紫色系',pink:'粉色系',green:'绿色系',red:'红色系',orange:'橙黄色系',white:'白色系',black:'黑色系',mixed:'综合色系'},
   organ:{heart:'心脏',brain:'大脑',kidney:'肾脏',liver:'肝脏',lung:'肺',spleen:'脾脏',stomach:'胃',pancreas:'胰腺',vascular:'血管',genetics:'DNA / 基因',other:'其他医疗'}
 };
-const state={assets:[],visible:[],domain:'character',characterCategory:ALL,color:ALL,usage:ALL,query:'',sort:'newest',favoritesOnly:false,dislikedOnly:false,favorites:new Set(JSON.parse(localStorage.getItem('visual-asset-library:favorites')||'[]')),dislikes:new Set()};
+
+function readIdSet(key){
+  try{
+    const value=JSON.parse(localStorage.getItem(key)||'[]');
+    return new Set(Array.isArray(value)?value.filter(x=>typeof x==='string'):[]);
+  }catch{return new Set();}
+}
+function saveIdSet(key,set){localStorage.setItem(key,JSON.stringify([...set]));}
+
+const state={
+  assets:[],visible:[],domain:'character',characterCategory:ALL,color:ALL,query:'',sort:'newest',favoritesOnly:false,dislikedOnly:false,
+  favorites:readIdSet(FAVORITES_KEY),dislikes:readIdSet(DISLIKES_KEY)
+};
 const $=selector=>document.querySelector(selector);
 const el={
   grid:$('#galleryGrid'),template:$('#cardTemplate'),search:$('#searchInput'),clearSearch:$('#clearSearch'),sort:$('#sortSelect'),favoritesOnly:$('#favoritesOnly'),dislikedOnly:$('#dislikedOnly'),
-  characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),medicalFilters:$('#medicalFilters'),colorFilters:$('#colorFilters'),usageFilters:$('#usageFilters'),
-  result:$('#resultText'),activeFilters:$('#activeFilters'),clear:$('#clearFilters'),empty:$('#emptyState'),assetCount:$('#assetCount'),characterCount:$('#characterCount'),kvCount:$('#kvCount'),characterTabCount:$('#characterTabCount'),kvTabCount:$('#kvTabCount'),theme:$('#themeToggle')
+  characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),medicalFilters:$('#medicalFilters'),colorFilters:$('#colorFilters'),
+  result:$('#resultText'),activeFilters:$('#activeFilters'),clear:$('#clearFilters'),empty:$('#emptyState'),characterTabCount:$('#characterTabCount'),kvTabCount:$('#kvTabCount'),theme:$('#themeToggle')
 };
 let lightbox;
 
 function assertAsset(asset){
   if(!asset||typeof asset!=='object'||!asset.id||!asset.path||!asset.title)throw new Error('发现缺少 id/path/title 的素材记录。');
-  if(asset.domain==='character'){if(!LABELS.character[asset.category])throw new Error(`人物分类非法：${asset.id}`);return;}
-  if(asset.domain==='medical-kv'){if(!LABELS.color[asset.color]||!LABELS.organ[asset.organ]||typeof asset.used!=='boolean')throw new Error(`医药KV分类非法：${asset.id}`);return;}
+  if(asset.domain==='character'){
+    if(!LABELS.character[asset.category])throw new Error(`人物分类非法：${asset.id}`);
+    return;
+  }
+  if(asset.domain==='medical-kv'){
+    if(!LABELS.color[asset.color]||!LABELS.organ[asset.organ])throw new Error(`医药KV分类非法：${asset.id}`);
+    return;
+  }
   throw new Error(`素材域非法：${asset.id}`);
 }
 function assertPromptIndex(payload){
   if(payload?.schemaVersion!==1||!payload.assets||typeof payload.assets!=='object'||Array.isArray(payload.assets))throw new Error('提示词索引格式非法。');
   for(const [id,prompt] of Object.entries(payload.assets))if(!id||!prompt?.path||!['original','reconstructed'].includes(prompt.kind))throw new Error(`提示词索引非法：${id}`);
 }
-function assertDislikes(payload,assetIds){
-  if(payload?.schemaVersion!==1||!Array.isArray(payload.assetIds))throw new Error('不喜欢列表格式非法。');
-  if(new Set(payload.assetIds).size!==payload.assetIds.length)throw new Error('不喜欢列表存在重复素材。');
-  for(const id of payload.assetIds)if(!assetIds.has(id))throw new Error(`不喜欢列表关联了不存在的素材：${id}`);
+function validSeedDislikes(payload,assetIds){
+  if(payload?.schemaVersion!==1||!Array.isArray(payload.assetIds))return [];
+  return payload.assetIds.filter(id=>assetIds.has(id));
 }
-function searchable(asset){return [asset.title,...(asset.tags||[]),asset.domain==='character'?LABELS.character[asset.category]:LABELS.color[asset.color],asset.domain==='medical-kv'?LABELS.organ[asset.organ]:''].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN');}
-function matchesShared(asset){const q=state.query.trim().toLocaleLowerCase('zh-CN');return (!state.favoritesOnly||state.favorites.has(asset.id))&&(!state.dislikedOnly||state.dislikes.has(asset.id))&&(!q||searchable(asset).includes(q));}
-function matchesUsage(asset){return state.usage===ALL||(state.usage==='used'?asset.used:!asset.used);}
+function searchable(asset){
+  return [asset.title,...(asset.tags||[]),asset.domain==='character'?LABELS.character[asset.category]:LABELS.color[asset.color],asset.domain==='medical-kv'?LABELS.organ[asset.organ]:''].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN');
+}
+function matchesShared(asset){
+  const q=state.query.trim().toLocaleLowerCase('zh-CN');
+  return (!state.favoritesOnly||state.favorites.has(asset.id))&&(!state.dislikedOnly||state.dislikes.has(asset.id))&&(!q||searchable(asset).includes(q));
+}
 function currentDomainAssets(){return state.assets.filter(asset=>asset.domain===state.domain);}
-function sortAssets(items){return items.sort((a,b)=>{if(state.sort==='title')return a.title.localeCompare(b.title,'zh-CN');const at=Date.parse(a.createdAt||0)||0,bt=Date.parse(b.createdAt||0)||0;return state.sort==='oldest'?at-bt:bt-at;});}
-function computeVisible(){return sortAssets(currentDomainAssets().filter(matchesShared).filter(asset=>state.domain==='character'?state.characterCategory===ALL||asset.category===state.characterCategory:(state.color===ALL||asset.color===state.color)&&matchesUsage(asset)));}
+function sortAssets(items){
+  return items.sort((a,b)=>{
+    if(state.sort==='title')return a.title.localeCompare(b.title,'zh-CN');
+    const at=Date.parse(a.createdAt||0)||0,bt=Date.parse(b.createdAt||0)||0;
+    return state.sort==='oldest'?at-bt:bt-at;
+  });
+}
+function computeVisible(){
+  return sortAssets(currentDomainAssets().filter(matchesShared).filter(asset=>state.domain==='character'?state.characterCategory===ALL||asset.category===state.characterCategory:state.color===ALL||asset.color===state.color));
+}
 function countBy(items,key){const map=new Map();for(const item of items)map.set(item[key],(map.get(item[key])||0)+1);return map;}
-function medicalScope(skip){return state.assets.filter(asset=>asset.domain==='medical-kv').filter(matchesShared).filter(asset=>skip==='color'||state.color===ALL||asset.color===state.color).filter(asset=>skip==='usage'||matchesUsage(asset));}
 function characterScope(){return state.assets.filter(asset=>asset.domain==='character').filter(matchesShared);}
+function medicalScope(){return state.assets.filter(asset=>asset.domain==='medical-kv').filter(matchesShared);}
 function domainLabel(asset){return asset.domain==='character'?(LABELS.character[asset.category]||asset.category):`${LABELS.organ[asset.organ]} · ${LABELS.color[asset.color]}`;}
-function createChip(container,value,label,onClick){const button=document.createElement('button');button.type='button';button.dataset.value=value;button.setAttribute('aria-pressed','false');const text=document.createElement('span');text.className='chip-label';text.textContent=label;const count=document.createElement('small');count.className='chip-count';button.append(text,count);button.onclick=()=>onClick(value);container.append(button);return button;}
+function createChip(container,value,label,onClick){
+  const button=document.createElement('button');button.type='button';button.dataset.value=value;button.setAttribute('aria-pressed','false');
+  const text=document.createElement('span');text.className='chip-label';text.textContent=label;
+  const count=document.createElement('small');count.className='chip-count';
+  button.append(text,count);button.onclick=()=>onClick(value);container.append(button);
+}
 function toggleFacet(current,value){return current===value?ALL:value;}
 function buildFilterControls(){
-  createChip(el.characterCategoryFilters,ALL,'全部',value=>{state.characterCategory=toggleFacet(state.characterCategory,value);apply();});for(const [value,label] of Object.entries(LABELS.character))createChip(el.characterCategoryFilters,value,label,v=>{state.characterCategory=toggleFacet(state.characterCategory,v);apply();});
-  createChip(el.colorFilters,ALL,'全部颜色',value=>{state.color=toggleFacet(state.color,value);apply();});for(const [value,label] of Object.entries(LABELS.color))createChip(el.colorFilters,value,label,v=>{state.color=toggleFacet(state.color,v);apply();});
-  for(const [value,label] of [[ALL,'全部'],['unused','未使用'],['used','已使用']])createChip(el.usageFilters,value,label,v=>{state.usage=toggleFacet(state.usage,v);apply();});
+  createChip(el.characterCategoryFilters,ALL,'全部',value=>{state.characterCategory=toggleFacet(state.characterCategory,value);apply();});
+  for(const [value,label] of Object.entries(LABELS.character))createChip(el.characterCategoryFilters,value,label,v=>{state.characterCategory=toggleFacet(state.characterCategory,v);apply();});
+  createChip(el.colorFilters,ALL,'全部',value=>{state.color=toggleFacet(state.color,value);apply();});
+  for(const [value,label] of Object.entries(LABELS.color))createChip(el.colorFilters,value,label,v=>{state.color=toggleFacet(state.color,v);apply();});
 }
 function updateChipGroup(container,current,counts,total){
-  container.querySelectorAll('button').forEach(button=>{const value=button.dataset.value,count=value===ALL?total:(counts.get(value)||0);const selected=value===current;button.hidden=value!==ALL&&count===0&&!selected;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));button.querySelector('.chip-count').textContent=String(count);});
+  container.querySelectorAll('button').forEach(button=>{
+    const value=button.dataset.value,count=value===ALL?total:(counts.get(value)||0),selected=value===current;
+    button.hidden=value!==ALL&&count===0&&!selected;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));button.querySelector('.chip-count').textContent=String(count);
+  });
 }
 function updateFilterControls(){
-  const charScope=characterScope();updateChipGroup(el.characterCategoryFilters,state.characterCategory,countBy(charScope,'category'),charScope.length);
-  const colorScope=medicalScope('color');updateChipGroup(el.colorFilters,state.color,countBy(colorScope,'color'),colorScope.length);
-  const usageScope=medicalScope('usage'),usageCounts=new Map([['unused',usageScope.filter(asset=>!asset.used).length],['used',usageScope.filter(asset=>asset.used).length]]);updateChipGroup(el.usageFilters,state.usage,usageCounts,usageScope.length);
+  const chars=characterScope();updateChipGroup(el.characterCategoryFilters,state.characterCategory,countBy(chars,'category'),chars.length);
+  const kvs=medicalScope();updateChipGroup(el.colorFilters,state.color,countBy(kvs,'color'),kvs.length);
 }
-function renderStats(){const characters=state.assets.filter(asset=>asset.domain==='character').length,kvs=state.assets.filter(asset=>asset.domain==='medical-kv').length;el.assetCount.textContent=state.assets.length;el.characterCount.textContent=characters;el.kvCount.textContent=kvs;el.characterTabCount.textContent=characters;el.kvTabCount.textContent=kvs;}
+function renderCounts(){
+  el.characterTabCount.textContent=String(state.assets.filter(asset=>asset.domain==='character').length);
+  el.kvTabCount.textContent=String(state.assets.filter(asset=>asset.domain==='medical-kv').length);
+}
+function syncDomainTabs(){
+  document.querySelectorAll('.domain-tab').forEach(button=>{
+    const active=button.dataset.domain===state.domain;
+    button.classList.toggle('active',active);button.setAttribute('aria-selected',String(active));
+  });
+}
 function syncControls(){
-  el.characterFilters.hidden=state.domain!=='character';el.medicalFilters.hidden=state.domain!=='medical-kv';el.search.placeholder=state.domain==='character'?'搜索人物标题或关键词…':'搜索KV标题或关键词…';el.clearSearch.hidden=!state.query;
-  el.favoritesOnly.setAttribute('aria-pressed',String(state.favoritesOnly));el.favoritesOnly.textContent=state.favoritesOnly?'♥ 只看收藏':'♡ 只看收藏';
-  el.dislikedOnly.setAttribute('aria-pressed',String(state.dislikedOnly));el.dislikedOnly.textContent=state.dislikedOnly?`👎 不喜欢 ${state.dislikes.size}`:'👎 只看不喜欢';
-  document.querySelectorAll('.domain-tab').forEach(button=>{const active=button.dataset.domain===state.domain;button.classList.toggle('active',active);button.setAttribute('aria-selected',String(active));});
-  const has=state.query||state.favoritesOnly||state.dislikedOnly||state.characterCategory!==ALL||state.color!==ALL||state.usage!==ALL;el.clear.hidden=!has;
+  el.characterFilters.hidden=state.domain!=='character';el.medicalFilters.hidden=state.domain!=='medical-kv';
+  el.search.placeholder=state.domain==='character'?'搜索人物标题或关键词…':'搜索KV标题或关键词…';el.clearSearch.hidden=!state.query;
+  el.favoritesOnly.setAttribute('aria-pressed',String(state.favoritesOnly));el.favoritesOnly.textContent=state.favoritesOnly?'♥ 收藏':'♡ 收藏';
+  el.dislikedOnly.setAttribute('aria-pressed',String(state.dislikedOnly));el.dislikedOnly.textContent=state.dislikedOnly?`👎 不喜欢 ${state.dislikes.size}`:'👎 不喜欢';
+  syncDomainTabs();
+  el.clear.hidden=!(state.query||state.favoritesOnly||state.dislikedOnly||state.characterCategory!==ALL||state.color!==ALL);
 }
 function renderActiveFilters(){
   el.activeFilters.replaceChildren();const filters=[];
+  if(state.favoritesOnly)filters.push(['收藏',()=>{state.favoritesOnly=false;apply();}]);
   if(state.dislikedOnly)filters.push(['不喜欢',()=>{state.dislikedOnly=false;apply();}]);
   if(state.domain==='character'&&state.characterCategory!==ALL)filters.push([LABELS.character[state.characterCategory],()=>{state.characterCategory=ALL;apply();}]);
-  if(state.domain==='medical-kv'){
-    if(state.color!==ALL)filters.push([LABELS.color[state.color],()=>{state.color=ALL;apply();}]);
-    if(state.usage!==ALL)filters.push([state.usage==='used'?'已使用':'未使用',()=>{state.usage=ALL;apply();}]);
-  }
-  for(const [label,remove] of filters){const button=document.createElement('button');button.type='button';button.textContent=`${label} ×`;button.onclick=remove;el.activeFilters.append(button);}el.activeFilters.hidden=!filters.length;
+  if(state.domain==='medical-kv'&&state.color!==ALL)filters.push([LABELS.color[state.color],()=>{state.color=ALL;apply();}]);
+  for(const [label,remove] of filters){const button=document.createElement('button');button.type='button';button.textContent=`${label} ×`;button.onclick=remove;el.activeFilters.append(button);}
+  el.activeFilters.hidden=!filters.length;
 }
-function syncFavoriteButton(button,id){const favorite=state.favorites.has(id);button.textContent=favorite?'♥':'♡';button.setAttribute('aria-pressed',String(favorite));}
-function syncDislikeButton(button,id){const disliked=state.dislikes.has(id);button.textContent=disliked?'👎 已标记':'👎';button.setAttribute('aria-pressed',String(disliked));button.setAttribute('aria-label',disliked?'取消不喜欢标记':'标记不喜欢');button.title=disliked?'取消不喜欢标记':'标记不喜欢，之后可集中删除';}
-function refreshFavoriteUI(id){document.querySelectorAll(`.gallery-card[data-asset-id="${CSS.escape(id)}"] .favorite-button`).forEach(button=>syncFavoriteButton(button,id));lightbox?.refresh();}
-function toggleFavorite(id){state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);localStorage.setItem('visual-asset-library:favorites',JSON.stringify([...state.favorites]));if(state.favoritesOnly)apply();else{refreshFavoriteUI(id);updateFilterControls();}}
-function requestDislikeToggle(id,button){document.dispatchEvent(new CustomEvent('gallery:toggle-dislike',{detail:{id,button}}));}
+function syncFavoriteButton(button,id){
+  const active=state.favorites.has(id);button.textContent=active?'♥':'♡';button.setAttribute('aria-pressed',String(active));button.title=active?'取消收藏':'收藏';
+}
+function syncDislikeButton(button,id){
+  const active=state.dislikes.has(id);button.textContent='👎';button.setAttribute('aria-pressed',String(active));button.setAttribute('aria-label',active?'取消不喜欢标记':'标记不喜欢');button.title=active?'取消不喜欢标记':'标记不喜欢';
+}
+function toggleFavorite(id){
+  state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);saveIdSet(FAVORITES_KEY,state.favorites);apply();
+}
+function toggleDislike(id){
+  state.dislikes.has(id)?state.dislikes.delete(id):state.dislikes.add(id);saveIdSet(DISLIKES_KEY,state.dislikes);apply();
+}
 function render(){
-  el.grid.replaceChildren();state.visible.forEach((asset,index)=>{const fragment=el.template.content.cloneNode(true),card=fragment.querySelector('.gallery-card'),button=fragment.querySelector('.image-button'),image=fragment.querySelector('img'),meta=fragment.querySelector('.card-meta'),title=fragment.querySelector('.card-title'),dimensions=fragment.querySelector('.card-dimensions'),favorite=fragment.querySelector('.favorite-button'),dislike=fragment.querySelector('.dislike-button'),badge=fragment.querySelector('.usage-badge');
-    const ratio=asset.width>0&&asset.height>0?asset.width/asset.height:1;card.dataset.assetId=asset.id;card.dataset.domain=asset.domain;card.classList.toggle('is-disliked',state.dislikes.has(asset.id));card.style.setProperty('--ratio',String(Math.max(.55,Math.min(2.4,ratio))));if(ratio>=1.15)card.classList.add('is-landscape');
-    image.onload=()=>card.classList.add('image-ready');image.onerror=()=>{card.hidden=true;};image.alt=asset.title;image.loading=index<6?'eager':'lazy';image.fetchPriority=index<3?'high':'low';image.src=encodeURI(asset.thumbnail);if(asset.thumbnailLarge){image.srcset=`${encodeURI(asset.thumbnail)} 640w, ${encodeURI(asset.thumbnailLarge)} ${asset.thumbnailLargeWidth}w`;image.sizes=asset.domain==='medical-kv'?'(min-width:1121px) 50vw, 100vw':'(min-width:1121px) 50vw, 100vw';}if(image.complete&&image.naturalWidth)card.classList.add('image-ready');
-    meta.textContent=domainLabel(asset);title.textContent=asset.title;dimensions.textContent=asset.width&&asset.height?`${asset.width} × ${asset.height}`:'';button.onclick=()=>lightbox.open(index,button);syncFavoriteButton(favorite,asset.id);favorite.onclick=()=>toggleFavorite(asset.id);syncDislikeButton(dislike,asset.id);dislike.onclick=()=>requestDislikeToggle(asset.id,dislike);
-    if(asset.domain==='medical-kv'){badge.hidden=false;badge.className=`usage-badge ${asset.used?'used':'unused'}`;badge.textContent=asset.used?'✓ 已使用':'● 未使用';}
+  el.grid.replaceChildren();
+  state.visible.forEach((asset,index)=>{
+    const fragment=el.template.content.cloneNode(true),card=fragment.querySelector('.gallery-card'),button=fragment.querySelector('.image-button'),image=fragment.querySelector('img'),meta=fragment.querySelector('.card-meta'),title=fragment.querySelector('.card-title'),favorite=fragment.querySelector('.favorite-button'),dislike=fragment.querySelector('.dislike-button');
+    const ratio=asset.width>0&&asset.height>0?asset.width/asset.height:1;
+    card.dataset.assetId=asset.id;card.dataset.domain=asset.domain;card.classList.toggle('is-disliked',state.dislikes.has(asset.id));card.style.setProperty('--ratio',String(Math.max(.55,Math.min(2.4,ratio))));if(ratio>=1.15)card.classList.add('is-landscape');
+    image.onload=()=>card.classList.add('image-ready');image.onerror=()=>{card.hidden=true;};image.alt=asset.title;image.loading=index<8?'eager':'lazy';image.fetchPriority=index<4?'high':'low';image.src=encodeURI(asset.thumbnail);
+    if(asset.thumbnailLarge){image.srcset=`${encodeURI(asset.thumbnail)} 640w, ${encodeURI(asset.thumbnailLarge)} ${asset.thumbnailLargeWidth}w`;image.sizes=asset.domain==='medical-kv'?'(min-width:1100px) 44vw, 100vw':'(min-width:1400px) 20vw, (min-width:900px) 25vw, 50vw';}
+    if(image.complete&&image.naturalWidth)card.classList.add('image-ready');
+    meta.textContent=domainLabel(asset);title.textContent=asset.title;button.onclick=()=>lightbox.open(index,button);
+    syncFavoriteButton(favorite,asset.id);favorite.onclick=()=>toggleFavorite(asset.id);
+    syncDislikeButton(dislike,asset.id);dislike.onclick=()=>toggleDislike(asset.id);
     el.grid.append(fragment);
   });
-  const total=currentDomainAssets().length;el.result.textContent=`显示 ${state.visible.length} / ${total} 张${state.domain==='character'?'人物图片':'医药 KV'}`;el.empty.hidden=state.visible.length!==0;el.grid.hidden=state.visible.length===0;document.dispatchEvent(new CustomEvent('gallery:rendered'));
+  const total=currentDomainAssets().length;
+  el.result.textContent=`${state.visible.length} / ${total}`;
+  el.empty.hidden=state.visible.length!==0;el.grid.hidden=state.visible.length===0;
 }
 function apply(){state.visible=computeVisible();updateFilterControls();syncControls();renderActiveFilters();render();if(lightbox?.isOpen())lightbox.refresh();}
-function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.usage=ALL;state.query='';state.favoritesOnly=false;state.dislikedOnly=false;el.search.value='';apply();}
-function setDomain(domain){if(domain===state.domain)return;state.domain=domain;state.characterCategory=ALL;state.color=ALL;state.usage=ALL;apply();}
-function patchAsset(id,patch){const asset=state.assets.find(item=>item.id===id);if(!asset)return;if(typeof patch.disliked==='boolean'){patch.disliked?state.dislikes.add(id):state.dislikes.delete(id);}Object.assign(asset,patch);apply();}
-async function load(){
-  const [response,promptResponse,dislikesResponse]=await Promise.all([fetch('./data/gallery.json',{cache:'no-store'}),fetch('./data/prompt-index.json',{cache:'no-store'}),fetch('./data/dislikes.json',{cache:'no-store'})]);
-  if(!response.ok)throw new Error(`索引读取失败：HTTP ${response.status}`);if(!promptResponse.ok)throw new Error(`提示词索引读取失败：HTTP ${promptResponse.status}`);if(!dislikesResponse.ok)throw new Error(`不喜欢列表读取失败：HTTP ${dislikesResponse.status}`);
-  const payload=await response.json(),promptPayload=await promptResponse.json(),dislikesPayload=await dislikesResponse.json();if(payload.schemaVersion!==3||!Array.isArray(payload.assets))throw new Error('只支持 schemaVersion 3。');assertPromptIndex(promptPayload);payload.assets.forEach(assertAsset);const assetIds=new Set(payload.assets.map(asset=>asset.id));assertDislikes(dislikesPayload,assetIds);state.dislikes=new Set(dislikesPayload.assetIds);state.assets=payload.assets.map(asset=>{const prompt=promptPayload.assets[asset.id];return {...asset,disliked:state.dislikes.has(asset.id),...(prompt?{promptPath:prompt.path,promptKind:prompt.kind}:{})};});
-  buildFilterControls();renderStats();lightbox=createLightbox({getItems:()=>state.visible,formatMeta:domainLabel,isFavorite:id=>state.favorites.has(id),onToggleFavorite:toggleFavorite,isDisliked:id=>state.dislikes.has(id),onToggleDislike:(id,button)=>requestDislikeToggle(id,button)});apply();
+function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.query='';state.favoritesOnly=false;state.dislikedOnly=false;el.search.value='';apply();}
+function setDomain(domain){
+  if(!['character','medical-kv'].includes(domain)||domain===state.domain)return;
+  state.domain=domain;state.characterCategory=ALL;state.color=ALL;apply();
 }
-window.visualAssetLibrary={getAsset:id=>state.assets.find(asset=>asset.id===id),patchAsset,getDomain:()=>state.domain,getDislikedIds:()=>[...state.dislikes]};
-document.querySelectorAll('.domain-tab').forEach(button=>button.onclick=()=>setDomain(button.dataset.domain));
-el.search.oninput=event=>{state.query=event.target.value;apply();};el.clearSearch.onclick=()=>{state.query='';el.search.value='';el.search.focus();apply();};el.sort.onchange=event=>{state.sort=event.target.value;apply();};el.favoritesOnly.onclick=()=>{state.favoritesOnly=!state.favoritesOnly;apply();};el.dislikedOnly.onclick=()=>{state.dislikedOnly=!state.dislikedOnly;apply();};el.clear.onclick=clearFilters;
-const savedTheme=localStorage.getItem('visual-asset-library:theme');if(savedTheme)document.documentElement.dataset.theme=savedTheme;el.theme.onclick=()=>{const next=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=next;localStorage.setItem('visual-asset-library:theme',next);};
-document.addEventListener('keydown',event=>{if(event.key==='/'&&!lightbox?.isOpen()&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)){event.preventDefault();el.search.focus();}});
-load().catch(error=>{console.error(error);el.result.textContent=`素材库加载失败：${error.message}`;});
+async function load(){
+  const [response,promptResponse,seedResponse]=await Promise.all([
+    fetch('./data/gallery.json',{cache:'no-store'}),
+    fetch('./data/prompt-index.json',{cache:'no-store'}),
+    fetch('./data/dislikes.json',{cache:'no-store'}).catch(()=>null)
+  ]);
+  if(!response.ok)throw new Error(`索引读取失败：HTTP ${response.status}`);
+  if(!promptResponse.ok)throw new Error(`提示词索引读取失败：HTTP ${promptResponse.status}`);
+  const payload=await response.json(),promptPayload=await promptResponse.json();
+  if(payload.schemaVersion!==3||!Array.isArray(payload.assets))throw new Error('只支持 schemaVersion 3。');
+  assertPromptIndex(promptPayload);payload.assets.forEach(assertAsset);
+  const assetIds=new Set(payload.assets.map(asset=>asset.id));
+  const hadLocalDislikes=localStorage.getItem(DISLIKES_KEY)!==null;
+  if(!hadLocalDislikes&&seedResponse?.ok){
+    const seed=validSeedDislikes(await seedResponse.json(),assetIds);state.dislikes=new Set(seed);saveIdSet(DISLIKES_KEY,state.dislikes);
+  }else{
+    state.dislikes=new Set([...state.dislikes].filter(id=>assetIds.has(id)));saveIdSet(DISLIKES_KEY,state.dislikes);
+  }
+  state.favorites=new Set([...state.favorites].filter(id=>assetIds.has(id)));saveIdSet(FAVORITES_KEY,state.favorites);
+  state.assets=payload.assets.map(asset=>{const prompt=promptPayload.assets[asset.id];return {...asset,...(prompt?{promptPath:prompt.path,promptKind:prompt.kind}:{})};});
+  buildFilterControls();renderCounts();
+  lightbox=createLightbox({getItems:()=>state.visible,formatMeta:domainLabel,isFavorite:id=>state.favorites.has(id),onToggleFavorite:toggleFavorite,isDisliked:id=>state.dislikes.has(id),onToggleDislike:toggleDislike});
+  apply();
+}
+
+window.visualAssetLibrary={getAsset:id=>state.assets.find(asset=>asset.id===id),getDomain:()=>state.domain,getDislikedIds:()=>[...state.dislikes]};
+document.querySelectorAll('.domain-tab[data-domain="character"],.domain-tab[data-domain="medical-kv"]').forEach(button=>button.addEventListener('click',()=>setDomain(button.dataset.domain)));
+el.search.addEventListener('input',event=>{state.query=event.target.value;apply();});
+el.clearSearch.addEventListener('click',()=>{state.query='';el.search.value='';el.search.focus();apply();});
+el.sort.addEventListener('change',event=>{state.sort=event.target.value;apply();});
+el.favoritesOnly.addEventListener('click',()=>{state.favoritesOnly=!state.favoritesOnly;apply();});
+el.dislikedOnly.addEventListener('click',()=>{state.dislikedOnly=!state.dislikedOnly;apply();});
+el.clear.addEventListener('click',clearFilters);
+
+const savedTheme=localStorage.getItem(THEME_KEY);
+if(savedTheme==='light'||savedTheme==='dark')document.documentElement.dataset.theme=savedTheme;
+function syncThemeButton(){el.theme.textContent=document.documentElement.dataset.theme==='light'?'☾':'☀';}
+el.theme.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=next;localStorage.setItem(THEME_KEY,next);syncThemeButton();});
+syncThemeButton();
+
+load().catch(error=>{console.error(error);el.result.textContent=error.message;el.empty.hidden=false;el.empty.querySelector('strong').textContent='素材读取失败';el.empty.querySelector('p').textContent='请检查构建结果或刷新页面重试。';});

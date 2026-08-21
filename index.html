@@ -10,38 +10,21 @@
   <link rel="stylesheet" href="./assets/interactions.css?v=1" />
   <link rel="stylesheet" href="./assets/viewer.css?v=4" />
   <link rel="stylesheet" href="./assets/wechat-library.css?v=2" />
-  <link rel="stylesheet" href="./assets/curation.css?v=1" />
+  <link rel="stylesheet" href="./assets/curation.css?v=2" />
+  <link rel="stylesheet" href="./assets/library.css?v=1" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="./" aria-label="返回素材库首页">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span><strong>Visual Asset Library</strong><small>人物作品 · 医药KV · 公众号</small></span>
-    </a>
+  <header class="site-header compact-header">
+    <nav class="domain-tabs header-tabs" role="tablist" aria-label="素材类型">
+      <button class="domain-tab active" data-domain="character" type="button" role="tab" aria-selected="true"><span>人物图片</span><small id="characterTabCount">0</small></button>
+      <button class="domain-tab" data-domain="medical-kv" type="button" role="tab" aria-selected="false"><span>医药KV</span><small id="kvTabCount">0</small></button>
+      <button class="domain-tab" data-domain="wechat" type="button" role="tab" aria-selected="false"><span>公众号</span><small>26</small></button>
+    </nav>
     <button class="icon-button" id="themeToggle" type="button" aria-label="切换主题">◐</button>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <p class="eyebrow">PERSONAL VISUAL ARCHIVE</p>
-        <h1>把生成的好素材，<span>真正沉淀下来。</span></h1>
-        <p>人物图按服装主色或多宫图整理；医药KV按主色整理并保留使用状态；公众号样式按组件编号沉淀，方便后续直接指定样式生成文章。</p>
-      </div>
-      <div class="stats">
-        <div><strong id="assetCount">0</strong><span>张素材</span></div>
-        <div><strong id="characterCount">0</strong><span>人物图</span></div>
-        <div><strong id="kvCount">0</strong><span>医药KV</span></div>
-      </div>
-    </section>
-
+  <main class="library-shell">
     <section class="library-panel">
-      <div class="domain-tabs" role="tablist" aria-label="素材类型">
-        <button class="domain-tab active" data-domain="character" type="button" role="tab" aria-selected="true"><span>人物图片</span><small id="characterTabCount">0</small></button>
-        <button class="domain-tab" data-domain="medical-kv" type="button" role="tab" aria-selected="false"><span>医药KV</span><small id="kvTabCount">0</small></button>
-        <button class="domain-tab" data-domain="wechat" type="button" role="tab" aria-selected="false"><span>公众号</span><small>26</small></button>
-      </div>
-
       <div id="assetLibraryView">
         <div class="toolbar">
           <div class="search-box" role="search">
@@ -55,25 +38,19 @@
               <option value="oldest">最早优先</option>
               <option value="title">标题排序</option>
             </select>
-            <button class="text-button" id="favoritesOnly" type="button" aria-pressed="false">♡ 只看收藏</button>
-            <button class="text-button" id="dislikedOnly" type="button" aria-pressed="false">👎 只看不喜欢</button>
+            <button class="text-button" id="favoritesOnly" type="button" aria-pressed="false">♡ 收藏</button>
+            <button class="text-button" id="dislikedOnly" type="button" aria-pressed="false">👎 不喜欢</button>
           </div>
         </div>
 
-        <section id="characterFilters" class="filter-block">
-          <div class="facet-header"><span>分类</span><small>按主要视觉特征归档</small></div>
+        <section id="characterFilters" class="filter-strip">
+          <span class="filter-label">分类</span>
           <div class="chip-row" id="characterCategoryFilters"></div>
         </section>
 
-        <section id="medicalFilters" class="filter-block medical-filters" hidden>
-          <div class="facet-row">
-            <div class="facet-header"><span>主色</span><small>按KV整体主色快速筛选</small></div>
-            <div class="chip-row" id="colorFilters"></div>
-          </div>
-          <div class="facet-row usage-row">
-            <div class="facet-header"><span>使用状态</span><small>用于筛选可继续使用的KV</small></div>
-            <div class="segmented-control" id="usageFilters" aria-label="使用状态筛选"></div>
-          </div>
+        <section id="medicalFilters" class="filter-strip" hidden>
+          <span class="filter-label">主色</span>
+          <div class="chip-row" id="colorFilters"></div>
         </section>
 
         <div class="result-meta">
@@ -92,7 +69,6 @@
       </div>
 
       <section id="wechatLibraryView" hidden>
-        <p class="wechat-library-intro">选择喜欢的样式编号，后续直接告诉我编号即可。每个组件只展示效果预览，并提供可直接复制的 inline HTML。</p>
         <div class="wechat-library-toolbar">
           <div class="wechat-chips" id="wechatChips"></div>
           <input class="wechat-search" id="wechatSearch" type="search" aria-label="搜索公众号样式" placeholder="搜索样式编号或名称，例如：标题-01" autocomplete="off" />
@@ -156,22 +132,19 @@
       <button class="image-button" type="button">
         <img loading="lazy" decoding="async" alt="" />
         <span class="image-overlay">查看大图</span>
-        <span class="usage-badge" hidden></span>
       </button>
       <div class="card-body">
-        <div class="card-copy"><p class="card-meta"></p><h2 class="card-title"></h2><p class="card-dimensions"></p></div>
+        <div class="card-copy"><p class="card-meta"></p><h2 class="card-title"></h2></div>
         <div class="card-actions">
           <button class="dislike-button" type="button" aria-label="标记不喜欢" aria-pressed="false">👎</button>
-          <button class="favorite-button" type="button" aria-label="收藏">♡</button>
+          <button class="favorite-button" type="button" aria-label="收藏" aria-pressed="false">♡</button>
         </div>
       </div>
-      <div class="admin-card-actions"></div>
     </article>
   </template>
 
-  <script type="module" src="./assets/app.js?v=11"></script>
-  <script type="module" src="./assets/wechat-library.js?v=3"></script>
-  <script type="module" src="./assets/admin.js?v=6"></script>
+  <script type="module" src="./assets/app.js?v=12"></script>
+  <script type="module" src="./assets/wechat-library.js?v=4"></script>
   <script type="module" src="./assets/interactions.js?v=1"></script>
 </body>
 </html>
