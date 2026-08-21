@@ -2,11 +2,16 @@
 
 > 本文件是 `sdwurg180507280211/image-gallery` 当前唯一的图片入库操作手册。
 >
-> 只要任务涉及“把当前会话生成图、上传图或工作区图片写入 image-gallery”，第一步必须读取本文件；不要重新探索 Base64、Google Drive、聊天缩略图或其他临时中转方案。
+> 只要任务涉及“把当前会话生成图、上传图或工作区图片写入 image-gallery”，第一步必须读取本文件。不要重新探索 Base64、Google Drive、聊天缩略图或其他临时中转方案。
 
 ## 适用场景
 
-将 ChatGPT 当前会话可访问的原始图片、image_gen / ChatGPT Images 生成图，或当前工作区可访问的原始图片，稳定写入 `sdwurg180507280211/image-gallery`，并确保 GitHub Pages 被明确触发发布。
+将 ChatGPT 当前会话可访问的原始图片、image_gen / ChatGPT Images 生成图，或当前工作区可访问的原始图片，稳定写入 `sdwurg180507280211/image-gallery`，并明确区分：
+
+1. 原图传输成功；
+2. 仓库入库成功；
+3. GitHub Pages 发布已触发；
+4. GitHub Pages 发布成功。
 
 默认入库域为 **人物图片**；只有明确属于医药会议 KV / 医疗主视觉时才写入 `medical-kv`。
 
@@ -17,7 +22,11 @@
 ```text
 读取本文件
         ↓
-筛选本批次真实原图
+筛选本批次真实原图并去重
+        ↓
+逐图确定 title / category / tags / prompt
+        ↓
+生成本批次 manifest
         ↓
 Adobe.adobe_mandatory_init（本会话首次使用 Adobe 时）
         ↓
@@ -31,7 +40,7 @@ assetId + presignedAssetUrl + mediaType
         ↓
 curl -L 下载原始图片
         ↓
-MIME / 文件大小 / sharp 可解析性校验
+MIME / 文件大小 / SHA-256 / sharp 校验
         ↓
 images/ 正式原图
         ↓
@@ -39,15 +48,17 @@ data/gallery.json v3
         ↓
 prompts/assets/<id>.md + data/prompt-index.json
         ↓
+批次数量一致性校验
+        ↓
 npm run build
         ↓
 正式 commit + git push main
         ↓
-显式 workflow_dispatch .github/workflows/pages.yml
+显式 workflow_dispatch pages.yml
         ↓
 删除一次性 workflow / 临时触发文件
         ↓
-确认正式入库 commit + Pages 发布状态
+确认仓库入库状态 + Pages 状态
 ```
 
 真正的二进制传输通道是：
@@ -56,56 +67,34 @@ npm run build
 
 GitHub connector 本身不需要直接承载几十 MB 的 Base64 图片。
 
-### 0.1 必须显式触发 Pages
+### 0.1 Actions 只负责机械执行，不负责猜图片语义
 
-不要依赖“一次性导入 workflow 向 `main` push 后，`pages.yml` 会自动继续运行”。
+一次性 importer 可以自动完成：
 
-导入 workflow 通常使用仓库 `GITHUB_TOKEN` 进行：
+- 下载；
+- 文件校验；
+- SHA 去重；
+- 写文件；
+- 写已准备好的 metadata；
+- 写已准备好的 prompt；
+- build；
+- commit；
+- Pages dispatch。
 
-```bash
-git push origin HEAD:main
-```
+但是 importer **不要**根据文件名正则、标题关键词或场景词临时猜：
 
-GitHub 为避免 workflow 递归触发，会抑制由该 token 产生的部分后续 workflow 事件。因此：
+- 人物服装主色；
+- 医药 KV 主色；
+- 人物身份特征；
+- 动作、表情、姿态；
+- 镜头、构图和光线；
+- reconstructed prompt 的具体内容。
 
-> **由 `github-actions[bot]` / `GITHUB_TOKEN` 产生的 `main` push，不能作为 Pages 一定会自动触发的依据。**
-
-本项目的 `.github/workflows/pages.yml` 已支持：
-
-```yaml
-workflow_dispatch:
-```
-
-因此一次性导入 workflow 在正式 push 后必须显式 dispatch Pages workflow。
-
-推荐：
-
-```bash
-git push origin HEAD:main
-
-gh workflow run pages.yml --ref main
-```
-
-并给一次性导入 workflow 配置：
-
-```yaml
-permissions:
-  contents: write
-  actions: write
-```
-
-调用 `gh` 时使用当前 workflow token：
-
-```yaml
-env:
-  GH_TOKEN: ${{ github.token }}
-```
-
-如果显式 dispatch 失败，图片可以已经完成仓库入库，但**不能声称网站已经发布**。
+这些语义信息必须在创建 importer 前，根据当前图片和生成上下文准备完成。
 
 ---
 
-## 1. 图片收集规则
+## 1. 图片收集与批次清单
 
 ### 1.1 当前会话生成图
 
@@ -114,24 +103,219 @@ env:
 - 使用真实 `file_id` / 当前会话可访问的原始文件引用；
 - 一次生成多张时，每张作为独立素材；
 - 不使用聊天缩略图、截图或预览图代替原图；
-- 不重新生成近似图替代缺失原图。
-
-用户参考图、普通附件是否入库，以当前任务要求为准；不要把参考图误当生成成品。
+- 不重新生成近似图替代缺失原图；
+- 用户参考图、参考 ZIP、总览缩略图不要误当成生成成品。
 
 ### 1.2 批量文件 / ZIP
 
 如果输入是 ZIP：
 
 1. 先解压并筛选实际图片；
-2. 保留原始 PNG / JPG / WebP 等文件，不为了上传主动降质；
-3. 每张图片单独进入后续 Adobe bridge；
-4. ZIP 本身不是图库资产，不提交到 `images/`。
+2. 排除参考图、重复副本、缩略图和非成品；
+3. 保留原始 PNG / JPG / WebP，不为了上传主动降质；
+4. 每张图片单独进入后续 Adobe bridge；
+5. ZIP 本身不是图库资产，不提交到 `images/`。
+
+### 1.3 去重发生在 Adobe bridge 前
+
+先确定本批次：
+
+```text
+candidateCount = 筛选后的候选原图数
+```
+
+如果当前环境可直接读取文件字节，优先使用 SHA-256 去重；如果桥接前只能通过文件引用判断，则至少根据真实文件来源、生成序号和重复附件关系先做一轮去重，下载后再用 SHA-256 做最终确认。
+
+不得把“发现 69 个文件引用”直接表述成“新增 69 张素材”。
 
 ---
 
-## 2. Adobe 初始化与桥接预检
+## 2. 入库前先准备逐图 manifest
 
-### 2.1 初始化
+在创建一次性 workflow 前，为每张候选图准备确定的数据，而不是在 Actions 里临时推断。
+
+推荐的内存 / 临时 manifest 结构：
+
+```json
+{
+  "order": 1,
+  "sourceFileId": "file_...",
+  "originalFileName": "example.png",
+  "title": "素材标题",
+  "domain": "character",
+  "category": "blue",
+  "tags": ["同一人物", "蓝色礼服", "海岸"],
+  "promptKind": "reconstructed",
+  "prompt": "逐图完整提示词"
+}
+```
+
+医药 KV 使用 `color / organ / used` 等 v3 字段。
+
+### 2.1 人物分类必须看“服装主色”，不能看场景词
+
+人物分类规则保持不变：
+
+1. 明确属于多宫图时优先 `multi-panel`；
+2. 否则只按**人物服装主色**归类；
+3. 黑金归 `black`，红金归 `red`；
+4. 背景、花朵、建筑、天气、节日、灯光颜色不能代替服装主色。
+
+当前允许：
+
+- `multi-panel`
+- `black`
+- `red`
+- `pink`
+- `blue`
+- `white`
+- `purple`
+- `green`
+- `gold`
+- `other`
+
+### 2.2 禁止用标题正则自动分类
+
+禁止类似：
+
+```js
+if (/红梅|葡萄园|书斋|圣诞|古寺/.test(title)) return 'red';
+if (/荷塘|森林|茶亭/.test(title)) return 'green';
+if (/霓虹/.test(title)) return 'black';
+```
+
+原因：这些词描述的通常是**场景**，不等于人物服装主色。
+
+例如：
+
+```text
+“雪夜红梅中的蓝衣佳人”
+```
+
+应该根据“蓝衣”及实际画面归为 `blue`，不能因为“红梅”归为 `red`。
+
+### 2.3 分类证据优先级
+
+人物服装颜色的证据优先级：
+
+```text
+实际图片视觉判断
+> 当前生成上下文中明确的服装描述
+> 可靠的逐图 metadata
+> 文件标题中的明确服装词
+> 场景词 / 背景词（不得作为分类依据）
+```
+
+如果无法可靠判断服装主色，不要硬猜，使用 `other` 或先补充视觉判断。
+
+---
+
+## 3. 提示词必须在入库前准备好
+
+项目已经建立提示词归档体系。新图片不要再制造“先入图库、以后补 prompt”的历史欠账。
+
+每张新素材原则上同时新增：
+
+```text
+prompts/assets/<asset-id>.md
+```
+
+并更新：
+
+```text
+data/prompt-index.json
+```
+
+`kind` 只使用：
+
+- `original`：确实取得并保存了生成该图的原始提示词；
+- `reconstructed`：无法证明逐字原始 prompt，根据图片和可靠上下文重建。
+
+不要把重建提示词冒充 `original`。
+
+### 3.1 reconstructed prompt 的最低质量要求
+
+`reconstructed` 不能只是：
+
+```text
+标题 + category + 一段通用模板
+```
+
+也不能只写：
+
+```text
+“生成一张高分辨率肖像，主题为 XXX，服装颜色为 XXX。”
+```
+
+每张人物图至少应尽量覆盖：
+
+- 稳定人物身份锚点；
+- 本张实际服装款式；
+- 本张实际服装主色；
+- 主要配饰；
+- 场景；
+- 动作 / 姿态；
+- 表情和眼神；
+- 景别 / 镜头角度；
+- 构图；
+- 光线；
+- 色调 / 氛围；
+- 材质和细节重点；
+- 必要负面约束。
+
+如果当前图片可见，就应根据实际图片重建，而不是仅根据文件名重建。
+
+### 3.2 不允许错误 category 反向污染 prompt
+
+不要把图库分类字段机械写进 prompt 后当成事实。
+
+例如图片实际是蓝衣，但 category 被误标成 `red` 时，不能再生成：
+
+```text
+人物服装主色按图库归类为 red
+```
+
+正确顺序是：
+
+```text
+先看图片确认服装颜色
+→ 写正确 category
+→ 再写与图片一致的 prompt
+```
+
+### 3.3 证据不足时不要编造
+
+如果无法取得原始 prompt，也无法可靠查看图片细节：
+
+- 不要凭标题编造复杂动作、服装、镜头；
+- 不要把低置信度推断写成确定事实；
+- 优先补充图片视觉分析后再入库。
+
+对于本项目的人物图片，目标是“可用于重新生成相近作品”，不是仅为了让 prompt 文件存在。
+
+### 3.4 医药 KV
+
+医药 KV 没有原始逐字 prompt 时，使用：
+
+`prompts/medical-kv-16x9-base.md`
+
+作为统一视觉母规范，再结合该图实际的：
+
+- 主色；
+- 主医学主体；
+- 构图方向；
+- 主视觉体量；
+- 留白；
+- 辅助元素；
+- 光线和材质；
+
+生成 `reconstructed` prompt。
+
+---
+
+## 4. Adobe 初始化与桥接预检
+
+### 4.1 初始化
 
 同一会话第一次调用 Adobe 工具前先执行：
 
@@ -139,7 +323,7 @@ env:
 
 如果本会话已经初始化过，不重复调用。
 
-### 2.2 第一张预检
+### 4.2 第一张预检
 
 先取候选图片中的第一张调用：
 
@@ -152,9 +336,9 @@ env:
 - 返回 `mediaType`；
 - `mediaType` 必须以 `image/` 开头。
 
-第一张预检成功后，再批量桥接剩余图片。工具支持一次提交多文件时优先批量提交；只有工具明确存在数量限制时才分批。
+第一张预检成功后，再批量桥接剩余图片。
 
-### 2.3 硬失败规则
+### 4.3 硬失败规则
 
 出现以下任一情况，停止本批次并明确报告原因：
 
@@ -166,7 +350,7 @@ env:
 
 此时不要自动改走：
 
-- Google Drive 预览页 / 分享网页；
+- Google Drive 预览页；
 - Markdown 图片预览地址；
 - 聊天缩略图 URL；
 - GitHub `create_blob` 大段 Base64；
@@ -176,43 +360,40 @@ env:
 
 ---
 
-## 3. 批量 Adobe 文件桥
+## 5. Adobe bridge 映射
 
-预检成功后，为每张图保留以下映射：
+预检成功后，为每张图保留：
 
 ```text
 批次序号
-原始 file_id / 文件引用
+sourceFileId / 文件引用
 原始文件名
-原始扩展名
 Adobe assetId
 presignedAssetUrl
 mediaType
+预先确定的 title / category / tags / promptKind / prompt
 最终 GitHub path
 最终 asset id
 ```
 
-`presignedAssetUrl` 只作为本次传输的临时下载地址，不长期写入图库元数据，也不保留在仓库长期配置中。
+`presignedAssetUrl` 只作为本次传输的临时下载地址，不长期写入图库元数据或 import manifest。
 
 ---
 
-## 4. GitHub 一次性导入工作流
+## 6. GitHub 一次性导入 workflow
 
-每个批次只创建 **一个** 一次性导入工作流。
+每个批次只创建 **一个** 一次性导入 workflow。
 
-不要为同一批次反复创建：
+禁止为同一批次反复创建：
 
 - `probe`
 - `test`
 - `working`
 - `final`
+- 第二个 importer
 - 多个平行上传分支
 
-如果需要临时触发分支 / PR，只保留一个；正式入库完成后清理。
-
-### 4.1 权限
-
-一次性导入 workflow 至少需要：
+### 6.1 权限
 
 ```yaml
 permissions:
@@ -220,55 +401,56 @@ permissions:
   actions: write
 ```
 
-含义：
+并设置：
 
-- `contents: write`：提交图片、gallery、prompt，并 push `main`；
-- `actions: write`：正式 push 后显式 dispatch `pages.yml`。
+```yaml
+env:
+  GH_TOKEN: ${{ github.token }}
+```
 
-### 4.2 导入 workflow 职责
+### 6.2 workflow 职责
 
-一次性 workflow 负责：
+一次性 importer 只消费已经准备好的 manifest，并负责：
 
 1. Checkout `main`；
 2. 设置 Node.js 20；
-3. 安装项目依赖；
-4. 使用 Adobe `presignedAssetUrl` 下载原始图片；
-5. 校验真实图片；
-6. 写入 `images/` 正式路径；
-7. 更新 `data/gallery.json`；
-8. 写入提示词文件并更新 `data/prompt-index.json`；
-9. 执行 `npm run build`；
-10. 删除自身及本批次临时触发文件；
-11. commit 并 push `main`；
-12. **显式 dispatch `pages.yml --ref main`**。
+3. 安装依赖；
+4. 下载 Adobe 原图；
+5. MIME / size / SHA-256 / sharp 校验；
+6. 当前批次 SHA 去重；
+7. 检查是否已存在于 gallery / 正式路径；
+8. 写入 `images/`；
+9. 写入 manifest 中已经确定的 v3 metadata；
+10. 写入 manifest 中已经确定的 prompt；
+11. 更新 `data/prompt-index.json`；
+12. 校验批次数量；
+13. `npm run build`；
+14. 删除 importer 自身和临时触发文件；
+15. commit + push `main`；
+16. 显式 dispatch `pages.yml --ref main`。
 
-### 4.3 不要用第二次空提交触发 Pages
+### 6.3 importer 必须幂等，但不允许主动重复执行
 
-不要把以下方式作为正常流程：
+推荐以图片完整 SHA-256 作为重复检测依据，并使用稳定 ID / path。
 
-```text
-import bot push main
-        ↓
-发现 Pages 没运行
-        ↓
-人工创建 refresh trigger
-        ↓
-再用普通用户身份 push 一次
-```
+再次运行同一 importer 时，不应重复新增 gallery 记录或 prompt。
 
-这只能作为历史故障补救，不是标准架构。
+但是：
 
-标准方案是在导入 workflow 内主动：
+> **幂等只是事故保护，不是允许重复运行 importer 的理由。**
 
-```bash
-gh workflow run pages.yml --ref main
-```
+一旦正式入库 commit 已经出现在 `main`：
+
+- 不要重新创建 importer；
+- 不要再次下载整批图片；
+- 不要为了检查 Pages 再运行 importer；
+- Pages 有问题只处理 Pages，不重新执行图片入库。
 
 ---
 
-## 5. GitHub 端下载原图
+## 7. GitHub 端下载和原图校验
 
-一次性导入 workflow 使用 Adobe 返回的 `presignedAssetUrl`：
+使用：
 
 ```bash
 curl \
@@ -293,7 +475,11 @@ size=$(wc -c < "$imagePath")
 [[ "$size" -ge 1024 ]]
 ```
 
-同时使用项目已有 `sharp` 读取图片，确认真实尺寸可解析。
+同时：
+
+- 计算 SHA-256；
+- 使用 `sharp` 读取实际宽高；
+- 拒绝无法解析的文件。
 
 禁止把以下内容保存为图片：
 
@@ -306,56 +492,31 @@ size=$(wc -c < "$imagePath")
 
 ---
 
-## 6. v3 的素材真源：data/gallery.json
+## 8. v3 素材真源：data/gallery.json
 
 **只把 PNG / JPG 放进 `images/` 不算完成入库。**
 
-当前 `scripts/build.mjs` 不会扫描 `images/` 自动发现新素材；它以：
+当前 `scripts/build.mjs` 不扫描 `images/` 自动发现新素材；它以：
 
 `data/gallery.json`
 
-作为素材真源，再读取其中的 `asset.path` 找原图、校验尺寸并生成缩略图。
+作为素材真源。
 
-因此每张新图片必须同时拥有一条 v3 资产记录。
-
-### 6.1 人物图片
-
-人物图片最小记录：
+### 8.1 人物最小记录
 
 ```json
 {
   "id": "稳定唯一ID",
-  "path": "images/<人物slug>/<主题或场景slug>/file.png",
+  "path": "images/<人物slug>/<主题slug>/file.png",
   "title": "素材标题",
   "domain": "character",
-  "category": "pink",
+  "category": "blue",
   "tags": ["补充搜索词"],
   "createdAt": "ISO 8601 时间"
 }
 ```
 
-当前人物 `category` 只使用：
-
-- `multi-panel`：多宫图 / 多分镜；
-- `black`；
-- `red`；
-- `pink`；
-- `blue`；
-- `white`；
-- `purple`；
-- `green`；
-- `gold`；
-- `other`。
-
-规则：
-
-1. 明确属于多宫图时优先 `multi-panel`；
-2. 否则只按人物服装主色归类；
-3. 黑金仍归黑色系、红金仍归红色系，不再叠加第二分类。
-
-### 6.2 医药 KV
-
-医药 KV 最小记录：
+### 8.2 医药 KV 最小记录
 
 ```json
 {
@@ -371,22 +532,20 @@ size=$(wc -c < "$imagePath")
 }
 ```
 
-页面内容分类只使用 `color`；`organ` 仅作为描述 / 搜索元数据，`used` 是业务状态。
+医药 KV 页面内容分类只使用 `color`；`organ` 是描述 / 搜索元数据，`used` 是业务状态。
 
-### 6.3 不再创建新 sidecar JSON
+### 8.3 不再创建新 sidecar JSON
 
-当前 v3 新图片**不要**再创建：
+当前 v3 新图片不要创建：
 
 ```text
 image.png
 image.json
 ```
 
-这套 sidecar Metadata V2 已退出当前入库架构。
+旧 sidecar Metadata V2 只作为 Git 历史证据使用。
 
-旧 sidecar 只作为 Git 历史证据，用于历史提示词重建；新入库直接维护 `data/gallery.json`。
-
-### 6.4 构建派生字段
+### 8.4 构建派生字段
 
 不要手工填写：
 
@@ -396,76 +555,61 @@ image.json
 - `thumbnailLarge`
 - `thumbnailLargeWidth`
 
-这些字段由 `scripts/build.mjs` 根据真实原图写入 `dist/data/gallery.json`。
+这些由 `scripts/build.mjs` 写入 `dist/data/gallery.json`。
 
 ---
 
-## 7. 提示词必须与新图片同步入库
+## 9. 批次数量与一致性校验
 
-项目已经建立提示词归档体系。新图片不要再制造“先入图库、以后补 prompt”的历史欠账。
+这是批量导入的强制步骤。
 
-每张新素材原则上同时新增：
-
-```text
-prompts/assets/<asset-id>.md
-```
-
-并更新：
+至少记录：
 
 ```text
-data/prompt-index.json
+candidateCount   筛选后的候选原图数
+bridgedCount     Adobe bridge 成功数
+downloadedCount 实际下载并通过文件校验数
+uniqueCount     SHA-256 去重后的唯一图片数
+existingCount   已经存在于仓库、因此跳过的数量
+addedCount      本次实际新增 gallery 记录数
+promptCount     本次实际写入 / 关联 prompt 数
 ```
 
-索引结构：
+如果本批次声明“全部都是新图”，应满足：
 
-```json
-{
-  "path": "prompts/assets/<asset-id>.md",
-  "kind": "original"
-}
+```text
+candidateCount
+= bridgedCount
+= downloadedCount
+= uniqueCount
+= addedCount
+= promptCount
 ```
 
-`kind` 只使用：
+如果存在历史重复图，则必须明确列出：
 
-- `original`：确实取得并保存了生成该图的原始提示词；
-- `reconstructed`：无法证明逐字原始 prompt，根据图片、当前元数据、人物母提示词或医药 KV 母提示词重建。
+```text
+existingCount
+skipped asset id / path
+```
 
-不要把重建提示词冒充 `original`。
+最终对用户汇报时：
 
-### 7.1 人物提示词
+- “处理了 69 个 URL” ≠ “新增 69 张”；
+- “下载了 69 张” ≠ “gallery 新增 69 条”；
+- 只有 `addedCount` 和正式 commit diff 能证明实际新增数量。
 
-人物图优先保留：
+对于批量导入，建议把不含 `presignedAssetUrl` 的最终映射写入：
 
-- 同一人物身份锚点；
-- 本张服装 / 配色；
-- 场景；
-- 动作；
-- 表情；
-- 镜头 / 构图；
-- 光线与风格；
-- 必要负面约束。
+```text
+data/imports/<batch-name>.json
+```
 
-人物身份和单张临时服装、武器、法球、背景必须分开。
-
-### 7.2 医药 KV 提示词
-
-医药 KV 没有原始逐字 prompt 时，使用：
-
-`prompts/medical-kv-16x9-base.md`
-
-作为当前统一视觉母规范，再结合该图的：
-
-- 主色；
-- 主医学主体；
-- tags；
-- 构图方向；
-- 主视觉体量和留白；
-
-生成 `reconstructed` 提示词。
+用于记录 asset id、final path、SHA-256、宽高和批次计数。
 
 ---
 
-## 8. 构建与校验
+## 10. 构建与正式提交
 
 仓库存在 `package-lock.json` 时优先：
 
@@ -474,179 +618,105 @@ npm ci --no-audit --no-fund
 npm run build
 ```
 
-如果当前仓库标准工作流使用 `npm install --no-audit --no-fund`，以仓库现有 workflow 为准，不为此额外引入兼容层。
+构建至少验证：
 
-`npm run build` 必须至少验证：
-
-- `data/gallery.json` 为 schemaVersion 3；
+- `data/gallery.json` schemaVersion 3；
 - asset ID 不重复；
 - asset path 不重复；
-- 每条记录对应原图真实存在；
-- 图片可被 `sharp` 解析；
-- `data/prompt-index.json` 指向真实素材；
-- prompt 文件真实存在；
-- category / color / organ / used 等字段合法；
-- 缩略图可正常生成。
+- 原图存在且 sharp 可解析；
+- category / color / organ / used 合法；
+- `data/prompt-index.json` 有效；
+- prompt 文件存在；
+- 缩略图生成成功。
 
-构建失败时不得提交半成品图库。
-
----
-
-## 9. 正式提交与 Pages 发布
-
-只有以下内容全部完成后才允许正式提交：
-
-- 原图已下载并验证；
-- `data/gallery.json` 已同步；
-- 提示词已同步；
-- `data/prompt-index.json` 已同步；
-- `npm run build` 成功。
-
-正式提交示例：
+只有全部通过后才：
 
 ```bash
-git add images data/gallery.json prompts data/prompt-index.json
+git add -A
 git commit -m "feat(gallery): import images via Adobe bridge"
 git push origin HEAD:main
 ```
 
-### 9.1 push 后必须显式 dispatch Pages
+### 10.1 正式 commit 出现后立即停止 importer 生命周期
 
-紧接着执行：
-
-```bash
-gh workflow run pages.yml --ref main
-```
-
-建议同一 step 中明确设置：
-
-```yaml
-env:
-  GH_TOKEN: ${{ github.token }}
-```
-
-项目当前 `pages.yml` 同时支持：
-
-```yaml
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-```
-
-其中 `push` 继续服务普通用户 / 外部正常 push；**导入 workflow 自己的 bot push 一律按显式 `workflow_dispatch` 处理，不依赖递归触发。**
-
-### 9.2 推荐的最终 shell 顺序
-
-```bash
-git config user.name 'github-actions[bot]'
-git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-
-git add -A
-git commit -m 'feat(gallery): import images via Adobe bridge'
-git push origin HEAD:main
-
-gh workflow run pages.yml --ref main
-```
-
-不要在 `git push` 与 `gh workflow run` 之间加入人为 refresh commit。
-
----
-
-## 10. 成功判定：入库与发布分开
-
-以后不要再用一个“上传成功”同时代表仓库和网站两个状态。
-
-### 10.1 仓库入库成功
-
-满足以下条件才可以说“图片已入库”：
-
-- 正式 import commit 已出现在 `main`；
-- 本批次原图真实存在；
-- `data/gallery.json` 已包含对应记录；
-- prompt / prompt-index 已同步；
-- import workflow 中 `npm run build` 已通过。
-
-### 10.2 Pages 发布已触发
-
-满足以下条件才可以说“网站发布已触发”：
-
-- 正式 import commit 已进入 `main`；
-- `gh workflow run pages.yml --ref main` / workflow dispatch 请求已成功提交。
-
-### 10.3 Pages 发布成功
-
-只有 Pages workflow 最终成功完成，才可以说：
-
-> **网站已发布 / 新图已上线。**
-
-如果 Pages 仍在 queued / in_progress，只能说：
-
-> **图片已入库，Pages 已触发，发布尚未完成。**
-
-如果 dispatch 失败，只能说：
-
-> **图片已入库，但 Pages 未成功触发。**
-
-### 10.4 检查策略
-
-不要高频轮询。
-
-在用户明确要求“上传到网站 / 确认能看见”时：
-
-1. 正式入库 commit 后显式 dispatch Pages；
-2. 对对应 Pages workflow 做有限检查；
-3. 成功则报告网站已发布；
-4. 仍运行中则准确报告当前状态；
-5. 失败则直接查该次 run / job 日志，不制造第二次空 push。
-
-不要用浏览器缓存问题解释尚未确认的部署失败。
-
----
-
-## 11. 临时文件与分支清理
-
-正式入库并完成 Pages dispatch 后：
-
-- 删除一次性 import workflow；
-- 删除本批次临时触发文件；
-- 关闭未合并的触发 PR；
-- 清理本批次无意义的 probe / test / working / final 分支；
-- 不把 `presignedAssetUrl` 长期留在仓库。
-
-不要为了同一个批次不断创建新的测试分支。
-
-注意：清理临时 workflow / trigger 可以包含在正式 import commit 中；但无论采用哪种方式，都不能因为清理动作产生另一个“为了触发 Pages”的空提交。
-
----
-
-## 12. 故障模式：图片已进 main，但 Pages 没更新
-
-如果出现：
-
-- 图片 blob 已存在；
-- `data/gallery.json` 已有记录；
-- import commit 已进入 `main`；
-- 网站仍然没有新图；
-
-第一优先检查：
-
-> **这次 import commit 是否由 `github-actions[bot]` / `GITHUB_TOKEN` push，以及 importer 是否显式 dispatch 了 `pages.yml`。**
-
-不要第一时间归因于：
-
-- 浏览器缓存；
-- 前端筛选；
-- `cache: no-store`；
-- 图片没有进入仓库。
-
-标准修复不是创建普通用户 refresh commit，而是修正 importer，让后续每次：
+一旦确认正式入库 commit 已进入 `main`：
 
 ```text
-bot push main
-        ↓
-explicit workflow_dispatch pages.yml
+Importer lifecycle = finished
 ```
+
+之后即使：
+
+- Pages 状态未知；
+- GitHub connector 暂时看不到 workflow run；
+- 网站尚未刷新；
+
+也**不得重新 stage / recreate / trigger importer**。
+
+后续问题进入 Pages 发布排查流程。
+
+---
+
+## 11. Pages 必须显式 dispatch
+
+不要依赖一次性 importer 的 `GITHUB_TOKEN` push 自动递归触发 Pages。
+
+Importer 正式 push 后执行：
+
+```bash
+gh workflow run pages.yml --ref main
+```
+
+项目当前 `pages.yml` 支持：
+
+```yaml
+workflow_dispatch:
+```
+
+### 11.1 Pages 状态分级
+
+严格使用以下表述：
+
+**仓库入库成功**
+
+> 正式 import commit 已进入 `main`，图片 / gallery / prompt 已确认，build 已通过。
+
+**Pages 发布已触发**
+
+> `gh workflow run pages.yml --ref main` 命令已成功执行，或已经取得对应 workflow run。
+
+**Pages 发布成功**
+
+> 对应 Pages workflow 最终 conclusion 为 success / deploy 完成。
+
+如果当前连接器无法验证 workflow 最终状态，只能说：
+
+> 仓库入库已确认；Importer 已包含 / 已执行 Pages dispatch，但 Pages 最终发布状态尚未验证。
+
+不能把“代码里存在 `gh workflow run`”直接等同于“网站已发布”。
+
+### 11.2 不要通过重跑 importer 修 Pages
+
+如果 Pages dispatch 失败或状态未知：
+
+- 重新 dispatch `pages.yml`；或
+- 排查 `pages.yml` 权限 / workflow 本身；
+
+不要重新下载、重新登记、重新构建整批图片。
+
+---
+
+## 12. 临时资源清理
+
+正式入库完成后：
+
+- 一次性 importer 应已自删除；
+- 删除临时触发文件；
+- 关闭未合并触发 PR；
+- 清理本批次 probe / test / working / final 分支；
+- 不把 `presignedAssetUrl` 长期留在仓库。
+
+不要因为状态不确定，又重新创建同一个 importer。
 
 ---
 
@@ -654,34 +724,40 @@ explicit workflow_dispatch pages.yml
 
 ```text
 [ ] 已先读取本文件
-[ ] 已筛选真实原图
+[ ] 已筛选真实原图并排除参考图 / 缩略图 / 重复副本
+[ ] 已记录 candidateCount
+[ ] 每张人物图 category 按实际服装主色确定
+[ ] 未使用标题 / 场景关键词正则自动猜颜色
+[ ] 每张图 title / tags 已准备
+[ ] 每张图 original 或高质量 reconstructed prompt 已准备
+[ ] reconstructed prompt 不只是标题 + category + 通用模板
 [ ] Adobe 已初始化
 [ ] 第一张 bridge 预检成功
 [ ] 全批次取得 image/* presignedAssetUrl
-[ ] 只创建一个一次性导入 workflow
-[ ] importer permissions 含 contents: write
-[ ] importer permissions 含 actions: write
-[ ] 原图 MIME / size / sharp 校验成功
-[ ] 原图写入 images/
+[ ] 只创建一个一次性 importer
+[ ] 原图 MIME / size / SHA-256 / sharp 校验成功
+[ ] SHA-256 批内去重完成
 [ ] data/gallery.json v3 已更新
-[ ] 每张图已有 original / reconstructed prompt
 [ ] data/prompt-index.json 已更新
+[ ] prompt 文件已写入
+[ ] candidate / bridged / downloaded / unique / existing / added / prompt 数量已核对
 [ ] npm run build 成功
 [ ] 正式入库 commit 已进入 main
-[ ] 已显式 workflow_dispatch pages.yml --ref main
-[ ] 已根据任务要求确认 Pages 当前状态
-[ ] 一次性 workflow 已删除
-[ ] 临时触发文件 / 无用分支已清理
-[ ] 没有为了触发 Pages 创建第二次空 refresh commit
+[ ] 正式 commit 出现后没有重新创建 importer
+[ ] pages.yml 已显式 dispatch
+[ ] Pages 状态使用“已触发 / 已成功 / 未验证”准确表述
+[ ] 一次性 workflow / trigger / 无用分支已清理
 ```
 
 ## 核心原则
 
 1. **先读项目规则，不重新发明上传方案。**
-2. **Adobe 文件桥解决 ChatGPT / 工作区图片到可下载 URL 的问题。**
-3. **GitHub Actions 负责拉取原始二进制、验证、构建和提交。**
-4. **`data/gallery.json` 是 v3 素材真源，`images/` 目录本身不会自动入库。**
-5. **新图片与提示词同步归档。**
-6. **正式 `main` import commit 代表仓库入库成功。**
-7. **bot push 后必须显式 dispatch `pages.yml`，不能依赖递归 push 触发。**
-8. **只有 Pages workflow 成功后，才能声称网站已发布。**
+2. **Adobe 文件桥只解决原始二进制传输，不负责素材语义理解。**
+3. **人物颜色分类看实际服装主色，不看背景和场景关键词。**
+4. **逐图 metadata 和 prompt 在 importer 运行前准备完成。**
+5. **reconstructed prompt 必须建立在图片实际内容上，不能是标题模板。**
+6. **`data/gallery.json` 是 v3 素材真源。**
+7. **批量导入必须核对 candidate / unique / added / prompt 数量。**
+8. **Importer 必须幂等，但正式 import commit 出现后绝不主动重跑。**
+9. **bot push 后显式 dispatch `pages.yml`。**
+10. **仓库入库成功、Pages 已触发、Pages 已发布必须分开表述。**
