@@ -3,14 +3,107 @@ import {access,cp,mkdir,readFile,readdir,rm,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import sharp from 'sharp';
+
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const sourceFile=path.join(root,'data','gallery.json');const promptIndexFile=path.join(root,'data','prompt-index.json');const dislikesFile=path.join(root,'data','dislikes.json');const promptsDir=path.join(root,'prompts');const cacheDir=path.join(root,'.cache','thumbnails-v3');const dist=path.join(root,'dist');
+const sourceFile=path.join(root,'data','gallery.json');
+const promptIndexFile=path.join(root,'data','prompt-index.json');
+const dislikesFile=path.join(root,'data','dislikes.json');
+const promptsDir=path.join(root,'prompts');
+const cacheDir=path.join(root,'.cache','thumbnails-v3');
+const dist=path.join(root,'dist');
+
 const charCategories=new Set(['multi-panel','black','red','pink','blue','white','purple','green','gold','other']);
-const colors=new Set(['blue','purple','pink','green','red','orange','white','black','mixed']);
 const organs=new Set(['heart','brain','kidney','liver','lung','spleen','stomach','pancreas','vascular','genetics','other']);
 const promptKinds=new Set(['original','reconstructed']);
-async function exists(p){try{await access(p);return true}catch{return false}}
-function validate(a){if(!a?.id||!a?.path||!a?.title)throw new Error('素材缺少 id/path/title');if(a.domain==='character'){if(!charCategories.has(a.category))throw new Error(`人物分类非法：${a.id}`);return}if(a.domain==='medical-kv'){if(!colors.has(a.color)||!organs.has(a.organ)||typeof a.used!=='boolean')throw new Error(`医药KV字段非法：${a.id}`);return}throw new Error(`素材域非法：${a.id}`)}
-async function thumb(source,hash,width,quality){const name=`${hash}-${width}.webp`,target=path.join(cacheDir,name);if(!await exists(target))await sharp(source,{failOn:'none'}).rotate().resize({width,withoutEnlargement:true}).webp({quality,effort:4,smartSubsample:true}).toFile(target);return {name,target};}
-async function main(){const doc=JSON.parse(await readFile(sourceFile,'utf8'));if(doc.schemaVersion!==3||!Array.isArray(doc.assets))throw new Error('data/gallery.json 必须是 schemaVersion 3。');doc.assets.forEach(validate);if(new Set(doc.assets.map(a=>a.id)).size!==doc.assets.length)throw new Error('素材 ID 重复。');if(new Set(doc.assets.map(a=>a.path)).size!==doc.assets.length)throw new Error('素材路径重复。');const assetIds=new Set(doc.assets.map(a=>a.id));const promptIndex=JSON.parse(await readFile(promptIndexFile,'utf8'));if(promptIndex.schemaVersion!==1||!promptIndex.assets||typeof promptIndex.assets!=='object'||Array.isArray(promptIndex.assets))throw new Error('data/prompt-index.json 必须是 schemaVersion 1。');for(const [id,prompt] of Object.entries(promptIndex.assets)){if(!assetIds.has(id))throw new Error(`提示词关联了不存在的素材：${id}`);if(!prompt?.path||!promptKinds.has(prompt.kind))throw new Error(`提示词索引非法：${id}`);if(!await exists(path.join(root,prompt.path)))throw new Error(`提示词文件不存在：${prompt.path}`);}const dislikes=JSON.parse(await readFile(dislikesFile,'utf8'));if(dislikes.schemaVersion!==1||!Array.isArray(dislikes.assetIds))throw new Error('data/dislikes.json 必须是 schemaVersion 1。');if(new Set(dislikes.assetIds).size!==dislikes.assetIds.length)throw new Error('不喜欢列表存在重复素材 ID。');for(const id of dislikes.assetIds)if(!assetIds.has(id))throw new Error(`不喜欢列表关联了不存在的素材：${id}`);await rm(dist,{recursive:true,force:true});await mkdir(path.join(dist,'data'),{recursive:true});await mkdir(path.join(dist,'generated','thumbnails'),{recursive:true});await mkdir(cacheDir,{recursive:true});await cp(path.join(root,'index.html'),path.join(dist,'index.html'));await cp(path.join(root,'wechat'),path.join(dist,'wechat'),{recursive:true});await cp(path.join(root,'assets'),path.join(dist,'assets'),{recursive:true});await cp(path.join(root,'images'),path.join(dist,'images'),{recursive:true});await cp(promptsDir,path.join(dist,'prompts'),{recursive:true});await cp(promptIndexFile,path.join(dist,'data','prompt-index.json'));await cp(dislikesFile,path.join(dist,'data','dislikes.json'));const built=[];const used=new Set();for(const asset of doc.assets){const source=path.join(root,asset.path);if(!await exists(source))throw new Error(`原图不存在：${asset.path}`);const buffer=await readFile(source);const hash=createHash('sha256').update(buffer).digest('hex').slice(0,24);const meta=await sharp(buffer,{failOn:'none'}).rotate().metadata();const width=Number(meta.width)||0,height=Number(meta.height)||0;if(!(width>0&&height>0))throw new Error(`无法读取尺寸：${asset.path}`);const small=await thumb(source,hash,640,80);used.add(small.name);await cp(small.target,path.join(dist,'generated','thumbnails',small.name));const record={...asset,width,height,thumbnail:`generated/thumbnails/${small.name}`};if(width/height>=1.15&&width>640){const large=await thumb(source,hash,1280,84);used.add(large.name);await cp(large.target,path.join(dist,'generated','thumbnails',large.name));record.thumbnailLarge=`generated/thumbnails/${large.name}`;record.thumbnailLargeWidth=Math.min(width,1280);}built.push(record)}const cacheEntries=await readdir(cacheDir,{withFileTypes:true});await Promise.all(cacheEntries.filter(e=>e.isFile()&&!used.has(e.name)).map(e=>rm(path.join(cacheDir,e.name),{force:true})));await writeFile(path.join(dist,'data','gallery.json'),`${JSON.stringify({schemaVersion:3,count:built.length,assets:built},null,2)}\n`,'utf8');await writeFile(path.join(dist,'.nojekyll'),'','utf8');console.log(`构建完成：${built.length} 张素材，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。`)}
-main().catch(e=>{console.error(e);process.exitCode=1});
+
+async function exists(p){try{await access(p);return true;}catch{return false;}}
+
+function validate(asset){
+  if(!asset?.id||!asset?.path||!asset?.title)throw new Error('素材缺少 id/path/title');
+  if(asset.domain==='character'){
+    if(!charCategories.has(asset.category))throw new Error(`人物分类非法：${asset.id}`);
+    return;
+  }
+  if(asset.domain==='medical-kv'){
+    if(!organs.has(asset.organ))throw new Error(`医药KV分类非法：${asset.id}`);
+    return;
+  }
+  throw new Error(`素材域非法：${asset.id}`);
+}
+
+async function thumb(source,hash,width,quality){
+  const name=`${hash}-${width}.webp`;
+  const target=path.join(cacheDir,name);
+  if(!await exists(target)){
+    await sharp(source,{failOn:'none'}).rotate().resize({width,withoutEnlargement:true}).webp({quality,effort:4,smartSubsample:true}).toFile(target);
+  }
+  return {name,target};
+}
+
+async function main(){
+  const doc=JSON.parse(await readFile(sourceFile,'utf8'));
+  if(doc.schemaVersion!==3||!Array.isArray(doc.assets))throw new Error('data/gallery.json 必须是 schemaVersion 3。');
+  doc.assets.forEach(validate);
+  if(new Set(doc.assets.map(a=>a.id)).size!==doc.assets.length)throw new Error('素材 ID 重复。');
+  if(new Set(doc.assets.map(a=>a.path)).size!==doc.assets.length)throw new Error('素材路径重复。');
+
+  const assetIds=new Set(doc.assets.map(a=>a.id));
+  const promptIndex=JSON.parse(await readFile(promptIndexFile,'utf8'));
+  if(promptIndex.schemaVersion!==1||!promptIndex.assets||typeof promptIndex.assets!=='object'||Array.isArray(promptIndex.assets))throw new Error('data/prompt-index.json 必须是 schemaVersion 1。');
+  for(const [id,prompt] of Object.entries(promptIndex.assets)){
+    if(!assetIds.has(id))throw new Error(`提示词关联了不存在的素材：${id}`);
+    if(!prompt?.path||!promptKinds.has(prompt.kind))throw new Error(`提示词索引非法：${id}`);
+    if(!await exists(path.join(root,prompt.path)))throw new Error(`提示词文件不存在：${prompt.path}`);
+  }
+
+  const dislikes=JSON.parse(await readFile(dislikesFile,'utf8'));
+  if(dislikes.schemaVersion!==1||!Array.isArray(dislikes.assetIds))throw new Error('data/dislikes.json 必须是 schemaVersion 1。');
+  if(new Set(dislikes.assetIds).size!==dislikes.assetIds.length)throw new Error('不喜欢列表存在重复素材 ID。');
+  for(const id of dislikes.assetIds)if(!assetIds.has(id))throw new Error(`不喜欢列表关联了不存在的素材：${id}`);
+
+  await rm(dist,{recursive:true,force:true});
+  await mkdir(path.join(dist,'data'),{recursive:true});
+  await mkdir(path.join(dist,'generated','thumbnails'),{recursive:true});
+  await mkdir(cacheDir,{recursive:true});
+  await cp(path.join(root,'index.html'),path.join(dist,'index.html'));
+  await cp(path.join(root,'wechat'),path.join(dist,'wechat'),{recursive:true});
+  await cp(path.join(root,'assets'),path.join(dist,'assets'),{recursive:true});
+  await cp(path.join(root,'images'),path.join(dist,'images'),{recursive:true});
+  await cp(promptsDir,path.join(dist,'prompts'),{recursive:true});
+  await cp(promptIndexFile,path.join(dist,'data','prompt-index.json'));
+  await cp(dislikesFile,path.join(dist,'data','dislikes.json'));
+
+  const built=[];
+  const usedThumbnailFiles=new Set();
+  for(const asset of doc.assets){
+    const source=path.join(root,asset.path);
+    if(!await exists(source))throw new Error(`原图不存在：${asset.path}`);
+    const buffer=await readFile(source);
+    const hash=createHash('sha256').update(buffer).digest('hex').slice(0,24);
+    const meta=await sharp(buffer,{failOn:'none'}).rotate().metadata();
+    const width=Number(meta.width)||0,height=Number(meta.height)||0;
+    if(!(width>0&&height>0))throw new Error(`无法读取尺寸：${asset.path}`);
+
+    const small=await thumb(source,hash,640,80);
+    usedThumbnailFiles.add(small.name);
+    await cp(small.target,path.join(dist,'generated','thumbnails',small.name));
+    const record={...asset,width,height,thumbnail:`generated/thumbnails/${small.name}`};
+
+    if(width/height>=1.15&&width>640){
+      const large=await thumb(source,hash,1280,84);
+      usedThumbnailFiles.add(large.name);
+      await cp(large.target,path.join(dist,'generated','thumbnails',large.name));
+      record.thumbnailLarge=`generated/thumbnails/${large.name}`;
+      record.thumbnailLargeWidth=Math.min(width,1280);
+    }
+    built.push(record);
+  }
+
+  const cacheEntries=await readdir(cacheDir,{withFileTypes:true});
+  await Promise.all(cacheEntries.filter(entry=>entry.isFile()&&!usedThumbnailFiles.has(entry.name)).map(entry=>rm(path.join(cacheDir,entry.name),{force:true})));
+  await writeFile(path.join(dist,'data','gallery.json'),`${JSON.stringify({schemaVersion:3,count:built.length,assets:built},null,2)}\n`,'utf8');
+  await writeFile(path.join(dist,'.nojekyll'),'','utf8');
+  console.log(`构建完成：${built.length} 张素材，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。`);
+}
+
+main().catch(error=>{console.error(error);process.exitCode=1;});
