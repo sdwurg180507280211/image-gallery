@@ -27,3 +27,10 @@
 
 - 粉色系「金饰花簪东方美人 / 春日花园」：26 / 26 已完成，均为 `reconstructed`。
 - 黑色系「红裳仙姬」：83 / 83 已完成，均为 `reconstructed`。
+- 多宫图「红裳仙姬」：49 / 49 已完成，均为 `reconstructed`。
+- 绿色系「红裳仙姬」：4 / 4 已完成，均为 `reconstructed`。
+- 紫色系「红裳仙姬」：2 / 2 已完成，均为 `reconstructed`。
+- 红色系「红裳仙姬」：20 / 20 已完成，均为 `reconstructed`。
+- 白色系「红裳仙姬」：2 / 2 已完成，均为 `reconstructed`。
+- 蓝色系「红裳仙姬」：2 / 2 已完成，均为 `reconstructed`。
+- 粉色系「红裳仙姬」：3 / 3 已完成，均为 `reconstructed`。
