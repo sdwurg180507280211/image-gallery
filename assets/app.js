@@ -1,12 +1,11 @@
 import {createLightbox} from './lightbox.js?v=10';
+import {feedbackStore} from './feedback-store.js?v=1';
 
 const ALL='all';
 const FAVORITES_KEY='visual-asset-library:favorites';
-const DISLIKES_KEY='visual-asset-library:dislikes';
 const THEME_KEY='visual-asset-library:theme';
 const LABELS={
   character:{'multi-panel':'多宫图',black:'黑色系',red:'红色系',pink:'粉色系',blue:'蓝色系',white:'白色系',purple:'紫色系',green:'绿色系',gold:'金色系',other:'其他'},
-  color:{blue:'蓝色系',purple:'紫色系',pink:'粉色系',green:'绿色系',red:'红色系',orange:'橙黄色系',white:'白色系',black:'黑色系',mixed:'综合色系'},
   organ:{heart:'心脏',brain:'大脑',kidney:'肾脏',liver:'肝脏',lung:'肺',spleen:'脾脏',stomach:'胃',pancreas:'胰腺',vascular:'血管',genetics:'DNA / 基因',other:'其他医疗'}
 };
 
@@ -19,13 +18,13 @@ function readIdSet(key){
 function saveIdSet(key,set){localStorage.setItem(key,JSON.stringify([...set]));}
 
 const state={
-  assets:[],visible:[],domain:'character',characterCategory:ALL,color:ALL,query:'',sort:'newest',favoritesOnly:false,dislikedOnly:false,
-  favorites:readIdSet(FAVORITES_KEY),dislikes:readIdSet(DISLIKES_KEY)
+  assets:[],visible:[],domain:'character',characterCategory:ALL,query:'',sort:'newest',favoritesOnly:false,dislikedOnly:false,
+  favorites:readIdSet(FAVORITES_KEY),dislikes:new Set()
 };
 const $=selector=>document.querySelector(selector);
 const el={
   grid:$('#galleryGrid'),template:$('#cardTemplate'),search:$('#searchInput'),clearSearch:$('#clearSearch'),sort:$('#sortSelect'),favoritesOnly:$('#favoritesOnly'),dislikedOnly:$('#dislikedOnly'),
-  characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),medicalFilters:$('#medicalFilters'),colorFilters:$('#colorFilters'),
+  characterFilters:$('#characterFilters'),characterCategoryFilters:$('#characterCategoryFilters'),
   result:$('#resultText'),activeFilters:$('#activeFilters'),clear:$('#clearFilters'),empty:$('#emptyState'),characterTabCount:$('#characterTabCount'),kvTabCount:$('#kvTabCount'),theme:$('#themeToggle')
 };
 let lightbox;
@@ -37,7 +36,7 @@ function assertAsset(asset){
     return;
   }
   if(asset.domain==='medical-kv'){
-    if(!LABELS.color[asset.color]||!LABELS.organ[asset.organ])throw new Error(`医药KV分类非法：${asset.id}`);
+    if(!LABELS.organ[asset.organ])throw new Error(`医药KV分类非法：${asset.id}`);
     return;
   }
   throw new Error(`素材域非法：${asset.id}`);
@@ -46,12 +45,12 @@ function assertPromptIndex(payload){
   if(payload?.schemaVersion!==1||!payload.assets||typeof payload.assets!=='object'||Array.isArray(payload.assets))throw new Error('提示词索引格式非法。');
   for(const [id,prompt] of Object.entries(payload.assets))if(!id||!prompt?.path||!['original','reconstructed'].includes(prompt.kind))throw new Error(`提示词索引非法：${id}`);
 }
-function validSeedDislikes(payload,assetIds){
+function seedDislikes(payload,assetIds){
   if(payload?.schemaVersion!==1||!Array.isArray(payload.assetIds))return [];
   return payload.assetIds.filter(id=>assetIds.has(id));
 }
 function searchable(asset){
-  return [asset.title,...(asset.tags||[]),asset.domain==='character'?LABELS.character[asset.category]:LABELS.color[asset.color],asset.domain==='medical-kv'?LABELS.organ[asset.organ]:''].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN');
+  return [asset.title,...(asset.tags||[]),asset.domain==='character'?LABELS.character[asset.category]:LABELS.organ[asset.organ],asset.color].filter(Boolean).join(' ').toLocaleLowerCase('zh-CN');
 }
 function matchesShared(asset){
   const q=state.query.trim().toLocaleLowerCase('zh-CN');
@@ -66,12 +65,11 @@ function sortAssets(items){
   });
 }
 function computeVisible(){
-  return sortAssets(currentDomainAssets().filter(matchesShared).filter(asset=>state.domain==='character'?state.characterCategory===ALL||asset.category===state.characterCategory:state.color===ALL||asset.color===state.color));
+  return sortAssets(currentDomainAssets().filter(matchesShared).filter(asset=>state.domain!=='character'||state.characterCategory===ALL||asset.category===state.characterCategory));
 }
 function countBy(items,key){const map=new Map();for(const item of items)map.set(item[key],(map.get(item[key])||0)+1);return map;}
 function characterScope(){return state.assets.filter(asset=>asset.domain==='character').filter(matchesShared);}
-function medicalScope(){return state.assets.filter(asset=>asset.domain==='medical-kv').filter(matchesShared);}
-function domainLabel(asset){return asset.domain==='character'?(LABELS.character[asset.category]||asset.category):`${LABELS.organ[asset.organ]} · ${LABELS.color[asset.color]}`;}
+function domainLabel(asset){return asset.domain==='character'?(LABELS.character[asset.category]||asset.category):(LABELS.organ[asset.organ]||'医药KV');}
 function createChip(container,value,label,onClick){
   const button=document.createElement('button');button.type='button';button.dataset.value=value;button.setAttribute('aria-pressed','false');
   const text=document.createElement('span');text.className='chip-label';text.textContent=label;
@@ -82,8 +80,6 @@ function toggleFacet(current,value){return current===value?ALL:value;}
 function buildFilterControls(){
   createChip(el.characterCategoryFilters,ALL,'全部',value=>{state.characterCategory=toggleFacet(state.characterCategory,value);apply();});
   for(const [value,label] of Object.entries(LABELS.character))createChip(el.characterCategoryFilters,value,label,v=>{state.characterCategory=toggleFacet(state.characterCategory,v);apply();});
-  createChip(el.colorFilters,ALL,'全部',value=>{state.color=toggleFacet(state.color,value);apply();});
-  for(const [value,label] of Object.entries(LABELS.color))createChip(el.colorFilters,value,label,v=>{state.color=toggleFacet(state.color,v);apply();});
 }
 function updateChipGroup(container,current,counts,total){
   container.querySelectorAll('button').forEach(button=>{
@@ -93,7 +89,6 @@ function updateChipGroup(container,current,counts,total){
 }
 function updateFilterControls(){
   const chars=characterScope();updateChipGroup(el.characterCategoryFilters,state.characterCategory,countBy(chars,'category'),chars.length);
-  const kvs=medicalScope();updateChipGroup(el.colorFilters,state.color,countBy(kvs,'color'),kvs.length);
 }
 function renderCounts(){
   el.characterTabCount.textContent=String(state.assets.filter(asset=>asset.domain==='character').length);
@@ -106,19 +101,18 @@ function syncDomainTabs(){
   });
 }
 function syncControls(){
-  el.characterFilters.hidden=state.domain!=='character';el.medicalFilters.hidden=state.domain!=='medical-kv';
+  el.characterFilters.hidden=state.domain!=='character';
   el.search.placeholder=state.domain==='character'?'搜索人物标题或关键词…':'搜索KV标题或关键词…';el.clearSearch.hidden=!state.query;
   el.favoritesOnly.setAttribute('aria-pressed',String(state.favoritesOnly));el.favoritesOnly.textContent=state.favoritesOnly?'♥ 收藏':'♡ 收藏';
   el.dislikedOnly.setAttribute('aria-pressed',String(state.dislikedOnly));el.dislikedOnly.textContent=state.dislikedOnly?`👎 不喜欢 ${state.dislikes.size}`:'👎 不喜欢';
   syncDomainTabs();
-  el.clear.hidden=!(state.query||state.favoritesOnly||state.dislikedOnly||state.characterCategory!==ALL||state.color!==ALL);
+  el.clear.hidden=!(state.query||state.favoritesOnly||state.dislikedOnly||state.characterCategory!==ALL);
 }
 function renderActiveFilters(){
   el.activeFilters.replaceChildren();const filters=[];
   if(state.favoritesOnly)filters.push(['收藏',()=>{state.favoritesOnly=false;apply();}]);
   if(state.dislikedOnly)filters.push(['不喜欢',()=>{state.dislikedOnly=false;apply();}]);
   if(state.domain==='character'&&state.characterCategory!==ALL)filters.push([LABELS.character[state.characterCategory],()=>{state.characterCategory=ALL;apply();}]);
-  if(state.domain==='medical-kv'&&state.color!==ALL)filters.push([LABELS.color[state.color],()=>{state.color=ALL;apply();}]);
   for(const [label,remove] of filters){const button=document.createElement('button');button.type='button';button.textContent=`${label} ×`;button.onclick=remove;el.activeFilters.append(button);}
   el.activeFilters.hidden=!filters.length;
 }
@@ -132,7 +126,7 @@ function toggleFavorite(id){
   state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);saveIdSet(FAVORITES_KEY,state.favorites);apply();
 }
 function toggleDislike(id){
-  state.dislikes.has(id)?state.dislikes.delete(id):state.dislikes.add(id);saveIdSet(DISLIKES_KEY,state.dislikes);apply();
+  feedbackStore.toggleDisliked(id);state.dislikes=new Set(feedbackStore.getDislikedIds());apply();
 }
 function render(){
   el.grid.replaceChildren();
@@ -153,10 +147,10 @@ function render(){
   el.empty.hidden=state.visible.length!==0;el.grid.hidden=state.visible.length===0;
 }
 function apply(){state.visible=computeVisible();updateFilterControls();syncControls();renderActiveFilters();render();if(lightbox?.isOpen())lightbox.refresh();}
-function clearFilters(){state.characterCategory=ALL;state.color=ALL;state.query='';state.favoritesOnly=false;state.dislikedOnly=false;el.search.value='';apply();}
+function clearFilters(){state.characterCategory=ALL;state.query='';state.favoritesOnly=false;state.dislikedOnly=false;el.search.value='';apply();}
 function setDomain(domain){
   if(!['character','medical-kv'].includes(domain)||domain===state.domain)return;
-  state.domain=domain;state.characterCategory=ALL;state.color=ALL;apply();
+  state.domain=domain;state.characterCategory=ALL;apply();
 }
 async function load(){
   const [response,promptResponse,seedResponse]=await Promise.all([
@@ -170,12 +164,10 @@ async function load(){
   if(payload.schemaVersion!==3||!Array.isArray(payload.assets))throw new Error('只支持 schemaVersion 3。');
   assertPromptIndex(promptPayload);payload.assets.forEach(assertAsset);
   const assetIds=new Set(payload.assets.map(asset=>asset.id));
-  const hadLocalDislikes=localStorage.getItem(DISLIKES_KEY)!==null;
-  if(!hadLocalDislikes&&seedResponse?.ok){
-    const seed=validSeedDislikes(await seedResponse.json(),assetIds);state.dislikes=new Set(seed);saveIdSet(DISLIKES_KEY,state.dislikes);
-  }else{
-    state.dislikes=new Set([...state.dislikes].filter(id=>assetIds.has(id)));saveIdSet(DISLIKES_KEY,state.dislikes);
-  }
+  let seed=[];
+  if(seedResponse?.ok)seed=seedDislikes(await seedResponse.json(),assetIds);
+  await feedbackStore.init({validAssetIds:assetIds,seedAssetIds:seed});
+  state.dislikes=new Set(feedbackStore.getDislikedIds());
   state.favorites=new Set([...state.favorites].filter(id=>assetIds.has(id)));saveIdSet(FAVORITES_KEY,state.favorites);
   state.assets=payload.assets.map(asset=>{const prompt=promptPayload.assets[asset.id];return {...asset,...(prompt?{promptPath:prompt.path,promptKind:prompt.kind}:{})};});
   buildFilterControls();renderCounts();
@@ -183,7 +175,7 @@ async function load(){
   apply();
 }
 
-window.visualAssetLibrary={getAsset:id=>state.assets.find(asset=>asset.id===id),getDomain:()=>state.domain,getDislikedIds:()=>[...state.dislikes]};
+window.visualAssetLibrary={getAsset:id=>state.assets.find(asset=>asset.id===id),getDomain:()=>state.domain,getDislikedIds:()=>feedbackStore.getDislikedIds()};
 document.querySelectorAll('.domain-tab[data-domain="character"],.domain-tab[data-domain="medical-kv"]').forEach(button=>button.addEventListener('click',()=>setDomain(button.dataset.domain)));
 el.search.addEventListener('input',event=>{state.query=event.target.value;apply();});
 el.clearSearch.addEventListener('click',()=>{state.query='';el.search.value='';el.search.focus();apply();});
