@@ -1,0 +1,53 @@
+name: Backfill black character prompts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/backfill-black-prompts-20260821.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prompt-history-backfill
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Reconstruct black character prompts
+        run: node scripts/backfill-prompts-from-history.mjs --category=black --family=红裳仙姬
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Validate site build
+        run: npm run build
+
+      - name: Remove one-time workflow
+        run: rm -f .github/workflows/backfill-black-prompts-20260821.yml
+
+      - name: Commit reconstructed prompts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No prompt changes to commit."
+            exit 0
+          fi
+          git commit -m "feat(prompts): backfill black character prompts"
+          git push origin HEAD:main
