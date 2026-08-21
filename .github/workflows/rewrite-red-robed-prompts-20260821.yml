@@ -1,0 +1,53 @@
+name: Rewrite red-robed prompts with stable identity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/rewrite-red-robed-prompts-20260821.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prompt-history-backfill
+  cancel-in-progress: false
+
+jobs:
+  rewrite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full main history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rewrite red-robed prompts
+        run: node scripts/backfill-prompts-from-history.mjs --category=all --family=红裳仙姬 --rewrite=true
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Validate site build
+        run: npm run build
+
+      - name: Remove one-time workflow
+        run: rm -f .github/workflows/rewrite-red-robed-prompts-20260821.yml
+
+      - name: Commit prompt quality rewrite
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No prompt changes to commit."
+            exit 0
+          fi
+          git commit -m "fix(prompts): stabilize red-robed prompt reconstruction"
+          git push origin HEAD:main
