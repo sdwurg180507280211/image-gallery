@@ -6,7 +6,8 @@
   "description": "A focused static visual asset library for character artwork and medical KV backgrounds.",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "serve": "python3 -m http.server 4173 --directory dist"
+    "serve": "python3 -m http.server 4173 --directory dist",
+    "delete-assets": "node scripts/delete-assets.mjs"
   },
   "dependencies": {
     "sharp": "latest"
