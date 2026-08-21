@@ -22,6 +22,9 @@ function validate(asset){
   if(!asset?.id||!asset?.path||!asset?.title)throw new Error('素材缺少 id/path/title');
   if(asset.domain==='character'){
     if(!charCategories.has(asset.category))throw new Error(`人物分类非法：${asset.id}`);
+    for(const field of ['characterId','seriesId','seriesSlug']){
+      if(asset[field]!=null&&(typeof asset[field]!=='string'||!asset[field].trim()))throw new Error(`人物分组字段 ${field} 非法：${asset.id}`);
+    }
     return;
   }
   if(asset.domain==='medical-kv'){
@@ -29,6 +32,59 @@ function validate(asset){
     return;
   }
   throw new Error(`素材域非法：${asset.id}`);
+}
+
+function deriveCharacterGrouping(asset){
+  if(asset.domain!=='character')return {};
+  const segments=String(asset.path).split('/').filter(Boolean);
+  if(segments[0]!=='images'||segments.length<4)throw new Error(`人物素材路径需符合 images/<character>/<series>/<file>：${asset.id}`);
+  const folderCharacter=segments[1];
+  const folderSeries=segments[2];
+  const characterId=(asset.characterId||folderCharacter).trim();
+  const seriesSlug=(asset.seriesSlug||folderSeries).trim();
+  const seriesId=(asset.seriesId||`${characterId}--${seriesSlug}`).trim();
+  return {characterId,seriesId,seriesSlug};
+}
+
+function buildGroupIndex(assets){
+  const characters=new Map();
+  for(const asset of assets){
+    if(asset.domain!=='character')continue;
+    let character=characters.get(asset.characterId);
+    if(!character){
+      character={
+        id:asset.characterId,
+        label:asset.characterLabel||asset.tags?.[0]||asset.characterId,
+        count:0,
+        coverAssetId:asset.id,
+        series:new Map()
+      };
+      characters.set(asset.characterId,character);
+    }
+    character.count+=1;
+    let series=character.series.get(asset.seriesId);
+    if(!series){
+      series={
+        id:asset.seriesId,
+        slug:asset.seriesSlug,
+        label:asset.seriesLabel||asset.seriesSlug,
+        count:0,
+        coverAssetId:asset.id
+      };
+      character.series.set(asset.seriesId,series);
+    }
+    series.count+=1;
+  }
+  return {
+    schemaVersion:1,
+    characters:[...characters.values()].map(character=>({
+      id:character.id,
+      label:character.label,
+      count:character.count,
+      coverAssetId:character.coverAssetId,
+      series:[...character.series.values()]
+    }))
+  };
 }
 
 async function thumb(source,hash,width,quality){
@@ -87,7 +143,7 @@ async function main(){
     const small=await thumb(source,hash,640,80);
     usedThumbnailFiles.add(small.name);
     await cp(small.target,path.join(dist,'generated','thumbnails',small.name));
-    const record={...asset,width,height,thumbnail:`generated/thumbnails/${small.name}`};
+    const record={...asset,...deriveCharacterGrouping(asset),width,height,thumbnail:`generated/thumbnails/${small.name}`};
 
     if(width/height>=1.15&&width>640){
       const large=await thumb(source,hash,1280,84);
@@ -101,9 +157,11 @@ async function main(){
 
   const cacheEntries=await readdir(cacheDir,{withFileTypes:true});
   await Promise.all(cacheEntries.filter(entry=>entry.isFile()&&!usedThumbnailFiles.has(entry.name)).map(entry=>rm(path.join(cacheDir,entry.name),{force:true})));
+  const groupIndex=buildGroupIndex(built);
   await writeFile(path.join(dist,'data','gallery.json'),`${JSON.stringify({schemaVersion:3,count:built.length,assets:built},null,2)}\n`,'utf8');
+  await writeFile(path.join(dist,'data','character-series.json'),`${JSON.stringify(groupIndex,null,2)}\n`,'utf8');
   await writeFile(path.join(dist,'.nojekyll'),'','utf8');
-  console.log(`构建完成：${built.length} 张素材，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。`);
+  console.log(`构建完成：${built.length} 张素材，${groupIndex.characters.length} 个人物，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。`);
 }
 
 main().catch(error=>{console.error(error);process.exitCode=1;});
