@@ -7,7 +7,6 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     counter:document.querySelector('#lightboxCounter'),
     meta:document.querySelector('#lightboxMeta'),
     title:document.querySelector('#lightboxTitle'),
-    status:document.querySelector('#lightboxStatus'),
     favorite:document.querySelector('#lightboxFavorite'),
     dislike:document.querySelector('#lightboxDislike'),
     prompt:document.querySelector('#lightboxPrompt'),
@@ -35,6 +34,17 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
   el.stage.tabIndex=-1;
 
   const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+  function gcd(a,b){
+    a=Math.abs(Math.round(a));b=Math.abs(Math.round(b));
+    while(b){const next=a%b;a=b;b=next;}
+    return a||1;
+  }
+  function aspectRatio(asset){
+    const width=Number(asset?.width)||0,height=Number(asset?.height)||0;
+    if(!(width>0&&height>0))return '';
+    const divisor=gcd(width,height);
+    return `${Math.round(width/divisor)}:${Math.round(height/divisor)}`;
+  }
 
   function promptOpen(){return !el.promptPanel.hidden;}
 
@@ -137,8 +147,9 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     pan=null;
     el.stage.classList.remove('is-panning');
 
+    const ratio=aspectRatio(activeAsset);
     el.counter.textContent=`${activeIndex+1} / ${items.length}`;
-    el.meta.textContent=`${formatMeta(activeAsset)} · ${activeAsset.width} × ${activeAsset.height} · 1:1`;
+    el.meta.textContent=`${formatMeta(activeAsset)} · ${activeAsset.width} × ${activeAsset.height}${ratio?` · ${ratio}`:''}`;
     el.title.textContent=activeAsset.title;
     el.image.style.width=`${activeAsset.width}px`;
     el.image.style.height=`${activeAsset.height}px`;
@@ -163,14 +174,6 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     el.prompt.hidden=!activeAsset.promptPath;
     el.prev.disabled=items.length<2;
     el.next.disabled=items.length<2;
-
-    if(activeAsset.domain==='medical-kv'){
-      el.status.hidden=false;
-      el.status.className=`viewer-status ${activeAsset.used?'used':'unused'}`;
-      el.status.textContent=activeAsset.used?'✓ 已使用':'● 未使用';
-    }else{
-      el.status.hidden=true;
-    }
     showControls();
   }
 
