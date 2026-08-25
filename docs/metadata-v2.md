@@ -1,81 +1,154 @@
-# Image Gallery 元数据 V2
+# Image Gallery 元数据说明
 
-V2 将“人物是谁、画面表现什么、在哪里、什么配色、怎样构图、属于哪类资产”拆成独立维度，避免把颜色、场景和拼图形式混进同一个主题目录。
+本文档记录当前图库实际使用的元数据与构建规则。不要把历史实验能力当成现行约束。
 
-## 标准字段
+## 当前数据源
+
+页面构建以 `data/gallery.json` 为主索引：
 
 ```json
 {
-  "schemaVersion": 2,
-  "id": "固定且不随路径变化的图片 ID",
-  "title": "作品标题",
-  "description": "作品说明",
-  "character": "红裳仙姬",
-  "theme": ["magic"],
-  "scene": ["moon-night", "palace"],
-  "palette": ["black-gold"],
-  "composition": ["single-image", "close-up"],
-  "assetType": "artwork",
-  "actions": ["魔法召唤", "直视镜头"],
-  "expressions": ["清冷", "妩媚"],
-  "confirmedTraits": ["成年东方女性", "黑色长发"],
-  "tags": ["互动视线"],
-  "createdAt": "2026-08-03T00:00:00Z",
-  "featured": false,
-  "sourceFileId": "file_...",
-  "generationSequence": 1,
-  "generatedAt": "2026-08-03T00:00:00Z",
-  "sourceChat": "生成人物特写图",
-  "sourceSha256": "完整原图 SHA-256"
+  "schemaVersion": 3,
+  "assets": [
+    {
+      "id": "固定素材 ID",
+      "path": "images/<character>/<series>/<file>.png",
+      "title": "作品标题",
+      "domain": "character",
+      "category": "red",
+      "tags": ["红裳仙姬"],
+      "createdAt": "2026-08-03T00:00:00Z"
+    }
+  ]
 }
 ```
 
-## 字段职责
+医药 KV 使用同一份 `gallery.json`，但字段为：
 
-- `character`：人物身份，只回答“她是谁”。
-- `theme`：内容题材，如肖像、战斗、魔法、火焰魔法、武侠。
-- `scene`：环境，如雪境、宫廷、沙漠、月夜、花园。
-- `palette`：服装与主色，如红金、黑金、翡翠金、紫金。
-- `composition`：景别和布局，可同时包含 `single-image` 与 `close-up`。
-- `assetType`：普通作品、拼图、角色设定图、建模参考图或部件参考图。
-- `confirmedTraits`：只写经过画面或明确设定确认的稳定特征；不确定时留空。
-
-允许值及中文显示名称统一维护在 `data/taxonomy-v2.json`。
-
-## 兼容旧数据
-
-构建脚本仍读取旧字段：
-
-- `category` 会作为 `character` 的兼容来源。
-- 旧 `tags` 会保留用于搜索。
-- 旧目录会暂时辅助推断主题、场景、配色和构图。
-- 推断产生的冲突会写入 `data/validation-report.json`，不会静默覆盖原始元数据。
-
-## 固定图片 ID
-
-移动目录前必须将当前索引中的 `id` 写入同名 JSON：
-
-```bash
-npm run freeze-ids
-npm run freeze-ids -- --write
+```json
+{
+  "id": "固定素材 ID",
+  "path": "images/medical-kv/...",
+  "title": "作品标题",
+  "domain": "medical-kv",
+  "organ": "heart"
+}
 ```
 
-第一次命令只预演并生成 `data/id-freeze-manifest.json`；第二次才写入同名 JSON。
+当前构建不要求 `used` 或医药主色字段。
 
-## 构建校验
+## 人物与系列
+
+人物素材目录遵循：
+
+```text
+images/<character>/<series>/<file>
+```
+
+构建时会自动补充：
+
+- `characterId`：默认取第一层人物目录名。
+- `seriesSlug`：默认取第二层系列目录名。
+- `seriesId`：默认由 `<characterId>--<seriesSlug>` 组成。
+
+如果 `gallery.json` 中显式提供这些字段，则以显式值为准。
+
+构建还会生成：
+
+```text
+dist/data/character-series.json
+```
+
+供页面的“系列”浏览模式使用。
+
+## 提示词索引
+
+提示词关联维护在：
+
+```text
+data/prompt-index.json
+```
+
+当前支持：
+
+- `original`
+- `reconstructed`
+
+构建会检查提示词关联的素材 ID 是否存在、提示词类型是否合法，以及对应提示词文件是否真实存在。
+
+## 不喜欢状态
+
+仓库镜像文件：
+
+```text
+data/dislikes.json
+```
+
+这里只是云端“不喜欢”状态的仓库镜像与回退种子。页面运行时以 `assets/feedback-store.js` 的云端同步逻辑为主。
+
+构建会检查：
+
+- `schemaVersion` 是否正确
+- `assetIds` 是否为数组
+- 是否存在重复 ID
+- 每个 ID 是否仍存在于图库
+
+## 当前构建校验
+
+执行：
 
 ```bash
 npm run build
 ```
 
-构建会检查：
+当前构建会检查：
 
-- 重复图片 ID
-- 完全重复的原图内容
-- 未登记的主题、场景、配色、构图和资产类型
-- 把颜色或拼图形式写进主题字段
-- `single-image` 与 `multi-panel` 同时出现
-- 人物稳定特征中的互斥描述
-- 尚未固化到同名 JSON 的 ID
+- `data/gallery.json` 必须是 `schemaVersion: 3`
+- 每张素材必须有 `id / path / title`
+- `domain` 必须是 `character` 或 `medical-kv`
+- 人物 `category` 必须属于当前固定分类
+- 医药 KV `organ` 必须属于当前固定器官分类
+- 素材 ID 不得重复
+- 素材路径不得重复
+- 原图文件必须存在
+- 图片尺寸必须可读取
+- `prompt-index.json` 的关联必须有效
+- `dislikes.json` 的关联必须有效
+- 人物目录必须满足 `images/<character>/<series>/<file>`，除非未来明确调整构建规则
 
-只有重复 ID 等阻断错误会令构建失败；其余问题进入报告，供图片生成窗口逐张复核。
+构建会生成 640px WebP 缩略图；符合条件的横图还会生成 1280px 缩略图，并清理不再使用的缩略图缓存。
+
+## 当前没有的能力
+
+以下内容不是当前构建能力，不应作为上传或维护前提：
+
+- 不做图片内容重复检测或 pHash 检测
+- 不做“完全重复原图”阻断
+- 不生成 `data/validation-report.json`
+- 不要求 `data/taxonomy-v2.json`
+- 当前 `package.json` 没有 `freeze-ids` 命令
+- 当前没有 commerce / R2 构建配置
+
+如以后重新引入这些能力，应先修改代码，再同步更新本文档。
+
+## 删除素材
+
+当前安全删除入口：
+
+```bash
+npm run delete-assets -- <asset-id>
+npm run delete-assets -- --from-dislikes
+npm run delete-assets -- --from-dislikes --write
+```
+
+默认只预演；只有 `--write` 才会真正修改文件。正常流程会先清理云端“不喜欢”状态，再删除图库索引、提示词索引、仓库镜像、原图、同名 JSON 与已知缩略图缓存。
+
+## 上传图片
+
+上传图片前，先读取并遵循：
+
+```text
+docs/image-upload-via-adobe-bridge.md
+```
+
+该文档是当前项目图片上传流程的正式入口。
