@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "image-gallery-commerce",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-25",
+  "r2_buckets": [
+    {
+      "binding": "ORIGINALS",
+      "bucket_name": "image-gallery-originals"
+    }
+  ]
+}
