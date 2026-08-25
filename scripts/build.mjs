@@ -8,6 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourceFile=path.join(root,'data','gallery.json');
 const promptIndexFile=path.join(root,'data','prompt-index.json');
 const dislikesFile=path.join(root,'data','dislikes.json');
+const commerceFile=path.join(root,'data','commerce.json');
 const promptsDir=path.join(root,'prompts');
 const cacheDir=path.join(root,'.cache','thumbnails-v3');
 const dist=path.join(root,'dist');
@@ -15,6 +16,9 @@ const dist=path.join(root,'dist');
 const charCategories=new Set(['multi-panel','black','red','pink','blue','white','purple','green','gold','other']);
 const organs=new Set(['heart','brain','kidney','liver','lung','spleen','stomach','pancreas','vascular','genetics','other']);
 const promptKinds=new Set(['original','reconstructed']);
+const checkoutProviders=new Set(['alipay']);
+const deliveryModes=new Set(['public','private']);
+const deliveryProviders=new Set(['github','r2']);
 
 async function exists(p){try{await access(p);return true;}catch{return false;}}
 
@@ -32,6 +36,22 @@ function validate(asset){
     return;
   }
   throw new Error(`素材域非法：${asset.id}`);
+}
+
+function validateCommerce(config){
+  if(config?.schemaVersion!==1)throw new Error('data/commerce.json 必须是 schemaVersion 1。');
+  if(typeof config.enabled!=='boolean')throw new Error('commerce.enabled 必须是 boolean。');
+  if(config.currency!=='CNY')throw new Error('commerce.currency 当前仅支持 CNY。');
+  if(!checkoutProviders.has(config.checkoutProvider))throw new Error(`commerce.checkoutProvider 非法：${config.checkoutProvider}`);
+  if(!deliveryModes.has(config.originalDelivery?.mode))throw new Error(`commerce.originalDelivery.mode 非法：${config.originalDelivery?.mode}`);
+  if(!deliveryProviders.has(config.originalDelivery?.provider))throw new Error(`commerce.originalDelivery.provider 非法：${config.originalDelivery?.provider}`);
+  for(const kind of ['asset','series']){
+    const pricing=config.pricing?.[kind];
+    if(typeof pricing?.enabled!=='boolean')throw new Error(`commerce.pricing.${kind}.enabled 必须是 boolean。`);
+    if(!Number.isSafeInteger(pricing.defaultPriceCents)||pricing.defaultPriceCents<0)throw new Error(`commerce.pricing.${kind}.defaultPriceCents 必须是非负整数。`);
+  }
+  if(config.enabled&&config.originalDelivery.mode!=='private')throw new Error('开启收费前，originalDelivery.mode 必须切换为 private。');
+  if(config.enabled&&config.originalDelivery.provider!=='r2')throw new Error('开启收费前，originalDelivery.provider 必须切换为 r2。');
 }
 
 function deriveCharacterGrouping(asset){
@@ -103,6 +123,9 @@ async function main(){
   if(new Set(doc.assets.map(a=>a.id)).size!==doc.assets.length)throw new Error('素材 ID 重复。');
   if(new Set(doc.assets.map(a=>a.path)).size!==doc.assets.length)throw new Error('素材路径重复。');
 
+  const commerce=JSON.parse(await readFile(commerceFile,'utf8'));
+  validateCommerce(commerce);
+
   const assetIds=new Set(doc.assets.map(a=>a.id));
   const promptIndex=JSON.parse(await readFile(promptIndexFile,'utf8'));
   if(promptIndex.schemaVersion!==1||!promptIndex.assets||typeof promptIndex.assets!=='object'||Array.isArray(promptIndex.assets))throw new Error('data/prompt-index.json 必须是 schemaVersion 1。');
@@ -128,6 +151,7 @@ async function main(){
   await cp(promptsDir,path.join(dist,'prompts'),{recursive:true});
   await cp(promptIndexFile,path.join(dist,'data','prompt-index.json'));
   await cp(dislikesFile,path.join(dist,'data','dislikes.json'));
+  await cp(commerceFile,path.join(dist,'data','commerce.json'));
 
   const built=[];
   const usedThumbnailFiles=new Set();
@@ -161,7 +185,7 @@ async function main(){
   await writeFile(path.join(dist,'data','gallery.json'),`${JSON.stringify({schemaVersion:3,count:built.length,assets:built},null,2)}\n`,'utf8');
   await writeFile(path.join(dist,'data','character-series.json'),`${JSON.stringify(groupIndex,null,2)}\n`,'utf8');
   await writeFile(path.join(dist,'.nojekyll'),'','utf8');
-  console.log(`构建完成：${built.length} 张素材，${groupIndex.characters.length} 个人物，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。`);
+  console.log(`构建完成：${built.length} 张素材，${groupIndex.characters.length} 个人物，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢；收费功能 ${commerce.enabled?'已启用':'已关闭'}。`);
 }
 
 main().catch(error=>{console.error(error);process.exitCode=1;});
