@@ -9,8 +9,10 @@ const sourceFile=path.join(root,'data','gallery.json');
 const promptIndexFile=path.join(root,'data','prompt-index.json');
 const dislikesFile=path.join(root,'data','dislikes.json');
 const promptsDir=path.join(root,'prompts');
-const cacheDir=path.join(root,'.cache','thumbnails-v3');
+const thumbnailCacheDir=path.join(root,'.cache','thumbnails-v3');
+const publishedCacheDir=path.join(root,'.cache','published-images-v1');
 const dist=path.join(root,'dist');
+const rawBase='https://raw.githubusercontent.com/sdwurg180507280211/image-gallery/main/';
 
 const charCategories=new Set(['multi-panel','black','red','pink','blue','white','purple','green','gold','other']);
 const organs=new Set(['heart','brain','kidney','liver','lung','spleen','stomach','pancreas','vascular','genetics','other']);
@@ -89,26 +91,45 @@ function buildGroupIndex(assets){
 
 async function thumb(source,hash,width,quality){
   const name=`${hash}-${width}.webp`;
-  const target=path.join(cacheDir,name);
+  const target=path.join(thumbnailCacheDir,name);
   if(!await exists(target)){
     await sharp(source,{failOn:'none'}).rotate().resize({width,withoutEnlargement:true}).webp({quality,effort:4,smartSubsample:true}).toFile(target);
   }
   return {name,target};
 }
 
-// 原图直接压缩进 dist（不缓存），把产物体积控制在 GitHub Pages 1GB 限制内
-async function compressOriginal(source,target){
-  await mkdir(path.dirname(target),{recursive:true});
-  await sharp(source,{failOn:'none'}).rotate().resize({width:2560,height:2560,fit:'inside',withoutEnlargement:true}).webp({quality:85,effort:4,smartSubsample:true}).toFile(target);
+async function publishedImage(source,hash){
+  const name=`${hash}-2560-q85.webp`;
+  const target=path.join(publishedCacheDir,name);
+  if(!await exists(target)){
+    await sharp(source,{failOn:'none'})
+      .rotate()
+      .resize({width:2560,height:2560,fit:'inside',withoutEnlargement:true})
+      .webp({quality:85,effort:4,smartSubsample:true})
+      .toFile(target);
+  }
+  const meta=await sharp(target,{failOn:'none'}).metadata();
+  const width=Number(meta.width)||0,height=Number(meta.height)||0;
+  if(!(width>0&&height>0))throw new Error(`无法读取发布图尺寸：${source}`);
+  return {name,target,width,height};
 }
 
-function originalDistPath(assetRel,hash,taken){
+function displayDistPath(assetRel,hash,taken){
   const segments=assetRel.split('/').filter(Boolean);
   const file=segments.pop();
   const base=file.replace(/\.[^.]+$/,'');
   let rel=`${segments.join('/')}/${base}.webp`;
   if(taken.has(rel)&&taken.get(rel)!==assetRel)rel=`${segments.join('/')}/${base}-${hash.slice(0,8)}.webp`;
   return rel;
+}
+
+function rawUrl(assetRel){
+  return `${rawBase}${assetRel.split('/').map(encodeURIComponent).join('/')}`;
+}
+
+async function cleanCache(cacheDir,usedFiles){
+  const entries=await readdir(cacheDir,{withFileTypes:true});
+  await Promise.all(entries.filter(entry=>entry.isFile()&&!usedFiles.has(entry.name)).map(entry=>rm(path.join(cacheDir,entry.name),{force:true})));
 }
 
 async function main(){
@@ -135,12 +156,13 @@ async function main(){
   await rm(dist,{recursive:true,force:true});
   await mkdir(path.join(dist,'data'),{recursive:true});
   await mkdir(path.join(dist,'generated','thumbnails'),{recursive:true});
-  await mkdir(cacheDir,{recursive:true});
+  await mkdir(thumbnailCacheDir,{recursive:true});
+  await mkdir(publishedCacheDir,{recursive:true});
   await cp(path.join(root,'index.html'),path.join(dist,'index.html'));
   await cp(path.join(root,'wechat'),path.join(dist,'wechat'),{recursive:true});
   await cp(path.join(root,'assets'),path.join(dist,'assets'),{recursive:true});
   await mkdir(path.join(dist,'images'),{recursive:true});
-  // wechat/index.html 硬编码引用 images/wechat，该目录保持原样发布
+  // 公众号页面仍直接引用 images/wechat，因此该目录保持原样发布。
   if(await exists(path.join(root,'images','wechat'))){
     await cp(path.join(root,'images','wechat'),path.join(dist,'images','wechat'),{recursive:true});
   }
@@ -150,7 +172,8 @@ async function main(){
 
   const built=[];
   const usedThumbnailFiles=new Set();
-  const originalTargets=new Map();
+  const usedPublishedFiles=new Set();
+  const displayTargets=new Map();
   for(const asset of doc.assets){
     const source=path.join(root,asset.path);
     if(!await exists(source))throw new Error(`原图不存在：${asset.path}`);
@@ -160,13 +183,29 @@ async function main(){
     const width=Number(meta.width)||0,height=Number(meta.height)||0;
     if(!(width>0&&height>0))throw new Error(`无法读取尺寸：${asset.path}`);
 
-    const originalRel=originalDistPath(asset.path,hash,originalTargets);
-    originalTargets.set(originalRel,asset.path);
-    await compressOriginal(source,path.join(dist,originalRel));
+    const displayRel=displayDistPath(asset.path,hash,displayTargets);
+    displayTargets.set(displayRel,asset.path);
+    const display=await publishedImage(source,hash);
+    usedPublishedFiles.add(display.name);
+    await mkdir(path.dirname(path.join(dist,displayRel)),{recursive:true});
+    await cp(display.target,path.join(dist,displayRel));
+
     const small=await thumb(source,hash,640,80);
     usedThumbnailFiles.add(small.name);
     await cp(small.target,path.join(dist,'generated','thumbnails',small.name));
-    const record={...asset,path:originalRel,...deriveCharacterGrouping(asset),width,height,thumbnail:`generated/thumbnails/${small.name}`};
+
+    const record={
+      ...asset,
+      ...deriveCharacterGrouping(asset),
+      originalPath:asset.path,
+      originalUrl:rawUrl(asset.path),
+      displayPath:displayRel,
+      width,
+      height,
+      displayWidth:display.width,
+      displayHeight:display.height,
+      thumbnail:`generated/thumbnails/${small.name}`
+    };
 
     if(width/height>=1.15&&width>640){
       const large=await thumb(source,hash,1280,84);
@@ -178,13 +217,13 @@ async function main(){
     built.push(record);
   }
 
-  const cacheEntries=await readdir(cacheDir,{withFileTypes:true});
-  await Promise.all(cacheEntries.filter(entry=>entry.isFile()&&!usedThumbnailFiles.has(entry.name)).map(entry=>rm(path.join(cacheDir,entry.name),{force:true})));
+  await cleanCache(thumbnailCacheDir,usedThumbnailFiles);
+  await cleanCache(publishedCacheDir,usedPublishedFiles);
   const groupIndex=buildGroupIndex(built);
   await writeFile(path.join(dist,'data','gallery.json'),`${JSON.stringify({schemaVersion:3,count:built.length,assets:built},null,2)}\n`,'utf8');
   await writeFile(path.join(dist,'data','character-series.json'),`${JSON.stringify(groupIndex,null,2)}\n`,'utf8');
   await writeFile(path.join(dist,'.nojekyll'),'','utf8');
-  console.log(`构建完成：${built.length} 张素材，${groupIndex.characters.length} 个人物，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。`);
+  console.log(`构建完成：${built.length} 张素材，${groupIndex.characters.length} 个人物，${Object.keys(promptIndex.assets).length} 条提示词，${dislikes.assetIds.length} 张标记不喜欢。Pages 使用压缩展示图，仓库原图保持不变。`);
 }
 
 main().catch(error=>{console.error(error);process.exitCode=1;});
