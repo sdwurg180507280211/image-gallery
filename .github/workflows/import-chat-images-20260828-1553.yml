@@ -1,0 +1,1110 @@
+name: One-time import ChatGPT portrait batch 2026-08-28
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-chat-images-20260828-1553.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Write prepared manifest
+        shell: bash
+        run: |
+          cat > /tmp/chatgpt-image-manifest.json <<'__MANIFEST__'
+          [
+            {
+              "order": 1,
+              "sourceFileId": "file_0000000076548207af4b266566e06c88",
+              "originalFileName": "月下东方幻境美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/qbdzzVpaUWASJ4Q1",
+              "mediaType": "image/png",
+              "id": "881081c1d69a",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/01-moonlit-blue-fantasy.png",
+              "title": "月下东方幻境美人",
+              "domain": "character",
+              "category": "blue",
+              "tags": ["金饰花簪东方美人", "同一人物", "月下庭院", "蓝色薄纱", "近景肖像", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n夜色东方庭院与水面月光倒影构成冷蓝背景，远处亭台和薄雾虚化。人物穿冰蓝半透明刺绣礼服，佩戴金色水晶发饰、长耳坠与细链项链；采用胸像至半身近景，身体微侧，手指轻触锁骨，眼神平静而带神秘感。以冷月光勾勒肩颈和纱料边缘，强调清透蓝银色调、湿润高光与梦幻浅景深。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 2,
+              "sourceFileId": "file_00000000e2788207ba8b4e5eca08820a",
+              "originalFileName": "樱花流光中的金簪佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/AJfS8YRWEK9PWSfL",
+              "mediaType": "image/png",
+              "id": "f5f08e585591",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/02-spring-blossom-gold-hairpin.png",
+              "title": "樱花流光中的金簪佳人",
+              "domain": "character",
+              "category": "pink",
+              "tags": ["金饰花簪东方美人", "同一人物", "春日樱花", "粉色轻纱", "金簪", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n春日粉樱盛放，暖金逆光从花枝间穿过。人物穿粉色轻纱刺绣裙，金色花簪与细珠链呼应花朵；采用上半身近景，轻微前倾，一手靠近花枝，直视镜头并带若有若无的笑意。突出粉色纱料、花瓣散景、柔亮肤质和温柔明媚的春日氛围。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 3,
+              "sourceFileId": "file_000000001d488211bab1eb6a6a0e0a12",
+              "originalFileName": "红伞秋叶中的古典美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/g5M5IIVM3XHXZjJy",
+              "mediaType": "image/png",
+              "id": "3812bd50e26e",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/03-autumn-red-umbrella-kimono.png",
+              "title": "红伞秋叶中的古典美人",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "秋日枫叶", "黑色和服", "红伞", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n深秋庭院遍布橙红枫叶，人物身着深色花纹和服式华服，配金红发饰并持红色油纸伞。采用三分之二侧身构图，肩身轻转、脸部回向镜头，神态冷艳克制。夕阳从伞缘和枫叶间形成暖色轮廓光，强调黑红金织物、秋叶层次与古典电影感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 4,
+              "sourceFileId": "file_0000000029908207a483b502085e763f",
+              "originalFileName": "圣诞树下的红装佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/LaKLAPG16YcOPnOh",
+              "mediaType": "image/png",
+              "id": "251662ed523a",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/04-christmas-red-fur-portrait.png",
+              "title": "圣诞树下的红装佳人",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "圣诞冬季", "红色毛绒", "暖灯", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n冬季节庆室内布置暖色圣诞灯和树饰。人物穿红色节庆礼服与白色毛绒边，长发编束并配精致耳饰；采用紧凑半身肖像，微微靠近镜头，眼神温柔亲密。暖黄色灯串形成圆形散景，与红白服装形成节日对比，突出绒毛、亮片和皮肤柔光细节。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 5,
+              "sourceFileId": "file_00000000c918821191ad531a74dea578",
+              "originalFileName": "金色夜幕下的香槟佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/QfyB60MwH4VnG1ar",
+              "mediaType": "image/png",
+              "id": "2e355e218482",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/05-city-champagne-black-gown.png",
+              "title": "金色夜幕下的香槟佳人",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "都市夜景", "黑色晚礼服", "香槟", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n高层城市夜景与金色灯火虚化在身后，人物穿黑色闪烁晚礼服、细肩带和简约珠宝，手持香槟杯。采用坐姿半身到三分之二身构图，双腿交叠，另一只手自然落在座椅扶手，神态自信、慵懒、与镜头直接互动。利用暖肤色与冷城市散景形成现代奢华反差。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 6,
+              "sourceFileId": "file_0000000069b08211bf1b330a6bd8ab42",
+              "originalFileName": "雪林回眸_金饰与霜雪_伊人.png",
+              "adobeAssetUrl": "https://at.adobe.com/yeK4EXOJIeN2D892",
+              "mediaType": "image/png",
+              "id": "dc537c211e46",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/06-snow-forest-white-hanfu.png",
+              "title": "雪林回眸_金饰与霜雪_伊人",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "雪林冬日", "白色汉服", "侧身回眸", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n冬日雪林与冷色薄雾为背景，人物穿白色刺绣汉服式长裙，佩戴银金发饰和长耳坠。采用侧身至三分之二侧面构图，身体朝远处而面部轻回望镜头，表情清冷安静。柔冷侧光勾勒发丝、肩颈和白纱纹理，雪花与浅景深营造空灵冬季质感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 7,
+              "sourceFileId": "file_000000004ec88206a2d521413000904f",
+              "originalFileName": "华美蕾丝婚纱新娘肖像.png",
+              "adobeAssetUrl": "https://at.adobe.com/b3FC8izikJwwwHmK",
+              "mediaType": "image/png",
+              "id": "3473307e3fab",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/07-lace-bridal-portrait.png",
+              "title": "华美蕾丝婚纱新娘肖像",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "婚礼", "白色蕾丝", "新娘", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n明亮洁净的婚礼空间中，人物穿精致白色蕾丝婚纱、轻纱头纱和皇冠式发饰，手持小型花束。采用胸像到半身的正式新娘肖像，身体端正、眼神温柔坚定。柔和高调侧光表现蕾丝、珠饰、头纱透明度与细腻肤质，整体圣洁、奢华而现代。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 8,
+              "sourceFileId": "file_0000000070788211b2c6356cebc62f50",
+              "originalFileName": "暗夜玫瑰与哥特少女.png",
+              "adobeAssetUrl": "https://at.adobe.com/h3u5f17BnxGmoGbe",
+              "mediaType": "image/png",
+              "id": "d4ba8266aa14",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/08-gothic-black-red-rose.png",
+              "title": "暗夜玫瑰与哥特少女",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "哥特玫瑰", "黑红蕾丝", "暗调", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n暗黑花园或黑色棚拍背景中点缀深红玫瑰与飘落花瓣。人物穿黑红蕾丝礼服，配玫瑰发饰、暗金首饰和精致眼妆；采用偏近景半身构图，手持一枝红玫瑰靠近面部，目光冷艳、带轻微挑衅。使用低照度轮廓光和红色点光突出蕾丝、花瓣与神秘哥特质感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 9,
+              "sourceFileId": "file_0000000009348211906a059543e3e2ee",
+              "originalFileName": "金色古典闺房中的优雅肖像.png",
+              "adobeAssetUrl": "https://at.adobe.com/HvoSTSzgw4XnmwFZ",
+              "mediaType": "image/png",
+              "id": "e53d848ea583",
+              "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/09-golden-boudoir-portrait.png",
+              "title": "金色古典闺房中的优雅肖像",
+              "domain": "character",
+              "category": "gold",
+              "tags": ["金饰花簪东方美人", "同一人物", "金色闺房", "金色礼服", "慵懒坐姿", "会话批次1"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260821-set-01",
+              "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+              "createdAt": "2026-08-21T07:39:15Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n暖金色古典卧室或贵族闺房内有丝绒、床幔和柔暖灯光。人物穿奶油金或香槟色贴身长裙，丝绸与薄纱叠层明显；采用坐姿或轻靠的三分之二身构图，身体舒展、神态慵懒从容。用窗边暖光勾勒腰线、肩颈和缎面反射，画面柔和奢华。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 10,
+              "sourceFileId": "file_0000000064f081faad2c6e6deee39503",
+              "originalFileName": "雨中古典茶亭美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/ylZjkBellsHGM8CB",
+              "mediaType": "image/png",
+              "id": "0a39987908a6",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/01-jiangnan-rain-tea-pavilion.png",
+              "title": "雨中古典茶亭美人",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "江南春雨", "绿色汉服", "茶亭", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n春雨中的江南水榭，白墙黛瓦与运河被薄雾柔化。人物穿青瓷绿刺绣汉服，配玉石发簪，坐在临水茶亭边，手持素雅油纸伞，另一手靠近茶盏。采用坐姿三分之二身构图，神态温柔平静。细雨、湿木栏与青绿色调共同构成清润古典氛围。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 11,
+              "sourceFileId": "file_000000001ec481fa81f5325c664ddd89",
+              "originalFileName": "晨雾荷塘中的汉服女子.png",
+              "adobeAssetUrl": "https://at.adobe.com/C4Rlmf5qgFnXjkaw",
+              "mediaType": "image/png",
+              "id": "59c6416377de",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/02-lotus-lake-aqua-hanfu.png",
+              "title": "晨雾荷塘中的汉服女子",
+              "domain": "character",
+              "category": "blue",
+              "tags": ["金饰花簪东方美人", "同一人物", "初夏荷塘", "蓝绿色汉服", "木舟", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n初夏清晨的荷花湖面与木舟，晨雾和水面反光柔和。人物穿浅青白荷花纹汉服式长裙，佩戴珍珠与玉石饰品，一手持圆形丝扇，另一手轻扶船沿。采用较远的全身或三分之二身构图，表情清新活泼。强调荷叶、薄雾、流水和轻盈衣摆。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 12,
+              "sourceFileId": "file_00000000acf881fa9e0ba0cadd019a27",
+              "originalFileName": "盛夏海岸回眸微笑.png",
+              "adobeAssetUrl": "https://at.adobe.com/Fx4bzHR6qjQkiRaP",
+              "mediaType": "image/png",
+              "id": "81322efe3176",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/03-summer-coast-white-dress.png",
+              "title": "盛夏海岸回眸微笑",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "盛夏海岸", "白色长裙", "海风", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n盛夏海岸与明亮蓝海、悬崖栈道作为开放背景。人物穿白色轻薄夏季长裙和淡蓝丝巾，手持宽檐草帽，边行走边回身看镜头，笑意自然。采用环境式三分之二身构图，海风扬起长发和裙摆，阳光强而清透，呈现自由、明快的旅行时装感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 13,
+              "sourceFileId": "file_00000000ae8c8207b4eb8759458414d9",
+              "originalFileName": "金色沙漠中的风舞旅人.png",
+              "adobeAssetUrl": "https://at.adobe.com/HWJKI9RL603uITzV",
+              "mediaType": "image/png",
+              "id": "6e56c7bcc09f",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/04-desert-traveler-gold-teal.png",
+              "title": "金色沙漠中的风舞旅人",
+              "domain": "character",
+              "category": "gold",
+              "tags": ["金饰花簪东方美人", "同一人物", "沙漠夕阳", "金色异域服饰", "风纱", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n夕阳沙丘在远处形成层层金色曲线。人物穿沙金与青绿色异域高级时装，加入薄纱面罩、腰封、绿松石和金属饰品；采用全身构图，行走于沙丘，一手举起风纱，目光坚定。强逆光、长阴影和风吹布料营造宏大、坚韧、电影化的沙漠旅行作品。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 14,
+              "sourceFileId": "file_00000000163c8211a62520867272eed8",
+              "originalFileName": "金色麦田中的秋日少女.png",
+              "adobeAssetUrl": "https://at.adobe.com/h3ac3xdyJCaDcJbo",
+              "mediaType": "image/png",
+              "id": "f724b14c1f1e",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/05-autumn-wheatfield-gold.png",
+              "title": "金色麦田中的秋日少女",
+              "domain": "character",
+              "category": "gold",
+              "tags": ["金饰花簪东方美人", "同一人物", "秋日麦田", "金棕服饰", "暖阳", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n深秋金色麦田在低角度暖阳中发光。人物穿焦糖、奶油和金棕色的贴身长裙与柔软披肩，手捧少量麦穗或干花。采用中远景站姿，身体轻转回望镜头，笑容温暖自然。强调麦浪、夕阳轮廓光、织物层次和质朴但奢华的秋季时装感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 15,
+              "sourceFileId": "file_00000000f12481fa9810f5b335f56867",
+              "originalFileName": "暖灯下的绿裙藏书阁少女.png",
+              "adobeAssetUrl": "https://at.adobe.com/BzFDa7GtCidK0yVD",
+              "mediaType": "image/png",
+              "id": "80e6bc369823",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/06-vintage-library-green-dress.png",
+              "title": "暖灯下的绿裙藏书阁少女",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "复古书房", "绿色丝绒", "阅读", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n古老高挑藏书阁内有深色木书架、梯子、台灯与厚重书籍。人物穿深祖母绿丝绒礼服或复古学者风服装，配手套、胸针和简洁耳饰，坐在书桌前翻阅打开的书。采用腰部以上或坐姿半身构图，神态专注、聪慧、沉静，暖琥珀灯光与深绿色形成文艺氛围。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 16,
+              "sourceFileId": "file_000000004d4481fabed662cecace440a",
+              "originalFileName": "雪夜温泉旁的红衣佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/jG9rJUVCu5EHysim",
+              "mediaType": "image/png",
+              "id": "866ff4c6d5a5",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/07-winter-hot-spring-red-cloak.png",
+              "title": "雪夜温泉旁的红衣佳人",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "冬夜温泉", "红色斗篷", "雪景", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n雪夜传统庭院与户外温泉，蒸汽在冷空气中上升。人物穿奶油色蕾丝或针织礼服，外披深红色毛绒边斗篷，佩戴红宝石耳饰。采用坐在温泉石边的中景，单手轻拢披风，目光放松而温柔。暖灯笼、冷雪、蒸汽和红白织物形成强烈冬夜质感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 17,
+              "sourceFileId": "file_00000000754081faa5f070da8e95d2f1",
+              "originalFileName": "霓虹雨夜中的赛博女侠.png",
+              "adobeAssetUrl": "https://at.adobe.com/DNB7MZOuEUBIgVXb",
+              "mediaType": "image/png",
+              "id": "b6583b0e1025",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/08-cyberpunk-rain-black.png",
+              "title": "霓虹雨夜中的赛博女侠",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "赛博雨夜", "黑色科技服", "霓虹", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n霓虹雨夜城市街道或高架步道，湿地反射青蓝与洋红灯光。人物穿黑色高光未来感服装和透明虹彩雨衣，加入金属扣件与科技耳饰；采用偏低机位三分之二身构图，一手触耳或发边，另一手自然置于腰侧。神态锋利、自信，雨滴和高光材质构成赛博电影感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 18,
+              "sourceFileId": "file_000000005aec8211b6b91a08de086063",
+              "originalFileName": "歌剧院阶梯上的银色华服女士.png",
+              "adobeAssetUrl": "https://at.adobe.com/AZ1o7xesfrUTcIS1",
+              "mediaType": "image/png",
+              "id": "00111269d051",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/09-opera-staircase-silver.png",
+              "title": "歌剧院阶梯上的银色华服女士",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "歌剧院", "银色礼服", "阶梯", "会话批次2"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-02",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+              "createdAt": "2026-08-25T02:30:31Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n宏伟歌剧院或欧式宫殿大厅内，水晶吊灯与大理石阶梯延伸。人物穿银白色雕塑感礼服、长手套与晶钻首饰，采用全身纵向构图，单手扶栏、另一手提起裙摆。下巴微抬，眼神疏离高贵。暖金建筑光与冷银服装形成典雅戏剧反差。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 19,
+              "sourceFileId": "file_000000006ed882078d0fc9198e48b9cb",
+              "originalFileName": "桃花春日梦幻佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/qj86mtAAzk9AagtR",
+              "mediaType": "image/png",
+              "id": "285cddc0f841",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/01-spring-peach-blossom-pink.png",
+              "title": "桃花春日梦幻佳人",
+              "domain": "character",
+              "category": "pink",
+              "tags": ["金饰花簪东方美人", "同一人物", "春日桃花", "粉色轻纱", "花冠", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n春日桃花园被粉色花海和暖晨光包围。人物穿柔粉刺绣薄纱礼服并佩戴花冠、金色细链首饰，采用靠近镜头的半身构图，身体轻倚、手指轻触肩颈或花枝，直视镜头。表情柔媚但克制，花瓣散景与粉金光线突出细腻皮肤和纱料层次。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 20,
+              "sourceFileId": "file_0000000064d08211bdaea346c073bca9",
+              "originalFileName": "海风中的海岸回眸.png",
+              "adobeAssetUrl": "https://at.adobe.com/thH0UoBj9ssMgNWo",
+              "mediaType": "image/png",
+              "id": "2974648bc36f",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/02-coastal-white-backless.png",
+              "title": "海风中的海岸回眸",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "海岸悬崖", "白色露背裙", "回眸", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n晴朗海崖与深蓝海面、白色山城远景。人物穿白色露背丝绸长裙，淡蓝透明披纱在海风中大幅飘动；采用全身背身回眸构图，身体朝海，面部转向镜头，强调背部线条、腰线和修长腿部。强烈夏日阳光与蓝白色调带来清爽高级感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 21,
+              "sourceFileId": "file_00000000ae8882118db5d6a7b4c968bf",
+              "originalFileName": "秋日宫苑贵妃肖像.png",
+              "adobeAssetUrl": "https://at.adobe.com/N8sN6kyh0Fu3Z3BW",
+              "mediaType": "image/png",
+              "id": "0f1d9370ddf7",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/03-autumn-palace-red-gold.png",
+              "title": "秋日宫苑贵妃肖像",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "秋日宫苑", "红金宫廷服", "贵妃", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n金红秋叶覆盖宫苑，传统红柱与宫殿屋檐在夕阳中虚化。人物穿深酒红与金色刺绣宫廷华服，佩戴繁复发冠和长耳坠，采用端庄坐姿或半站姿，手持精致扇具，神态高贵疏离。暖金逆光强调织金纹样、珠饰和秋日皇家氛围。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 22,
+              "sourceFileId": "file_0000000058e0821182228903372741d8",
+              "originalFileName": "冬夜温泉庭院美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/nTuu8ChJoGeQfAud",
+              "mediaType": "image/png",
+              "id": "8a4aef3250b7",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/04-winter-hot-spring-red-fur.png",
+              "title": "冬夜温泉庭院美人",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "雪夜温泉", "红色绒披风", "蕾丝", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n传统雪夜庭院与温泉雾气，暖灯笼映在水面。人物穿象牙白蕾丝礼服，外披深红丝绒与白色毛绒边披风；采用跪坐或坐姿中景，单手握住毛领，眼神安静而神秘。用雪花、蒸汽和暖冷对比突出蕾丝、绒毛、肌肤与珠宝细节。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 23,
+              "sourceFileId": "file_00000000cb688211868d152ca32cd5d4",
+              "originalFileName": "沙漠夕阳下的神秘舞者.png",
+              "adobeAssetUrl": "https://at.adobe.com/X7B77AXMbkBW2ar5",
+              "mediaType": "image/png",
+              "id": "dc679ed99ec7",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/05-desert-dancer-teal-gold.png",
+              "title": "沙漠夕阳下的神秘舞者",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "沙漠舞者", "翡翠金服饰", "全身", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n广阔沙丘落日下，人物穿翡翠绿与金色珠链装饰的异域舞者高级服饰，薄纱长尾随风飞扬。采用低机位全身动态构图，一臂高举薄纱，另一臂舒展，身体呈优雅S形，眼神强势迷人。强调腰线、长腿、风动纱料与金色逆光。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 24,
+              "sourceFileId": "file_00000000dac08207b3efe61031554ad0",
+              "originalFileName": "霓虹都市夜宴佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/6ZifGnP9LID0tFms",
+              "mediaType": "image/png",
+              "id": "3700151921a5",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/06-city-night-black-gown.png",
+              "title": "霓虹都市夜宴佳人",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "都市夜宴", "黑色礼服", "香槟", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n高层都市夜宴或屋顶酒廊，背景是模糊灯火和玻璃栏杆。人物穿黑色深色闪光晚礼服，配精细耳饰与项链，手持香槟杯，采用坐姿三分之二身构图，双腿优雅交叉，眼神直接自信。让现代黑色服装、暖肤色与冷色城市散景形成高级夜生活质感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 25,
+              "sourceFileId": "file_0000000055948206b1892c54700ab76c",
+              "originalFileName": "月下古庭华裳美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/x03qXSKEwI2e9AoF",
+              "mediaType": "image/png",
+              "id": "561d5ec0b6e8",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/07-moonlit-courtyard-blue.png",
+              "title": "月下古庭华裳美人",
+              "domain": "character",
+              "category": "blue",
+              "tags": ["金饰花簪东方美人", "同一人物", "月下古庭", "冰蓝礼服", "月光", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n冷蓝月色笼罩古典庭院、湖面和远处亭台，淡花枝伸入画面。人物穿冰蓝银色露肩刺绣礼服，佩戴晶石发冠和垂坠耳饰；采用紧密胸像到半身近景，一手轻触锁骨或发丝，目光神秘、安静、略带疏离。月光边缘光突出肩颈、纱料和水面反光。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 26,
+              "sourceFileId": "file_00000000105082119e7173903886ff09",
+              "originalFileName": "翡翠秘境中的森林精灵.png",
+              "adobeAssetUrl": "https://at.adobe.com/KyqbTsoARXxlTHUb",
+              "mediaType": "image/png",
+              "id": "0709dd7461d7",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/08-forest-spirit-emerald.png",
+              "title": "翡翠秘境中的森林精灵",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "森林秘境", "绿色幻想服", "精灵", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n葱郁森林中有苔藓、树根、金绿色阳光和细小萤光点。人物穿祖母绿与金色叶纹幻想礼服，透明披纱和高开衩形成流动层次，配植物形发饰。采用三分之二身倚树构图，一手抬起整理发饰，眼神亲密而略带野性。突出腰臀曲线、腿线与森林魔法氛围。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 27,
+              "sourceFileId": "file_00000000feb88209a70868d57ee0f13d",
+              "originalFileName": "鎏金宫廷阶梯上的银裙佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/kiqlwFDzmvSlXcGS",
+              "mediaType": "image/png",
+              "id": "3656118e5e80",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/09-palace-staircase-silver.png",
+              "title": "鎏金宫廷阶梯上的银裙佳人",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "宫廷阶梯", "银色礼服", "全身", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n欧式宫殿的大理石阶梯、雕花栏杆和水晶灯营造宏大空间。人物穿银色珠绣礼服，束腰结构与高开衩清晰，配长手套和细高跟鞋；采用全身纵向稍低机位构图，单手扶栏，站姿挺拔。表情冷静高贵，强调建筑尺度、长腿比例和冷银与暖金的高级反差。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 28,
+              "sourceFileId": "file_00000000b9b08207ac4aef7012336c7c",
+              "originalFileName": "霓虹雨夜中的赛博女郎.png",
+              "adobeAssetUrl": "https://at.adobe.com/qvCNx9BAp4ZC6bKY",
+              "mediaType": "image/png",
+              "id": "0b87883d30d0",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/10-cyberpunk-neon-black.png",
+              "title": "霓虹雨夜中的赛博女郎",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "赛博霓虹", "黑色未来服", "雨夜", "会话批次3"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-03",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+              "createdAt": "2026-08-25T06:07:05Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n赛博朋克城市的雨夜，巨幅霓虹招牌、湿润金属栏杆和雨水反光形成强透视。人物穿黑色高光贴身未来服与透明虹彩长外套，佩戴金属科技首饰；采用中近景到三分之二身构图，一手靠近耳侧或下颌，另一手置于腰侧，眼神冷艳强势。洋红与青蓝轮廓光强化高光材质。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 29,
+              "sourceFileId": "file_00000000de0482118b11aa837fd20b56",
+              "originalFileName": "樱花映中的春日花冠美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/XL3CRnF5yYkLI6if",
+              "mediaType": "image/png",
+              "id": "877128a9a42d",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/01-spring-flower-crown-pink.png",
+              "title": "樱花映中的春日花冠美人",
+              "domain": "character",
+              "category": "pink",
+              "tags": ["金饰花簪东方美人", "同一人物", "春日樱花", "粉色花冠礼服", "近景", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n春日樱花暖光中，人物穿粉色花朵刺绣轻纱礼服，佩戴粉金花冠、长耳坠和层叠项链。采用靠近镜头的胸像至半身构图，身体微前倾，一手靠近锁骨，眼神温柔撩人。粉色花海形成大面积柔焦散景，暖金侧逆光突出面部、肩颈和纱料珠饰。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 30,
+              "sourceFileId": "file_000000002a4c820bb1984c8072ce1da3",
+              "originalFileName": "海风中的悬崖白裙少女.png",
+              "adobeAssetUrl": "https://at.adobe.com/d4KxiuMhQbz21fXG",
+              "mediaType": "image/png",
+              "id": "28e65b214c06",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/02-cliffside-white-dress.png",
+              "title": "海风中的悬崖白裙少女",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "海崖夏日", "白色露背裙", "全身", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n高耸海崖俯瞰深蓝海湾和白色山城，夏日天空清澈。人物穿白色露背长裙与透明淡蓝披纱，赤足站在岩石上；采用全身纵向背身回眸构图，海风大幅吹动长发和披纱。强调裸背线条、腰线、腿部比例以及明亮蓝白海岸时装感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 31,
+              "sourceFileId": "file_00000000c36c820b8002196c85524837",
+              "originalFileName": "秋日金辉宫苑美人持扇.png",
+              "adobeAssetUrl": "https://at.adobe.com/nFZdsY6jt59bbTAw",
+              "mediaType": "image/png",
+              "id": "37bbc50d5453",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/03-autumn-palace-fan-red.png",
+              "title": "秋日金辉宫苑美人持扇",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "秋日宫苑", "红金服饰", "圆扇", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n深秋宫苑在橙红枫叶和金色夕阳中发光。人物穿红金刺绣华服、精细发冠和珠宝，手持绘有秋景的圆扇，端坐雕花木椅。采用半身至三分之二身构图，脸部正向镜头，神态从容高贵。突出红金织物、圆扇、枫叶散景和皇室感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 32,
+              "sourceFileId": "file_00000000c3d08211a48b94b5fcd7c1da",
+              "originalFileName": "雪夜温泉庭院中的红绒佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/G6w1nRQUmJQm7TdA",
+              "mediaType": "image/png",
+              "id": "5a7af01926c5",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/04-snow-hot-spring-red-cloak.png",
+              "title": "雪夜温泉庭院中的红绒佳人",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "雪夜温泉", "红绒披风", "坐姿", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n雪夜温泉庭院中暖灯笼倒映在水面，蒸汽与雪花交织。人物穿白色蕾丝长裙，外披红色丝绒毛绒边披风，跪坐或侧坐在石边，一手扶毛领。采用中景偏近构图，目光温柔而克制，强调红白材质、雪水高光和暖冷光影。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 33,
+              "sourceFileId": "file_0000000070e48211a2ba58a7059484f5",
+              "originalFileName": "暮色沙海中的翡翠舞者.png",
+              "adobeAssetUrl": "https://at.adobe.com/p5JKsyxDEnA32Dhp",
+              "mediaType": "image/png",
+              "id": "a0aac7836929",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/05-desert-emerald-dancer.png",
+              "title": "暮色沙海中的翡翠舞者",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "暮色沙海", "翡翠金舞衣", "动态", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n暮色沙海在金橙色天空下延伸，人物穿翡翠绿与金色珠链的舞者式高级服装，宽大半透明风纱在头顶与身侧飘扬。采用全身动态构图，一臂高举、另一臂向外伸展，身体重心优雅转移，眼神坚定。强调金色夕阳、风动纱料、腰线和修长腿部。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 34,
+              "sourceFileId": "file_000000009178820b8973907394091d2f",
+              "originalFileName": "月下兰亭_花影凝香.png",
+              "adobeAssetUrl": "https://at.adobe.com/RCAq0sXQ1Q8poPOQ",
+              "mediaType": "image/png",
+              "id": "6b8d129a6049",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/06-moonlit-lanting-blue.png",
+              "title": "月下兰亭_花影凝香",
+              "domain": "character",
+              "category": "blue",
+              "tags": ["金饰花簪东方美人", "同一人物", "月下兰亭", "蓝色薄纱", "胸像", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n静谧月下兰亭与湖面倒影、白色花枝构成蓝银夜景。人物穿浅蓝银色薄纱礼服，佩戴水晶花冠、耳坠和精细项链；采用近距离胸像构图，面部和眼神占据画面视觉中心，肩部与纱袖被月光勾勒。神态清冷、略带忧郁，画面湿润通透。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 35,
+              "sourceFileId": "file_00000000b9f881fa823c1869d0370177",
+              "originalFileName": "翡翠森林中的精灵女神.png",
+              "adobeAssetUrl": "https://at.adobe.com/zskLYhOQZmgx4Eb8",
+              "mediaType": "image/png",
+              "id": "05f962a47ffb",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/07-forest-emerald-goddess.png",
+              "title": "翡翠森林中的精灵女神",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "森林精灵", "翡翠礼服", "倚树", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n森林深处的树干被苔藓与藤蔓覆盖，阳光斑驳并漂浮细小金色光点。人物穿翡翠绿金叶刺绣礼服，高开衩和透明披纱带来轻盈层次；采用三分之二身倚树姿态，一手抬至发饰，另一手自然垂下，目光柔媚而神秘。突出绿色材质、腰线和腿部轮廓。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 36,
+              "sourceFileId": "file_000000008a78821198f53329f05a7b8e",
+              "originalFileName": "霓虹夜色中的香槟佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/0bOrD0Vr7WOtTGxu",
+              "mediaType": "image/png",
+              "id": "3a298e8c21c3",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/08-night-champagne-black.png",
+              "title": "霓虹夜色中的香槟佳人",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "都市夜色", "黑色礼服", "香槟", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n夜色城市天际线在屋顶酒廊后方形成彩色散景。人物穿黑色亮片吊带礼服，佩戴金色红宝石系首饰，手持香槟杯坐在深色座椅上，双腿交叉。采用半身至三分之二身构图，直视镜头，神态自信淡定。暖人物光与冷城市光对比鲜明。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 37,
+              "sourceFileId": "file_00000000910c81fabb7531b0dd35176d",
+              "originalFileName": "宫廷奢华阶梯上的银色女王.png",
+              "adobeAssetUrl": "https://at.adobe.com/KyOBdDOvXeNBGcEN",
+              "mediaType": "image/png",
+              "id": "7d82bb665de3",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/09-palace-silver-queen.png",
+              "title": "宫廷奢华阶梯上的银色女王",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "欧式宫廷", "银色礼服", "低机位", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n巴洛克式欧式宫殿内，水晶吊灯、金色雕花和大理石阶梯营造奢华尺度。人物穿银白珠绣束腰礼服、长手套与高跟鞋，裙摆有大幅拖尾。采用全身低机位构图，站在阶梯中央，姿态挺拔，表情疏离高贵。强调银色刺绣、腿部比例和金色建筑反光。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 38,
+              "sourceFileId": "file_00000000c62481fdaf5c77a4634bf585",
+              "originalFileName": "霓虹雨夜中的赛博女郎.png",
+              "adobeAssetUrl": "https://at.adobe.com/BM7lMoxC42qQYnNt",
+              "mediaType": "image/png",
+              "id": "6f97158f1760",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/10-cyberpunk-rain-black-2.png",
+              "title": "霓虹雨夜中的赛博女郎",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "赛博雨夜", "黑色胶质服", "霓虹", "会话批次4"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-04",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+              "createdAt": "2026-08-25T06:23:41Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n密集未来城市雨夜，霓虹广告与湿地倒影呈洋红、青蓝色。人物穿黑色亮面科技连体服和透明虹彩雨衣，金属扣件与未来发饰清晰；采用三分之二身近景，一手靠近下颌，另一手置于腰侧，眼神强势直接。强调雨滴、高光材质、都市纵深和冷艳气场。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 39,
+              "sourceFileId": "file_0000000016208211960e20a04bc5dbe4",
+              "originalFileName": "樱花暖光下的梦幻佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/TGZE5oxu9oXgfJPC",
+              "mediaType": "image/png",
+              "id": "55e2019fa930",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/01-spring-warm-blossom-pink.png",
+              "title": "樱花暖光下的梦幻佳人",
+              "domain": "character",
+              "category": "pink",
+              "tags": ["金饰花簪东方美人", "同一人物", "春日暖樱", "粉色刺绣礼服", "半身", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n春日樱花园被柔暖晨光覆盖。人物穿浅粉刺绣纱质礼服和精致花冠，长发半盘、碎发自然垂落；采用腰部以上近景坐姿，一手轻触肩颈，另一手自然落在裙摆，直视镜头并带轻柔笑意。强调粉金色花海、皮肤质感与高级花卉珠绣。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 40,
+              "sourceFileId": "file_0000000064f08211b8b28f8d65449b6f",
+              "originalFileName": "圣托里尼海崖上的风之回眸.png",
+              "adobeAssetUrl": "https://at.adobe.com/vSEenPqoFxNUBeEi",
+              "mediaType": "image/png",
+              "id": "40f7877e6992",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/02-santorini-white-backless.png",
+              "title": "圣托里尼海崖上的风之回眸",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "圣托里尼", "白色露背裙", "回眸", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n圣托里尼式白色山城与湛蓝海面在强烈夏日阳光下延伸。人物穿白色露背丝绸长裙，淡蓝透明披纱随海风飘动；采用全身背身回眸，赤足站在岩石边，头发长线条向侧后方飞扬。强调背部、腰臀和长腿的自然比例以及蓝白旅行大片氛围。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 41,
+              "sourceFileId": "file_0000000061dc8207b63de380a79abe84",
+              "originalFileName": "秋日金光下的红衣仕女.png",
+              "adobeAssetUrl": "https://at.adobe.com/6y6nJRdTtlSE4zX3",
+              "mediaType": "image/png",
+              "id": "ccbd371384c9",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/03-autumn-red-court-lady.png",
+              "title": "秋日金光下的红衣仕女",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "秋日宫廷", "红色华服", "持扇", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n深秋宫廷长廊与红橙枫叶被夕阳染成金色。人物穿深红金绣宫廷华服，佩戴花形金饰与长耳坠，端坐雕花椅并持半透明圆扇。采用半身到三分之二身构图，脸部直接面对镜头，眼神冷静高贵。突出秋叶、红金丝绸、扇面和层叠首饰。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 42,
+              "sourceFileId": "file_000000008cc08211af58605ea4720862",
+              "originalFileName": "雪夜温泉庭院中的红衣佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/tWViSmxJOg232kFu",
+              "mediaType": "image/png",
+              "id": "44a7869a97e2",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/04-winter-red-hot-spring.png",
+              "title": "雪夜温泉庭院中的红衣佳人",
+              "domain": "character",
+              "category": "red",
+              "tags": ["金饰花簪东方美人", "同一人物", "冬夜温泉", "红色披风", "暖灯", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n冬夜传统庭院、雪瓦、温泉和暖色灯笼形成安静场景。人物穿象牙白蕾丝礼服，外披红色绒面毛边披风，跪坐在温泉石边并轻拢衣领。采用中景偏近构图，直视镜头，神态温柔、略带神秘。雪花与蒸汽强化暖冷对比和织物质感。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 43,
+              "sourceFileId": "file_00000000cff08207965482d602e3aef5",
+              "originalFileName": "落日沙海中的翡翠舞者.png",
+              "adobeAssetUrl": "https://at.adobe.com/y1TOdUWii2bq5EOn",
+              "mediaType": "image/png",
+              "id": "1bb8a0242ab6",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/05-sunset-desert-emerald.png",
+              "title": "落日沙海中的翡翠舞者",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "落日沙海", "翡翠金舞衣", "风纱", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n落日沙漠中云层与沙丘被橙金色逆光点亮。人物穿翡翠绿与金珠异域舞衣，薄纱大幅飞扬，珠链、腰饰和腿部装饰细节丰富；采用全身动态构图，一臂高举风纱、另一臂舒展，目光坚定迷人。强调腰线、长腿、轻纱透明度和电影化夕阳。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 44,
+              "sourceFileId": "file_00000000b4588211950f7d9f23d6ae0d",
+              "originalFileName": "月下花影中的东方佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/tSdGSEVUl0Mi54Ob",
+              "mediaType": "image/png",
+              "id": "dded9f6b37a2",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/06-moonlit-flower-blue.png",
+              "title": "月下花影中的东方佳人",
+              "domain": "character",
+              "category": "blue",
+              "tags": ["金饰花簪东方美人", "同一人物", "月下花影", "冰蓝礼服", "近景", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n满月、湖面和盛开的白色花枝构成冷色夜景，远处亭台有微弱暖光。人物穿冰蓝花纹薄纱礼服，佩戴水晶发饰、耳坠与项链；采用大头到胸像近景，肩颈被银蓝月光照亮，眼神平静凝视镜头，唇部微启。突出细腻五官、湿润光泽和安静诗意。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 45,
+              "sourceFileId": "file_00000000caec821196a783e8832a41cf",
+              "originalFileName": "苔林金光中的精灵女王.png",
+              "adobeAssetUrl": "https://at.adobe.com/NKe3uNJN0sFtVraf",
+              "mediaType": "image/png",
+              "id": "ca3715872054",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/07-moss-forest-emerald.png",
+              "title": "苔林金光中的精灵女王",
+              "domain": "character",
+              "category": "green",
+              "tags": ["金饰花簪东方美人", "同一人物", "苔林金光", "翡翠礼服", "倚树", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n苔藓覆盖的古树与浓密森林在金绿色光束中形成梦境。人物穿翡翠绿金叶纹幻想礼服，透明披纱从手臂垂落，高开衩露出自然腿部线条；采用三分之二身倚树构图，一手整理金叶发冠，目光柔和而带神秘吸引力。萤光点与植物纹样相互呼应。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 46,
+              "sourceFileId": "file_000000003914820786a72766603fc1e4",
+              "originalFileName": "璀璨夜色中的香槟美人.png",
+              "adobeAssetUrl": "https://at.adobe.com/iSOJOtq9slEyIM0K",
+              "mediaType": "image/png",
+              "id": "07f9a4fc96ac",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/08-city-champagne-black-2.png",
+              "title": "璀璨夜色中的香槟美人",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "城市夜宴", "黑色礼服", "交叉腿", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n高层城市夜景与玻璃栏杆形成奢华酒廊背景。人物穿黑色闪片细肩带晚礼服，佩戴层叠金色首饰，手持香槟杯，坐姿端正又放松，双腿交叉。采用稍远的三分之二身构图，直视镜头，神态自信优雅。强调黑色亮片、肤色高光与城市散景。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 47,
+              "sourceFileId": "file_0000000063488211862891a80062afab",
+              "originalFileName": "金色宫殿中的银色礼服佳人.png",
+              "adobeAssetUrl": "https://at.adobe.com/Y6bfs4tQwYsGyNXm",
+              "mediaType": "image/png",
+              "id": "77d43e76bc20",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/09-gold-palace-silver-gown.png",
+              "title": "金色宫殿中的银色礼服佳人",
+              "domain": "character",
+              "category": "white",
+              "tags": ["金饰花簪东方美人", "同一人物", "金色宫殿", "银色礼服", "阶梯全身", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n金色欧式宫殿拥有高大拱门、水晶吊灯与宽阔大理石阶梯。人物穿银白色束腰礼服，透明披肩和珠绣长拖尾闪耀，搭配银色高跟鞋；采用全身纵向构图，站在阶梯前方，一腿自然前置，姿态挺拔。表情冷静强大，强调建筑尺度、长腿与高级礼服工艺。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            },
+            {
+              "order": 48,
+              "sourceFileId": "file_0000000082fc82119daab3fdd57ace5c",
+              "originalFileName": "雨夜霓虹下的赛博都市丽人.png",
+              "adobeAssetUrl": "https://at.adobe.com/UHGkj84WnYpRJzPN",
+              "mediaType": "image/png",
+              "id": "dd36d5a48a69",
+              "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/10-cyberpunk-city-rain-black.png",
+              "title": "雨夜霓虹下的赛博都市丽人",
+              "domain": "character",
+              "category": "black",
+              "tags": ["金饰花簪东方美人", "同一人物", "未来都市", "黑色科技服", "霓虹雨", "会话批次5"],
+              "characterId": "golden-floral-eastern-beauty",
+              "seriesSlug": "session-20260825-set-05",
+              "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+              "createdAt": "2026-08-25T09:41:24Z",
+              "promptKind": "reconstructed",
+              "prompt": "保持同一位成年东方女性人物身份与稳定面容：精致椭圆脸型，琥珀棕色杏眼，直而细致的鼻梁，自然饱满的唇形，瓷白细腻肤质；长黑发以高盘/半盘发为核心，并保留自然垂落的面部碎发。严格保持五官比例、眼神、发型特征、气质与整体神韵一致，不年龄幼化，不更换人物身份。\n\n未来都市雨夜充满纵向霓虹招牌、雨线和湿润栏杆。人物穿黑色高光科技连体服、透明虹彩风衣和金属配件，长黑发半盘并带未来发饰；采用中近景三分之二身构图，一手指尖靠近下颌，另一手置于腰侧或口袋，眼神锐利直接。青蓝与洋红轮廓光塑造强烈赛博气场。\n\n整体为竖版高分辨率高级人物写真与艺术化时装创作，肤质真实细腻，解剖自然，手部自然，服装材质与首饰纹理清晰，光影有层次，画面完成度高。性感感来自眼神、姿态、肩颈、腰线、腿部比例、材质与光影的共同塑造，保持自然比例与高级审美。\n\n单人竖版完整大图；不要拼图、不要多宫格、不要多人、不要文字和水印；避免五官漂移、崩脸、手部畸形、多余肢体、解剖异常、低清晰度、过度磨皮和廉价服装质感。"
+            }
+          ]
+          __MANIFEST__
+
+      - name: Download Adobe originals and update metadata
+        shell: bash
+        run: |
+          cat > /tmp/import-chatgpt-images.mjs <<'__SCRIPT__'
+          import fs from "node:fs";
+          import path from "node:path";
+          import crypto from "node:crypto";
+          import { execFileSync } from "node:child_process";
+          import sharp from "sharp";
+
+          const EXPECTED = 48;
+          const manifest = JSON.parse(fs.readFileSync("/tmp/chatgpt-image-manifest.json", "utf8"));
+          const galleryPath = "data/gallery.json";
+          const promptIndexPath = "data/prompt-index.json";
+          const gallery = JSON.parse(fs.readFileSync(galleryPath, "utf8"));
+          const promptIndex = JSON.parse(fs.readFileSync(promptIndexPath, "utf8"));
+
+          if (gallery.schemaVersion !== 3 || !Array.isArray(gallery.assets)) {
+            throw new Error("data/gallery.json is not schemaVersion 3 with assets[]");
+          }
+          if (promptIndex.schemaVersion !== 1 || typeof promptIndex.assets !== "object" || !promptIndex.assets) {
+            throw new Error("data/prompt-index.json is not schemaVersion 1 with assets{}");
+          }
+          if (!Array.isArray(manifest) || manifest.length !== EXPECTED) {
+            throw new Error(`manifest count ${manifest?.length} != expected ${EXPECTED}`);
+          }
+
+          const allowedCategories = new Set(["multi-panel","black","red","pink","blue","white","purple","green","gold","other"]);
+          const existingIds = new Set(gallery.assets.map(a => a.id));
+          const existingPaths = new Set(gallery.assets.map(a => a.path));
+          const batchIds = new Set();
+          const batchPaths = new Set();
+
+          for (const item of manifest) {
+            if (item.domain !== "character") throw new Error(`invalid domain for ${item.order}`);
+            if (!allowedCategories.has(item.category)) throw new Error(`invalid category ${item.category}`);
+            if (!String(item.mediaType || "").startsWith("image/")) throw new Error(`invalid mediaType for ${item.order}`);
+            if (!/^https:\/\/at\.adobe\.com\//.test(item.adobeAssetUrl)) throw new Error(`invalid Adobe bridge URL for ${item.order}`);
+            if (!/^[0-9a-f]{12}$/.test(item.id)) throw new Error(`invalid id ${item.id}`);
+            if (!item.path.startsWith(`images/${item.characterId}/${item.seriesSlug}/`) || item.path.includes("..")) {
+              throw new Error(`unsafe or inconsistent path ${item.path}`);
+            }
+            if (existingIds.has(item.id) || batchIds.has(item.id)) throw new Error(`asset id collision ${item.id}`);
+            if (existingPaths.has(item.path) || batchPaths.has(item.path)) throw new Error(`asset path collision ${item.path}`);
+            const promptPath = `prompts/assets/${item.id}.md`;
+            if (promptIndex.assets[item.id] || fs.existsSync(promptPath)) throw new Error(`prompt collision ${item.id}`);
+            if (fs.existsSync(item.path)) throw new Error(`target file already exists ${item.path}`);
+            batchIds.add(item.id);
+            batchPaths.add(item.path);
+          }
+
+          const imported = [];
+          for (const item of manifest) {
+            fs.mkdirSync(path.dirname(item.path), { recursive: true });
+            const tmpPath = `${item.path}.part`;
+
+            const curlOutput = execFileSync("curl", [
+              "-L", "--fail", "--silent", "--show-error",
+              "--output", tmpPath,
+              "--write-out", "%{http_code}\n%{content_type}\n",
+              item.adobeAssetUrl,
+            ], { encoding: "utf8" }).trim().split(/\r?\n/);
+
+            const httpCode = Number(curlOutput[0] || 0);
+            const headerType = String(curlOutput[1] || "").toLowerCase();
+            if (httpCode < 200 || httpCode >= 300) throw new Error(`HTTP ${httpCode} for ${item.order}`);
+            const st = fs.statSync(tmpPath);
+            if (st.size < 1024) throw new Error(`download too small (${st.size}) for ${item.order}`);
+
+            const fileType = execFileSync("file", ["--mime-type", "-b", tmpPath], { encoding: "utf8" }).trim().toLowerCase();
+            if (!fileType.startsWith("image/")) throw new Error(`file MIME ${fileType} is not image for ${item.order}`);
+            if (headerType && !(headerType.startsWith("image/") || headerType.startsWith("application/octet-stream"))) {
+              throw new Error(`HTTP content-type ${headerType} is not image for ${item.order}`);
+            }
+
+            const meta = await sharp(tmpPath).metadata();
+            if (!meta.width || !meta.height || !meta.format) throw new Error(`sharp could not identify ${item.order}`);
+            fs.renameSync(tmpPath, item.path);
+
+            const sha256 = crypto.createHash("sha256").update(fs.readFileSync(item.path)).digest("hex");
+            console.log(`[${item.order}/${EXPECTED}] ${item.title}: ${meta.width}x${meta.height} ${fileType} ${st.size} bytes sha256=${sha256}`);
+
+            gallery.assets.push({
+              id: item.id,
+              path: item.path,
+              title: item.title,
+              domain: item.domain,
+              category: item.category,
+              tags: item.tags,
+              characterId: item.characterId,
+              seriesSlug: item.seriesSlug,
+              seriesId: item.seriesId,
+              createdAt: item.createdAt,
+            });
+
+            const promptPath = `prompts/assets/${item.id}.md`;
+            fs.mkdirSync(path.dirname(promptPath), { recursive: true });
+            const md = `# ${item.title}
+
+          > 提示词类型：reconstructed  
+          > 关联人物：金饰花簪东方美人  
+          > 历史依据：本会话生成成品 + 当前生成上下文重建
+
+          ## 生成提示词
+
+          ${item.prompt}
+          `;
+            fs.writeFileSync(promptPath, md, "utf8");
+            promptIndex.assets[item.id] = { path: promptPath, kind: item.promptKind };
+            imported.push(item);
+          }
+
+          fs.writeFileSync(galleryPath, JSON.stringify(gallery, null, 2) + "\n", "utf8");
+          fs.writeFileSync(promptIndexPath, JSON.stringify(promptIndex, null, 2) + "\n", "utf8");
+
+          if (imported.length !== EXPECTED) throw new Error(`imported count ${imported.length} != ${EXPECTED}`);
+          for (const item of imported) {
+            if (!fs.existsSync(item.path)) throw new Error(`missing image after import ${item.path}`);
+            const p = `prompts/assets/${item.id}.md`;
+            if (!fs.existsSync(p)) throw new Error(`missing prompt after import ${p}`);
+          }
+          console.log(`Prepared ${imported.length} image assets and prompt records.`);
+          __SCRIPT__
+          node /tmp/import-chatgpt-images.mjs
+
+      - name: Build and validate gallery
+        run: |
+          npm run build
+          node --input-type=module <<'__VERIFY__'
+          import fs from "node:fs";
+          const manifest = JSON.parse(fs.readFileSync("/tmp/chatgpt-image-manifest.json", "utf8"));
+          const gallery = JSON.parse(fs.readFileSync("data/gallery.json", "utf8"));
+          const promptIndex = JSON.parse(fs.readFileSync("data/prompt-index.json", "utf8"));
+          const byId = new Map(gallery.assets.map(a => [a.id, a]));
+          for (const item of manifest) {
+            const a = byId.get(item.id);
+            if (!a || a.path !== item.path) throw new Error(`gallery verification failed for ${item.id}`);
+            const p = promptIndex.assets[item.id];
+            if (!p || p.kind !== "reconstructed" || !fs.existsSync(p.path)) throw new Error(`prompt verification failed for ${item.id}`);
+            if (!fs.existsSync(item.path)) throw new Error(`image verification failed for ${item.id}`);
+          }
+          console.log(`Verified ${manifest.length} new assets after npm run build.`);
+          __VERIFY__
+
+      - name: Commit and push imported assets
+        run: |
+          git config user.name "chatgpt-image-importer"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/gallery.json data/prompt-index.json prompts/assets \
+            images/golden-floral-eastern-beauty/session-20260821-set-01 \
+            images/golden-floral-eastern-beauty/session-20260825-set-02 \
+            images/golden-floral-eastern-beauty/session-20260825-set-03 \
+            images/golden-floral-eastern-beauty/session-20260825-set-04 \
+            images/golden-floral-eastern-beauty/session-20260825-set-05
+          test "$(git diff --cached --name-only | wc -l)" -ge 98
+          git commit -m "Add 48 ChatGPT portrait assets via Adobe bridge"
+          git push origin HEAD:main
+
+      - name: Trigger Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
