@@ -6762,6 +6762,366 @@
         "低角度"
       ],
       "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "a596e5c27f2f",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-001-a596e5c2.png",
+      "title": "樱花暖阳下的蓝衣佳人",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "春日樱花",
+        "浅蓝汉服",
+        "亭台暖光"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "03f27f052ae3",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-002-03f27f05.png",
+      "title": "海崖金辉中的蓝裙回眸",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "夏日海岸",
+        "深蓝露背礼裙",
+        "夕阳回眸"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "8b0f3b6cf571",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-003-8b0f3b6c.png",
+      "title": "秋日宫廷红枫美人",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "秋日宫廷",
+        "青红华服",
+        "红枫团扇"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "6cfbfe7b46f0",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-004-6cfbfe7b.png",
+      "title": "冰雪宫廷中的冬夜女王",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "冬夜雪宫",
+        "冰蓝毛领",
+        "近景回眸"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "56945c54c98d",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-005-56945c54.png",
+      "title": "月下莲灯汉服女子",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "月下庭院",
+        "莲花灯",
+        "浅蓝汉服"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "06a2832cadfa",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-006-06a2832c.png",
+      "title": "霓虹雨夜中的魅惑行者",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "霓虹都市",
+        "雨夜蓝裙",
+        "黑色风衣"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "0a5b12208cb1",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-007-0a5b1220.png",
+      "title": "翡翠瀑布秘境中的水灵仙子",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "森林秘境",
+        "翡翠水潭",
+        "水灵幻想"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "bebbb2f64ec8",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-008-bebbb2f6.png",
+      "title": "蓝金花影中的优雅美人",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "蓝玫瑰沙龙",
+        "慵懒倚卧",
+        "蕾丝薄纱"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "8f84198ce9e1",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-009-8f84198c.png",
+      "title": "鎏金宫廷中的星夜贵族少女",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "欧式晚宴",
+        "星夜礼服",
+        "香槟"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "b03b70cd10a3",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-010-b03b70cd.png",
+      "title": "未来水晶王座前的银色女神",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "未来时尚",
+        "银色高定",
+        "水晶殿堂"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "f4742491b110",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-011-f4742491.png",
+      "title": "樱花亭中的鎏金佳人",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "春日亭台",
+        "樱花",
+        "浅蓝金绣"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "99ead633b252",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-012-99ead633.png",
+      "title": "暮色海崖上的鎏金长裙少女",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "海崖暮色",
+        "深蓝露背裙",
+        "风中回眸"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "240f2d92ce0d",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-013-240f2d92.png",
+      "title": "秋日宫阁中的华服美人",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "秋日宫阁",
+        "青红华服",
+        "枫叶团扇"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "51c5acbe599d",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-014-51c5acbe.png",
+      "title": "月下冰晶宫廷回眸",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "冰晶冬夜",
+        "雪花发饰",
+        "肩颈回眸"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "71b3b290705e",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-015-71b3b290.png",
+      "title": "霓虹雨夜的赛博女郎",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "赛博都市",
+        "雨夜礼裙",
+        "全身街拍"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "ec20a50ac876",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-016-ec20a50a.png",
+      "title": "翡翠瀑布中的宝石精灵",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "翡翠瀑布",
+        "宝石薄纱",
+        "森林精灵"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "05024abb9361",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-017-05024abb.png",
+      "title": "蓝金花饰中的优雅凝眸",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "蓝金沙龙",
+        "沙发半躺",
+        "蕾丝礼服"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "2015c2cfcd6a",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-018-2015c2cf.png",
+      "title": "鎏金舞会中的星夜女王",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "鎏金舞会",
+        "星夜礼服",
+        "全身晚宴"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "ed7bdafe7fcb",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-019-ed7bdafe.png",
+      "title": "月下荷灯美人夜游",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "月下荷塘",
+        "莲灯夜游",
+        "浅蓝薄纱"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
+    },
+    {
+      "id": "45d6dd4eaf10",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest20-v2/portrait-020-45d6dd4e.png",
+      "title": "冰晶圣殿中的银装女王",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "东方美人时装肖像集5",
+        "同一人物",
+        "冰晶圣殿",
+        "银色高定",
+        "未来女王"
+      ],
+      "createdAt": "2026-08-28T16:05:00+08:00",
+      "characterId": "oriental-fashion-beauty",
+      "seriesSlug": "session-2026-08-28-latest20-v2",
+      "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20-v2"
     }
   ]
 }
