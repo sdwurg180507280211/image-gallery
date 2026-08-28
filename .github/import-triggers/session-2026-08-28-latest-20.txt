@@ -1,3 +1,0 @@
-triggered-at=2026-08-28T15:59:00+08:00
-batch=session-2026-08-28-latest-20
-attempt=2
