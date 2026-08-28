@@ -1,0 +1,225 @@
+name: Import latest 20 portraits via Adobe bridge
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/import-triggers/session-2026-08-28-latest-20.txt
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: import-session-2026-08-28-latest-20
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Import original images and metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+          const { execFileSync } = require('child_process');
+          const sharp = require('sharp');
+
+          const manifestPath = '.github/import-manifests/session-2026-08-28-latest-20.json';
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          const galleryPath = 'data/gallery.json';
+          const promptIndexPath = 'data/prompt-index.json';
+          const gallery = JSON.parse(fs.readFileSync(galleryPath, 'utf8'));
+          const promptIndex = JSON.parse(fs.readFileSync(promptIndexPath, 'utf8'));
+
+          if (gallery.schemaVersion !== 3 || !Array.isArray(gallery.assets)) {
+            throw new Error('data/gallery.json must be schemaVersion 3 with assets[]');
+          }
+          if (promptIndex.schemaVersion !== 1 || !promptIndex.assets || Array.isArray(promptIndex.assets)) {
+            throw new Error('data/prompt-index.json must be schemaVersion 1 with assets object');
+          }
+          if (manifest.candidateCount !== 20 || manifest.bridgedCount !== 20 || manifest.assets.length !== 20) {
+            throw new Error('Manifest count mismatch: expected 20 candidates and 20 bridged assets');
+          }
+
+          const existingIds = new Set(gallery.assets.map(a => a.id));
+          const existingPaths = new Set(gallery.assets.map(a => a.path));
+          const batchIds = new Set();
+          const batchPaths = new Set();
+
+          for (const a of manifest.assets) {
+            if (existingIds.has(a.assetId) || batchIds.has(a.assetId)) {
+              throw new Error(`Asset ID collision: ${a.assetId}`);
+            }
+            if (existingPaths.has(a.finalPath) || batchPaths.has(a.finalPath) || fs.existsSync(a.finalPath)) {
+              throw new Error(`Asset path collision: ${a.finalPath}`);
+            }
+            if (!String(a.mediaType || '').startsWith('image/')) {
+              throw new Error(`Non-image media type for order ${a.order}: ${a.mediaType}`);
+            }
+            batchIds.add(a.assetId);
+            batchPaths.add(a.finalPath);
+          }
+
+          const workDir = '.tmp-adobe-import-session-2026-08-28-latest-20';
+          fs.rmSync(workDir, { recursive: true, force: true });
+          fs.mkdirSync(workDir, { recursive: true });
+          fs.mkdirSync('prompts/assets', { recursive: true });
+          fs.mkdirSync('data/imports', { recursive: true });
+
+          const imported = [];
+
+          (async () => {
+            for (const a of manifest.assets) {
+              const tmp = path.join(workDir, `asset-${String(a.order).padStart(3, '0')}.bin`);
+              execFileSync('curl', [
+                '-L', '--fail', '--silent', '--show-error',
+                '--retry', '3', '--retry-delay', '2', '--retry-all-errors',
+                a.presignedAssetUrl, '-o', tmp
+              ], { stdio: 'inherit' });
+
+              const stat = fs.statSync(tmp);
+              if (stat.size < 1024) throw new Error(`Downloaded file too small: order ${a.order}`);
+              const mime = execFileSync('file', ['-b', '--mime-type', tmp], { encoding: 'utf8' }).trim();
+              if (!mime.startsWith('image/')) throw new Error(`Downloaded non-image MIME for order ${a.order}: ${mime}`);
+
+              const meta = await sharp(tmp).metadata();
+              if (!meta.width || !meta.height) throw new Error(`Sharp could not read dimensions for order ${a.order}`);
+              const bytes = fs.readFileSync(tmp);
+              const sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+
+              fs.mkdirSync(path.dirname(a.finalPath), { recursive: true });
+              fs.renameSync(tmp, a.finalPath);
+
+              gallery.assets.push({
+                id: a.assetId,
+                path: a.finalPath,
+                title: a.title,
+                domain: 'character',
+                category: a.category,
+                tags: a.tags,
+                createdAt: manifest.createdAt
+              });
+
+              const promptPath = `prompts/assets/${a.assetId}.md`;
+              const promptMarkdown = `# ${a.title}\n\n> 提示词类型：${a.promptKind}  \n> 关联人物：东方美人时装肖像集4  \n> 依据：本会话实际成图 + 生成上下文 + 逐图视觉重建\n\n## 生成提示词\n\n${a.prompt}\n`;
+              fs.writeFileSync(promptPath, promptMarkdown, 'utf8');
+              promptIndex.assets[a.assetId] = { path: promptPath, kind: a.promptKind };
+
+              imported.push({
+                order: a.order,
+                sourceFileName: a.originalFileName,
+                adobeAssetId: a.adobeAssetId,
+                assetId: a.assetId,
+                finalPath: a.finalPath,
+                category: a.category,
+                sha256,
+                width: meta.width,
+                height: meta.height,
+                bytes: stat.size,
+                status: 'added'
+              });
+            }
+
+            if (imported.length !== manifest.assets.length) {
+              throw new Error(`Downloaded/added count mismatch: ${imported.length} vs ${manifest.assets.length}`);
+            }
+
+            fs.writeFileSync(galleryPath, JSON.stringify(gallery, null, 2) + '\n', 'utf8');
+            fs.writeFileSync(promptIndexPath, JSON.stringify(promptIndex, null, 2) + '\n', 'utf8');
+
+            const report = {
+              schemaVersion: 1,
+              batch: manifest.batch,
+              domain: 'character',
+              characterSlug: manifest.characterId,
+              seriesSlug: manifest.seriesSlug,
+              transfer: 'Adobe asset_openai_file_upload -> presignedAssetUrl -> GitHub Actions curl',
+              createdAt: manifest.createdAt,
+              counts: {
+                candidateCount: manifest.candidateCount,
+                bridgedCount: manifest.bridgedCount,
+                downloadedCount: imported.length,
+                addedCount: imported.length,
+                promptCount: imported.length
+              },
+              note: 'SHA-256 values are recorded only as transfer-integrity evidence and are not used for content deduplication.',
+              assets: imported
+            };
+            fs.writeFileSync('data/imports/session-portraits-20260828-latest20.json', JSON.stringify(report, null, 2) + '\n', 'utf8');
+            fs.rmSync(workDir, { recursive: true, force: true });
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Build gallery
+        run: npm run build
+
+      - name: Verify batch counts and paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('data/imports/session-portraits-20260828-latest20.json', 'utf8'));
+          const gallery = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          const promptIndex = JSON.parse(fs.readFileSync('data/prompt-index.json', 'utf8'));
+          if (report.counts.candidateCount !== 20 || report.counts.bridgedCount !== 20 || report.counts.downloadedCount !== 20 || report.counts.addedCount !== 20 || report.counts.promptCount !== 20) {
+            throw new Error(`Unexpected report counts: ${JSON.stringify(report.counts)}`);
+          }
+          for (const a of report.assets) {
+            const record = gallery.assets.find(x => x.id === a.assetId);
+            if (!record || record.path !== a.finalPath) throw new Error(`Gallery record missing/mismatched: ${a.assetId}`);
+            if (!fs.existsSync(a.finalPath)) throw new Error(`Image missing: ${a.finalPath}`);
+            if (!promptIndex.assets[a.assetId]) throw new Error(`Prompt index missing: ${a.assetId}`);
+            if (!fs.existsSync(promptIndex.assets[a.assetId].path)) throw new Error(`Prompt file missing: ${a.assetId}`);
+          }
+          console.log('Verified 20/20 images, gallery records, and prompts.');
+          NODE
+
+      - name: Remove one-time importer resources
+        run: |
+          rm -f .github/workflows/import-session-2026-08-28-latest-20.yml
+          rm -f .github/import-manifests/session-2026-08-28-latest-20.json
+          rm -f .github/import-triggers/session-2026-08-28-latest-20.txt
+          rmdir .github/import-manifests 2>/dev/null || true
+          rmdir .github/import-triggers 2>/dev/null || true
+
+      - name: Commit and push imported assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat(gallery): import latest 20 portraits via Adobe bridge'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Trigger Pages
+        run: gh workflow run pages.yml --ref main
