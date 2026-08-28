@@ -96,6 +96,21 @@ async function thumb(source,hash,width,quality){
   return {name,target};
 }
 
+// 原图直接压缩进 dist（不缓存），把产物体积控制在 GitHub Pages 1GB 限制内
+async function compressOriginal(source,target){
+  await mkdir(path.dirname(target),{recursive:true});
+  await sharp(source,{failOn:'none'}).rotate().resize({width:2560,height:2560,fit:'inside',withoutEnlargement:true}).webp({quality:85,effort:4,smartSubsample:true}).toFile(target);
+}
+
+function originalDistPath(assetRel,hash,taken){
+  const segments=assetRel.split('/').filter(Boolean);
+  const file=segments.pop();
+  const base=file.replace(/\.[^.]+$/,'');
+  let rel=`${segments.join('/')}/${base}.webp`;
+  if(taken.has(rel)&&taken.get(rel)!==assetRel)rel=`${segments.join('/')}/${base}-${hash.slice(0,8)}.webp`;
+  return rel;
+}
+
 async function main(){
   const doc=JSON.parse(await readFile(sourceFile,'utf8'));
   if(doc.schemaVersion!==3||!Array.isArray(doc.assets))throw new Error('data/gallery.json 必须是 schemaVersion 3。');
@@ -124,13 +139,18 @@ async function main(){
   await cp(path.join(root,'index.html'),path.join(dist,'index.html'));
   await cp(path.join(root,'wechat'),path.join(dist,'wechat'),{recursive:true});
   await cp(path.join(root,'assets'),path.join(dist,'assets'),{recursive:true});
-  await cp(path.join(root,'images'),path.join(dist,'images'),{recursive:true});
+  await mkdir(path.join(dist,'images'),{recursive:true});
+  // wechat/index.html 硬编码引用 images/wechat，该目录保持原样发布
+  if(await exists(path.join(root,'images','wechat'))){
+    await cp(path.join(root,'images','wechat'),path.join(dist,'images','wechat'),{recursive:true});
+  }
   await cp(promptsDir,path.join(dist,'prompts'),{recursive:true});
   await cp(promptIndexFile,path.join(dist,'data','prompt-index.json'));
   await cp(dislikesFile,path.join(dist,'data','dislikes.json'));
 
   const built=[];
   const usedThumbnailFiles=new Set();
+  const originalTargets=new Map();
   for(const asset of doc.assets){
     const source=path.join(root,asset.path);
     if(!await exists(source))throw new Error(`原图不存在：${asset.path}`);
@@ -140,10 +160,13 @@ async function main(){
     const width=Number(meta.width)||0,height=Number(meta.height)||0;
     if(!(width>0&&height>0))throw new Error(`无法读取尺寸：${asset.path}`);
 
+    const originalRel=originalDistPath(asset.path,hash,originalTargets);
+    originalTargets.set(originalRel,asset.path);
+    await compressOriginal(source,path.join(dist,originalRel));
     const small=await thumb(source,hash,640,80);
     usedThumbnailFiles.add(small.name);
     await cp(small.target,path.join(dist,'generated','thumbnails',small.name));
-    const record={...asset,...deriveCharacterGrouping(asset),width,height,thumbnail:`generated/thumbnails/${small.name}`};
+    const record={...asset,path:originalRel,...deriveCharacterGrouping(asset),width,height,thumbnail:`generated/thumbnails/${small.name}`};
 
     if(width/height>=1.15&&width>640){
       const large=await thumb(source,hash,1280,84);
