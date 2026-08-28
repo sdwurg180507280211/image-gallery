@@ -45,6 +45,14 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     const divisor=gcd(width,height);
     return `${Math.round(width/divisor)}:${Math.round(height/divisor)}`;
   }
+  function displaySize(asset){
+    const width=Number(asset?.displayWidth)||Number(asset?.width)||0;
+    const height=Number(asset?.displayHeight)||Number(asset?.height)||0;
+    return {width,height};
+  }
+  function displayPath(asset){return asset?.displayPath||asset?.path||'';}
+  function originalPath(asset){return asset?.originalPath||asset?.path||'';}
+  function originalUrl(asset){return asset?.originalUrl||originalPath(asset);}
 
   function promptOpen(){return !el.promptPanel.hidden;}
 
@@ -73,17 +81,18 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
   }
 
   function computeBounds(asset){
-    const width=el.stage.clientWidth;
-    const height=el.stage.clientHeight;
-    const centerX=(width-asset.width)/2;
-    const centerY=(height-asset.height)/2;
+    const stageWidth=el.stage.clientWidth;
+    const stageHeight=el.stage.clientHeight;
+    const size=displaySize(asset);
+    const centerX=(stageWidth-size.width)/2;
+    const centerY=(stageHeight-size.height)/2;
     bounds={
-      minX:asset.width>width?width-asset.width:centerX,
-      maxX:asset.width>width?0:centerX,
-      minY:asset.height>height?height-asset.height:centerY,
-      maxY:asset.height>height?0:centerY
+      minX:size.width>stageWidth?stageWidth-size.width:centerX,
+      maxX:size.width>stageWidth?0:centerX,
+      minY:size.height>stageHeight?stageHeight-size.height:centerY,
+      maxY:size.height>stageHeight?0:centerY
     };
-    el.stage.classList.toggle('is-pannable',asset.width>width||asset.height>height);
+    el.stage.classList.toggle('is-pannable',size.width>stageWidth||size.height>stageHeight);
   }
 
   function applyOffset(){
@@ -94,10 +103,11 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
 
   function resetViewport(asset){
     computeBounds(asset);
-    const width=el.stage.clientWidth;
-    const height=el.stage.clientHeight;
-    offset.x=(width-asset.width)/2;
-    offset.y=asset.height>height?0:(height-asset.height)/2;
+    const stageWidth=el.stage.clientWidth;
+    const stageHeight=el.stage.clientHeight;
+    const size=displaySize(asset);
+    offset.x=(stageWidth-size.width)/2;
+    offset.y=size.height>stageHeight?0:(stageHeight-size.height)/2;
     applyOffset();
   }
 
@@ -138,6 +148,35 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     }
   }
 
+  async function downloadOriginal(event){
+    if(!activeAsset)return;
+    const href=originalUrl(activeAsset);
+    if(!href)return;
+    event.preventDefault();
+    const filename=originalPath(activeAsset).split('/').pop()||'image';
+    const initialText=el.download.textContent;
+    el.download.textContent='正在下载…';
+    el.download.setAttribute('aria-busy','true');
+    try{
+      const response=await fetch(encodeURI(href));
+      if(!response.ok)throw new Error(`HTTP ${response.status}`);
+      const blob=await response.blob();
+      const objectUrl=URL.createObjectURL(blob);
+      const anchor=document.createElement('a');
+      anchor.href=objectUrl;
+      anchor.download=filename;
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
+    }catch{
+      window.location.assign(encodeURI(href));
+    }finally{
+      el.download.textContent=initialText;
+      el.download.removeAttribute('aria-busy');
+    }
+  }
+
   function render(){
     const items=getItems();
     if(!dialog.open||!items.length)return;
@@ -148,11 +187,12 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     el.stage.classList.remove('is-panning');
 
     const ratio=aspectRatio(activeAsset);
+    const size=displaySize(activeAsset);
     el.counter.textContent=`${activeIndex+1} / ${items.length}`;
     el.meta.textContent=`${formatMeta(activeAsset)} · ${activeAsset.width} × ${activeAsset.height}${ratio?` · ${ratio}`:''}`;
     el.title.textContent=activeAsset.title;
-    el.image.style.width=`${activeAsset.width}px`;
-    el.image.style.height=`${activeAsset.height}px`;
+    el.image.style.width=`${size.width}px`;
+    el.image.style.height=`${size.height}px`;
     el.image.alt=activeAsset.title;
     el.stage.classList.add('is-loading');
     el.image.onload=()=>{
@@ -160,10 +200,10 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
       resetViewport(activeAsset);
     };
     el.image.onerror=()=>el.stage.classList.remove('is-loading');
-    el.image.src=encodeURI(activeAsset.path);
+    el.image.src=encodeURI(displayPath(activeAsset));
 
-    el.download.href=encodeURI(activeAsset.path);
-    el.download.download=activeAsset.path.split('/').pop();
+    el.download.href=encodeURI(originalUrl(activeAsset));
+    el.download.download=originalPath(activeAsset).split('/').pop();
     const favorite=isFavorite(activeAsset.id);
     el.favorite.textContent=favorite?'♥ 已收藏':'♡ 收藏';
     el.favorite.setAttribute('aria-pressed',String(favorite));
@@ -287,6 +327,7 @@ export function createLightbox({getItems,formatMeta,isFavorite,onToggleFavorite,
     onToggleDislike?.(activeAsset.id,el.dislike);
   };
   el.prompt.onclick=openPromptPanel;
+  el.download.onclick=downloadOriginal;
   el.promptClose.onclick=closePromptPanel;
   el.promptPanel.onclick=event=>{if(event.target===el.promptPanel)closePromptPanel();};
   el.copyPrompt.onclick=async()=>{

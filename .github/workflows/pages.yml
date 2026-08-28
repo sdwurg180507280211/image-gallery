@@ -27,6 +27,11 @@ jobs:
           path: .cache/thumbnails-v3
           key: thumbnails-v3-${{ hashFiles('images/**/*', 'data/gallery.json') }}
           restore-keys: thumbnails-v3-
+      - uses: actions/cache@v4
+        with:
+          path: .cache/published-images-v1
+          key: published-images-v1-${{ hashFiles('images/**/*', 'data/gallery.json', 'scripts/build.mjs') }}
+          restore-keys: published-images-v1-
       - run: npm install --no-audit --no-fund
       - run: npm run build
       - uses: actions/configure-pages@v5
