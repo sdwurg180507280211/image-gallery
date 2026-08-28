@@ -6612,6 +6612,156 @@
       "characterId": "oriental-fashion-beauty",
       "seriesSlug": "session-2026-08-28-latest20",
       "seriesId": "oriental-fashion-beauty--session-2026-08-28-latest20"
+    },
+    {
+      "id": "0d88007238ff",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-001-0d880072.png",
+      "title": "阳光花园中的玫瑰少女",
+      "domain": "character",
+      "category": "pink",
+      "tags": [
+        "同一人物",
+        "春日花园",
+        "粉色高定礼服",
+        "露肩束腰",
+        "中近景"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "018ee3eefdd5",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-002-018ee3ee.png",
+      "title": "金色海岸的海之女神",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "同一人物",
+        "夏日海岸",
+        "白色海沫礼裙",
+        "高开衩",
+        "全身写真"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "51a4eb6cddef",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-003-51a4eb6c.png",
+      "title": "烛影中的宫廷贵妇",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "同一人物",
+        "秋日宫廷",
+        "酒红丝绒礼服",
+        "宫廷珠宝",
+        "坐姿"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "2a2d0ffb6565",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-004-2a2d0ffb.png",
+      "title": "月下雪庭回眸·伊人流光",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "同一人物",
+        "冬夜雪庭",
+        "冰蓝礼服",
+        "白色毛领",
+        "回眸全身"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "3e6a60377c48",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-005-3e6a6037.png",
+      "title": "鎏金灯影下的青金舞姬",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "同一人物",
+        "异域舞姬",
+        "青金珠饰",
+        "薄纱高开衩",
+        "动态站姿"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "7da22a144188",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-006-7da22a14.png",
+      "title": "霓虹雨夜中的赛博魅影",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "同一人物",
+        "都市霓虹",
+        "黑色礼服",
+        "雨夜近景",
+        "强烈眼神"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "c4f677e39b7f",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-007-c4f677e3.png",
+      "title": "月下宫苑回眸佳人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "同一人物",
+        "月下庭院",
+        "黑银礼服",
+        "露背回眸",
+        "夜景"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "bffcbea933e6",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-008-bffcbea9.png",
+      "title": "魔法森林中的翡翠精灵少女",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "同一人物",
+        "森林精灵",
+        "翡翠薄纱",
+        "藤蔓珠宝",
+        "躺姿"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "aebd69d31b72",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-009-aebd69d3.png",
+      "title": "鎏金舞厅阶梯上的优雅肖像",
+      "domain": "character",
+      "category": "gold",
+      "tags": [
+        "同一人物",
+        "欧式晚宴",
+        "香槟缎面礼服",
+        "长手套",
+        "阶梯坐姿"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
+    },
+    {
+      "id": "505bb34e1cb3",
+      "path": "images/oriental-fashion-beauty/session-2026-08-28-latest-10/portrait-010-505bb34e.png",
+      "title": "霓虹星环下的未来女王",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "同一人物",
+        "未来霓虹",
+        "白紫科幻礼服",
+        "水晶配饰",
+        "低角度"
+      ],
+      "createdAt": "2026-08-28T15:54:00+08:00"
     }
   ]
 }
