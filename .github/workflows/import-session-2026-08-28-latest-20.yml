@@ -37,6 +37,15 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Stop if same batch already imported
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f data/imports/session-portraits-20260828-latest20.json ]; then
+            echo 'Formal report already exists on main; refusing to import the same batch again.'
+            exit 42
+          fi
+
       - name: Import original images and metadata
         shell: bash
         run: |
@@ -207,6 +216,9 @@ jobs:
           rm -f .github/workflows/import-session-2026-08-28-latest-20.yml
           rm -f .github/import-manifests/session-2026-08-28-latest-20.json
           rm -f .github/import-triggers/session-2026-08-28-latest-20.txt
+          # A concurrent same-batch staging manifest appeared while attempt 1 was running.
+          # It references the same 20 sourceFileIds and is removed to prevent a second importer path.
+          rm -f .github/import-latest20-20260828.manifest.json
           rmdir .github/import-manifests 2>/dev/null || true
           rmdir .github/import-triggers 2>/dev/null || true
 
@@ -218,8 +230,26 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m 'feat(gallery): import latest 20 portraits via Adobe bridge'
-          git pull --rebase origin main
-          git push origin HEAD:main
+
+          for attempt in 1 2 3 4 5; do
+            echo "Push attempt $attempt/5"
+            git fetch origin main
+
+            if git cat-file -e 'origin/main:data/imports/session-portraits-20260828-latest20.json' 2>/dev/null; then
+              echo 'Another process has already committed the formal report for this exact batch; stopping to prevent duplicate import.'
+              exit 42
+            fi
+
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              echo 'Formal import push succeeded.'
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+
+          echo 'Failed to push after 5 fetch/rebase attempts.'
+          exit 1
 
       - name: Trigger Pages
         run: gh workflow run pages.yml --ref main
