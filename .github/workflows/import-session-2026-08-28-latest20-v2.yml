@@ -1,0 +1,244 @@
+name: Import exact latest 20 portraits via Adobe bridge v2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/import-triggers/session-2026-08-28-latest20-v2.txt
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: import-session-2026-08-28-latest20-v2
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Refuse duplicate batch report
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f data/imports/session-portraits-20260828-latest20-v2.json ]; then
+            echo 'This exact latest-20 batch is already imported; refusing duplicate upload.'
+            exit 42
+          fi
+
+      - name: Import original images and metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const crypto = require('crypto');
+          const { execFileSync } = require('child_process');
+          const sharp = require('sharp');
+
+          const manifestPath = '.github/import-manifests/session-2026-08-28-latest20-v2.json';
+          const galleryPath = 'data/gallery.json';
+          const promptIndexPath = 'data/prompt-index.json';
+          const reportPath = 'data/imports/session-portraits-20260828-latest20-v2.json';
+          const expected = 20;
+
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          const gallery = JSON.parse(fs.readFileSync(galleryPath, 'utf8'));
+          const promptIndex = JSON.parse(fs.readFileSync(promptIndexPath, 'utf8'));
+
+          if (gallery.schemaVersion !== 3 || !Array.isArray(gallery.assets)) {
+            throw new Error('data/gallery.json must be schemaVersion 3 with assets[]');
+          }
+          if (promptIndex.schemaVersion !== 1 || !promptIndex.assets || Array.isArray(promptIndex.assets)) {
+            throw new Error('data/prompt-index.json must be schemaVersion 1 with assets object');
+          }
+          if (manifest.candidateCount !== expected || manifest.bridgedCount !== expected || !Array.isArray(manifest.assets) || manifest.assets.length !== expected) {
+            throw new Error(`Manifest count mismatch: ${JSON.stringify({candidateCount: manifest.candidateCount, bridgedCount: manifest.bridgedCount, assets: manifest.assets?.length})}`);
+          }
+
+          const allowedCategories = new Set(['multi-panel','black','red','pink','blue','white','purple','green','gold','other']);
+          const existingIds = new Set(gallery.assets.map(a => a.id));
+          const existingPaths = new Set(gallery.assets.map(a => a.path));
+          const batchIds = new Set();
+          const batchPaths = new Set();
+          const sourceIds = new Set();
+
+          for (const a of manifest.assets) {
+            if (!allowedCategories.has(a.category)) throw new Error(`Invalid category for ${a.title}: ${a.category}`);
+            if (a.promptKind !== 'reconstructed') throw new Error(`Expected reconstructed prompt kind for ${a.title}`);
+            if (existingIds.has(a.assetId) || batchIds.has(a.assetId)) throw new Error(`Asset ID collision: ${a.assetId}`);
+            if (existingPaths.has(a.finalPath) || batchPaths.has(a.finalPath) || fs.existsSync(a.finalPath)) throw new Error(`Asset path collision: ${a.finalPath}`);
+            if (sourceIds.has(a.sourceFileId)) throw new Error(`Duplicate source file in batch: ${a.sourceFileId}`);
+            if (!String(a.mediaType || '').startsWith('image/')) throw new Error(`Non-image media type for order ${a.order}: ${a.mediaType}`);
+            if (!String(a.presignedAssetUrl || '').startsWith('https://')) throw new Error(`Invalid Adobe URL for order ${a.order}`);
+            batchIds.add(a.assetId);
+            batchPaths.add(a.finalPath);
+            sourceIds.add(a.sourceFileId);
+          }
+
+          const workDir = '.tmp-adobe-import-session-2026-08-28-latest20-v2';
+          fs.rmSync(workDir, { recursive: true, force: true });
+          fs.mkdirSync(workDir, { recursive: true });
+          fs.mkdirSync('prompts/assets', { recursive: true });
+          fs.mkdirSync('data/imports', { recursive: true });
+
+          const identityBase = '参考同一位成年东方女性人物，严格保持稳定一致的人物身份：精致偏椭圆脸型与柔和骨相、协调稳定的眉眼鼻唇比例、深色长发与精致盘发特征、清晰有互动感的杏眼、细腻白皙肤质，以及优雅、成熟、带高级魅惑感的东方气质。只改变本张作品的服装、配饰、动作、姿态、表情、场景、色调和构图，不改变人物身份与年龄。';
+          const qualityBase = '单人竖版高分辨率艺术时装肖像，脸部完整清晰，解剖自然，手部正常；皮肤保留细腻自然质感，发丝、珠宝、刺绣、薄纱、丝绸、金属等材质清晰，电影级光影与自然景深。不要文字、不要水印、不要拼图、不要多人、不要画中画、不要多余肢体或畸形手指。';
+
+          const imported = [];
+          (async () => {
+            for (const a of manifest.assets) {
+              const tmp = path.join(workDir, `asset-${String(a.order).padStart(3, '0')}.bin`);
+              execFileSync('curl', [
+                '-L', '--fail', '--silent', '--show-error',
+                '--retry', '3', '--retry-delay', '2', '--retry-all-errors',
+                a.presignedAssetUrl, '-o', tmp
+              ], { stdio: 'inherit' });
+
+              const stat = fs.statSync(tmp);
+              if (stat.size < 1024) throw new Error(`Downloaded file too small: order ${a.order}`);
+              const mime = execFileSync('file', ['-b', '--mime-type', tmp], { encoding: 'utf8' }).trim();
+              if (!mime.startsWith('image/')) throw new Error(`Downloaded non-image MIME for order ${a.order}: ${mime}`);
+              const meta = await sharp(tmp).metadata();
+              if (!meta.width || !meta.height) throw new Error(`Sharp could not read dimensions for order ${a.order}`);
+              const bytes = fs.readFileSync(tmp);
+              const sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+
+              fs.mkdirSync(path.dirname(a.finalPath), { recursive: true });
+              fs.renameSync(tmp, a.finalPath);
+
+              gallery.assets.push({
+                id: a.assetId,
+                path: a.finalPath,
+                title: a.title,
+                domain: 'character',
+                category: a.category,
+                tags: a.tags,
+                createdAt: manifest.createdAt,
+                characterId: manifest.characterId,
+                seriesSlug: manifest.seriesSlug,
+                seriesId: `${manifest.characterId}--${manifest.seriesSlug}`
+              });
+
+              const promptPath = `prompts/assets/${a.assetId}.md`;
+              const fullPrompt = `${identityBase}\n\n本张具体画面：${a.specific}\n\n${qualityBase}`;
+              const promptMarkdown = `# ${a.title}\n\n> 提示词类型：reconstructed  \n> 关联人物：东方美人时装肖像集5  \n> 依据：本会话实际成图 + 生成上下文 + 逐图视觉重建\n\n## 生成提示词\n\n${fullPrompt}\n`;
+              fs.writeFileSync(promptPath, promptMarkdown, 'utf8');
+              promptIndex.assets[a.assetId] = { path: promptPath, kind: 'reconstructed' };
+
+              imported.push({
+                order: a.order,
+                sourceFileId: a.sourceFileId,
+                sourceFileName: a.originalFileName,
+                adobeAssetId: a.adobeAssetId,
+                assetId: a.assetId,
+                finalPath: a.finalPath,
+                category: a.category,
+                sha256,
+                width: meta.width,
+                height: meta.height,
+                bytes: stat.size,
+                status: 'added'
+              });
+            }
+
+            if (imported.length !== expected) throw new Error(`Imported count mismatch: ${imported.length}`);
+
+            fs.writeFileSync(galleryPath, JSON.stringify(gallery, null, 2) + '\n', 'utf8');
+            fs.writeFileSync(promptIndexPath, JSON.stringify(promptIndex, null, 2) + '\n', 'utf8');
+
+            const report = {
+              schemaVersion: 1,
+              batch: manifest.batch,
+              domain: 'character',
+              characterSlug: manifest.characterId,
+              seriesSlug: manifest.seriesSlug,
+              transfer: 'Adobe asset_openai_file_upload -> presignedAssetUrl -> GitHub Actions curl',
+              createdAt: manifest.createdAt,
+              selectionNote: manifest.selectionNote,
+              counts: {
+                candidateCount: manifest.candidateCount,
+                bridgedCount: manifest.bridgedCount,
+                downloadedCount: imported.length,
+                addedCount: imported.length,
+                promptCount: imported.length
+              },
+              note: 'The selected 20 are the exact latest generated conversation images from user turns 9 and 10. Previously uploaded batches were excluded. SHA-256 is recorded only for transfer integrity, not content deduplication.',
+              assets: imported
+            };
+            fs.writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n', 'utf8');
+            fs.rmSync(workDir, { recursive: true, force: true });
+          })().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Build gallery
+        run: npm run build
+
+      - name: Verify exact batch counts and prompt links
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('data/imports/session-portraits-20260828-latest20-v2.json', 'utf8'));
+          const gallery = JSON.parse(fs.readFileSync('data/gallery.json', 'utf8'));
+          const promptIndex = JSON.parse(fs.readFileSync('data/prompt-index.json', 'utf8'));
+          const expected = 20;
+          if (report.counts.candidateCount !== expected || report.counts.bridgedCount !== expected || report.counts.downloadedCount !== expected || report.counts.addedCount !== expected || report.counts.promptCount !== expected) {
+            throw new Error(`Unexpected report counts: ${JSON.stringify(report.counts)}`);
+          }
+          if (new Set(report.assets.map(a => a.sourceFileId)).size !== expected) throw new Error('Source-file uniqueness check failed');
+          for (const a of report.assets) {
+            const record = gallery.assets.find(x => x.id === a.assetId);
+            if (!record || record.path !== a.finalPath) throw new Error(`Gallery record missing/mismatched: ${a.assetId}`);
+            if (!fs.existsSync(a.finalPath)) throw new Error(`Image missing: ${a.finalPath}`);
+            const p = promptIndex.assets[a.assetId];
+            if (!p || p.kind !== 'reconstructed') throw new Error(`Prompt index missing/mismatched: ${a.assetId}`);
+            if (!fs.existsSync(p.path)) throw new Error(`Prompt file missing: ${a.assetId}`);
+          }
+          console.log('Verified exact latest 20 current-session images, gallery records, and prompt files.');
+          NODE
+
+      - name: Remove this one-time importer resources
+        run: |
+          rm -f .github/workflows/import-session-2026-08-28-latest20-v2.yml
+          rm -f .github/import-manifests/session-2026-08-28-latest20-v2.json
+          rm -f .github/import-triggers/session-2026-08-28-latest20-v2.txt
+
+      - name: Commit and push imported assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat(gallery): import exact latest 20 portraits via Adobe bridge'
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Explicitly dispatch Pages
+        run: gh workflow run pages.yml --ref main
