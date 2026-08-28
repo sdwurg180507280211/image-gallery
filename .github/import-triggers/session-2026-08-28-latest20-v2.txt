@@ -1,0 +1,1 @@
+trigger exact latest20 v2 via Adobe bridge 2026-08-28T16:06:00+08:00
