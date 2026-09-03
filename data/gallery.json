@@ -7482,6 +7482,918 @@
       "characterId": "oriental-fashion-beauty",
       "seriesSlug": "session-2026-09-03-earlier-10",
       "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10"
+    },
+    {
+      "id": "881081c1d69a",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/01-moonlit-blue-fantasy.png",
+      "title": "月下东方幻境美人",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "月下庭院",
+        "蓝色薄纱",
+        "近景肖像",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "f5f08e585591",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/02-spring-blossom-gold-hairpin.png",
+      "title": "樱花流光中的金簪佳人",
+      "domain": "character",
+      "category": "pink",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "春日樱花",
+        "粉色轻纱",
+        "金簪",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "3812bd50e26e",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/03-autumn-red-umbrella-kimono.png",
+      "title": "红伞秋叶中的古典美人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "秋日枫叶",
+        "黑色和服",
+        "红伞",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "251662ed523a",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/04-christmas-red-fur-portrait.png",
+      "title": "圣诞树下的红装佳人",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "圣诞冬季",
+        "红色毛绒",
+        "暖灯",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "2e355e218482",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/05-city-champagne-black-gown.png",
+      "title": "金色夜幕下的香槟佳人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "都市夜景",
+        "黑色晚礼服",
+        "香槟",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "dc537c211e46",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/06-snow-forest-white-hanfu.png",
+      "title": "雪林回眸_金饰与霜雪_伊人",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "雪林冬日",
+        "白色汉服",
+        "侧身回眸",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "3473307e3fab",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/07-lace-bridal-portrait.png",
+      "title": "华美蕾丝婚纱新娘肖像",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "婚礼",
+        "白色蕾丝",
+        "新娘",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "d4ba8266aa14",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/08-gothic-black-red-rose.png",
+      "title": "暗夜玫瑰与哥特少女",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "哥特玫瑰",
+        "黑红蕾丝",
+        "暗调",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "e53d848ea583",
+      "path": "images/golden-floral-eastern-beauty/session-20260821-set-01/09-golden-boudoir-portrait.png",
+      "title": "金色古典闺房中的优雅肖像",
+      "domain": "character",
+      "category": "gold",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "金色闺房",
+        "金色礼服",
+        "慵懒坐姿",
+        "会话批次1"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260821-set-01",
+      "seriesId": "golden-floral-eastern-beauty--session-20260821-set-01",
+      "createdAt": "2026-08-21T07:39:15Z"
+    },
+    {
+      "id": "0a39987908a6",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/01-jiangnan-rain-tea-pavilion.png",
+      "title": "雨中古典茶亭美人",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "江南春雨",
+        "绿色汉服",
+        "茶亭",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "59c6416377de",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/02-lotus-lake-aqua-hanfu.png",
+      "title": "晨雾荷塘中的汉服女子",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "初夏荷塘",
+        "蓝绿色汉服",
+        "木舟",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "81322efe3176",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/03-summer-coast-white-dress.png",
+      "title": "盛夏海岸回眸微笑",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "盛夏海岸",
+        "白色长裙",
+        "海风",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "6e56c7bcc09f",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/04-desert-traveler-gold-teal.png",
+      "title": "金色沙漠中的风舞旅人",
+      "domain": "character",
+      "category": "gold",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "沙漠夕阳",
+        "金色异域服饰",
+        "风纱",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "f724b14c1f1e",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/05-autumn-wheatfield-gold.png",
+      "title": "金色麦田中的秋日少女",
+      "domain": "character",
+      "category": "gold",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "秋日麦田",
+        "金棕服饰",
+        "暖阳",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "80e6bc369823",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/06-vintage-library-green-dress.png",
+      "title": "暖灯下的绿裙藏书阁少女",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "复古书房",
+        "绿色丝绒",
+        "阅读",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "866ff4c6d5a5",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/07-winter-hot-spring-red-cloak.png",
+      "title": "雪夜温泉旁的红衣佳人",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "冬夜温泉",
+        "红色斗篷",
+        "雪景",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "b6583b0e1025",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/08-cyberpunk-rain-black.png",
+      "title": "霓虹雨夜中的赛博女侠",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "赛博雨夜",
+        "黑色科技服",
+        "霓虹",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "00111269d051",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-02/09-opera-staircase-silver.png",
+      "title": "歌剧院阶梯上的银色华服女士",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "歌剧院",
+        "银色礼服",
+        "阶梯",
+        "会话批次2"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-02",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-02",
+      "createdAt": "2026-08-25T02:30:31Z"
+    },
+    {
+      "id": "285cddc0f841",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/01-spring-peach-blossom-pink.png",
+      "title": "桃花春日梦幻佳人",
+      "domain": "character",
+      "category": "pink",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "春日桃花",
+        "粉色轻纱",
+        "花冠",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "2974648bc36f",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/02-coastal-white-backless.png",
+      "title": "海风中的海岸回眸",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "海岸悬崖",
+        "白色露背裙",
+        "回眸",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "0f1d9370ddf7",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/03-autumn-palace-red-gold.png",
+      "title": "秋日宫苑贵妃肖像",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "秋日宫苑",
+        "红金宫廷服",
+        "贵妃",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "8a4aef3250b7",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/04-winter-hot-spring-red-fur.png",
+      "title": "冬夜温泉庭院美人",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "雪夜温泉",
+        "红色绒披风",
+        "蕾丝",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "dc679ed99ec7",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/05-desert-dancer-teal-gold.png",
+      "title": "沙漠夕阳下的神秘舞者",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "沙漠舞者",
+        "翡翠金服饰",
+        "全身",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "3700151921a5",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/06-city-night-black-gown.png",
+      "title": "霓虹都市夜宴佳人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "都市夜宴",
+        "黑色礼服",
+        "香槟",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "561d5ec0b6e8",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/07-moonlit-courtyard-blue.png",
+      "title": "月下古庭华裳美人",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "月下古庭",
+        "冰蓝礼服",
+        "月光",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "0709dd7461d7",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/08-forest-spirit-emerald.png",
+      "title": "翡翠秘境中的森林精灵",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "森林秘境",
+        "绿色幻想服",
+        "精灵",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "3656118e5e80",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/09-palace-staircase-silver.png",
+      "title": "鎏金宫廷阶梯上的银裙佳人",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "宫廷阶梯",
+        "银色礼服",
+        "全身",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "0b87883d30d0",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-03/10-cyberpunk-neon-black.png",
+      "title": "霓虹雨夜中的赛博女郎",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "赛博霓虹",
+        "黑色未来服",
+        "雨夜",
+        "会话批次3"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-03",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-03",
+      "createdAt": "2026-08-25T06:07:05Z"
+    },
+    {
+      "id": "877128a9a42d",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/01-spring-flower-crown-pink.png",
+      "title": "樱花映中的春日花冠美人",
+      "domain": "character",
+      "category": "pink",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "春日樱花",
+        "粉色花冠礼服",
+        "近景",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "28e65b214c06",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/02-cliffside-white-dress.png",
+      "title": "海风中的悬崖白裙少女",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "海崖夏日",
+        "白色露背裙",
+        "全身",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "37bbc50d5453",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/03-autumn-palace-fan-red.png",
+      "title": "秋日金辉宫苑美人持扇",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "秋日宫苑",
+        "红金服饰",
+        "圆扇",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "5a7af01926c5",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/04-snow-hot-spring-red-cloak.png",
+      "title": "雪夜温泉庭院中的红绒佳人",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "雪夜温泉",
+        "红绒披风",
+        "坐姿",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "a0aac7836929",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/05-desert-emerald-dancer.png",
+      "title": "暮色沙海中的翡翠舞者",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "暮色沙海",
+        "翡翠金舞衣",
+        "动态",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "6b8d129a6049",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/06-moonlit-lanting-blue.png",
+      "title": "月下兰亭_花影凝香",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "月下兰亭",
+        "蓝色薄纱",
+        "胸像",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "05f962a47ffb",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/07-forest-emerald-goddess.png",
+      "title": "翡翠森林中的精灵女神",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "森林精灵",
+        "翡翠礼服",
+        "倚树",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "3a298e8c21c3",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/08-night-champagne-black.png",
+      "title": "霓虹夜色中的香槟佳人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "都市夜色",
+        "黑色礼服",
+        "香槟",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "7d82bb665de3",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/09-palace-silver-queen.png",
+      "title": "宫廷奢华阶梯上的银色女王",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "欧式宫廷",
+        "银色礼服",
+        "低机位",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "6f97158f1760",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-04/10-cyberpunk-rain-black-2.png",
+      "title": "霓虹雨夜中的赛博女郎",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "赛博雨夜",
+        "黑色胶质服",
+        "霓虹",
+        "会话批次4"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-04",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-04",
+      "createdAt": "2026-08-25T06:23:41Z"
+    },
+    {
+      "id": "55e2019fa930",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/01-spring-warm-blossom-pink.png",
+      "title": "樱花暖光下的梦幻佳人",
+      "domain": "character",
+      "category": "pink",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "春日暖樱",
+        "粉色刺绣礼服",
+        "半身",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "40f7877e6992",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/02-santorini-white-backless.png",
+      "title": "圣托里尼海崖上的风之回眸",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "圣托里尼",
+        "白色露背裙",
+        "回眸",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "ccbd371384c9",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/03-autumn-red-court-lady.png",
+      "title": "秋日金光下的红衣仕女",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "秋日宫廷",
+        "红色华服",
+        "持扇",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "44a7869a97e2",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/04-winter-red-hot-spring.png",
+      "title": "雪夜温泉庭院中的红衣佳人",
+      "domain": "character",
+      "category": "red",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "冬夜温泉",
+        "红色披风",
+        "暖灯",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "1bb8a0242ab6",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/05-sunset-desert-emerald.png",
+      "title": "落日沙海中的翡翠舞者",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "落日沙海",
+        "翡翠金舞衣",
+        "风纱",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "dded9f6b37a2",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/06-moonlit-flower-blue.png",
+      "title": "月下花影中的东方佳人",
+      "domain": "character",
+      "category": "blue",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "月下花影",
+        "冰蓝礼服",
+        "近景",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "ca3715872054",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/07-moss-forest-emerald.png",
+      "title": "苔林金光中的精灵女王",
+      "domain": "character",
+      "category": "green",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "苔林金光",
+        "翡翠礼服",
+        "倚树",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "07f9a4fc96ac",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/08-city-champagne-black-2.png",
+      "title": "璀璨夜色中的香槟美人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "城市夜宴",
+        "黑色礼服",
+        "交叉腿",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "77d43e76bc20",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/09-gold-palace-silver-gown.png",
+      "title": "金色宫殿中的银色礼服佳人",
+      "domain": "character",
+      "category": "white",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "金色宫殿",
+        "银色礼服",
+        "阶梯全身",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
+    },
+    {
+      "id": "dd36d5a48a69",
+      "path": "images/golden-floral-eastern-beauty/session-20260825-set-05/10-cyberpunk-city-rain-black.png",
+      "title": "雨夜霓虹下的赛博都市丽人",
+      "domain": "character",
+      "category": "black",
+      "tags": [
+        "金饰花簪东方美人",
+        "同一人物",
+        "未来都市",
+        "黑色科技服",
+        "霓虹雨",
+        "会话批次5"
+      ],
+      "characterId": "golden-floral-eastern-beauty",
+      "seriesSlug": "session-20260825-set-05",
+      "seriesId": "golden-floral-eastern-beauty--session-20260825-set-05",
+      "createdAt": "2026-08-25T09:41:24Z"
     }
   ]
 }
