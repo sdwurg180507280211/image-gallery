@@ -55,7 +55,8 @@ function searchable(asset){
 }
 function matchesShared(asset){
   const q=state.query.trim().toLocaleLowerCase('zh-CN');
-  return (!state.favoritesOnly||state.favorites.has(asset.id))&&(!state.dislikedOnly||state.dislikes.has(asset.id))&&(!q||searchable(asset).includes(q));
+  const dislikeMatches=state.dislikedOnly?state.dislikes.has(asset.id):!state.dislikes.has(asset.id);
+  return (!state.favoritesOnly||state.favorites.has(asset.id))&&dislikeMatches&&(!q||searchable(asset).includes(q));
 }
 function currentDomainAssets(){return state.assets.filter(asset=>asset.domain===state.domain);}
 function sortAssets(items){
@@ -139,7 +140,16 @@ function syncDislikeButton(button,id){
   const active=state.dislikes.has(id);button.textContent='👎';button.setAttribute('aria-pressed',String(active));button.setAttribute('aria-label',active?'取消不喜欢标记':'标记不喜欢');button.title=active?'取消不喜欢标记':'标记不喜欢';
 }
 function toggleFavorite(id){state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);saveIdSet(FAVORITES_KEY,state.favorites);apply();}
-function toggleDislike(id){feedbackStore.toggleDisliked(id);state.dislikes=new Set(feedbackStore.getDislikedIds());apply();}
+function restoreScrollPosition(top){
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const maxTop=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+    window.scrollTo({top:Math.min(top,maxTop),left:0,behavior:'auto'});
+  }));
+}
+function toggleDislike(id){
+  const scrollTop=window.scrollY;
+  feedbackStore.toggleDisliked(id);state.dislikes=new Set(feedbackStore.getDislikedIds());apply();restoreScrollPosition(scrollTop);
+}
 function applyImage(card,image,asset,index){
   const ratio=asset.width>0&&asset.height>0?asset.width/asset.height:1;
   card.style.setProperty('--ratio',String(Math.max(.55,Math.min(2.4,ratio))));if(ratio>=1.15)card.classList.add('is-landscape');
