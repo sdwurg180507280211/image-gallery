@@ -1,0 +1,333 @@
+name: One-time import remaining 10 portraits 2026-09-03
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-session-2026-09-03-earlier-10.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for latest-10 batch to land on main
+        shell: bash
+        run: |
+          marker='images/oriental-fashion-beauty/session-2026-09-03-latest-10/portrait-001-34c08209.png'
+          for i in $(seq 1 80); do
+            git fetch origin main --quiet
+            if git cat-file -e "origin/main:${marker}" 2>/dev/null; then
+              echo 'latest-10 batch is present on main'
+              git reset --hard origin/main
+              exit 0
+            fi
+            echo "waiting for latest-10 batch ($i/80)"
+            sleep 15
+          done
+          echo 'Timed out waiting for latest-10 batch' >&2
+          exit 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Prepare manifest
+        shell: bash
+        run: |
+          mkdir -p .tmp
+          cat > .tmp/import-manifest.json <<'JSON'
+          {
+            "seriesSlug": "session-2026-09-03-earlier-10",
+            "characterId": "oriental-fashion-beauty",
+            "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+            "createdAt": "2026-09-03T21:02:00+08:00",
+            "assets": [
+              {
+                "order": 1,
+                "sourceFileId": "file_00000000a884820b8e03d18c95b2ddcb",
+                "originalFileName": "樱花庭院中的汉服佳人.png",
+                "assetId": "a884820b8e03",
+                "title": "樱花庭院中的汉服佳人",
+                "domain": "character",
+                "category": "pink",
+                "tags": ["同一人物", "樱花庭院", "粉色东方礼服", "春日", "花枝互动"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，保持稳定面容与身份：精致椭圆脸、杏仁形棕色眼睛、清晰眼线、自然挺直鼻梁、柔润珊瑚色嘴唇、白皙细腻皮肤、乌黑长发与蓬松半盘发，直视镜头并保持优雅成熟气质。春季东方园林樱花主题，人物近正面三分之二身站在池畔，右手轻触盛放的粉色樱花枝，左手自然提起裙摆。服装为浅粉色东方古典灵感礼服，露肩薄纱长袖、花卉刺绣、收腰结构与高开衩，搭配花形发饰、珍珠/水晶耳坠。背景有传统亭阁、池水、假山与繁花，柔和春日逆光和暖白侧光形成发丝轮廓与花瓣散景。色调粉白、浅金、柔绿，强调薄纱透光、刺绣、皮肤高光和浪漫气氛。仅一名成年女性、单一完整竖版画面，禁止拼图、多宫格、多人、画中画、崩脸、年龄幼化、多余肢体、畸形手部。",
+                "presignedAssetUrl": "https://at.adobe.com/QtoDupfaIphwoNwd",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-001-a884820b.png"
+              },
+              {
+                "order": 2,
+                "sourceFileId": "file_000000003198820b8a61c503b5f00f08",
+                "originalFileName": "夕阳游艇上的香槟礼服女士.png",
+                "assetId": "3198820b8a61",
+                "title": "夕阳游艇上的香槟礼服女士",
+                "domain": "character",
+                "category": "white",
+                "tags": ["同一人物", "夕阳游艇", "象牙香槟礼服", "海上黄金时刻", "全身"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，保持稳定面容与身份：精致椭圆脸、杏仁形棕色眼睛、清晰眼线、自然挺直鼻梁、柔润珊瑚色嘴唇、白皙细腻皮肤、乌黑长发，成熟优雅且与镜头直接互动。盛夏海上游艇黄金时刻，正面全身纵向构图，人物站在木质甲板与金属栏杆之间，右手扶栏杆，左手自然放在胯侧，双腿前后错落，身体轻微扭腰。服装为象牙白偏香槟色丝缎长礼服，细肩带、深V、腰侧镂空、斜向褶皱收腰和高开衩，搭配水晶项链、耳坠和金色细带高跟鞋。落日从海面后方形成强烈金色逆光，海面闪烁光斑，游艇金属与木甲板细节清晰。整体奶油白、暖金、海蓝，奢华、浪漫、自信。仅一名成年女性、单一完整竖版画面，禁止拼图、多宫格、多人、崩脸、多余肢体。",
+                "presignedAssetUrl": "https://at.adobe.com/sjxDvqBTzoqrQWpT",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-002-3198820b.png"
+              },
+              {
+                "order": 3,
+                "sourceFileId": "file_00000000d8c881fbad20d37eb0c04986",
+                "originalFileName": "秋日街角的风衣女郎.png",
+                "assetId": "d8c881fbad20",
+                "title": "秋日街角的风衣女郎",
+                "domain": "character",
+                "category": "black",
+                "tags": ["同一人物", "秋日街头", "黑色丝缎裙", "卡其风衣", "都市写真"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，稳定面容、乌黑长发和棕色杏仁眼，成熟冷艳，直接凝视镜头。深秋欧式城市街角，人物近正面三分之二身到全身构图，身体倚靠古典石墙，一手抓住卡其色风衣翻领，另一手垂下并拿着黑色皮手套，重心压在一侧腿上。内搭黑色丝缎贴身吊带裙，胸前简洁褶皱，高开衩与半透明黑丝袜，外搭经典卡其长风衣；配珍珠耳坠和细钻吊坠。背景是金黄落叶、街灯、古典建筑立面和远处车辆，午后斜射暖阳形成金色轮廓与硬朗石墙阴影。色调焦糖、黑、秋叶金、石灰，都市、成熟、优雅。仅一名成年女性、单一竖版完整画面，禁止拼接、多宫格、多人、畸形手部与多余肢体。",
+                "presignedAssetUrl": "https://at.adobe.com/a0aAeYrVH6YmN37U",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-003-d8c881fb.png"
+              },
+              {
+                "order": 4,
+                "sourceFileId": "file_00000000bc10820b9ada4002a23aff00",
+                "originalFileName": "月下雪夜的翡翠女王.png",
+                "assetId": "bc10820b9ada",
+                "title": "月下雪夜的翡翠女王",
+                "domain": "character",
+                "category": "green",
+                "tags": ["同一人物", "雪夜宫廷", "翡翠丝绒礼服", "月光", "冬季"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，稳定精致五官、棕色杏仁眼、乌黑长发，成熟高贵，正面凝视镜头。冬季雪夜欧洲宫廷露台，正面全身纵向构图，人物挺拔站立，一手覆在腰腹，另一手提起黑色皮草披肩，双肩展开。服装为深翡翠绿色丝绒一字肩长礼服，胸前水晶珠宝扣、收腰褶皱、高开衩，配黑色长手套、黑色皮草披肩、璀璨项链和水晶高跟鞋。满月、飘雪与暖黄色宫殿窗光形成冷暖对比，蓝色月光勾勒轮廓，雪粒和丝绒表面清晰。画面深绿、午夜蓝、暖金，像冬夜女王时尚大片。仅一名成年女性、单一完整画面，禁止拼图、多人、年龄幼化、崩脸、多余肢体。",
+                "presignedAssetUrl": "https://at.adobe.com/5DggTuWVlT0z8h6h",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-004-bc10820b.png"
+              },
+              {
+                "order": 5,
+                "sourceFileId": "file_00000000034481fda4a575bc69fe7771",
+                "originalFileName": "月下蓝花仙境中的女子.png",
+                "assetId": "034481fda4a5",
+                "title": "月下蓝花仙境中的女子",
+                "domain": "character",
+                "category": "blue",
+                "tags": ["同一人物", "月夜森林", "银蓝礼服", "发光蓝花", "幻想"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，保持稳定椭圆脸、棕色杏仁眼、精致鼻唇与乌黑长发，神秘温柔并直视镜头。仲夏月夜蓝花魔法森林，人物腰部以上至三分之二身近正面构图，右手扶住藤蔓与发光花朵，左手轻触锁骨和项链。服装为银蓝色水晶刺绣薄纱礼服，细肩带、半透明飘逸纱袖、晶体花饰、腰侧镂空与珠链，搭配晶石发冠和垂坠耳饰。背景深色森林、巨树、满月和密集发光蓝花，冷蓝月光、花朵微光和银白高光共同塑形。强调水晶反光、纱料层次、肤质与露珠，氛围清冷、梦幻、高级。仅一名成年女性、单一竖版画面，禁止拼图、多宫格、多人、多余肢体和崩脸。",
+                "presignedAssetUrl": "https://at.adobe.com/lJyOP86qtEiCuICs",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-005-034481fd.png"
+              },
+              {
+                "order": 6,
+                "sourceFileId": "file_00000000bf1881fb961ae41d04a4380b",
+                "originalFileName": "霓虹雨夜的未来酒店女郎.png",
+                "assetId": "bf1881fb961a",
+                "title": "霓虹雨夜的未来酒店女郎",
+                "domain": "character",
+                "category": "black",
+                "tags": ["同一人物", "霓虹雨夜", "黑蓝未来礼服", "赛博都市", "湿润材质"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，稳定精致面容、锐利棕色杏仁眼、乌黑湿润长发，强势冷艳地直视镜头。未来都市高层酒店露台雨夜，三分之二身近正面构图，一手叉腰，另一手抓住黑色未来感外套/肩甲，身体轻微扭转。服装为黑色带深蓝反光的未来哥特礼服，亮面皮革与透明网纱拼接、结构化束腰、金属环扣、颈圈、半透明高开衩裙层和黑色长靴。背景是雨幕、玻璃栏杆、赛博城市天际线以及蓝青和洋红霓虹招牌，湿地面形成强烈倒影。冷蓝主光加品红轮廓光，雨滴、湿发、亮面材质和皮肤高光清晰，电影级赛博时尚大片。仅一名成年女性、单一完整竖图，禁止拼接、多人、文字作为主体、多余肢体、畸形手部和崩脸。",
+                "presignedAssetUrl": "https://at.adobe.com/syEkCPHIHkivrhqr",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-006-bf1881fb.png"
+              },
+              {
+                "order": 7,
+                "sourceFileId": "file_00000000427081fbb4a12c3f368b38b5",
+                "originalFileName": "烛光下的深红华服肖像.png",
+                "assetId": "427081fbb4a1",
+                "title": "烛光下的深红华服肖像",
+                "domain": "character",
+                "category": "red",
+                "tags": ["同一人物", "烛光沙龙", "深红丝绒礼服", "黑色蕾丝", "红宝石"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，稳定五官与乌黑长发，棕色杏仁眼直视镜头，神态妩媚、平静、成熟。烛光古典哥特沙龙，人物正面坐在深红丝绒长沙发上，双腿交叠，一手撑在沙发边缘，另一手轻触颈侧红宝石项链。服装为深酒红丝绒紧身礼服，露肩结构、黑色蕾丝镶边、金色刺绣和束腰细节，高开衩露出腿部线条；配红宝石耳坠、项链。背景有黄铜烛台、暗木墙板、雕花镜框和暖色烛火，暖金侧光照亮脸部、锁骨和丝绒纹理，深红、黑与古金构成浓郁色调。奢华、私密、戏剧化，但不低俗。仅一名成年女性、单一竖版场景，禁止拼图、多人、畸形手部、多余肢体。",
+                "presignedAssetUrl": "https://at.adobe.com/GaCQYi0Vpbyo3Atx",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-007-427081fb.png"
+              },
+              {
+                "order": 8,
+                "sourceFileId": "file_000000007b9081fa8bb9be1faed89a06",
+                "originalFileName": "沙漠绿洲中的青纱舞者.png",
+                "assetId": "7b9081fa8bb9",
+                "title": "沙漠绿洲中的青纱舞者",
+                "domain": "character",
+                "category": "blue",
+                "tags": ["同一人物", "沙漠绿洲", "青绿色薄纱", "金饰", "全身"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，稳定精致面容与乌黑长发，棕色杏仁眼直视镜头，自信而神秘。炎夏沙漠绿洲主题，正面全身纵向构图，人物站在高处沙丘，一只手高举并拉起随风飞舞的青绿色长薄纱，另一手自然垂落在胯侧，双腿形成优雅重心。服装为青绿/绿松石色半透明薄纱舞裙和贴身胸衣，金色刺绣、珠链、腰饰、臂环、发饰丰富，双侧高开衩和长拖尾随风飘动。背景是连绵金色沙丘、棕榈树和蓝绿色绿洲湖面，强烈日光、晴空与风感明显。色调绿松石、沙金、肤色，强调纱料透明层次、金饰反光与长腿比例。仅一名成年女性、单一完整竖图，禁止拼图、多人、崩脸、多余肢体、畸形手脚。",
+                "presignedAssetUrl": "https://at.adobe.com/6nQNc0spniY1XISM",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-008-7b9081fa.png"
+              },
+              {
+                "order": 9,
+                "sourceFileId": "file_00000000105481faba49a5632a5a883b",
+                "originalFileName": "白色拱影中的珍珠礼服肖像.png",
+                "assetId": "105481faba49",
+                "title": "白色拱影中的珍珠礼服肖像",
+                "domain": "character",
+                "category": "white",
+                "tags": ["同一人物", "白色建筑", "珍珠礼服", "象牙白缎面", "极简肖像"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，稳定精致面容、乌黑长发和棕色杏仁眼，神态温柔自信，近距离正面凝视镜头。极简白色建筑空间中的高级珠宝肖像，胸像到三分之二身构图，一只戴象牙白长手套的手轻触下颌，另一只手自然交叠在腰胯前。服装为象牙白丝缎与珍珠珠串结合的不对称礼服，单侧珠串肩带、斜向褶皱收腰、侧开衩，配长缎面手套、珍珠项链、珍珠耳坠和水晶手饰。背景是干净白色弧形拱门与台阶，柔和自然侧光产生高级几何阴影。整体象牙白、珍珠银、肤色，清透、奢华、极简，强调缎面反光、珍珠细节与细腻皮肤。仅一名成年女性、单一竖版完整画面，禁止拼接、多人、画中画、多余肢体和崩脸。",
+                "presignedAssetUrl": "https://at.adobe.com/qT7JZau0gh41EdgK",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-009-105481fa.png"
+              },
+              {
+                "order": 10,
+                "sourceFileId": "file_00000000f08081fa8b48844740193d30",
+                "originalFileName": "复古书房里的金色凝眸.png",
+                "assetId": "f08081fa8b48",
+                "title": "复古书房里的金色凝眸",
+                "domain": "character",
+                "category": "white",
+                "tags": ["同一人物", "复古书房", "象牙白衬衫", "金框眼镜", "暖光"],
+                "characterId": "oriental-fashion-beauty",
+                "seriesSlug": "session-2026-09-03-earlier-10",
+                "seriesId": "oriental-fashion-beauty--session-2026-09-03-earlier-10",
+                "promptKind": "reconstructed",
+                "prompt": "同一位成年东亚女性，保持稳定椭圆脸、棕色杏仁眼、自然珊瑚色唇与乌黑长发，佩戴纤细金色圆框眼镜，知性、成熟、轻微慵懒地直视镜头。冬夜复古私人书房，人物正面坐在深棕皮椅与木桌旁，上半身轻微前倾，一手托腮，另一手伸向摊开的旧书。服装为象牙白轻薄丝质衬衫，领口自然敞开，搭配黑色高腰贴身裙；配水晶耳坠和吊坠项链。背景是整墙旧书、深木书架、黄铜复古台灯和厚重皮革家具，暖琥珀侧光照亮眼睛、脸部和手部，背景暗部柔和浅景深。色调暖棕、古金、象牙白与黑色，电影感、知识感与私密奢华并存。仅一名成年女性、单一完整竖图，禁止拼图、多人、畸形手部、多余肢体和崩脸。",
+                "presignedAssetUrl": "https://at.adobe.com/UtR2omdhK2bO0HJq",
+                "mediaType": "image/png",
+                "path": "images/oriental-fashion-beauty/session-2026-09-03-earlier-10/portrait-010-f08081fa.png"
+              }
+            ]
+          }
+          JSON
+      - name: Preflight structural conflicts
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const m = JSON.parse(fs.readFileSync('.tmp/import-manifest.json','utf8'));
+          const g = JSON.parse(fs.readFileSync('data/gallery.json','utf8'));
+          if (g.schemaVersion !== 3) throw new Error('gallery schemaVersion must be 3');
+          if (m.assets.length !== 10) throw new Error(`expected 10 assets, got ${m.assets.length}`);
+          const ids = new Set(g.assets.map(a => a.id));
+          const paths = new Set(g.assets.map(a => a.path));
+          for (const a of m.assets) {
+            if (ids.has(a.assetId)) throw new Error(`asset id collision: ${a.assetId}`);
+            if (paths.has(a.path) || fs.existsSync(a.path)) throw new Error(`asset path collision: ${a.path}`);
+            if (!a.presignedAssetUrl?.startsWith('https://')) throw new Error(`bad Adobe URL: ${a.title}`);
+            if (!a.mediaType?.startsWith('image/')) throw new Error(`bad media type: ${a.title}`);
+          }
+          console.log('preflight ok: 10 remaining assets');
+          NODE
+      - name: Download Adobe originals
+        shell: bash
+        run: |
+          node <<'NODE' > .tmp/downloads.tsv
+          const fs = require('fs');
+          const m = JSON.parse(fs.readFileSync('.tmp/import-manifest.json','utf8'));
+          for (const a of m.assets) console.log([a.presignedAssetUrl,a.path,a.title].join('\t'));
+          NODE
+          while IFS=$'\t' read -r url dest title; do
+            mkdir -p "$(dirname "$dest")"
+            echo "Downloading: $title"
+            curl -fL --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 180 -o "$dest" "$url"
+            size=$(stat -c%s "$dest")
+            if [ "$size" -lt 10000 ]; then echo "File too small: $dest ($size bytes)"; exit 1; fi
+            actual=$(file -b --mime-type "$dest")
+            case "$actual" in image/png|image/jpeg|image/webp) ;; *) echo "Unexpected MIME $actual for $dest"; exit 1;; esac
+            echo "Saved $dest ($size bytes, $actual)"
+          done < .tmp/downloads.tsv
+      - name: Validate images with sharp
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const sharp = require('sharp');
+          const m = JSON.parse(fs.readFileSync('.tmp/import-manifest.json','utf8'));
+          (async()=>{
+            for (const a of m.assets) {
+              const meta = await sharp(a.path).metadata();
+              if (!meta.width || !meta.height) throw new Error(`cannot read ${a.path}`);
+              console.log(`${a.assetId}: ${meta.width}x${meta.height} ${meta.format}`);
+            }
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - name: Update gallery and prompts
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const m = JSON.parse(fs.readFileSync('.tmp/import-manifest.json','utf8'));
+          const g = JSON.parse(fs.readFileSync('data/gallery.json','utf8'));
+          const p = JSON.parse(fs.readFileSync('data/prompt-index.json','utf8'));
+          if (p.schemaVersion !== 1 || !p.assets) throw new Error('unexpected prompt-index schema');
+          for (const a of m.assets) {
+            g.assets.push({id:a.assetId,path:a.path,title:a.title,domain:a.domain,category:a.category,tags:a.tags,createdAt:m.createdAt,characterId:a.characterId,seriesSlug:a.seriesSlug,seriesId:a.seriesId});
+            const promptPath = `prompts/assets/${a.assetId}.md`;
+            if (fs.existsSync(promptPath)) throw new Error(`prompt collision: ${promptPath}`);
+            fs.mkdirSync(path.dirname(promptPath),{recursive:true});
+            fs.writeFileSync(promptPath,`# ${a.title}\n\n> 提示词类型：reconstructed  \n> 来源：当前 ChatGPT 会话生成成品，根据实际画面与可靠生成上下文重建  \n> 关联人物：东方美人时装肖像集\n\n## 重建提示词\n\n${a.prompt}\n`,'utf8');
+            p.assets[a.assetId] = {path:promptPath,kind:'reconstructed'};
+          }
+          fs.writeFileSync('data/gallery.json',JSON.stringify(g,null,2)+'\n','utf8');
+          fs.writeFileSync('data/prompt-index.json',JSON.stringify(p,null,2)+'\n','utf8');
+          NODE
+      - name: Batch consistency check
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const m = JSON.parse(fs.readFileSync('.tmp/import-manifest.json','utf8'));
+          const g = JSON.parse(fs.readFileSync('data/gallery.json','utf8'));
+          const p = JSON.parse(fs.readFileSync('data/prompt-index.json','utf8'));
+          const ids = m.assets.map(a=>a.assetId);
+          if (ids.length !== 10 || new Set(ids).size !== 10) throw new Error('ID count mismatch');
+          for (const a of m.assets) {
+            if (!fs.existsSync(a.path)) throw new Error(`missing image ${a.path}`);
+            if (g.assets.filter(x=>x.id===a.assetId).length !== 1) throw new Error(`gallery mismatch ${a.assetId}`);
+            if (!p.assets[a.assetId] || !fs.existsSync(p.assets[a.assetId].path)) throw new Error(`prompt mismatch ${a.assetId}`);
+          }
+          console.log('batch consistency ok: 10/10');
+          NODE
+      - name: Build
+        run: npm run build
+      - name: Commit and push imported assets
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images data/gallery.json data/prompt-index.json prompts/assets
+          if git diff --cached --quiet; then echo 'No changes to commit'; exit 1; fi
+          git commit -m 'feat(gallery): import remaining 10 portraits from 2026-09-03 session'
+          git pull --rebase origin main
+          git push origin HEAD:main
