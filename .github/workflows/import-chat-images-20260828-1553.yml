@@ -29,6 +29,11 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Sync latest main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+
       - name: Extract preserved manifest and importer into workspace
         shell: bash
         run: |
@@ -41,6 +46,32 @@ jobs:
           script = src.split("cat > /tmp/import-chatgpt-images.mjs <<'__SCRIPT__'\n", 1)[1].split("\n          __SCRIPT__", 1)[0]
           Path('/tmp/chatgpt-image-manifest.json').write_text(textwrap.dedent(manifest) + '\n', encoding='utf-8')
           Path('.tmp-import-chatgpt-images.mjs').write_text(textwrap.dedent(script) + '\n', encoding='utf-8')
+          PY
+
+      - name: Patch manifest with refreshed Adobe URLs
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          manifest_path = Path('/tmp/chatgpt-image-manifest.json')
+          urls_path = Path('.github/tmp/import-chat-images-20260828-1553-fresh-urls.json')
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          urls = json.loads(urls_path.read_text(encoding='utf-8'))
+          if len(manifest) != 48 or len(urls) != 48:
+              raise SystemExit(f'expected 48 manifest items and URLs, got {len(manifest)} / {len(urls)}')
+          missing = []
+          for item in manifest:
+              url = urls.get(item['sourceFileId'])
+              if not url:
+                  missing.append(item['sourceFileId'])
+              else:
+                  item['adobeAssetUrl'] = url
+          if missing:
+              raise SystemExit(f'missing refreshed URLs: {missing}')
+          manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print('Patched 48 Adobe bridge URLs.')
           PY
 
       - name: Download Adobe originals and update metadata
@@ -82,8 +113,6 @@ jobs:
           git push origin HEAD:main
 
       - name: Verify files are on main
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           git fetch origin main
           test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
