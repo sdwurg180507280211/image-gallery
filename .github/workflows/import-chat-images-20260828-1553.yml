@@ -8,7 +8,10 @@ on:
 
 permissions:
   contents: write
-  actions: write
+
+concurrency:
+  group: import-chatgpt-48-main
+  cancel-in-progress: false
 
 jobs:
   import:
@@ -64,7 +67,7 @@ jobs:
           console.log(`Verified ${manifest.length} new assets after npm run build.`);
           __VERIFY__
 
-      - name: Commit and push imported assets
+      - name: Commit and push imported assets to main
         run: |
           git config user.name "chatgpt-image-importer"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -78,7 +81,11 @@ jobs:
           git commit -m "Add 48 ChatGPT portrait assets via Adobe bridge"
           git push origin HEAD:main
 
-      - name: Trigger Pages deployment
+      - name: Verify files are on main
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run pages.yml --ref main
+        run: |
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+          test -f images/golden-floral-eastern-beauty/session-20260821-set-01/01-moonlit-blue-fantasy.png
+          test -f images/golden-floral-eastern-beauty/session-20260825-set-05/10-cyberpunk-city-rain-black.png
